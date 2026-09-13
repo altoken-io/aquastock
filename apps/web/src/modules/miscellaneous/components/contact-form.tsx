@@ -118,7 +118,7 @@ const ContactForm = ({ className, ...props }: ContactFormProps) => {
               de valores. Toda emisión o inversión está sujeta a verificación y
               al marco regulatorio aplicable.
             </p>
-            <SubmitButton type="submit" variant="gradient" className="self-end">
+            <SubmitButton type="submit" variant="primary" className="self-end">
               <Send className="size-4" />
               Enviar
             </SubmitButton>

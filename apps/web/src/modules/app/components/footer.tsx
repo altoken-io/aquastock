@@ -19,21 +19,37 @@ const Footer = async () => {
   const t = await getTranslations('footer');
 
   return (
-    <footer className="relative flex min-h-0 w-full flex-col overflow-hidden border-t border-border bg-muted/25">
+    <footer className="relative flex min-h-0 w-full flex-col overflow-hidden border-t border-border bg-muted/25 lg:min-h-[var(--footer-min-height)]">
       <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col gap-10 px-5 py-16 sm:px-8 lg:px-10">
-        <div className="flex flex-col items-start gap-4">
-          <Link
-            href="/"
-            className="flex items-center gap-2 rounded-full transition-opacity hover:opacity-80"
+        <div className="flex flex-1 flex-col justify-between gap-16 lg:gap-24">
+          <div className="flex flex-col items-start gap-4">
+            <Link
+              href="/"
+              className="flex items-center gap-2 rounded-full transition-opacity hover:opacity-80"
+            >
+              <BrandLogo alt="AquaStock" size={40} className="size-9" />
+              <span className="font-headline text-xl font-extrabold tracking-tight text-foreground">
+                AquaStock
+              </span>
+            </Link>
+            <p className="max-w-sm text-sm text-muted-foreground">
+              {t('tagline')}
+            </p>
+          </div>
+
+          <div
+            aria-hidden="true"
+            className="hidden select-none items-end justify-between lg:flex"
           >
-            <BrandLogo alt="AquaStock" size={40} className="size-9" />
-            <span className="font-headline text-xl font-extrabold tracking-tight text-foreground">
+            <BrandLogo
+              alt=""
+              size={160}
+              className="size-32 opacity-[0.08] xl:size-40"
+            />
+            <span className="font-headline text-[13vw] leading-none font-extrabold tracking-tighter text-foreground/[0.06] xl:text-[10rem]">
               AquaStock
             </span>
-          </Link>
-          <p className="max-w-sm text-sm text-muted-foreground">
-            {t('tagline')}
-          </p>
+          </div>
         </div>
 
         <nav aria-label={t('quickLinks.title')} className="flex flex-col gap-4">

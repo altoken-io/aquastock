@@ -2,21 +2,25 @@
 name: AquaStock dApp
 description: AquaStock's dApp — a Solana public/private infrastructure-funding console for the Stocklana hackathon.
 colors:
-  primary: 'oklch(0.54 0.22 28)'
-  primary-hover: 'oklch(0.57 0.21 30)'
-  primary-foreground: 'oklch(0.985 0.003 85)'
-  accent: 'oklch(0.57 0.21 30)'
-  accent-2: 'oklch(0.72 0.17 60)'
-  background: 'oklch(0.978 0.004 75)'
-  foreground: 'oklch(0.2 0.012 32)'
-  card: 'oklch(0.992 0.003 75)'
-  secondary: 'oklch(0.934 0.006 75)'
-  muted: 'oklch(0.941 0.006 75)'
-  muted-foreground: 'oklch(0.39 0.013 36)'
-  border: 'oklch(0.84 0.008 75)'
-  destructive: 'oklch(0.58 0.22 25)'
-  ok: 'oklch(0.68 0.17 150)'
-  warning: 'oklch(0.74 0.16 75)'
+  primary: 'oklch(0.52 0.10 200)' # "Reservoir" — teal/cyan, the one brand/CTA color
+  primary-hover: 'oklch(0.44 0.10 200)'
+  primary-foreground: 'oklch(1 0 0)'
+  accent: 'oklch(0.94 0.025 196)' # soft teal tint — hover/highlight surfaces only
+  accent-foreground: 'oklch(0.28 0.05 196)'
+  public: 'oklch(0.34 0.07 260)' # "Anchor" — government-position tag, never a general accent
+  public-foreground: 'oklch(1 0 0)'
+  private: 'oklch(0.55 0.13 45)' # "Terra" — community-position tag, never a general accent
+  private-foreground: 'oklch(1 0 0)'
+  background: 'oklch(1 0 0)' # true neutral scale — zero chroma
+  foreground: 'oklch(0.145 0 0)'
+  card: 'oklch(1 0 0)'
+  secondary: 'oklch(0.96 0 0)'
+  muted: 'oklch(0.96 0 0)'
+  muted-foreground: 'oklch(0.46 0 0)'
+  border: 'oklch(0.90 0 0)'
+  destructive: 'oklch(0.58 0.21 25)'
+  ok: 'oklch(0.56 0.12 150)'
+  warning: 'oklch(0.74 0.15 75)'
 typography:
   display:
     fontFamily: 'Geist, ui-sans-serif, system-ui'
@@ -70,48 +74,54 @@ components:
 
 ## 1. Overview
 
-**Placeholder palette, inherited mechanism.** The color _values_ below are carried over from this repo's previous project and are a placeholder only — nobody has run AquaStock's own Day 1 visual design pass yet. What's worth keeping is the _mechanism_: OKLCH as the token format, the type-scale approach (Geist, tabular numerals for amounts), and the component-spec pattern (buttons/panels/inputs as named tokens). Treat every color name and hex/OKLCH value in this file as "replace me," not "the brand."
+**Creative North Star: "The Confluence"**
 
-**Creative North Star (working title): "The Public Ledger"**
+The AquaStock dApp is where a government position and a community position sit on the same funding table, in the open — two sources of capital converging on one project, the way two streams meet at a confluence and become one river. Every surface should be built to be read in one glance: a project, a split between government and community funding, a milestone status — never a chart to interpret.
 
-The AquaStock dApp is where a government position and a community position sit on the same funding table, in the open. Every surface should be built to be read in one glance: a project, a split between government and community funding, a milestone status — never a chart to interpret. The current (inherited, placeholder) tokens lean on a single warm red-orange (`oklch(0.54 0.22 28)`) as primary against a warm off-white canvas.
+The palette is built around that convergence: **Reservoir**, a deep teal/cyan, is the one brand/CTA color (water, clarity, the product itself). **Anchor**, a deep institutional navy, and **Terra**, a warm terracotta, are reserved specifically for tagging a position's `investor_type` — public vs. private — never used as a general accent. Cool institutional blue against warm grounded clay is a deliberate pairing: the two capital sources read as distinct and equally legitimate, not as "official" vs. "informal."
 
-This system should reject a speculative-crypto aesthetic: no neon gradients, no glassmorphism as a default surface treatment, no token-price decoration. It should also reject a sterile corporate-bank feel — this is public-interest infrastructure funding, not a trading terminal.
+This system rejects a speculative-crypto aesthetic: no neon gradients, no glassmorphism as a default surface treatment, no token-price decoration. It also rejects a sterile corporate-bank feel — this is public-interest infrastructure funding, not a trading terminal.
 
-**Key Characteristics (inherited, to be revisited on Day 1):**
+**Key Characteristics:**
 
-- One warm accent color carrying primary actions, active states, and focus rings.
+- One brand color (Reservoir teal) carrying primary actions, active states, and focus rings — never used for the public/private distinction.
+- Two dedicated semantic colors (Anchor navy, Terra terracotta) exist solely to tag investor_type — see the Named Rule below.
+- True neutral backgrounds (zero-chroma gray, not the warm off-white this repo inherited) — plain white in light mode, near-black in dark mode.
 - Soft, deep-rounded panels (`dapp-panel` at 32px) over hard-edged cards.
 - Geist as the single sans-serif voice across display and body text.
 - OKLCH as the canonical color format throughout `globals.css`.
 
 ## 2. Colors
 
-The palette below is inherited placeholder content — a single warm red-orange family layered over warm-tinted neutrals, in both a light and dark theme. AquaStock's actual palette (very plausibly should include a blue/water association given the product) is Day 1 work for the team, not decided here.
-
 ### Primary
 
-- **Matte Ember** (`oklch(0.54 0.22 28)` / dark: `oklch(0.66 0.2 28)`): primary buttons, active sidebar/nav states, focus rings. Currently doubles as `accent` (`oklch(0.57 0.21 30)`) — splitting primary/accent into two distinct hues is a reasonable Day 1 task.
+- **Reservoir** (`oklch(0.52 0.10 200)` / dark: `oklch(0.72 0.12 196)`): primary buttons, active sidebar/nav states, focus rings, links.
+- **Accent** (`oklch(0.94 0.025 196)` / dark: `oklch(0.28 0.045 196)`): a soft teal-tinted surface for hover states and subtle highlights — not a second CTA color.
+
+### Public / Private (funding-table tags)
+
+- **Anchor** (`oklch(0.34 0.07 260)` / dark: `oklch(0.58 0.09 258)`): tags a `PUBLIC` (government-anchor) position.
+- **Terra** (`oklch(0.55 0.13 45)` / dark: `oklch(0.68 0.14 48)`): tags a `PRIVATE` (community/investor) position.
 
 ### Neutral
 
-- **Warm Paper** (`oklch(0.978 0.004 75)` / dark: `oklch(0.13 0.006 35)`): page background.
-- **Warm Card** (`oklch(0.992 0.003 75)` / dark: `oklch(0.18 0.008 35)`): cards, sheets, inputs, popovers.
-- **Ink** (`oklch(0.2 0.012 32)` / dark: `oklch(0.95 0.004 75)`): headings, amounts, primary text.
-- **Muted Ink** (`oklch(0.39 0.013 36)` / dark: `oklch(0.72 0.008 55)`): supporting text, labels, timestamps.
-- **Hairline** (`oklch(0.84 0.008 75)` / dark: `oklch(0.26 0.008 35)`): borders, dividers — used at partial opacity (`border/85`, `border/70`) rather than full strength.
+- **Background** (`oklch(1 0 0)` / dark: `oklch(0.13 0 0)`): page background — true white / near-black, zero chroma.
+- **Card** (`oklch(1 0 0)` / dark: `oklch(0.19 0 0)`): cards, sheets, inputs, popovers.
+- **Foreground** (`oklch(0.145 0 0)` / dark: `oklch(0.98 0 0)`): headings, amounts, primary text.
+- **Muted foreground** (`oklch(0.46 0 0)` / dark: `oklch(0.65 0 0)`): supporting text, labels, timestamps.
+- **Border** (`oklch(0.9 0 0)` / dark: `oklch(0.28 0 0)`): borders, dividers — used at partial opacity (`border/85`, `border/70`) rather than full strength.
 
 ### Semantic
 
-- **Danger** (`oklch(0.58 0.22 25)`): errors, destructive actions.
-- **OK** (`oklch(0.68 0.17 150)`): completed/verified milestone states.
-- **Warning** (`oklch(0.74 0.16 75)`): review-needed or time-sensitive state.
+- **Destructive** (`oklch(0.58 0.21 25)`): errors, destructive actions.
+- **OK** (`oklch(0.56 0.12 150)` / dark: `oklch(0.7 0.15 150)`): completed/verified milestone states — a leafy green, distinct in hue from both Reservoir and Terra.
+- **Warning** (`oklch(0.74 0.15 75)` / dark: `oklch(0.72 0.15 65)`): review-needed or time-sensitive state.
 
 ### Named Rules
 
-**The Government/Community Split Rule.** Whatever palette AquaStock lands on, public (government) and private (community) positions need a reliable, colorblind-safe visual distinction (color + icon/label, never color alone) — this is the product's core visual job and should be a deliberate Day 1 decision, not an accident of whichever two accent colors happen to exist.
+**The Government/Community Split Rule.** A position always shows its `investor_type` with both color (`public`/`private` token) _and_ an icon or label — never color alone. `public`/`private` are reserved exclusively for this distinction; don't reach for them as a general-purpose second/third accent elsewhere in the UI.
 
-**The Never-Red-For-Success Rule.** Success and verified states use `ok` (emerald), never the primary accent — reserve the primary hue for actions, not celebration.
+**The Never-Red-For-Success Rule.** Success and verified states use `ok` (green), never `primary` — reserve the brand teal for actions, not celebration.
 
 ## 3. Typography
 
@@ -156,7 +166,7 @@ Mostly flat with soft ambient shadows rather than hard drop shadows — `dapp-pa
 ### Cards / Panels
 
 - **`.dapp-panel`:** 32px radius, `border-border/85`, card background, `shadow-sm` — the primary content-panel wrapper. Worth reconsidering (12–16px reads more disciplined) once the real brand personality is set.
-- **`.dapp-panel-accent`:** same shape with a subtle primary-tinted gradient wash (`from-primary/6 via-card to-background`) for a single emphasized panel per view — a strong candidate for "this is the government position" vs. "this is the community position" differentiation.
+- **`.dapp-panel-accent`:** same shape with a subtle primary-tinted gradient wash (`from-primary/6 via-card to-background`) for a single emphasized panel per view (e.g. the funding-goal summary). Use the dedicated `public`/`private` tokens, not this, for the government/community distinction.
 - **`.dapp-panel-muted`:** 16px radius (`rounded-2xl`), background-tinted, `shadow-inner` — for secondary/nested surfaces.
 - **Internal padding:** 16–24px, generous around headline numbers, tighter (8–12px) in list rows.
 
@@ -178,16 +188,16 @@ Mostly flat with soft ambient shadows rather than hard drop shadows — `dapp-pa
 
 ### Do:
 
-- **Do** keep the government/community split visually unambiguous everywhere a position or funding total is shown — pair color with an icon/label, never color alone.
+- **Do** keep the government/community split visually unambiguous everywhere a position or funding total is shown — pair the `public`/`private` token with an icon/label, never color alone.
 - **Do** use the neutral ambient panel shadow as the default card treatment; reserve any colored glow for one highest-stakes action per screen.
 - **Do** pair every status (danger/warning/ok, pending/verified) with an icon and label.
 - **Do** keep Geist as the only typeface; differentiate hierarchy through weight/size only.
-- **Do** run an actual Day 1 palette decision instead of treating the inherited red-orange as final — this repo's history is not this project's brand.
 
 ### Don't:
 
 - **Don't** ship neon gradients, everywhere-glassmorphism, token-price charts as default decoration, or "cyber" crypto-terminal grid backgrounds.
 - **Don't** carry the `.dapp-panel`'s 32px radius forward into new surfaces without reconsidering it.
 - **Don't** use gradient text or color-only status indicators anywhere in this system.
+- **Don't** use `public`/`private` as a general-purpose accent — they exist only to tag investor_type.
 - **Don't** show a position as funded or a milestone as verified before the chain confirms it.
 - **Don't** claim a government partnership, deployed program, or production money movement in UI copy — this is a devnet hackathon demo (see the required disclaimer in PRODUCT.md / packages/locales' `legal` namespace).

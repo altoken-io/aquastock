@@ -3,6 +3,7 @@ import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 
 import { HeroSection } from '@/modules/app/components/sections/hero-section';
+import { ConfluenceSection } from '@/modules/app/components/sections/confluence-section';
 import { HowItWorksSection } from '@/modules/app/components/sections/how-it-works-section';
 import { UseCasesSection } from '@/modules/app/components/sections/use-cases-section';
 import { FaqSection } from '@/modules/app/components/sections/faq-section';
@@ -28,6 +29,7 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center">
       <HeroSection />
+      <ConfluenceSection />
       <HowItWorksSection />
       <UseCasesSection />
       <FaqSection />

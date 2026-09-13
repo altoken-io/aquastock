@@ -50,7 +50,7 @@ const NewsletterForm = ({ ...props }: NewsletterFormProps) => {
         isSubmitting={isSubmitting}
         type="submit"
         loaderText={t('form.cta.submit')}
-        variant="gradient"
+        variant="primary"
         rounded="full"
       >
         {t('form.cta.submit')}

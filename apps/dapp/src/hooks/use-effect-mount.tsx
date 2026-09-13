@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useEffectEvent, useState } from 'react';
+import { useEffect, useEffectEvent, useSyncExternalStore } from 'react';
 
 /**
  * useEffectMount
@@ -13,22 +13,27 @@ import { useEffect, useEffectEvent, useState } from 'react';
  */
 type MountCallback = () => void | (() => void);
 
+const emptySubscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 const useEffectMount = (onMount?: MountCallback) => {
-  const [mounted, setMounted] = useState(false);
+  // useSyncExternalStore gives an SSR-safe "mounted" flag without setState-in-effect.
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    getClientSnapshot,
+    getServerSnapshot,
+  );
 
   const onMountEvent = useEffectEvent(() => {
-    setMounted(true);
     const cleanup = onMount?.();
-    // Run cleanup on unmount. No need to set mounted=false here.
     return () => {
       cleanup?.();
     };
     // Deliberately run once on mount/unmount only.
   });
 
-  useEffect(() => {
-    onMountEvent();
-  }, []);
+  useEffect(() => onMountEvent(), []);
 
   return mounted;
 };

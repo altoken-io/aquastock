@@ -1,11 +1,12 @@
 'use client';
 
 import { FC, useCallback } from 'react';
+import { flushSync } from 'react-dom';
 import { cn } from '@/utils/classNames';
 import { useTheme } from 'next-themes';
 import useEffectMount from '@/hooks/use-effect-mount';
 import { LucideProps, Moon, Sun } from 'lucide-react';
-import { MotionButton } from '@/components/helpers/motion/custom-lazy-motion';
+import { useReducedMotion } from 'motion/react';
 
 const themeIcons = {
   dark: Moon,
@@ -24,6 +25,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
 }) => {
   // useMount is used to prevent the theme switcher from being rendered on the server
   const isMounted = useEffectMount();
+  const prefersReducedMotion = useReducedMotion();
 
   // useTheme is used to get the current theme and set the theme
   const { theme, setTheme } = useTheme();
@@ -34,47 +36,73 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
   // icon is used to get the icon for the new theme
   const Icon = themeIcons[currentTheme];
 
-  // handleThemeChange is used to change the theme
-  const handleThemeChange = useCallback(() => {
-    setTheme(currentTheme);
-  }, [setTheme, currentTheme]);
+  // handleThemeChange reveals the incoming theme with a ripple centered on
+  // the button the user pressed (native View Transitions API — see the
+  // ::view-transition-new(root) rule in globals.css). Falls back to a plain
+  // theme swap when the API or reduced-motion preference isn't available.
+  const handleThemeChange = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (
+        prefersReducedMotion ||
+        typeof document === 'undefined' ||
+        !document.startViewTransition
+      ) {
+        setTheme(currentTheme);
+        return;
+      }
+
+      const { left, top, width, height } =
+        event.currentTarget.getBoundingClientRect();
+      document.documentElement.style.setProperty(
+        '--vt-x',
+        `${left + width / 2}px`,
+      );
+      document.documentElement.style.setProperty(
+        '--vt-y',
+        `${top + height / 2}px`,
+      );
+
+      document.startViewTransition(() => {
+        flushSync(() => setTheme(currentTheme));
+      });
+    },
+    [currentTheme, prefersReducedMotion, setTheme],
+  );
 
   // if the theme switcher is not mounted, return skeleton loader
   if (!isMounted)
     return (
       <div
         className={cn(
-          'flex size-9 animate-pulse items-center justify-center rounded-full border border-red-900/10 bg-white/85 p-2.5 shadow-[0_10px_30px_-18px_rgba(127,29,29,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-black/75 dark:shadow-[0_10px_30px_-18px_rgba(0,0,0,0.7)]',
+          'flex size-9 animate-pulse items-center justify-center rounded-full border border-border/70 bg-background/60 backdrop-blur-md',
           wrapperClassName,
         )}
       >
         <div
-          className={cn(
-            'h-4 w-4 rounded-full bg-red-900/20 dark:bg-white/20',
-            className,
-          )}
+          className={cn('h-4 w-4 rounded-full bg-foreground/15', className)}
         />
       </div>
     );
 
   if (useIcon) {
     return (
-      <MotionButton
+      <button
+        type="button"
         onClick={handleThemeChange}
         aria-label={`Switch to ${currentTheme} theme`}
         aria-pressed={theme === 'dark'}
         className={cn(
-          'group flex size-9 items-center justify-center rounded-full border border-red-900/10 bg-white/85 p-2.5 text-stone-600 shadow-[0_10px_30px_-18px_rgba(127,29,29,0.18)] backdrop-blur-xl transition-all duration-300 ease-linear hover:border-red-900/20 hover:bg-red-50/80 hover:text-red-900 hover:shadow-[0_16px_40px_-20px_rgba(127,29,29,0.28)] active:scale-[0.98] active:bg-red-100/80 dark:border-white/10 dark:bg-black/75 dark:text-neutral-300 dark:shadow-[0_10px_30px_-18px_rgba(0,0,0,0.7)] dark:hover:border-red-500/25 dark:hover:bg-red-950/35 dark:hover:text-red-300 dark:hover:shadow-[0_16px_40px_-20px_rgba(220,38,38,0.2)] dark:active:bg-neutral-900',
+          'group flex size-9 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground/70 backdrop-blur-md transition-colors duration-300 ease-out hover:border-primary/30 hover:bg-accent hover:text-foreground active:scale-95',
           wrapperClassName,
         )}
       >
         <Icon
           className={cn(
-            'size-4 opacity-75 transition-all ease-in-out group-hover:scale-110 group-hover:opacity-100',
+            'size-4 transition-transform duration-300 ease-out group-hover:scale-110',
             className,
           )}
         />
-      </MotionButton>
+      </button>
     );
   }
 
@@ -83,7 +111,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
       value={theme}
       onChange={(e) => setTheme(e.target.value)}
       aria-label="Theme"
-      className="rounded-full border border-red-900/10 bg-white/85 px-4 py-2 text-stone-900 shadow-[0_10px_30px_-18px_rgba(127,29,29,0.18)] backdrop-blur-xl transition-all duration-300 ease-in-out hover:border-red-900/20 hover:bg-red-50/80 dark:border-white/10 dark:bg-black/75 dark:text-neutral-100 dark:hover:border-red-500/25 dark:hover:bg-red-950/35"
+      className="rounded-full border border-border/70 bg-background/60 px-4 py-2 text-foreground backdrop-blur-md transition-colors duration-300 ease-out hover:border-primary/30 hover:bg-accent"
     >
       <option value="dark">Dark</option>
       <option value="light">Light</option>

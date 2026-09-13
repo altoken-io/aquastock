@@ -71,14 +71,6 @@ export const generateMetadata = async ({
       title: t('openGraph.title'),
       description: t('openGraph.description'),
       siteName: t('openGraph.siteName'),
-      images: [
-        {
-          url: t('openGraph.images.url'),
-          width: 1731,
-          height: 909,
-          alt: t('openGraph.images.alt'),
-        },
-      ],
     },
     twitter: {
       card: 'summary_large_image',
@@ -86,12 +78,6 @@ export const generateMetadata = async ({
       creator: t('twitter.creator'),
       title: t('twitter.title'),
       description: t('twitter.description'),
-      images: [t('openGraph.images.url')],
-    },
-    icons: {
-      icon: '/assets/favicon/favicon.ico',
-      shortcut: '/assets/favicon/favicon.ico',
-      apple: '/assets/favicon/apple-touch-icon.png',
     },
     appleWebApp: {
       capable: true,
@@ -161,7 +147,7 @@ export const viewport: Viewport = {
   userScalable: true,
   viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#faf7f3' },
-    { media: '(prefers-color-scheme: dark)', color: '#1e1714' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#1c1c1c' },
   ],
 };

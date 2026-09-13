@@ -2,19 +2,19 @@
   "title": "Where it applies",
   "subtitle": "The same public/private funding model works anywhere infrastructure needs both.",
   "cases": {
-    "crossBorder": {
+    "government": {
       "title": "Government-anchored projects",
       "description": "A municipal or national government seeds a project with a public position."
     },
-    "bodegas": {
+    "community": {
       "title": "Community funding",
       "description": "Local residents and diaspora co-invest alongside the government."
     },
-    "smes": {
+    "investors": {
       "title": "Outside investors",
       "description": "Impact investors fund the remaining gap through the same table."
     },
-    "enterprise": {
+    "generalized": {
       "title": "Any essential infrastructure",
       "description": "The model generalizes beyond water to any public-private funding gap."
     }

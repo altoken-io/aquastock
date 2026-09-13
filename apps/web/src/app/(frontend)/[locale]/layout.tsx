@@ -21,7 +21,6 @@ import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
 
 import CookieBanner from '@/modules/miscellaneous/components/cookie-banner';
-import { LanguageSwitcher } from '@/components/helpers/language-switcher';
 
 import { routing } from '@/lib/i18n/routing';
 
@@ -30,7 +29,6 @@ import Header from '@/modules/app/components/header';
 import '../../globals.css';
 import '../../animations.css';
 
-import ThemeSwitcher from '@/components/helpers/theme-switcher';
 import { Toaster } from 'sonner';
 
 function getBrowserPreferredLocale(
@@ -150,14 +148,6 @@ export const generateMetadata = async ({
       type: 'website',
       locale: t('openGraph.locale'),
       url: canonicalUrl,
-      images: [
-        {
-          url: t('openGraph.images.url'),
-          width: 1731,
-          height: 909,
-          alt: t('openGraph.images.alt'),
-        },
-      ],
       title: t('openGraph.title'),
       siteName: t('openGraph.siteName'),
       description: t('openGraph.description'),
@@ -168,18 +158,12 @@ export const generateMetadata = async ({
       creator: t('twitter.creator'),
       title: t('twitter.title'),
       description: t('twitter.description'),
-      images: [t('openGraph.images.url')],
     },
     category: t('category'),
     classification: t('classification'),
     applicationName: 'AquaStock',
     creator: 'AquaStock',
     publisher: 'AquaStock',
-    icons: {
-      icon: '/assets/favicon/favicon.ico',
-      shortcut: '/assets/favicon/favicon.ico',
-      apple: '/assets/favicon/apple-touch-icon.png',
-    },
     appleWebApp: {
       title: 'AquaStock',
       statusBarStyle: 'default',
@@ -229,8 +213,6 @@ export default async function RootLayout({
                     <MotionProvider>
                       <Header />
                       <main id="main-content">{children}</main>
-                      <ThemeSwitcher wrapperClassName="fixed bottom-4 right-4 z-50" />
-                      <LanguageSwitcher className="fixed bottom-4 left-4 z-50" />
                       <Footer />
                       <CookieBanner />
                     </MotionProvider>
@@ -253,9 +235,9 @@ export default async function RootLayout({
               '@type': 'Organization',
               name: 'AquaStock',
               url: baseUrl,
-              logo: `${baseUrl}/assets/favicon/android-chrome-512x512.png`,
+              logo: `${baseUrl}/icon.svg`,
               description:
-                'AquaStock is a digital wallet for sending, receiving, and accepting payments across Peru and Latin America.',
+                'AquaStock lets a government anchor and community investors co-fund water infrastructure projects, tracked on-chain on Solana.',
             }),
           }}
         />
@@ -282,7 +264,7 @@ export const viewport: Viewport = {
   userScalable: true,
   viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fce8eb' },
-    { media: '(prefers-color-scheme: dark)', color: '#220309' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#1c1c1c' },
   ],
 };

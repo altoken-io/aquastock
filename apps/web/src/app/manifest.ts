@@ -2,29 +2,19 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'AquaStock - PEN Stablecoin Settlement Layer',
+    name: 'AquaStock — Water Infrastructure Funding',
     short_name: 'AquaStock',
     description:
-      'PEN-backed stablecoin and settlement platform for B2B payments, remittances, treasury transfers, and merchant payouts across Latin America.',
+      'AquaStock lets a government anchor and community investors co-fund water infrastructure projects, tracked on-chain on Solana.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#fce8eb',
-    theme_color: '#e6153b',
+    background_color: '#ffffff',
+    theme_color: '#3d7a8a',
     icons: [
       {
-        src: '/assets/favicon/favicon.ico',
+        src: '/icon.svg',
         sizes: 'any',
-        type: 'image/x-icon',
-      },
-      {
-        src: '/assets/favicon/android-chrome-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
-      },
-      {
-        src: '/assets/favicon/android-chrome-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
+        type: 'image/svg+xml',
       },
     ],
   };

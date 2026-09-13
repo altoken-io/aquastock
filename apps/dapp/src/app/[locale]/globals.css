@@ -44,8 +44,12 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-primary-pressed: var(--primary-pressed);
-  --color-info: var(--info);
-  --color-info-foreground: var(--info-foreground);
+  /* Public (government-anchor) vs. private (community) position tags —
+     the funding table's core visual distinction. See docs/VISUAL.md. */
+  --color-public: var(--public);
+  --color-public-foreground: var(--public-foreground);
+  --color-private: var(--private);
+  --color-private-foreground: var(--private-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
   --color-ok: var(--ok);
@@ -68,62 +72,65 @@
   --shadow-foreground-glow: var(--shadow-foreground-glow-raw);
 }
 
+/* AquaStock palette (docs/VISUAL.md). Neutral scale is true gray (zero
+   chroma) so backgrounds read as plain white/black, not a warm or cool
+   tint. --primary ("Reservoir") is the one brand/CTA color; --public
+   ("Anchor") and --private ("Terra") are reserved specifically for
+   tagging a position's investor_type — never used as a general accent. */
 :root {
-  /* Wallet surface primary: Peruvian flag red per docs/VISUAL.md. Kept
-     distinct from --accent (legacy marketing/DeFi highlight token, left
-     untouched below to avoid restyling out-of-scope surfaces). */
-  --primary: #e6153b;
-  --primary-foreground: #ffffff;
-  --primary-pressed: #c71434;
-  /* Sky-blue informational accent (network/rail chips, trust highlights).
-     Never used as a CTA color. */
-  --info: #8cc9e8;
-  --info-foreground: oklch(0.2 0.02 250);
-  --accent: oklch(0.57 0.21 30);
-  --accent-foreground: oklch(0.985 0.003 85);
-  --background: oklch(0.978 0.004 75);
-  --foreground: oklch(0.2 0.012 32);
-  --card: oklch(0.992 0.003 75);
-  --card-foreground: oklch(0.2 0.012 32);
-  --muted: oklch(0.941 0.006 75);
-  --muted-foreground: oklch(0.39 0.013 36);
-  --border: oklch(0.84 0.008 75);
-  --input: oklch(0.955 0.005 75);
-  --secondary: oklch(0.934 0.006 75);
-  --secondary-foreground: oklch(0.2 0.012 32);
-  --popover: oklch(0.992 0.003 75);
-  --popover-foreground: oklch(0.2 0.012 32);
-  --destructive: oklch(0.58 0.22 25);
+  --primary: oklch(0.52 0.1 200);
+  --primary-foreground: oklch(1 0 0);
+  --primary-pressed: oklch(0.44 0.1 200);
+
+  --public: oklch(0.34 0.07 260);
+  --public-foreground: oklch(1 0 0);
+  --private: oklch(0.55 0.13 45);
+  --private-foreground: oklch(1 0 0);
+
+  --accent: oklch(0.94 0.025 196);
+  --accent-foreground: oklch(0.28 0.05 196);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.46 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  --destructive: oklch(0.58 0.21 25);
   --destructive-foreground: oklch(0.98 0.004 85);
-  --ring: oklch(0.62 0.23 32);
-  --chart-1: oklch(0.62 0.23 32);
-  --chart-2: oklch(0.67 0.21 45);
-  --chart-3: oklch(0.55 0.2 20);
-  --chart-4: oklch(0.72 0.16 65);
-  --chart-5: oklch(0.48 0.16 18);
+  --ring: var(--primary);
+
+  --chart-1: var(--primary);
+  --chart-2: var(--ok);
+  --chart-3: var(--warning);
+  --chart-4: var(--private);
+  --chart-5: var(--public);
+
   --radius: 0.5rem;
-  --sidebar: oklch(0.968 0.004 75);
-  --sidebar-foreground: oklch(0.2 0.012 32);
-  --sidebar-primary: oklch(0.62 0.23 32);
-  --sidebar-primary-foreground: oklch(0.98 0.004 85);
-  --sidebar-accent: oklch(0.62 0.23 32);
-  --sidebar-accent-foreground: oklch(0.98 0.004 85);
-  --sidebar-border: oklch(0.91 0.004 75);
-  --sidebar-ring: oklch(0.62 0.23 32);
-  --accent-2: oklch(0.72 0.17 60);
-  --ok: oklch(0.68 0.17 150);
-  --warning: oklch(0.74 0.16 75);
+
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: var(--primary);
+
+  --ok: oklch(0.56 0.12 150);
+  --warning: oklch(0.74 0.15 75);
   /* Dark text on the amber --warning surface — used by the sandbox-mode
      banner/badge, kept as its own token (rather than reusing
      --accent-foreground) since --warning is never a button/CTA color. */
   --warning-foreground: oklch(0.22 0.04 75);
-  --danger: var(--destructive);
-  --bg: var(--background);
-  --bg-soft: color-mix(in srgb, var(--secondary) 72%, var(--background));
-  --surface: color-mix(in srgb, var(--card) 92%, transparent);
-  --surface-2: color-mix(in srgb, var(--secondary) 82%, var(--card));
-  --text: var(--foreground);
-  --text-dim: var(--muted-foreground);
+
   /* Raw values for the shadow-* utilities registered in @theme inline above.
      Kept as separate -raw custom properties (rather than defined directly in
      @theme) so they can reference the light/dark-reactive color tokens above
@@ -141,52 +148,53 @@
 }
 
 .dark {
-  --primary: #ff2c58;
-  --primary-foreground: oklch(0.15 0.01 35);
+  --primary: oklch(0.72 0.12 196);
+  --primary-foreground: oklch(0.15 0.02 200);
   --primary-pressed: color-mix(in srgb, var(--primary) 82%, white 18%);
-  --info: #72b9dc;
-  --info-foreground: oklch(0.16 0.015 250);
-  --accent: oklch(0.68 0.19 34);
-  --accent-foreground: oklch(0.15 0.01 35);
-  --background: oklch(0.13 0.006 35);
-  --foreground: oklch(0.95 0.004 75);
-  --card: oklch(0.18 0.008 35);
-  --card-foreground: oklch(0.95 0.004 75);
-  --muted: oklch(0.23 0.008 35);
-  --muted-foreground: oklch(0.72 0.008 55);
-  --border: oklch(0.26 0.008 35);
-  --input: oklch(0.21 0.008 35);
-  --secondary: oklch(0.22 0.008 35);
-  --secondary-foreground: oklch(0.95 0.004 75);
-  --popover: oklch(0.18 0.008 35);
-  --popover-foreground: oklch(0.95 0.004 75);
-  --destructive: oklch(0.6 0.2 25);
-  --destructive-foreground: oklch(0.95 0.004 75);
-  --ring: oklch(0.68 0.19 34);
-  --chart-1: oklch(0.68 0.19 34);
-  --chart-2: oklch(0.72 0.17 50);
-  --chart-3: oklch(0.63 0.16 18);
-  --chart-4: oklch(0.6 0.14 70);
-  --chart-5: oklch(0.55 0.14 10);
-  --sidebar: oklch(0.16 0.006 35);
-  --sidebar-foreground: oklch(0.95 0.004 75);
-  --sidebar-primary: oklch(0.68 0.19 34);
-  --sidebar-primary-foreground: oklch(0.15 0.01 35);
-  --sidebar-accent: oklch(0.68 0.19 34);
-  --sidebar-accent-foreground: oklch(0.15 0.01 35);
-  --sidebar-border: oklch(0.26 0.008 35);
-  --sidebar-ring: oklch(0.68 0.19 34);
-  --accent-2: oklch(0.72 0.16 60);
-  --ok: oklch(0.7 0.16 150);
-  --warning: oklch(0.72 0.16 60);
-  --warning-foreground: oklch(0.18 0.03 60);
-  --danger: var(--destructive);
-  --bg: var(--background);
-  --bg-soft: color-mix(in srgb, var(--secondary) 55%, var(--background));
-  --surface: color-mix(in srgb, var(--card) 92%, transparent);
-  --surface-2: color-mix(in srgb, var(--secondary) 78%, var(--card));
-  --text: var(--foreground);
-  --text-dim: var(--muted-foreground);
+
+  --public: oklch(0.58 0.09 258);
+  --public-foreground: oklch(0.98 0.004 85);
+  --private: oklch(0.68 0.14 48);
+  --private-foreground: oklch(0.16 0.02 45);
+
+  --accent: oklch(0.28 0.045 196);
+  --accent-foreground: oklch(0.94 0.02 196);
+
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.19 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.23 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --border: oklch(0.28 0 0);
+  --input: oklch(0.28 0 0);
+  --secondary: oklch(0.23 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.19 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --destructive: oklch(0.62 0.2 25);
+  --destructive-foreground: oklch(0.98 0.004 85);
+  --ring: var(--primary);
+
+  --chart-1: var(--primary);
+  --chart-2: var(--ok);
+  --chart-3: var(--warning);
+  --chart-4: var(--private);
+  --chart-5: var(--public);
+
+  --sidebar: oklch(0.16 0 0);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: oklch(0.28 0 0);
+  --sidebar-ring: var(--primary);
+
+  --ok: oklch(0.7 0.15 150);
+  --warning: oklch(0.72 0.15 65);
+  --warning-foreground: oklch(0.18 0.03 65);
 }
 
 *,
@@ -286,245 +294,6 @@ body {
   margin-inline: auto;
 }
 
-.shell {
-  display: grid;
-  gap: 1rem;
-  padding: 1rem 0 2rem;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.9rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--card) 88%, transparent);
-  backdrop-filter: blur(18px);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.brand-mark {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: var(--accent);
-}
-
-.brand h1 {
-  font-size: 1rem;
-  margin: 0;
-}
-
-.brand p {
-  margin: 0;
-  color: var(--text-dim);
-  font-size: 0.8rem;
-}
-
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.nav a {
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-  color: var(--text-dim);
-  border-radius: 999px;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.82rem;
-  transition: all 180ms ease;
-}
-
-.nav a:hover {
-  color: var(--text);
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
-}
-
-.nav a[data-active='true'] {
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 14%, var(--card));
-  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-}
-
-.grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.grid.cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid.cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-@media (max-width: 980px) {
-  .grid.cols-2,
-  .grid.cols-3 {
-    grid-template-columns: 1fr;
-  }
-}
-
-.card {
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-  border-radius: 18px;
-  background: color-mix(in srgb, var(--card) 90%, transparent);
-  padding: 1rem;
-  box-shadow: 0 18px 60px -40px
-    color-mix(in srgb, var(--background) 85%, transparent);
-}
-
-.card h2,
-.card h3,
-.card h4 {
-  margin-top: 0;
-}
-
-.muted {
-  color: var(--text-dim);
-}
-
-.kpi {
-  display: grid;
-  gap: 0.2rem;
-}
-
-.kpi strong {
-  font-size: 1.45rem;
-}
-
-.row {
-  display: flex;
-  gap: 0.65rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.input,
-.select,
-.textarea {
-  width: 100%;
-  background: color-mix(in srgb, var(--secondary) 82%, var(--card));
-  color: var(--text);
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-  border-radius: 12px;
-  padding: 0.65rem 0.75rem;
-  outline: none;
-}
-
-.textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-.input:focus,
-.select:focus,
-.textarea:focus {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
-}
-
-.button {
-  border: 0;
-  border-radius: 12px;
-  background: linear-gradient(
-    145deg,
-    color-mix(in srgb, var(--primary) 88%, white 4%),
-    color-mix(in srgb, var(--accent) 72%, white 14%)
-  );
-  color: var(--accent-foreground);
-  font-weight: 700;
-  padding: 0.62rem 0.9rem;
-  cursor: pointer;
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease;
-}
-
-.button:hover {
-  opacity: 0.96;
-}
-
-.button.secondary {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-}
-
-.button.warn {
-  background: linear-gradient(
-    145deg,
-    color-mix(in srgb, var(--accent-2) 78%, white 8%),
-    color-mix(in srgb, var(--accent-2) 55%, white 28%)
-  );
-  color: oklch(0.17 0.03 80);
-}
-
-.button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.badge {
-  display: inline-block;
-  font-size: 0.73rem;
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-  border-radius: 999px;
-  padding: 0.18rem 0.5rem;
-  color: var(--text-dim);
-}
-
-.notice {
-  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
-  border-radius: 12px;
-  padding: 0.7rem 0.85rem;
-  font-size: 0.87rem;
-}
-
-.notice.ok {
-  border-color: color-mix(in srgb, var(--ok) 40%, var(--border));
-  color: color-mix(in srgb, var(--ok) 78%, white 20%);
-}
-
-.notice.warn {
-  border-color: color-mix(in srgb, var(--warning) 45%, var(--border));
-  color: color-mix(in srgb, var(--warning) 78%, white 20%);
-}
-
-.notice.error {
-  border-color: color-mix(in srgb, var(--danger) 45%, var(--border));
-  color: color-mix(in srgb, var(--danger) 78%, white 20%);
-}
-
-.empty {
-  border: 1px dashed color-mix(in srgb, var(--border) 88%, transparent);
-  border-radius: 14px;
-  padding: 1rem;
-  color: var(--text-dim);
-}
-
-.skeleton {
-  height: 18px;
-  border-radius: 8px;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--secondary) 70%, var(--background)),
-    color-mix(in srgb, var(--secondary) 92%, var(--card)),
-    color-mix(in srgb, var(--secondary) 70%, var(--background))
-  );
-  background-size: 220% 100%;
-  animation: shimmer 1.2s linear infinite;
-}
-
 @utility dapp-panel {
   @apply rounded-[32px] border border-border/85 bg-card shadow-sm;
 }
@@ -557,20 +326,6 @@ body {
   @apply rounded-xl border border-border/70 bg-background/70 px-3 py-2 font-mono text-xs text-accent;
 }
 
-/* Hazard-tape accent for the sandbox-mode banner (SandboxBanner) — a narrow
-   diagonal-stripe edge rather than covering the whole bar, so the "fake
-   money, handle differently" signal reads instantly without fighting the
-   banner's text for legibility. */
-@utility sandbox-hazard-stripes {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    color-mix(in srgb, var(--warning-foreground) 85%, transparent) 0,
-    color-mix(in srgb, var(--warning-foreground) 85%, transparent) 6px,
-    transparent 6px,
-    transparent 12px
-  );
-}
-
 /* Native <details>/<summary> as an accordion row (help center). Hides the
    default disclosure triangle in every engine — `list-none` alone leaves
    WebKit's ::-webkit-details-marker in place. */
@@ -578,14 +333,5 @@ body {
   list-style: none;
   &::-webkit-details-marker {
     display: none;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 220% 0;
-  }
-  100% {
-    background-position: -20% 0;
   }
 }

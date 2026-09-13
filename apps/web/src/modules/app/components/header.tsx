@@ -9,6 +9,8 @@ import { Link } from '@/lib/i18n/navigation';
 import BrandLogo from '@/components/helpers/brand-logo';
 import ButtonLink from '@/components/ui/button-link';
 import MobileMenu from '@/modules/app/components/mobile-menu';
+import { LanguageSwitcher } from '@/components/helpers/language-switcher';
+import ThemeSwitcher from '@/components/helpers/theme-switcher';
 import { useIsScrolled } from '@/hooks/use-scroll-position';
 import { cn } from '@/utils/classNames';
 import { DAPP_LOGIN_URL } from '@/lib/dapp-url';
@@ -102,7 +104,11 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className="hidden items-center gap-4 lg:flex">
+          <div className="hidden items-center gap-2 lg:flex">
+            <div className="mr-1 flex items-center gap-1 border-r border-border/70 pr-3">
+              <ThemeSwitcher wrapperClassName="size-8" />
+              <LanguageSwitcher />
+            </div>
             <a
               href={DAPP_LOGIN_URL}
               className="focus-visible:ring-ring rounded-full px-2 py-1 text-sm font-medium text-foreground/75 transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none"

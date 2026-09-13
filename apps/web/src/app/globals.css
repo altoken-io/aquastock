@@ -8,12 +8,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* AquaStock palette (docs/VISUAL.md). Neutral scale is true gray (zero
+   chroma) so backgrounds read as plain white/black, not a warm or cool
+   tint. --primary ("Reservoir") is the one brand/CTA color; --public
+   ("Anchor") and --private ("Terra") are reserved specifically for
+   tagging a position's investor_type in the dApp — never used as a
+   general accent on the marketing site, but kept here so both apps share
+   one token vocabulary. */
 :root {
   /* Base */
 
-  /*--background: oklch(0.99 0.008 85);*/
   --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0.015 300);
+  --foreground: oklch(0.145 0 0);
 
   /* Surface */
 
@@ -25,54 +31,56 @@
 
   /* Brand */
 
-  --primary: #e6153b;
-  /* White, not near-black: dark text on #E6153B fails WCAG AA (4.2:1) for
-     normal-size text — white clears 4.63:1. The old near-black value was
-     tuned for the previous pastel-pink primary. */
-  --primary-foreground: #ffffff;
-  /* For text set directly in the brand red on a light tint (e.g. eyebrow
-     badges) rather than white-on-solid — #E6153B only clears ~3.9:1 there,
-     under the 4.5 AA floor. --primary-pressed clears 5:1 in that role. */
-  --primary-pressed: #c71434;
+  --primary: oklch(0.52 0.1 200);
+  --primary-foreground: oklch(1 0 0);
+  --primary-pressed: oklch(0.44 0.1 200);
+
+  /* Public (government-anchor) vs. private (community) position tags */
+  --public: oklch(0.34 0.07 260);
+  --public-foreground: oklch(1 0 0);
+  --private: oklch(0.55 0.13 45);
+  --private-foreground: oklch(1 0 0);
 
   /* Soft surface */
 
-  --secondary: oklch(0.96 0.015 85);
-  --secondary-foreground: oklch(0.24 0.015 300);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: var(--foreground);
 
   /* Neutral */
 
-  --muted: oklch(0.97 0.006 85);
-  --muted-foreground: oklch(0.52 0.015 300);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.46 0 0);
 
   /* Accent */
 
-  --accent: oklch(0.93 0.04 105);
-  --accent-foreground: oklch(0.22 0.02 300);
+  --accent: oklch(0.94 0.025 196);
+  --accent-foreground: oklch(0.28 0.05 196);
 
   /* States */
 
-  --destructive: oklch(0.62 0.22 25);
+  --destructive: oklch(0.58 0.21 25);
   --destructive-foreground: oklch(1 0 0);
+  --ok: oklch(0.56 0.12 150);
+  --warning: oklch(0.74 0.15 75);
 
   /* Inputs */
 
-  --border: oklch(0.9 0.008 85);
-  --input: oklch(0.9 0.008 85);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
 
   --ring: var(--primary);
 
   /* Charts */
 
   --chart-1: var(--primary);
-  --chart-2: oklch(0.83 0.09 110); /* lime */
-  --chart-3: oklch(0.78 0.08 220); /* blue */
-  --chart-4: oklch(0.88 0.08 70); /* yellow */
-  --chart-5: oklch(0.8 0.07 310); /* lavender */
+  --chart-2: var(--ok);
+  --chart-3: var(--warning);
+  --chart-4: var(--private);
+  --chart-5: var(--public);
 
   /* Sidebar */
 
-  --sidebar: oklch(0.985 0.006 85);
+  --sidebar: oklch(0.98 0 0);
   --sidebar-foreground: var(--foreground);
 
   --sidebar-primary: var(--primary);
@@ -88,13 +96,6 @@
 
   --radius: 1.25rem;
 
-  /* Type scale */
-
-  --text-mega: clamp(5.5rem, 21vw, 16rem);
-
-  /* Wide letter-spacing for printed-ticket eyebrows and small-caps labels */
-  --tracking-ticket: 0.22em;
-
   /* Layout */
 
   /* Footer closing moment: ~70vh on desktop only (apps/web footer.tsx applies
@@ -102,69 +103,53 @@
      unset below `lg` so short/mobile viewports fall back to natural
      content-driven auto height instead of dead whitespace. */
   --footer-min-height: 70vh;
-
-  /* Peruvian flag green — reserved for small, deliberate accents (never
-     decorative shapes/CTAs, those use --primary). See docs/VISUAL.md. */
-  --green: #008f4c;
-
-  --purple: oklch(0.28 0.058 296.86);
-
-  --lilac: oklch(0.72 0.064 320.03);
-
-  --yellow: oklch(0.92 0.08 85);
-
-  --blue: oklch(0.85 0.06 235);
-
-  --lavender: oklch(0.88 0.05 315);
-
-  --peach: oklch(0.9 0.06 45);
-
-  --cream: oklch(0.96 0.02 82);
-
-  --ink: oklch(0.18 0.015 300);
-
-  /* Status accent for confirmation/receipt-style UI (e.g. /stripe) */
-  --stamp: oklch(0.4 0.085 155);
-
-  /* Take-a-number kiosk board (apps/web /join): dark display housing + lit amber digits */
-  --counter: oklch(0.17 0.02 55);
-  --led: oklch(0.74 0.16 55);
 }
 
 .dark {
-  --background: oklch(0.17 0.01 300);
-  --foreground: oklch(0.96 0.01 85);
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.98 0 0);
 
-  --card: oklch(0.22 0.01 300);
+  --card: oklch(0.19 0 0);
   --card-foreground: var(--foreground);
 
-  --popover: oklch(0.22 0.01 300);
+  --popover: oklch(0.19 0 0);
   --popover-foreground: var(--foreground);
 
-  --primary: #ff2c58;
-  --primary-foreground: oklch(0.12 0 0);
+  --primary: oklch(0.72 0.12 196);
+  --primary-foreground: oklch(0.15 0.02 200);
   --primary-pressed: color-mix(in srgb, var(--primary) 82%, white 18%);
 
-  --secondary: oklch(0.26 0.01 300);
+  --public: oklch(0.58 0.09 258);
+  --public-foreground: oklch(0.98 0.004 85);
+  --private: oklch(0.68 0.14 48);
+  --private-foreground: oklch(0.16 0.02 45);
+
+  --secondary: oklch(0.23 0 0);
   --secondary-foreground: var(--foreground);
 
-  --muted: oklch(0.24 0.01 300);
-  --muted-foreground: oklch(0.72 0.01 300);
+  --muted: oklch(0.23 0 0);
+  --muted-foreground: oklch(0.65 0 0);
 
-  --accent: oklch(0.33 0.04 105);
-  --accent-foreground: var(--foreground);
+  --accent: oklch(0.28 0.045 196);
+  --accent-foreground: oklch(0.94 0.02 196);
 
-  --destructive: oklch(0.62 0.22 25);
+  --destructive: oklch(0.62 0.2 25);
   --destructive-foreground: white;
+  --ok: oklch(0.7 0.15 150);
+  --warning: oklch(0.72 0.15 65);
 
-  --border: oklch(0.3 0.01 300);
-  --input: oklch(0.3 0.01 300);
+  --border: oklch(0.28 0 0);
+  --input: oklch(0.28 0 0);
 
   --ring: var(--primary);
 
-  --stamp: oklch(0.62 0.1 155);
+  --chart-1: var(--primary);
+  --chart-2: var(--ok);
+  --chart-3: var(--warning);
+  --chart-4: var(--private);
+  --chart-5: var(--public);
 
-  --sidebar: oklch(0.2 0.01 300);
+  --sidebar: oklch(0.16 0 0);
   --sidebar-foreground: var(--foreground);
 
   --sidebar-primary: var(--primary);
@@ -174,8 +159,6 @@
   --sidebar-accent-foreground: var(--accent-foreground);
 
   --sidebar-border: var(--border);
-
-  --green: color-mix(in srgb, #008f4c 82%, white 18%);
 }
 
 @theme inline {
@@ -188,6 +171,10 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-pressed: var(--primary-pressed);
+  --color-public: var(--public);
+  --color-public-foreground: var(--public-foreground);
+  --color-private: var(--private);
+  --color-private-foreground: var(--private-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -196,6 +183,8 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-ok: var(--ok);
+  --color-warning: var(--warning);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -216,26 +205,10 @@
   --font-headline: var(--font-headline);
   --font-body: var(--font-body);
 
-  --color-green: var(--green);
-  --color-purple: var(--purple);
-  --color-lilac: var(--lilac);
-  --color-yellow: var(--yellow);
-  --color-blue: var(--blue);
-  --color-lavender: var(--lavender);
-  --color-peach: var(--peach);
-  --color-cream: var(--cream);
-  --color-ink: var(--ink);
-  --color-stamp: var(--stamp);
-  --color-counter: var(--counter);
-  --color-led: var(--led);
-
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-
-  --text-mega: var(--text-mega);
-  --tracking-ticket: var(--tracking-ticket);
 
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
@@ -282,4 +255,34 @@ html {
 
 section {
   scroll-margin-top: 100px;
+}
+
+/* Theme-toggle view transition: a ripple reveal of the incoming theme from
+   the toggle button's position — see components/helpers/theme-switcher.tsx,
+   which sets --vt-x/--vt-y before calling document.startViewTransition(). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
+  animation: aquastock-theme-reveal 600ms cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes aquastock-theme-reveal {
+  to {
+    clip-path: circle(150% at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }

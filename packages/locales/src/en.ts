@@ -1,4 +1,5 @@
 import common from './content/en/common.json';
+import confluence from './content/en/confluence.json';
 import cookies from './content/en/cookies.json';
 import earlyAccessCta from './content/en/earlyAccessCta.json';
 import faq from './content/en/faq.json';
@@ -21,6 +22,7 @@ import validation from './content/en/validation.json';
 
 export const en = {
   common,
+  confluence,
   cookies,
   earlyAccessCta,
   faq,

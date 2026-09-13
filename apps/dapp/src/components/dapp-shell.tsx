@@ -1,7 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-
+import BrandLogo from '@/components/helpers/brand-logo';
 import { LanguageSwitcher } from '@/components/helpers/language-switcher';
 import ThemeSwitcher from '@/components/helpers/theme-switcher';
 import { Link } from '@/lib/i18n/navigation';
@@ -14,13 +13,7 @@ export function DappShell({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-dvh w-full flex-col bg-background text-foreground font-sans">
       <header className="flex flex-shrink-0 items-center justify-between gap-3 border-b border-border/85 bg-background/92 px-4 py-4 backdrop-blur-md sm:px-6 md:px-8 lg:px-10">
         <Link href="/" className="flex min-w-0 items-center gap-3">
-          <Image
-            src="/assets/favicon/android-chrome-512x512.png"
-            alt="AquaStock"
-            width={34}
-            height={34}
-            className="rounded-xl object-contain"
-          />
+          <BrandLogo alt="AquaStock" size={34} className="size-8" />
           <span className="truncate text-sm font-semibold uppercase tracking-[0.14em] text-foreground">
             AquaStock
           </span>

@@ -17,11 +17,7 @@
     "locale": "es_PE",
     "title": "AquaStock",
     "description": "Infraestructura de agua, financiada en Solana.",
-    "siteName": "AquaStock",
-    "images": {
-      "url": "/og-image.png",
-      "alt": "AquaStock"
-    }
+    "siteName": "AquaStock"
   },
   "twitter": {
     "site": "@aquastock",

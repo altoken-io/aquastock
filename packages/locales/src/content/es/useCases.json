@@ -2,19 +2,19 @@
   "title": "Dónde aplica",
   "subtitle": "El mismo modelo de financiamiento público-privado funciona donde la infraestructura lo necesite.",
   "cases": {
-    "crossBorder": {
+    "government": {
       "title": "Proyectos anclados por el gobierno",
       "description": "Un gobierno municipal o nacional inicia un proyecto con una posición pública."
     },
-    "bodegas": {
+    "community": {
       "title": "Financiación comunitaria",
       "description": "Vecinos y diáspora co-invierten junto al gobierno."
     },
-    "smes": {
+    "investors": {
       "title": "Inversionistas externos",
       "description": "Inversionistas de impacto financian la brecha restante en la misma tabla."
     },
-    "enterprise": {
+    "generalized": {
       "title": "Cualquier infraestructura esencial",
       "description": "El modelo se generaliza más allá del agua a cualquier brecha público-privada."
     }

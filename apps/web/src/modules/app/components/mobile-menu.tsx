@@ -13,6 +13,8 @@ import { DAPP_LOGIN_URL } from '@/lib/dapp-url';
 import BrandLogo from '@/components/helpers/brand-logo';
 import ButtonLink from '@/components/ui/button-link';
 import Portal from '@/components/ui/portal';
+import { LanguageSwitcher } from '@/components/helpers/language-switcher';
+import ThemeSwitcher from '@/components/helpers/theme-switcher';
 
 import { useScrollLock } from '@/hooks/use-scroll-lock';
 
@@ -175,6 +177,10 @@ const MobileMenu = ({ className }: { className?: string }) => {
                 </ol>
               </nav>
 
+              <div className="flex items-center justify-between gap-3 border-t border-border/70 bg-background px-4 py-4 sm:px-6">
+                <ThemeSwitcher wrapperClassName="size-10" />
+                <LanguageSwitcher />
+              </div>
               <div className="flex items-center gap-3 border-t border-border/70 bg-background px-4 py-4 sm:px-6">
                 <a
                   href={DAPP_LOGIN_URL}

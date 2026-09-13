@@ -1,98 +1,87 @@
 import { getTranslations } from 'next-intl/server';
+import { Landmark, TrendingUp, Users, Waves } from 'lucide-react';
+
 import {
   MotionDiv,
   MotionText,
 } from '@/components/helpers/motion/blur-lazy-motion';
-import { Globe2, Store, Briefcase, Building2 } from 'lucide-react';
 import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
+import { cn } from '@/utils/classNames';
+
+const CASES = [
+  {
+    id: 'government',
+    icon: Landmark,
+    tone: 'bg-public/10 text-public',
+  },
+  {
+    id: 'community',
+    icon: Users,
+    tone: 'bg-private/10 text-private',
+  },
+  {
+    id: 'investors',
+    icon: TrendingUp,
+    tone: 'bg-primary/10 text-primary',
+  },
+  {
+    id: 'generalized',
+    icon: Waves,
+    tone: 'bg-muted text-muted-foreground',
+  },
+] as const;
 
 export async function UseCasesSection() {
   const t = await getTranslations('useCases');
   const caseContent = (t.raw as (key: string) => unknown)('cases') as Record<
     string,
-    {
-      title: string;
-      description: string;
-    }
+    { title: string; description: string }
   >;
-  const cases = [
-    {
-      id: 'crossBorder',
-      icon: Globe2,
-      delay: 0.2,
-      className: 'lg:col-span-2 lg:row-span-2 min-h-[400px]',
-      gradient:
-        'from-red-900/20 to-stone-900/5 dark:from-red-900/40 dark:to-black/40',
-    },
-    {
-      id: 'bodegas',
-      icon: Store,
-      delay: 0.3,
-      className: 'lg:col-span-1 lg:row-span-1 min-h-[250px]',
-      gradient:
-        'from-stone-900/5 to-stone-900/10 dark:from-white/5 dark:to-white/10',
-    },
-    {
-      id: 'smes',
-      icon: Briefcase,
-      delay: 0.4,
-      className: 'lg:col-span-1 lg:row-span-1 min-h-[250px]',
-      gradient:
-        'from-stone-900/10 to-stone-900/5 dark:from-white/10 dark:to-white/5',
-    },
-    // {
-    //   id: 'individuals',
-    //   icon: User,
-    //   delay: 0.5,
-    //   className: 'lg:col-span-1 lg:row-span-1 min-h-[250px]',
-    //   gradient:
-    //     'from-stone-900/5 to-stone-900/10 dark:from-white/5 dark:to-white/10',
-    // },
-    {
-      id: 'enterprise',
-      icon: Building2,
-      delay: 0.6,
-      className: 'lg:col-span-2 lg:row-span-1 min-h-[250px]',
-      gradient:
-        'from-stone-900/10 to-red-900/10 dark:from-white/10 dark:to-red-900/20',
-    },
-  ].map((entry) => ({
-    ...entry,
-    ...caseContent[entry.id],
-  }));
 
   return (
     <section
       id="use-cases"
-      className="py-10 lg:py-35 relative flex w-full flex-col"
+      className="relative flex w-full flex-col py-10 lg:py-32"
     >
-      <div className="px-6 sm:px-12 lg:px-24 mx-auto max-w-7xl">
-        <div className="flex flex-col lg:mb-8">
+      <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24">
+        <div className="mb-16 flex flex-col lg:mb-20 lg:max-w-xl">
           <RichTextReveal
             as="h2"
             trigger="view"
             start="top"
-            className="mb-8 text-5xl md:text-6xl lg:text-7xl leading-[0.9] tracking-tighter"
+            className="mb-6 text-5xl leading-[0.95] tracking-tighter md:text-6xl lg:text-7xl"
           >
             {t('title')}
           </RichTextReveal>
-
-          <MotionText delay={0.3} className="mb-8 lg:text-lg font-light">
+          <MotionText delay={0.3} className="text-lg text-muted-foreground">
             {t('subtitle')}
           </MotionText>
         </div>
-        <div className="md:grid md:grid-cols-2 md:gap-10">
-          {cases.map((useCase) => {
+
+        <div className="grid gap-6 sm:grid-cols-2">
+          {CASES.map((useCase, index) => {
             const Icon = useCase.icon;
+            const content = caseContent[useCase.id];
             return (
               <MotionDiv
                 key={useCase.id}
-                delay={useCase.delay}
-                className="mb-10 md:mb-0"
+                delay={0.2 + index * 0.1}
+                className="rounded-2xl border border-border bg-card p-7"
               >
-                <Icon className="size-12 p-2 rounded-2xl bg-primary mb-4 text-primary-foreground" />
-                <h3 className="mb-3 text-2xl">{useCase.title}</h3>
-                <p className="text-lg font-light">{useCase.description}</p>
+                <span
+                  className={cn(
+                    'mb-5 flex size-12 items-center justify-center rounded-xl',
+                    useCase.tone,
+                  )}
+                >
+                  <Icon className="size-6" aria-hidden="true" />
+                </span>
+                <h3 className="mb-2 text-xl text-foreground">
+                  {content.title}
+                </h3>
+                <p className="text-base text-muted-foreground">
+                  {content.description}
+                </p>
               </MotionDiv>
             );
           })}

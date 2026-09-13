@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./brand/mark": "./src/brand/mark.ts",
     "./*": "./src/*.tsx"
   },
   "scripts": {

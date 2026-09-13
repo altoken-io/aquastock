@@ -1,85 +1,98 @@
+import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
-import {
-  MotionDiv,
-  MotionImg,
-} from '@/components/helpers/motion/blur-lazy-motion';
+import { MotionDiv } from '@/components/helpers/motion/blur-lazy-motion';
+import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
 import ButtonLink from '@/components/ui/button-link';
-import { Avatar, AvatarGroup, AvatarGroupCount } from '@/components/ui/avatar';
 
 export async function HeroSection() {
   const t = await getTranslations('hero');
+  const tProject = await getTranslations('project');
 
   return (
     <section
       id="home"
-      className="relative flex items-center min-h-screen w-full overflow-hidden px-4 sm:px-20 lg:px-10 xl:px-20 2xl:px-36"
+      className="relative flex w-full items-center overflow-hidden px-4 pt-32 pb-16 sm:px-10 sm:pt-40 lg:px-10 lg:pt-44 xl:px-20 2xl:px-36"
     >
-      {/*<div className="relative flex  flex-col justify-center mx-10 md:mx-20 lg:mx-44 gap-16 lg:gap-8">*/}
-      <div className="w-full justify-center">
-        <h1 className="mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-7xl whitespace-pre-line">
-          {t('title')}
-          {/*{t.rich('title', {
-          gradient: (chunks) => <span>{chunks}</span>,
-          underline: (chunks) => <span>{chunks}</span>,
-        })}*/}
-        </h1>
+      <div className="grid w-full items-center gap-16 lg:grid-cols-2 lg:gap-12">
+        <div>
+          <MotionDiv className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 bg-muted/60 px-3 py-1 text-xs font-medium text-muted-foreground">
+            <span className="size-1.5 rounded-full bg-primary" />
+            {t('usersCount')}
+          </MotionDiv>
 
-        <MotionDiv className="mb-4 xl:max-w-prose font-light text-lg xl:text-xl text-foreground/90">
-          {t('subtitle')}
-        </MotionDiv>
-        <MotionDiv
-          delay={0.2}
-          className="mb-6 xl:max-w-prose text-base xl:text-lg text-foreground/60"
-        >
-          {t('description')}
-        </MotionDiv>
-        <MotionDiv delay={0.4} className="flex w-full mb-5">
-          <ButtonLink
-            variant="primary"
-            rounded="full"
-            href={t('cta.primary.href')}
-            className="h-12 font-medium"
+          <RichTextReveal
+            as="h1"
+            trigger="load"
+            stagger={0.03}
+            className="mb-6 text-4xl sm:text-5xl md:text-6xl xl:text-7xl"
           >
-            <span>{t('cta.primary.label')}</span>
-          </ButtonLink>
-        </MotionDiv>
-        <MotionDiv delay={0.6} className="flex gap-5 items-center">
-          <AvatarGroup>
-            <Avatar className="bg-accent-foreground/90" />
-            <Avatar className="bg-secondary-foreground/80" />
-            <Avatar className="bg-accent-foreground/70" />
-            <AvatarGroupCount>+3</AvatarGroupCount>
-          </AvatarGroup>
-          <span className="text-foreground/60">{t('usersCount')}</span>
-        </MotionDiv>
-        {/*</div>*/}
-      </div>
-      <div className="relative hidden h-screen items-center xl:flex">
+            {t('title')}
+          </RichTextReveal>
+
+          <MotionDiv
+            delay={0.3}
+            className="mb-4 max-w-prose text-lg text-foreground/90 xl:text-xl"
+          >
+            {t('subtitle')}
+          </MotionDiv>
+          <MotionDiv
+            delay={0.4}
+            className="mb-8 max-w-prose text-base text-foreground/60 xl:text-lg"
+          >
+            {t('description')}
+          </MotionDiv>
+
+          <MotionDiv
+            delay={0.5}
+            className="mb-8 flex flex-wrap items-center gap-3"
+          >
+            <ButtonLink
+              variant="primary"
+              rounded="full"
+              padding="lg"
+              href={t('cta.primary.href')}
+              className="h-12 font-medium"
+            >
+              {t('cta.primary.label')}
+            </ButtonLink>
+            <ButtonLink
+              variant="outline"
+              rounded="full"
+              padding="lg"
+              href={t('cta.secondary.href')}
+              className="h-12 font-medium"
+            >
+              {t('cta.secondary.label')}
+            </ButtonLink>
+          </MotionDiv>
+
+          <MotionDiv delay={0.6} className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-public/25 bg-public/8 px-3 py-1.5 text-xs font-medium text-public">
+              <span className="size-1.5 rounded-full bg-public" />
+              {tProject('governmentContribution')}
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-private/25 bg-private/8 px-3 py-1.5 text-xs font-medium text-private">
+              <span className="size-1.5 rounded-full bg-private" />
+              {tProject('communityFunding')}
+            </span>
+          </MotionDiv>
+        </div>
+
         <MotionDiv
-          animate={{
-            scale: 1,
-          }}
-          initial={{
-            scale: 0,
-          }}
-          transition={{ type: 'spring', visualDuration: 0.9, bounce: 0.2 }}
-          className="bg-primary h-187 w-125 rounded-2xl"
-        />
-        <MotionImg
-          animate={{
-            scale: 1,
-          }}
-          initial={{
-            scale: 0.5,
-          }}
-          transition={{ type: 'spring', visualDuration: 1, bounce: 0.2 }}
-          src="/assets/brand/hero-1.jpg"
-          alt="AquaStock wallet app showing a cross-border payment from Lima to Miami"
-          width={500}
-          height={800}
-          className="absolute bottom-44 left-4 rounded-2xl"
-        />
+          delay={0.3}
+          direction="horizontal"
+          x={24}
+          className="relative hidden aspect-4/5 w-full max-w-md justify-self-end overflow-hidden rounded-3xl lg:block"
+        >
+          <Image
+            src="/assets/brand/hero-infrastructure-placeholder.svg"
+            alt="Water infrastructure — reservoir and treatment plant"
+            fill
+            priority
+            className="object-cover"
+          />
+        </MotionDiv>
       </div>
     </section>
   );

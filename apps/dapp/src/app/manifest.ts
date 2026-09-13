@@ -2,35 +2,20 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'AquaStock',
+    name: 'AquaStock dApp',
     short_name: 'AquaStock',
     description:
-      'Send, receive, and convert PEN-backed stablecoins from your AquaStock wallet.',
+      'Connect a Solana wallet, fund a water-infrastructure position, and track it against real milestones.',
     start_url: '/',
     display: 'standalone',
     orientation: 'portrait',
-    background_color: '#faf7f3',
-    theme_color: '#faf7f3',
+    background_color: '#ffffff',
+    theme_color: '#3d7a8a',
     icons: [
       {
-        src: '/assets/favicon/favicon-32x32.png',
-        sizes: '32x32',
-        type: 'image/png',
-      },
-      {
-        src: '/assets/favicon/android-chrome-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
-      },
-      {
-        src: '/assets/favicon/android-chrome-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
-      },
-      {
-        src: '/assets/favicon/apple-touch-icon.png',
-        sizes: '180x180',
-        type: 'image/png',
+        src: '/icon.svg',
+        sizes: 'any',
+        type: 'image/svg+xml',
       },
     ],
   };

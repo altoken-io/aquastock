@@ -17,11 +17,7 @@
     "locale": "en_US",
     "title": "AquaStock",
     "description": "Water infrastructure, funded on Solana.",
-    "siteName": "AquaStock",
-    "images": {
-      "url": "/og-image.png",
-      "alt": "AquaStock"
-    }
+    "siteName": "AquaStock"
   },
   "twitter": {
     "site": "@aquastock",

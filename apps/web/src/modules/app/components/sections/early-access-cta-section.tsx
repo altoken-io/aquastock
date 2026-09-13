@@ -43,7 +43,7 @@ export async function EarlyAccessCtaSection() {
             variant="none"
             rounded="full"
             animation="grow"
-            className="h-13 bg-white px-6 font-semibold text-ink shadow-lg shadow-ink/10 hover:bg-white/90 sm:min-w-xs"
+            className="h-13 bg-white px-6 font-semibold text-neutral-900 shadow-lg shadow-black/10 hover:bg-white/90 sm:min-w-xs"
           >
             <span>{t('cta.primary.label')}</span>
             <ArrowRight className="size-4" aria-hidden="true" />

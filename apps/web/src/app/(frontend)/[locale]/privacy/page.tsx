@@ -44,14 +44,6 @@ export const generateMetadata = async ({
       title: t('metadata.title'),
       description: t('metadata.description'),
       url: `${baseUrl}/${locale}/privacy`,
-      images: [
-        {
-          url: t('metadata.openGraph.images.url'),
-          width: 1200,
-          height: 630,
-          alt: t('metadata.openGraph.images.alt'),
-        },
-      ],
     },
   };
 };
