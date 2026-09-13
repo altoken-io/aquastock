@@ -1,0 +1,64 @@
+{
+  "name": "@aquastock/animation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "src"
+  ],
+  "exports": {
+    "./gsap": "./src/gsap/index.ts",
+    "./gsap/components/grid-motion": "./src/gsap/components/grid-motion.tsx",
+    "./ogl": "./src/ogl/index.ts",
+    "./ogl/components": "./src/ogl/components/index.ts",
+    "./motion/react": "./src/motion/react.ts",
+    "./motion/react-client": "./src/motion/react-client.ts",
+    "./motion/react-m": "./src/motion/react-m.ts",
+    "./motion/components/dot-pattern-bg": "./src/motion/components/dot-pattern-bg.tsx",
+    "./motion/features/dom-animation": "./src/motion/features/dom-animation.ts",
+    "./motion/provider": "./src/motion/provider/index.ts",
+    "./motion/components": "./src/motion/components/index.ts",
+    "./motion/components/blur": "./src/motion/components/blur.tsx",
+    "./motion/components/text-reveal": "./src/motion/components/text-reveal.tsx",
+    "./motion/components/marquee": "./src/motion/components/marquee.tsx",
+    "./motion/components/marquee.css": "./src/motion/components/marquee.css",
+    "./motion/components/count-up": "./src/motion/components/count-up.tsx",
+    "./motion/components/world-map": "./src/motion/components/world-map.tsx",
+    "./motion/components/world-map-projection": "./src/motion/components/world-map-projection.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "dotted-map": "^3.1.0",
+    "gsap": "3.15.0",
+    "motion": "12.38.0",
+    "ogl": "1.0.11",
+    "tailwind-merge": "^3.5.0",
+    "three": "0.185.0"
+  },
+  "devDependencies": {
+    "@aquastock/config": "workspace:*",
+    "@types/node": "^22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.185.0",
+    "@vitest/coverage-v8": "^4.1.9",
+    "eslint": "^9.39.4",
+    "jsdom": "^25.0.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "typescript": "5.9.3",
+    "vitest": "^4.1.9"
+  }
+}

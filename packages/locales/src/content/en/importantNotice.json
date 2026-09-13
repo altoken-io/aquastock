@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "tagline": "Demo",
+    "title": "This is a hackathon demo",
+    "description": "AquaStock runs on Solana devnet and does not constitute an offer of securities."
+  },
+  "cta": {
+    "primary": {
+      "label": "Got it"
+    },
+    "secondary": {
+      "href": "/",
+      "label": "Learn more"
+    }
+  }
+}

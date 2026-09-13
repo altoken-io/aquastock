@@ -1,0 +1,16 @@
+{
+  "title": "Mantente al día",
+  "description": "Recibe novedades de los proyectos de AquaStock.",
+  "emailPlaceholder": "tu@ejemplo.com",
+  "submit": "Suscribirme",
+  "success": "Gracias por suscribirte.",
+  "error": "Algo salió mal. Inténtalo de nuevo.",
+  "form": {
+    "placeholders": {
+      "email": "tu@ejemplo.com"
+    },
+    "cta": {
+      "submit": "Suscribirme"
+    }
+  }
+}

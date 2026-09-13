@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "title": "Política de Privacidad | AquaStock",
+    "description": "Cómo maneja AquaStock los datos en esta demo de hackathon.",
+    "openGraph": {
+      "images": {
+        "url": "/og-image.png",
+        "alt": "Política de Privacidad de AquaStock"
+      }
+    }
+  },
+  "eyebrow": "Legal",
+  "title": "Política de Privacidad",
+  "description": "AquaStock es una demo de hackathon. Esta política provisional aún no ha sido finalizada.",
+  "summary": {
+    "effectiveLabel": "Vigencia",
+    "effectiveValue": "Aún no vigente (demo)",
+    "appliesLabel": "Aplica a",
+    "appliesValue": "Solo esta implementación de demo",
+    "statusLabel": "Estado",
+    "statusValue": "Borrador",
+    "contactLabel": "Contacto",
+    "contactValue": "admin@aquastock.io"
+  },
+  "tocLabel": "En esta página",
+  "sections": [
+    {
+      "id": "data-collected",
+      "number": "1",
+      "title": "Datos que recopilamos",
+      "paragraphs": [
+        "Esta demo no recopila datos personales más allá de lo que tu billetera de Solana conectada expone en cadena, y analítica básica."
+      ]
+    },
+    {
+      "id": "contact",
+      "number": "2",
+      "title": "Contacto",
+      "paragraphs": [
+        "Las preguntas sobre esta política provisional pueden enviarse al contacto abajo."
+      ]
+    }
+  ],
+  "contact": {
+    "title": "¿Preguntas?",
+    "body": "Escríbenos y te responderemos.",
+    "email": "admin@aquastock.io",
+    "buttonLabel": "Contáctanos"
+  }
+}

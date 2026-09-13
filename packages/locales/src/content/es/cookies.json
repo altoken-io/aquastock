@@ -1,0 +1,13 @@
+{
+  "banner": {
+    "tagline": "Cookies",
+    "title": "Aviso de cookies",
+    "description": "Usamos cookies para que esta demo funcione correctamente.",
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "link": {
+      "label": "Más información",
+      "href": "/privacy"
+    }
+  }
+}

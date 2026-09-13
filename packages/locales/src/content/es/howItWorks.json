@@ -1,0 +1,24 @@
+{
+  "badge": "Cómo funciona",
+  "title": "Un proyecto, dos tipos de inversionista",
+  "subtitle": "Capital público y privado convergen en la misma tabla de financiamiento.",
+  "steps": {
+    "firstStep": {
+      "title": "Se publica un proyecto",
+      "description": "Un proyecto de infraestructura de agua se publica con una meta de financiamiento e hitos."
+    },
+    "secondStep": {
+      "title": "El gobierno lo ancla",
+      "description": "Una posición gubernamental, etiquetada como pública, señala que el proyecto está validado."
+    },
+    "thirdStep": {
+      "title": "La comunidad co-invierte",
+      "description": "Vecinos, diáspora e inversionistas externos financian el resto, etiquetado como privado."
+    },
+    "fourthStep": {
+      "title": "Se verifican los hitos",
+      "description": "El progreso y el impacto se registran en cadena a medida que el proyecto avanza."
+    }
+  },
+  "summary": "Capital público y privado, un solo dashboard, todo en cadena."
+}

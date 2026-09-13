@@ -1,0 +1,50 @@
+{
+  "required": "Este campo es obligatorio.",
+  "invalid": "Este valor no es válido.",
+  "email": "Ingresa un correo electrónico válido.",
+  "tooShort": "Este valor es demasiado corto.",
+  "tooLong": "Este valor es demasiado largo.",
+  "emailSubjects": {
+    "contact": "Nuevo mensaje del formulario de contacto"
+  },
+  "forms": {
+    "fields": {
+      "_default": "Este campo",
+      "email": "Correo electrónico",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "phone": "Teléfono",
+      "message": "Mensaje"
+    },
+    "errors": {
+      "required": "{field} es obligatorio.",
+      "invalidType": "{field} tiene un valor no válido.",
+      "invalidValue": "{field} debe ser uno de: {values}.",
+      "tooSmall": {
+        "exact": "{field} debe tener exactamente {min}{unit}.",
+        "exclusive": "{field} debe ser mayor que {min}{unit}.",
+        "inclusive": "{field} debe tener al menos {min}{unit}."
+      },
+      "tooBig": {
+        "exact": "{field} debe tener exactamente {max}{unit}.",
+        "exclusive": "{field} debe ser menor que {max}{unit}.",
+        "inclusive": "{field} debe tener como máximo {max}{unit}."
+      },
+      "invalidFormat": {
+        "default": "{field} tiene un formato no válido.",
+        "email": "{field} debe ser un correo electrónico válido.",
+        "regex": "{field} no coincide con el patrón requerido.",
+        "starts_with": "{field} debe comenzar con \"{prefix}\".",
+        "ends_with": "{field} debe terminar con \"{suffix}\".",
+        "includes": "{field} debe incluir \"{includes}\".",
+        "jwt": "{field} no es un token válido."
+      },
+      "notMultipleOf": "{field} debe ser múltiplo de {divisor}.",
+      "unrecognizedKeys": "Campos no reconocidos: {keys}.",
+      "invalidUnion": "{field} no coincide con ningún formato esperado.",
+      "invalidKey": "{field} tiene una clave no válida.",
+      "invalidElement": "{field} contiene un elemento no válido.",
+      "custom": "{field} no es válido."
+    }
+  }
+}

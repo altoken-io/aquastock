@@ -1,0 +1,591 @@
+@import 'tailwindcss';
+
+/* Explicit @source: pnpm workspace symlinks can be unreliable for Tailwind's
+   automatic content detection under WSL, so shared packages are scanned explicitly. */
+@source "../../../../../packages/ui/src";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-primary-pressed: var(--primary-pressed);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-ok: var(--ok);
+  --font-display: var(--font-plus-jakarta);
+  /* Changelog-page-local mono face; see changelog-view.tsx. Registered here
+     (rather than an arbitrary font-[family-name:var(...)] class) for the
+     same reason as the shadow-* tokens above — sidesteps the Tailwind v4 +
+     Turbopack bracketed-var() parser bug. */
+  --font-mono-ledger: var(--font-geist-mono);
+  /* Named shadow utilities (shadow-primary-glow, etc.) rather than
+     shadow-[var(--x)] arbitrary values — Tailwind v4's arbitrary-bracket
+     parser under Turbopack corrupts bracketed var()/color-mix() expressions
+     (500s every dApp route in dev; silent CSS-optimizer warnings in build).
+     A registered @theme token compiles to a plain utility class name, which
+     sidesteps that parser entirely. */
+  --shadow-primary-glow: var(--shadow-primary-glow-raw);
+  --shadow-accent-glow-sm: var(--shadow-accent-glow-sm-raw);
+  --shadow-accent-glow-md: var(--shadow-accent-glow-md-raw);
+  --shadow-accent-glow-lg: var(--shadow-accent-glow-lg-raw);
+  --shadow-foreground-glow: var(--shadow-foreground-glow-raw);
+}
+
+:root {
+  /* Wallet surface primary: Peruvian flag red per docs/VISUAL.md. Kept
+     distinct from --accent (legacy marketing/DeFi highlight token, left
+     untouched below to avoid restyling out-of-scope surfaces). */
+  --primary: #e6153b;
+  --primary-foreground: #ffffff;
+  --primary-pressed: #c71434;
+  /* Sky-blue informational accent (network/rail chips, trust highlights).
+     Never used as a CTA color. */
+  --info: #8cc9e8;
+  --info-foreground: oklch(0.2 0.02 250);
+  --accent: oklch(0.57 0.21 30);
+  --accent-foreground: oklch(0.985 0.003 85);
+  --background: oklch(0.978 0.004 75);
+  --foreground: oklch(0.2 0.012 32);
+  --card: oklch(0.992 0.003 75);
+  --card-foreground: oklch(0.2 0.012 32);
+  --muted: oklch(0.941 0.006 75);
+  --muted-foreground: oklch(0.39 0.013 36);
+  --border: oklch(0.84 0.008 75);
+  --input: oklch(0.955 0.005 75);
+  --secondary: oklch(0.934 0.006 75);
+  --secondary-foreground: oklch(0.2 0.012 32);
+  --popover: oklch(0.992 0.003 75);
+  --popover-foreground: oklch(0.2 0.012 32);
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.98 0.004 85);
+  --ring: oklch(0.62 0.23 32);
+  --chart-1: oklch(0.62 0.23 32);
+  --chart-2: oklch(0.67 0.21 45);
+  --chart-3: oklch(0.55 0.2 20);
+  --chart-4: oklch(0.72 0.16 65);
+  --chart-5: oklch(0.48 0.16 18);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.968 0.004 75);
+  --sidebar-foreground: oklch(0.2 0.012 32);
+  --sidebar-primary: oklch(0.62 0.23 32);
+  --sidebar-primary-foreground: oklch(0.98 0.004 85);
+  --sidebar-accent: oklch(0.62 0.23 32);
+  --sidebar-accent-foreground: oklch(0.98 0.004 85);
+  --sidebar-border: oklch(0.91 0.004 75);
+  --sidebar-ring: oklch(0.62 0.23 32);
+  --accent-2: oklch(0.72 0.17 60);
+  --ok: oklch(0.68 0.17 150);
+  --warning: oklch(0.74 0.16 75);
+  /* Dark text on the amber --warning surface — used by the sandbox-mode
+     banner/badge, kept as its own token (rather than reusing
+     --accent-foreground) since --warning is never a button/CTA color. */
+  --warning-foreground: oklch(0.22 0.04 75);
+  --danger: var(--destructive);
+  --bg: var(--background);
+  --bg-soft: color-mix(in srgb, var(--secondary) 72%, var(--background));
+  --surface: color-mix(in srgb, var(--card) 92%, transparent);
+  --surface-2: color-mix(in srgb, var(--secondary) 82%, var(--card));
+  --text: var(--foreground);
+  --text-dim: var(--muted-foreground);
+  /* Raw values for the shadow-* utilities registered in @theme inline above.
+     Kept as separate -raw custom properties (rather than defined directly in
+     @theme) so they can reference the light/dark-reactive color tokens above
+     them, same indirection pattern already used for --color-primary etc. */
+  --shadow-primary-glow-raw: 0 10px 24px -8px
+    color-mix(in srgb, var(--primary) 55%, transparent);
+  --shadow-accent-glow-sm-raw: 0 4px 16px
+    color-mix(in srgb, var(--accent) 12%, transparent);
+  --shadow-accent-glow-md-raw: 0 8px 32px
+    color-mix(in srgb, var(--accent) 8%, transparent);
+  --shadow-accent-glow-lg-raw: 0 8px 32px
+    color-mix(in srgb, var(--accent) 10%, transparent);
+  --shadow-foreground-glow-raw: 0 18px 42px
+    color-mix(in srgb, var(--foreground) 12%, transparent);
+}
+
+.dark {
+  --primary: #ff2c58;
+  --primary-foreground: oklch(0.15 0.01 35);
+  --primary-pressed: color-mix(in srgb, var(--primary) 82%, white 18%);
+  --info: #72b9dc;
+  --info-foreground: oklch(0.16 0.015 250);
+  --accent: oklch(0.68 0.19 34);
+  --accent-foreground: oklch(0.15 0.01 35);
+  --background: oklch(0.13 0.006 35);
+  --foreground: oklch(0.95 0.004 75);
+  --card: oklch(0.18 0.008 35);
+  --card-foreground: oklch(0.95 0.004 75);
+  --muted: oklch(0.23 0.008 35);
+  --muted-foreground: oklch(0.72 0.008 55);
+  --border: oklch(0.26 0.008 35);
+  --input: oklch(0.21 0.008 35);
+  --secondary: oklch(0.22 0.008 35);
+  --secondary-foreground: oklch(0.95 0.004 75);
+  --popover: oklch(0.18 0.008 35);
+  --popover-foreground: oklch(0.95 0.004 75);
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(0.95 0.004 75);
+  --ring: oklch(0.68 0.19 34);
+  --chart-1: oklch(0.68 0.19 34);
+  --chart-2: oklch(0.72 0.17 50);
+  --chart-3: oklch(0.63 0.16 18);
+  --chart-4: oklch(0.6 0.14 70);
+  --chart-5: oklch(0.55 0.14 10);
+  --sidebar: oklch(0.16 0.006 35);
+  --sidebar-foreground: oklch(0.95 0.004 75);
+  --sidebar-primary: oklch(0.68 0.19 34);
+  --sidebar-primary-foreground: oklch(0.15 0.01 35);
+  --sidebar-accent: oklch(0.68 0.19 34);
+  --sidebar-accent-foreground: oklch(0.15 0.01 35);
+  --sidebar-border: oklch(0.26 0.008 35);
+  --sidebar-ring: oklch(0.68 0.19 34);
+  --accent-2: oklch(0.72 0.16 60);
+  --ok: oklch(0.7 0.16 150);
+  --warning: oklch(0.72 0.16 60);
+  --warning-foreground: oklch(0.18 0.03 60);
+  --danger: var(--destructive);
+  --bg: var(--background);
+  --bg-soft: color-mix(in srgb, var(--secondary) 55%, var(--background));
+  --surface: color-mix(in srgb, var(--card) 92%, transparent);
+  --surface-2: color-mix(in srgb, var(--secondary) 78%, var(--card));
+  --text: var(--foreground);
+  --text-dim: var(--muted-foreground);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  /* Kills the double-tap-to-zoom gesture (and its ~300ms tap delay) for a
+     native app feel, while explicitly keeping pinch-zoom and panning —
+     `manipulation` resolves to `pan-x pan-y pinch-zoom` per spec, so this is
+     not an accessibility regression the way disabling zoom via the viewport
+     meta would be. */
+  touch-action: manipulation;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  text-rendering: optimizeSpeed;
+  @apply text-[15px] leading-relaxed antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--accent-foreground);
+}
+
+/* Layered (not a plain rule) so Tailwind utility classes like `text-primary`
+   on <Link>/<a> elements can override this default — unlayered CSS beats
+   layered CSS regardless of specificity, which silently defeated active-nav
+   text-color utilities (e.g. the mobile dock's selected-tab color) before
+   this was scoped into `base`. */
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.text-white {
+  color: white;
+}
+
+.text-white\/85 {
+  color: color-mix(in srgb, white 85%, transparent);
+}
+
+.text-primary-foreground {
+  color: var(--primary-foreground);
+}
+
+.text-accent-foreground {
+  color: var(--accent-foreground);
+}
+
+.text-card-foreground {
+  color: var(--card-foreground);
+}
+
+.text-secondary-foreground {
+  color: var(--secondary-foreground);
+}
+
+.text-popover-foreground {
+  color: var(--popover-foreground);
+}
+
+.text-sidebar-primary-foreground {
+  color: var(--sidebar-primary-foreground);
+}
+
+.text-sidebar-accent-foreground {
+  color: var(--sidebar-accent-foreground);
+}
+
+.mobile-dock-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.mobile-dock-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  width: min(1200px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.shell {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 0 2rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--accent);
+}
+
+.brand h1 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.brand p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.nav a {
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  color: var(--text-dim);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.82rem;
+  transition: all 180ms ease;
+}
+
+.nav a:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+
+.nav a[data-active='true'] {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--card));
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+  .grid.cols-2,
+  .grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--card) 90%, transparent);
+  padding: 1rem;
+  box-shadow: 0 18px 60px -40px
+    color-mix(in srgb, var(--background) 85%, transparent);
+}
+
+.card h2,
+.card h3,
+.card h4 {
+  margin-top: 0;
+}
+
+.muted {
+  color: var(--text-dim);
+}
+
+.kpi {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.kpi strong {
+  font-size: 1.45rem;
+}
+
+.row {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  background: color-mix(in srgb, var(--secondary) 82%, var(--card));
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 12px;
+  padding: 0.65rem 0.75rem;
+  outline: none;
+}
+
+.textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.button {
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--primary) 88%, white 4%),
+    color-mix(in srgb, var(--accent) 72%, white 14%)
+  );
+  color: var(--accent-foreground);
+  font-weight: 700;
+  padding: 0.62rem 0.9rem;
+  cursor: pointer;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.button:hover {
+  opacity: 0.96;
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+.button.warn {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--accent-2) 78%, white 8%),
+    color-mix(in srgb, var(--accent-2) 55%, white 28%)
+  );
+  color: oklch(0.17 0.03 80);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.73rem;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 999px;
+  padding: 0.18rem 0.5rem;
+  color: var(--text-dim);
+}
+
+.notice {
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 12px;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.87rem;
+}
+
+.notice.ok {
+  border-color: color-mix(in srgb, var(--ok) 40%, var(--border));
+  color: color-mix(in srgb, var(--ok) 78%, white 20%);
+}
+
+.notice.warn {
+  border-color: color-mix(in srgb, var(--warning) 45%, var(--border));
+  color: color-mix(in srgb, var(--warning) 78%, white 20%);
+}
+
+.notice.error {
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--border));
+  color: color-mix(in srgb, var(--danger) 78%, white 20%);
+}
+
+.empty {
+  border: 1px dashed color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 14px;
+  padding: 1rem;
+  color: var(--text-dim);
+}
+
+.skeleton {
+  height: 18px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--secondary) 70%, var(--background)),
+    color-mix(in srgb, var(--secondary) 92%, var(--card)),
+    color-mix(in srgb, var(--secondary) 70%, var(--background))
+  );
+  background-size: 220% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+
+@utility dapp-panel {
+  @apply rounded-[32px] border border-border/85 bg-card shadow-sm;
+}
+
+@utility dapp-panel-hover {
+  @apply transition-colors hover:border-accent/25;
+}
+
+@utility dapp-panel-muted {
+  @apply rounded-2xl border border-border/85 bg-background/85 shadow-inner;
+}
+
+@utility dapp-panel-accent {
+  @apply rounded-[32px] border border-primary/20 bg-linear-to-br from-primary/6 via-card to-background shadow-sm;
+}
+
+@utility dapp-icon-tile {
+  @apply flex h-10 w-10 items-center justify-center rounded-2xl border border-border/85 bg-secondary/85 text-foreground/72 shadow-inner;
+}
+
+@utility dapp-icon-accent {
+  @apply flex h-10 w-10 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary;
+}
+
+@utility dapp-pill {
+  @apply rounded-full border border-border/70 bg-card/90 px-4 py-2.5 text-xs font-medium text-muted-foreground shadow-inner;
+}
+
+@utility dapp-code-chip {
+  @apply rounded-xl border border-border/70 bg-background/70 px-3 py-2 font-mono text-xs text-accent;
+}
+
+/* Hazard-tape accent for the sandbox-mode banner (SandboxBanner) — a narrow
+   diagonal-stripe edge rather than covering the whole bar, so the "fake
+   money, handle differently" signal reads instantly without fighting the
+   banner's text for legibility. */
+@utility sandbox-hazard-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--warning-foreground) 85%, transparent) 0,
+    color-mix(in srgb, var(--warning-foreground) 85%, transparent) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* Native <details>/<summary> as an accordion row (help center). Hides the
+   default disclosure triangle in every engine — `list-none` alone leaves
+   WebKit's ::-webkit-details-marker in place. */
+@utility summary-reset {
+  list-style: none;
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 220% 0;
+  }
+  100% {
+    background-position: -20% 0;
+  }
+}

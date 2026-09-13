@@ -1,0 +1,32 @@
+{
+  "title": {
+    "default": "AquaStock — Solana Water Infrastructure Funding",
+    "template": "%s | AquaStock"
+  },
+  "category": "Finance",
+  "classification": "Public-private infrastructure funding",
+  "abstract": "AquaStock lets a government anchor and community investors co-fund water infrastructure projects, tracked on-chain on Solana.",
+  "description": "AquaStock lets a government anchor and community investors co-fund water infrastructure projects, tracked on-chain on Solana.",
+  "keywords": [
+    "Solana",
+    "water infrastructure",
+    "public-private funding",
+    "hackathon"
+  ],
+  "openGraph": {
+    "locale": "en_US",
+    "title": "AquaStock",
+    "description": "Water infrastructure, funded on Solana.",
+    "siteName": "AquaStock",
+    "images": {
+      "url": "/og-image.png",
+      "alt": "AquaStock"
+    }
+  },
+  "twitter": {
+    "site": "@aquastock",
+    "creator": "@aquastock",
+    "title": "AquaStock",
+    "description": "Water infrastructure, funded on Solana."
+  }
+}

@@ -1,0 +1,33 @@
+# ─── Docker Compose — Desarrollo Local AQUASTOCK ──────────────────────────────────
+# Solo PostgreSQL. Sin Redis, sin complejidad innecesaria para el MVP.
+#
+# Uso:
+#   docker compose -f docker-compose.dev.yml up -d
+#
+# Las credenciales coinciden con DATABASE_URL en .env:
+#   postgresql://postgres:postgres@localhost:5432/aquastock
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: aquastock-postgres
+    # Host port is overridable because a Windows-side Postgres (or a native WSL
+    # one) commonly already holds 5432, which makes the container fail to bind.
+    # Default is unchanged, so existing DATABASE_URLs keep working:
+    #   POSTGRES_HOST_PORT=5434 docker compose -f docker-compose.dev.yml up -d
+    ports:
+      - '${POSTGRES_HOST_PORT:-5432}:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aquastock
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  pgdata:

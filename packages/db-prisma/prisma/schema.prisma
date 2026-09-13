@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./client/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Off-chain cache/display layer mirroring the Solana Anchor program's
+// account types (Project, Position, Milestone, Impact). The program is the
+// source of truth; these rows exist so the dashboard can query/paginate
+// without hitting an RPC for every render. `onchainAddress` links each row
+// back to its on-chain PDA once the program writes it.
+
+enum ProjectStatus {
+  DRAFT
+  ACTIVE
+  FUNDED
+  COMPLETED
+  CLOSED
+}
+
+enum InvestorType {
+  PUBLIC
+  PRIVATE
+}
+
+enum MilestoneStatus {
+  PENDING
+  IN_PROGRESS
+  VERIFIED
+}
+
+model Project {
+  id             String        @id @default(cuid())
+  slug           String        @unique
+  name           String
+  description    String?
+  location       String
+  goalAmount     Decimal
+  raisedAmount   Decimal       @default(0)
+  status         ProjectStatus @default(DRAFT)
+  onchainAddress String?       @unique
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  positions  Position[]
+  milestones Milestone[]
+  impacts    Impact[]
+}
+
+model Position {
+  id             String       @id @default(cuid())
+  projectId      String
+  project        Project      @relation(fields: [projectId], references: [id])
+  investorType   InvestorType
+  walletAddress  String
+  amount         Decimal
+  txSignature    String?
+  onchainAddress String?      @unique
+  createdAt      DateTime     @default(now())
+
+  @@index([projectId])
+  @@index([walletAddress])
+}
+
+model Milestone {
+  id             String          @id @default(cuid())
+  projectId      String
+  project        Project         @relation(fields: [projectId], references: [id])
+  title          String
+  description    String?
+  targetAmount   Decimal?
+  status         MilestoneStatus @default(PENDING)
+  order          Int
+  verifiedAt     DateTime?
+  onchainAddress String?         @unique
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  impacts Impact[]
+
+  @@index([projectId])
+}
+
+model Impact {
+  id             String     @id @default(cuid())
+  projectId      String
+  project        Project    @relation(fields: [projectId], references: [id])
+  milestoneId    String?
+  milestone      Milestone? @relation(fields: [milestoneId], references: [id])
+  metric         String
+  value          Decimal
+  recordedAt     DateTime   @default(now())
+  onchainAddress String?    @unique
+
+  @@index([projectId])
+}

@@ -1,0 +1,23 @@
+{
+  "logo": {
+    "alt": "Logo de AquaStock",
+    "label": "AquaStock",
+    "tagline": "Infraestructura de agua, financiada en Solana"
+  },
+  "navigation": [
+    { "href": "/", "title": "Inicio", "description": "Ir al inicio" }
+  ],
+  "skipToContent": "Saltar al contenido",
+  "cta": {
+    "signIn": "Conectar billetera",
+    "earlyAccess": {
+      "href": "/#faq",
+      "label": "Saber más"
+    }
+  },
+  "mobileMenu": {
+    "contact": "Contáctanos",
+    "ariaOpen": "Abrir menú de navegación",
+    "ariaClose": "Cerrar menú de navegación"
+  }
+}

@@ -1,0 +1,285 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+/* Explicit @source: pnpm workspace symlinks can be unreliable for Tailwind's
+   automatic content detection under WSL, so shared packages are scanned explicitly. */
+@source '../../../../packages/ui/src';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Base */
+
+  /*--background: oklch(0.99 0.008 85);*/
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.015 300);
+
+  /* Surface */
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+
+  /* Brand */
+
+  --primary: #e6153b;
+  /* White, not near-black: dark text on #E6153B fails WCAG AA (4.2:1) for
+     normal-size text — white clears 4.63:1. The old near-black value was
+     tuned for the previous pastel-pink primary. */
+  --primary-foreground: #ffffff;
+  /* For text set directly in the brand red on a light tint (e.g. eyebrow
+     badges) rather than white-on-solid — #E6153B only clears ~3.9:1 there,
+     under the 4.5 AA floor. --primary-pressed clears 5:1 in that role. */
+  --primary-pressed: #c71434;
+
+  /* Soft surface */
+
+  --secondary: oklch(0.96 0.015 85);
+  --secondary-foreground: oklch(0.24 0.015 300);
+
+  /* Neutral */
+
+  --muted: oklch(0.97 0.006 85);
+  --muted-foreground: oklch(0.52 0.015 300);
+
+  /* Accent */
+
+  --accent: oklch(0.93 0.04 105);
+  --accent-foreground: oklch(0.22 0.02 300);
+
+  /* States */
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Inputs */
+
+  --border: oklch(0.9 0.008 85);
+  --input: oklch(0.9 0.008 85);
+
+  --ring: var(--primary);
+
+  /* Charts */
+
+  --chart-1: var(--primary);
+  --chart-2: oklch(0.83 0.09 110); /* lime */
+  --chart-3: oklch(0.78 0.08 220); /* blue */
+  --chart-4: oklch(0.88 0.08 70); /* yellow */
+  --chart-5: oklch(0.8 0.07 310); /* lavender */
+
+  /* Sidebar */
+
+  --sidebar: oklch(0.985 0.006 85);
+  --sidebar-foreground: var(--foreground);
+
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  /* Radius */
+
+  --radius: 1.25rem;
+
+  /* Type scale */
+
+  --text-mega: clamp(5.5rem, 21vw, 16rem);
+
+  /* Wide letter-spacing for printed-ticket eyebrows and small-caps labels */
+  --tracking-ticket: 0.22em;
+
+  /* Layout */
+
+  /* Footer closing moment: ~70vh on desktop only (apps/web footer.tsx applies
+     this from `lg:` up). Deliberately a min-height, not a height, and left
+     unset below `lg` so short/mobile viewports fall back to natural
+     content-driven auto height instead of dead whitespace. */
+  --footer-min-height: 70vh;
+
+  /* Peruvian flag green — reserved for small, deliberate accents (never
+     decorative shapes/CTAs, those use --primary). See docs/VISUAL.md. */
+  --green: #008f4c;
+
+  --purple: oklch(0.28 0.058 296.86);
+
+  --lilac: oklch(0.72 0.064 320.03);
+
+  --yellow: oklch(0.92 0.08 85);
+
+  --blue: oklch(0.85 0.06 235);
+
+  --lavender: oklch(0.88 0.05 315);
+
+  --peach: oklch(0.9 0.06 45);
+
+  --cream: oklch(0.96 0.02 82);
+
+  --ink: oklch(0.18 0.015 300);
+
+  /* Status accent for confirmation/receipt-style UI (e.g. /stripe) */
+  --stamp: oklch(0.4 0.085 155);
+
+  /* Take-a-number kiosk board (apps/web /join): dark display housing + lit amber digits */
+  --counter: oklch(0.17 0.02 55);
+  --led: oklch(0.74 0.16 55);
+}
+
+.dark {
+  --background: oklch(0.17 0.01 300);
+  --foreground: oklch(0.96 0.01 85);
+
+  --card: oklch(0.22 0.01 300);
+  --card-foreground: var(--foreground);
+
+  --popover: oklch(0.22 0.01 300);
+  --popover-foreground: var(--foreground);
+
+  --primary: #ff2c58;
+  --primary-foreground: oklch(0.12 0 0);
+  --primary-pressed: color-mix(in srgb, var(--primary) 82%, white 18%);
+
+  --secondary: oklch(0.26 0.01 300);
+  --secondary-foreground: var(--foreground);
+
+  --muted: oklch(0.24 0.01 300);
+  --muted-foreground: oklch(0.72 0.01 300);
+
+  --accent: oklch(0.33 0.04 105);
+  --accent-foreground: var(--foreground);
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: white;
+
+  --border: oklch(0.3 0.01 300);
+  --input: oklch(0.3 0.01 300);
+
+  --ring: var(--primary);
+
+  --stamp: oklch(0.62 0.1 155);
+
+  --sidebar: oklch(0.2 0.01 300);
+  --sidebar-foreground: var(--foreground);
+
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+
+  --sidebar-border: var(--border);
+
+  --green: color-mix(in srgb, #008f4c 82%, white 18%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-pressed: var(--primary-pressed);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-headline: var(--font-headline);
+  --font-body: var(--font-body);
+
+  --color-green: var(--green);
+  --color-purple: var(--purple);
+  --color-lilac: var(--lilac);
+  --color-yellow: var(--yellow);
+  --color-blue: var(--blue);
+  --color-lavender: var(--lavender);
+  --color-peach: var(--peach);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-stamp: var(--stamp);
+  --color-counter: var(--counter);
+  --color-led: var(--led);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --text-mega: var(--text-mega);
+  --tracking-ticket: var(--tracking-ticket);
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    font-family: var(--font-body), sans-serif;
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-headline), sans-serif;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    font-weight: 700;
+  }
+  p,
+  button,
+  input {
+    font-family: var(--font-body);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Reserve the scrollbar's width permanently so it disappearing (e.g. when
+     a Radix modal/popover locks body scroll) never shifts page content. */
+  scrollbar-gutter: stable;
+}
+
+section {
+  scroll-margin-top: 100px;
+}

@@ -1,0 +1,12 @@
+# Generated Prisma client (nested .gitignore isn't read by the Prettier CLI)
+packages/db-prisma/prisma/client/generated/
+
+# Lockfile: pnpm owns this format, never hand-format it
+pnpm-lock.yaml
+
+# Next.js-generated, regenerated on every build/dev run with its own
+# formatting (double quotes) — not meant to be edited or committed (see the
+# file's own header comment). apps/web already gitignores its copy; a stale
+# copy of apps/dapp's got committed once and broke CI's format check for
+# several pushes since nested .gitignore isn't read by the Prettier CLI.
+next-env.d.ts

@@ -1,0 +1,112 @@
+name: check
+
+# The repo's mandatory validation gate (CLAUDE.md "Quality Gates"): format,
+# lint, typecheck, and test run on every push and PR so a type-broken or
+# test-broken commit is visible before it reaches a demo. Next.js builds for
+# apps/web and apps/dapp are deliberately not run here — they need real env
+# (database, Solana RPC) and are already built by Vercel on the same commit.
+#
+# Branch protection cannot be enforced on this private repo without a paid
+# GitHub plan (docs/ROADMAP.md, "No branch-protection / CI gate on main"),
+# so this workflow is advisory on GitHub and enforced locally by the
+# pre-push hook: `pnpm hooks:install` (scripts/git-hooks/pre-push).
+#
+# Push trigger is `develop` only, not `[main, develop]`: this repo's
+# convention is that `main` is always a fast-forward of `develop` to the
+# same commit (see the pre-push hook and CLAUDE.md's PR workflow), so
+# triggering on both refs ran this entire suite twice per deploy for zero
+# additional coverage -- confirmed 2026-09-01 (two simultaneous "check"
+# runs from one develop-then-main push) while investigating CI/CD cost.
+# workflow_dispatch stays available to re-run against main by hand if ever
+# needed without a new commit.
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+  workflow_dispatch: {}
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      # Disposable Postgres so the `{ skip: !hasDatabase }` integration tests
+      # (ledger, withdraw, treasury policy, funding hold) actually run in CI
+      # instead of silently skipping.
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: aquastock
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+
+    env:
+      # Prisma CLI reads DIRECT_URL; the app/tests read DATABASE_URL. Both
+      # point at the throwaway service container above — never a real DB.
+      DIRECT_URL: postgresql://postgres:postgres@localhost:5432/aquastock?schema=public
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/aquastock?schema=public
+      TURBO_TELEMETRY_DISABLED: '1'
+      NEXT_TELEMETRY_DISABLED: '1'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4 # version from package.json "packageManager"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Apply migrations to the throwaway database
+        run: pnpm --filter @aquastock/db-prisma exec prisma migrate deploy
+
+      - name: Lint
+        run: pnpm turbo run lint
+
+      - name: Typecheck
+        run: pnpm turbo run check-types
+
+      - name: Test
+        # GitHub-hosted runners are 2 vCPU / 7 GB -- far smaller than a
+        # typical dev machine. turbo's default concurrency (10) lets every
+        # package's test task start at once, which can oversubscribe a
+        # runner that size. Capping turbo's cross-package concurrency costs
+        # only a few seconds of wall time here in exchange for not
+        # oversubscribing the runner.
+        run: pnpm turbo run test --concurrency=4
+
+  secrets:
+    # Secret-scanning gate over the full git history (scripts/scan-secrets.sh,
+    # rules in .gitleaks.toml). Independent of the main job so a leaked key
+    # is reported even when lint/tests are green, and vice versa. Advisory on
+    # GitHub for the same free-plan reason as the job above; the finding
+    # itself is the signal — rotate first, then scrub history.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # a credential in an old commit is still a leak
+
+      - name: gitleaks
+        run: bash ./scripts/scan-secrets.sh

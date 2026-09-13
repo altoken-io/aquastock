@@ -1,0 +1,49 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "ARCJET_KEY",
+    "DATABASE_URL",
+    "DIRECT_URL",
+    "DATABASE_POOL_MAX",
+    "NEXT_PUBLIC_BASE_URL",
+    "NEXT_PUBLIC_DAPP_URL",
+    "NODE_ENV",
+    "NEXT_PHASE",
+    "RESEND_API_KEY",
+    "RESEND_NEWSLETTER_AUDIENCE_ID",
+    "UPSTASH_REDIS_REST_TOKEN",
+    "UPSTASH_REDIS_REST_URL",
+    "VERCEL_URL",
+    "VERCEL_DEPLOYMENT_ID",
+    "VERCEL_GIT_COMMIT_SHA",
+    "NEXT_PUBLIC_POSTHOG_KEY",
+    "NEXT_PUBLIC_POSTHOG_HOST",
+    "NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION",
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+    "NEXT_PUBLIC_SOLANA_NETWORK",
+    "NEXT_PUBLIC_SOLANA_RPC_URL",
+    "NEXT_PUBLIC_ANCHOR_PROGRAM_ID"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "test": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

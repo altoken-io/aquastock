@@ -1,0 +1,13 @@
+{
+  "governmentContribution": "Government contribution",
+  "communityFunding": "Community funding",
+  "goal": "Funding goal",
+  "raised": "Raised",
+  "status": {
+    "DRAFT": "Draft",
+    "ACTIVE": "Active",
+    "FUNDED": "Funded",
+    "COMPLETED": "Completed",
+    "CLOSED": "Closed"
+  }
+}

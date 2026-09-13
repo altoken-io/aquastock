@@ -1,0 +1,19 @@
+{
+  "name": "@aquastock/types",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "node ../../node_modules/eslint/bin/eslint.js . --max-warnings 0",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@aquastock/config": "workspace:*",
+    "@types/node": "^22.19.11",
+    "eslint": "^9.39.3",
+    "typescript": "5.9.3"
+  }
+}

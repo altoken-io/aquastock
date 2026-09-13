@@ -1,0 +1,9 @@
+# Never let Cursor (Tab, Chat, Composer, codebase indexing) read or send
+# real production secrets as context. Only .env.prod files hold production
+# values — .env and .env.local are local/dev-only sample values, and
+# .env.example is reference documentation, so both stay visible to Cursor
+# (see CLAUDE.md and AGENTS.md security rules).
+**/.env.prod
+**/.env.staging
+**/.env.main.prod
+**/.env.main.staging

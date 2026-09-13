@@ -1,0 +1,15 @@
+{
+  "name": "@aquastock/locales",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./en": "./src/en.ts",
+    "./es": "./src/es.ts",
+    "./en/*": "./src/content/en/*",
+    "./es/*": "./src/content/es/*"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts"
+}

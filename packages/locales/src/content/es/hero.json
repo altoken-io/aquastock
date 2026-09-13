@@ -1,0 +1,16 @@
+{
+  "title": "Infraestructura de agua, financiada en Solana.",
+  "subtitle": "Un gobierno ancla e inversionistas comunitarios co-financian el mismo proyecto.",
+  "description": "AquaStock registra cada posición — pública y privada — contra hitos reales, en cadena.",
+  "cta": {
+    "primary": {
+      "href": "/#how-it-works",
+      "label": "Ver cómo funciona"
+    },
+    "secondary": {
+      "href": "/#faq",
+      "label": "Leer las preguntas frecuentes"
+    }
+  },
+  "usersCount": "Demo de hackathon — devnet"
+}

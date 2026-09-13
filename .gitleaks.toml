@@ -1,0 +1,21 @@
+# Secret-scanning gate — run by `pnpm secrets:scan` (scripts/scan-secrets.sh)
+# and the `secrets` job in .github/workflows/check.yml.
+#
+# Extends gitleaks' default ruleset. The allowlists below are scoped to the
+# generic entropy-based rule only, so every provider-specific detector —
+# Stripe live keys, GCP service-account JSON, private keys, Slack/GitHub
+# tokens — still fires everywhere, test fixtures and runbooks included.
+title = "AquaStock gitleaks config"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+[[rules.allowlists]]
+description = "Reference docs and fixtures that spell out example values by design"
+paths = [
+  '''(^|/)\.env\.example$''',
+  '''\.test\.ts$''',
+]

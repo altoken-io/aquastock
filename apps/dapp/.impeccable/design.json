@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-12T00:00:00Z",
+  "title": "Design System: AquaStock dApp",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Matte Ember",
+        "canonical": "oklch(0.54 0.22 28)",
+        "tonalRamp": [
+          "oklch(0.18 0.10 28)",
+          "oklch(0.28 0.14 28)",
+          "oklch(0.38 0.18 28)",
+          "oklch(0.46 0.20 28)",
+          "oklch(0.54 0.22 28)",
+          "oklch(0.63 0.20 28)",
+          "oklch(0.75 0.14 28)",
+          "oklch(0.90 0.06 28)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "oklch(0.978 0.004 75)",
+        "tonalRamp": [
+          "oklch(0.15 0.006 75)",
+          "oklch(0.25 0.006 75)",
+          "oklch(0.38 0.005 75)",
+          "oklch(0.55 0.005 75)",
+          "oklch(0.72 0.005 75)",
+          "oklch(0.85 0.004 75)",
+          "oklch(0.93 0.004 75)",
+          "oklch(0.978 0.004 75)"
+        ]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.2 0.012 32)",
+        "tonalRamp": [
+          "oklch(0.15 0.012 32)",
+          "oklch(0.2 0.012 32)",
+          "oklch(0.32 0.013 34)",
+          "oklch(0.39 0.013 36)",
+          "oklch(0.55 0.01 40)",
+          "oklch(0.7 0.008 50)",
+          "oklch(0.84 0.008 75)",
+          "oklch(0.95 0.004 75)"
+        ]
+      },
+      "destructive": {
+        "role": "danger",
+        "displayName": "Danger Red",
+        "canonical": "oklch(0.58 0.22 25)",
+        "tonalRamp": [
+          "oklch(0.2 0.1 25)",
+          "oklch(0.32 0.16 25)",
+          "oklch(0.45 0.2 25)",
+          "oklch(0.58 0.22 25)",
+          "oklch(0.68 0.2 25)",
+          "oklch(0.78 0.16 25)",
+          "oklch(0.88 0.1 25)",
+          "oklch(0.95 0.04 25)"
+        ]
+      },
+      "ok": {
+        "role": "success",
+        "displayName": "Healthy Green",
+        "canonical": "oklch(0.68 0.17 150)",
+        "tonalRamp": [
+          "oklch(0.22 0.08 150)",
+          "oklch(0.34 0.12 150)",
+          "oklch(0.48 0.15 150)",
+          "oklch(0.6 0.17 150)",
+          "oklch(0.68 0.17 150)",
+          "oklch(0.78 0.14 150)",
+          "oklch(0.88 0.08 150)",
+          "oklch(0.95 0.03 150)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page-level greetings and headline balances."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default running text, set at the body element."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form labels, nav labels, pills, badges."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ambient-panel",
+        "value": "0 18px 60px -40px color-mix(in srgb, var(--background) 85%, transparent)",
+        "purpose": "Default resting shadow under cards and the .card / .dapp-panel utilities."
+      },
+      {
+        "name": "connect-wallet-lift",
+        "value": "0 12px 26px color-mix(in srgb, var(--primary) 18%, transparent)",
+        "purpose": "Primary-tinted lift reserved for the wallet-connect control only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "180ms ease",
+        "purpose": "Default transition timing for hovers, nav pills, and borders across the system."
+      }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid brand-red button for the single primary action on a screen.",
+      "html": "<button class=\"ds-btn-primary\">Send payment</button>",
+      "css": ".ds-btn-primary { background: var(--primary); color: var(--primary-foreground); padding: 8px 16px; border-radius: 6px; border: none; font-weight: 600; font-family: Geist, ui-sans-serif, system-ui; box-shadow: 0 1px 2px rgba(0,0,0,0.06); transition: background 180ms ease, filter 180ms ease; } .ds-btn-primary:hover { background: var(--accent); filter: brightness(1.03); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent); } .ds-btn-primary:active { filter: brightness(0.95); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Bordered card-surface button; the default button variant across the app.",
+      "html": "<button class=\"ds-btn-secondary\">View details</button>",
+      "css": ".ds-btn-secondary { background: var(--card); color: var(--card-foreground); padding: 8px 16px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--border) 70%, transparent); font-weight: 600; font-family: Geist, ui-sans-serif, system-ui; transition: background 180ms ease; } .ds-btn-secondary:hover { background: color-mix(in srgb, var(--secondary) 80%, transparent); } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Default form field with icon slot, focus ring, and inline error support.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-amount\">Amount</label><input class=\"ds-input\" id=\"ds-amount\" type=\"text\" placeholder=\"0.00\" /></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; } .ds-field-label { font-size: 0.82rem; font-weight: 500; font-family: Geist, ui-sans-serif, system-ui; color: var(--foreground); } .ds-input { width: 100%; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--border) 70%, transparent); background: var(--card); color: var(--foreground); padding: 8px 16px; font-family: Geist, ui-sans-serif, system-ui; transition: box-shadow 180ms ease; } .ds-input::placeholder { color: color-mix(in srgb, var(--muted-foreground) 70%, transparent); } .ds-input:hover { box-shadow: 0 1px 4px color-mix(in srgb, var(--primary) 10%, transparent); } .ds-input:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 35%, transparent); }"
+    },
+    {
+      "name": "Content Panel",
+      "kind": "card",
+      "refersTo": "card-panel",
+      "description": "The primary content-card wrapper used across dashboard sections.",
+      "html": "<div class=\"ds-panel\"><h3 class=\"ds-panel-title\">Main Account</h3><p class=\"ds-panel-value\">5,654.32</p></div>",
+      "css": ".ds-panel { border-radius: 32px; border: 1px solid color-mix(in srgb, var(--border) 85%, transparent); background: var(--card); padding: 24px; box-shadow: 0 18px 60px -40px color-mix(in srgb, var(--background) 85%, transparent); } .ds-panel-title { margin: 0 0 8px; font-size: 1rem; font-weight: 500; font-family: Geist, ui-sans-serif, system-ui; color: var(--foreground); } .ds-panel-value { margin: 0; font-size: 1.75rem; font-weight: 600; font-family: Geist, ui-sans-serif, system-ui; color: var(--foreground); }"
+    },
+    {
+      "name": "Sidebar Nav Item",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Icon-only rail item; bordered accent pill when active.",
+      "html": "<a class=\"ds-nav-item ds-nav-item-active\" href=\"#\" aria-label=\"Dashboard\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/></svg></a>",
+      "css": ".ds-nav-item { display: inline-flex; align-items: center; justify-content: center; padding: 12px; border-radius: 16px; color: color-mix(in srgb, var(--foreground) 68%, transparent); transition: all 300ms ease; } .ds-nav-item:hover { background: color-mix(in srgb, var(--secondary) 75%, transparent); color: var(--foreground); } .ds-nav-item-active { border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "chip",
+      "refersTo": "badge-pill",
+      "description": "Low-emphasis rounded metadata chip, e.g. status counts or chain labels.",
+      "html": "<span class=\"ds-pill\">Pending</span>",
+      "css": ".ds-pill { display: inline-block; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--border) 88%, transparent); padding: 3px 8px; font-size: 0.73rem; font-family: Geist, ui-sans-serif, system-ui; color: var(--muted-foreground); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Trusted Ledger",
+    "overview": "The AquaStock dApp is where a client checks what they have and moves it. Every surface is built to be read in one glance and acted on in one tap: a balance, a status, an action — never a chart to interpret or a protocol to operate. The current implementation leans on a single warm, matte red-orange (oklch(0.54 0.22 28)) as its primary color against a warm off-white canvas, carried consistently through buttons, active nav states, and focus rings. This system explicitly rejects a crypto-terminal aesthetic: no neon gradients, no glassmorphism as a default surface treatment, no dense DeFi-protocol chrome (staking/governance/treasury language and layout), no token-price decoration, and no literal Peru-flag imagery. It also rejects a sterile corporate-bank feel — surfaces stay soft-edged and tactile, not boxy.",
+    "keyCharacteristics": [
+      "One warm accent color carrying primary actions, active states, and focus rings — not yet split into a decisive red + informational blue as docs/VISUAL.md intends.",
+      "Soft, deep-rounded panels (dapp-panel at 32px) over hard-edged cards.",
+      "Geist as the single sans-serif voice across display and body text.",
+      "OKLCH as the canonical color format throughout globals.css."
+    ],
+    "rules": [
+      {
+        "name": "The One-Red Rule (current state, to retire)",
+        "body": "Primary and accent currently resolve to the same red-orange family. docs/VISUAL.md requires separating these: matte red (#B6383A) for decisive actions only, sky blue (#8CC9E8) for information/trust context.",
+        "section": "colors"
+      },
+      {
+        "name": "The Never-Red-For-Success Rule",
+        "body": "Success and completed states use ok (emerald), never the brand red.",
+        "section": "colors"
+      },
+      {
+        "name": "The One-Voice Rule",
+        "body": "Geist is the only typeface in the system; hierarchy comes from weight and size, not a second family.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Colored-Glow Rule",
+        "body": "Primary-tinted shadows are reserved for the single highest-stakes action per screen (currently, connect-wallet). Most surfaces use a neutral ambient shadow only.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Keep amount, currency, and status as one visual group, with counterparty/date/fee as secondary metadata.",
+      "Use the neutral ambient panel shadow as the default card treatment; reserve the primary-tinted glow for one highest-stakes action per screen.",
+      "Pair every status (danger/warning/ok) with an icon and label, never color alone.",
+      "Keep Geist as the only typeface; differentiate hierarchy through weight/size only.",
+      "When migrating toward docs/VISUAL.md's target palette, split today's single red-orange into a decisive matte red (#B6383A) for actions and a separate sky blue (#8CC9E8) for informational context."
+    ],
+    "donts": [
+      "Don't reintroduce the current DeFi-protocol sidebar framing (staking/governance/treasury/vaults/risk/markets as primary navigation) once the dashboard is repurposed.",
+      "Don't use literal Peru-flag bands, Machu Picchu imagery, or tourist visual clichés to imply locality.",
+      "Don't ship neon gradients, everywhere-glassmorphism, token-price charts as default decoration, or crypto-terminal grid backgrounds.",
+      "Don't carry the .dapp-panel's 32px radius forward into new surfaces without reconsidering it — 12-16px is the more disciplined target.",
+      "Don't use border-left/border-right accent stripes, gradient text, or color-only status indicators.",
+      "Don't show a payment as complete before the relevant rail confirms it, and don't imply bank status, insurance, licensure, card availability, or yield guarantees without approved evidence."
+    ]
+  }
+}

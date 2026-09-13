@@ -1,0 +1,50 @@
+{
+  "required": "This field is required.",
+  "invalid": "This value is invalid.",
+  "email": "Enter a valid email address.",
+  "tooShort": "This value is too short.",
+  "tooLong": "This value is too long.",
+  "emailSubjects": {
+    "contact": "New contact form submission"
+  },
+  "forms": {
+    "fields": {
+      "_default": "This field",
+      "email": "Email",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "message": "Message"
+    },
+    "errors": {
+      "required": "{field} is required.",
+      "invalidType": "{field} has an invalid value.",
+      "invalidValue": "{field} must be one of: {values}.",
+      "tooSmall": {
+        "exact": "{field} must be exactly {min}{unit}.",
+        "exclusive": "{field} must be more than {min}{unit}.",
+        "inclusive": "{field} must be at least {min}{unit}."
+      },
+      "tooBig": {
+        "exact": "{field} must be exactly {max}{unit}.",
+        "exclusive": "{field} must be less than {max}{unit}.",
+        "inclusive": "{field} must be at most {max}{unit}."
+      },
+      "invalidFormat": {
+        "default": "{field} has an invalid format.",
+        "email": "{field} must be a valid email address.",
+        "regex": "{field} does not match the required pattern.",
+        "starts_with": "{field} must start with \"{prefix}\".",
+        "ends_with": "{field} must end with \"{suffix}\".",
+        "includes": "{field} must include \"{includes}\".",
+        "jwt": "{field} is not a valid token."
+      },
+      "notMultipleOf": "{field} must be a multiple of {divisor}.",
+      "unrecognizedKeys": "Unrecognized fields: {keys}.",
+      "invalidUnion": "{field} does not match any expected format.",
+      "invalidKey": "{field} has an invalid key.",
+      "invalidElement": "{field} contains an invalid item.",
+      "custom": "{field} is invalid."
+    }
+  }
+}

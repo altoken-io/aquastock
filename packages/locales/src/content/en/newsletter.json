@@ -1,0 +1,16 @@
+{
+  "title": "Stay updated",
+  "description": "Get updates on AquaStock projects.",
+  "emailPlaceholder": "you@example.com",
+  "submit": "Subscribe",
+  "success": "Thanks for subscribing.",
+  "error": "Something went wrong. Please try again.",
+  "form": {
+    "placeholders": {
+      "email": "you@example.com"
+    },
+    "cta": {
+      "submit": "Subscribe"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Water infrastructure, funded on Solana.",
+  "subtitle": "A government anchor and community investors co-fund the same project.",
+  "description": "AquaStock tracks every position — public and private — against real milestones, on-chain.",
+  "cta": {
+    "primary": {
+      "href": "/#how-it-works",
+      "label": "See how it works"
+    },
+    "secondary": {
+      "href": "/#faq",
+      "label": "Read the FAQ"
+    }
+  },
+  "usersCount": "Hackathon demo — devnet"
+}

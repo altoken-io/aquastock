@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "title": "Terms of Service | AquaStock",
+    "description": "Terms for using the AquaStock hackathon demo.",
+    "openGraph": {
+      "images": {
+        "url": "/og-image.png",
+        "alt": "AquaStock Terms of Service"
+      }
+    }
+  },
+  "eyebrow": "Legal",
+  "title": "Terms of Service",
+  "description": "AquaStock is a hackathon demo and does not constitute an offer of securities.",
+  "summary": {
+    "effectiveLabel": "Effective",
+    "effectiveValue": "Not yet in effect (demo)",
+    "appliesLabel": "Applies to",
+    "appliesValue": "This demo deployment only",
+    "statusLabel": "Status",
+    "statusValue": "Draft",
+    "contactLabel": "Contact",
+    "contactValue": "admin@aquastock.io"
+  },
+  "tocLabel": "On this page",
+  "sections": [
+    {
+      "id": "no-offer",
+      "number": "1",
+      "title": "Not an offer of securities",
+      "paragraphs": [
+        "AquaStock is a hackathon demo built for the Stocklana hackathon. Nothing here constitutes an offer or solicitation to buy or sell securities."
+      ]
+    },
+    {
+      "id": "devnet",
+      "number": "2",
+      "title": "Devnet only",
+      "paragraphs": [
+        "This demo runs on Solana devnet. No real funds are moved."
+      ]
+    }
+  ],
+  "contact": {
+    "title": "Questions?",
+    "body": "Reach out and we'll get back to you.",
+    "email": "admin@aquastock.io",
+    "buttonLabel": "Contact us"
+  }
+}

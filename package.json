@@ -1,0 +1,40 @@
+{
+  "name": "aquastock",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "reset-packages": "node scripts/reset-modules.js",
+    "list-packages": "node scripts/list-modules.js",
+    "dev:clean": "node scripts/dev-clean.js",
+    "clean:cache": "node scripts/clean-next-cache.js",
+    "clean:workspace": "node scripts/reset-modules.js --with-lockfile",
+    "dev": "turbo run dev --filter=web --filter=dapp",
+    "dev:all": "turbo run dev",
+    "dev:web": "turbo run dev --filter=web",
+    "dev:dapp": "turbo run dev --filter=dapp",
+    "audit:cache": "node scripts/audit-vercel-cache.mjs",
+    "secrets:scan": "bash scripts/scan-secrets.sh",
+    "hooks:install": "git config core.hooksPath scripts/git-hooks",
+    "claude:new-session": "script -qec \"claude --remote-control mobile-$(date +%s)\" /dev/null",
+    "claude:close-sessions": "node scripts/claude-close-sessions.js",
+    "codex:new-session": "codex remote-control start",
+    "codex:close-sessions": "codex remote-control stop",
+    "build:dapp": "turbo run build --filter=dapp",
+    "lint": "turbo run lint",
+    "check-types": "turbo run check-types",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,cjs,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,cjs,json,md,yml,yaml}\"",
+    "check": "pnpm format && turbo run lint check-types test build"
+  },
+  "devDependencies": {
+    "@aquastock/config": "workspace:*",
+    "prettier": "^3.8.1",
+    "turbo": "^2.8.10",
+    "typescript": "5.9.3"
+  },
+  "packageManager": "pnpm@10.30.1",
+  "engines": {
+    "node": ">=18"
+  }
+}

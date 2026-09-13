@@ -1,0 +1,21 @@
+{
+  "logo": {
+    "alt": "AquaStock logo",
+    "label": "AquaStock",
+    "tagline": "Water infrastructure, funded on Solana"
+  },
+  "navigation": [{ "href": "/", "title": "Home", "description": "Go to home" }],
+  "skipToContent": "Skip to content",
+  "cta": {
+    "signIn": "Connect wallet",
+    "earlyAccess": {
+      "href": "/#faq",
+      "label": "Learn more"
+    }
+  },
+  "mobileMenu": {
+    "contact": "Contact us",
+    "ariaOpen": "Open navigation menu",
+    "ariaClose": "Close navigation menu"
+  }
+}

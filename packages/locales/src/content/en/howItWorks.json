@@ -1,0 +1,24 @@
+{
+  "badge": "How it works",
+  "title": "One project, two kinds of investor",
+  "subtitle": "Public and private capital converge on the same funding table.",
+  "steps": {
+    "firstStep": {
+      "title": "A project goes live",
+      "description": "A water infrastructure project is published with a funding goal and milestones."
+    },
+    "secondStep": {
+      "title": "Government anchors it",
+      "description": "A government position, tagged public, signals the project is validated."
+    },
+    "thirdStep": {
+      "title": "Community co-invests",
+      "description": "Local residents, diaspora, and outside investors fund the rest, tagged private."
+    },
+    "fourthStep": {
+      "title": "Milestones get verified",
+      "description": "Progress and impact are recorded on-chain as the project delivers."
+    }
+  },
+  "summary": "Public and private capital, one dashboard, fully on-chain."
+}

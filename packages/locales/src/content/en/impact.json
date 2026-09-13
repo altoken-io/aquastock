@@ -1,0 +1,10 @@
+{
+  "title": "My Impact",
+  "empty": "No positions funded yet.",
+  "timeline": {
+    "capital": "Capital",
+    "project": "Project",
+    "milestone": "Milestone",
+    "impact": "Impact"
+  }
+}

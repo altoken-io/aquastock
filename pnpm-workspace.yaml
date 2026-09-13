@@ -1,0 +1,23 @@
+packages:
+  - apps/*
+  - packages/*
+
+nodeLinker: hoisted
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@prisma/engines'
+  - '@swc/core'
+  - bigint-buffer
+  - bufferutil
+  - core-js
+  - esbuild
+  - keccak
+  - msw
+  - prisma
+  - protobufjs
+  - secp256k1
+  - sharp
+  - unrs-resolver
+  - utf-8-validate
+  - workerd

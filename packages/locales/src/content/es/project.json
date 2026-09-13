@@ -1,0 +1,13 @@
+{
+  "governmentContribution": "Aporte del gobierno",
+  "communityFunding": "Financiación comunitaria",
+  "goal": "Meta de financiamiento",
+  "raised": "Recaudado",
+  "status": {
+    "DRAFT": "Borrador",
+    "ACTIVE": "Activo",
+    "FUNDED": "Financiado",
+    "COMPLETED": "Completado",
+    "CLOSED": "Cerrado"
+  }
+}

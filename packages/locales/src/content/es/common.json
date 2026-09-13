@@ -1,0 +1,26 @@
+{
+  "appName": "AquaStock",
+  "loading": "Cargando…",
+  "error": "Algo salió mal.",
+  "retry": "Reintentar",
+  "close": "Cerrar",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "back": "Atrás",
+  "update": {
+    "title": "Actualización disponible",
+    "description": "Una nueva versión de AquaStock está lista.",
+    "reload": "Recargar",
+    "later": "Más tarde"
+  },
+  "comingSoon": {
+    "title": "Próximamente",
+    "description": "Esta página está en construcción."
+  },
+  "underConstruction": {
+    "appLabel": "AquaStock",
+    "title": "En construcción",
+    "description": "Todavía estamos construyendo esta página para la demo del hackathon.",
+    "thanks": "Gracias por visitarla."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Frequently asked questions",
+  "subtitle": "Placeholder answers for the hackathon demo.",
+  "questions": {
+    "faq1": {
+      "question": "Is this a real offer of securities?",
+      "answer": "No. This is a hackathon demo and does not constitute an offer of securities."
+    },
+    "faq2": {
+      "question": "What chain does AquaStock run on?",
+      "answer": "Solana. Positions and milestones are tracked on-chain via an Anchor program."
+    },
+    "faq3": {
+      "question": "What's the difference between public and private positions?",
+      "answer": "Public positions come from a government anchor; private positions come from community or outside investors."
+    },
+    "faq4": {
+      "question": "How do I fund a position?",
+      "answer": "Connect a Solana wallet and fund a project via Solana Pay."
+    },
+    "faq5": {
+      "question": "How are milestones verified?",
+      "answer": "Milestones are marked verified on-chain as the project delivers."
+    },
+    "faq6": {
+      "question": "Where can I see project impact?",
+      "answer": "The My Impact page shows the capital → project → milestone → impact timeline."
+    }
+  }
+}

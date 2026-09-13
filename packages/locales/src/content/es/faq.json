@@ -1,0 +1,30 @@
+{
+  "title": "Preguntas frecuentes",
+  "subtitle": "Respuestas provisionales para la demo del hackathon.",
+  "questions": {
+    "faq1": {
+      "question": "¿Es esto una oferta real de valores?",
+      "answer": "No. Esta es una demo de hackathon y no constituye una oferta de valores."
+    },
+    "faq2": {
+      "question": "¿En qué cadena corre AquaStock?",
+      "answer": "Solana. Las posiciones e hitos se registran en cadena mediante un programa Anchor."
+    },
+    "faq3": {
+      "question": "¿Cuál es la diferencia entre posiciones públicas y privadas?",
+      "answer": "Las posiciones públicas vienen de un ancla gubernamental; las privadas, de la comunidad o inversionistas externos."
+    },
+    "faq4": {
+      "question": "¿Cómo financio una posición?",
+      "answer": "Conecta una billetera de Solana y financia un proyecto vía Solana Pay."
+    },
+    "faq5": {
+      "question": "¿Cómo se verifican los hitos?",
+      "answer": "Los hitos se marcan como verificados en cadena a medida que el proyecto avanza."
+    },
+    "faq6": {
+      "question": "¿Dónde veo el impacto del proyecto?",
+      "answer": "La página Mi Impacto muestra la línea de tiempo capital → proyecto → hito → impacto."
+    }
+  }
+}

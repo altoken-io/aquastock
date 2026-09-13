@@ -1,0 +1,32 @@
+{
+  "title": {
+    "default": "AquaStock — Financiamiento de Infraestructura de Agua en Solana",
+    "template": "%s | AquaStock"
+  },
+  "category": "Finanzas",
+  "classification": "Financiamiento de infraestructura público-privada",
+  "abstract": "AquaStock permite que un gobierno ancla e inversionistas comunitarios co-financien proyectos de infraestructura de agua, con seguimiento en cadena en Solana.",
+  "description": "AquaStock permite que un gobierno ancla e inversionistas comunitarios co-financien proyectos de infraestructura de agua, con seguimiento en cadena en Solana.",
+  "keywords": [
+    "Solana",
+    "infraestructura de agua",
+    "financiamiento público-privado",
+    "hackathon"
+  ],
+  "openGraph": {
+    "locale": "es_PE",
+    "title": "AquaStock",
+    "description": "Infraestructura de agua, financiada en Solana.",
+    "siteName": "AquaStock",
+    "images": {
+      "url": "/og-image.png",
+      "alt": "AquaStock"
+    }
+  },
+  "twitter": {
+    "site": "@aquastock",
+    "creator": "@aquastock",
+    "title": "AquaStock",
+    "description": "Infraestructura de agua, financiada en Solana."
+  }
+}

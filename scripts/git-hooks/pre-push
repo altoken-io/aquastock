@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# Local enforcement of the validation gate for pushes to main/develop.
+#
+# Why a hook: this private repo sits on a free GitHub plan, where branch
+# protection and rulesets are unavailable, so `.github/workflows/check.yml`
+# can only report — it cannot reject a push. The repo's own rule (CLAUDE.md
+# "Quality Gates") is that lint, typecheck and tests pass before code lands on
+# main, and provider contacts see `main` live in meetings. This hook runs
+# the fast half of `pnpm check` (no format rewrite, no Next.js builds) for
+# pushes that target main or develop and blocks the push on failure.
+#
+# Install once per clone:  pnpm hooks:install
+# Bypass deliberately:     git push --no-verify   (say so in the commit/PR)
+
+set -euo pipefail
+
+TARGETS='refs/heads/main refs/heads/develop'
+NEEDS_CHECK=false
+
+# git feeds "<local ref> <local sha> <remote ref> <remote sha>" per pushed ref.
+while read -r _local_ref _local_sha remote_ref _remote_sha; do
+  for target in $TARGETS; do
+    if [[ "$remote_ref" == "$target" ]]; then
+      NEEDS_CHECK=true
+    fi
+  done
+done
+
+if [[ "$NEEDS_CHECK" != true ]]; then
+  exit 0
+fi
+
+echo "[pre-push] push targets main/develop — running lint, check-types, test"
+cd "$(git rev-parse --show-toplevel)"
+pnpm turbo run lint check-types test
+echo "[pre-push] validation passed"

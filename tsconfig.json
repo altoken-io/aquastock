@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "files": [],
+  "references": [
+    { "path": "./apps/dapp" },
+    { "path": "./apps/web" },
+    { "path": "./apps/api" },
+    { "path": "./apps/agent" },
+    { "path": "./apps/indexer-solana" },
+    { "path": "./apps/indexer-hedera" },
+    { "path": "./apps/stellar-rails" },
+    { "path": "./apps/treasury" },
+    { "path": "./apps/compliance" },
+    { "path": "./packages/auth" },
+    { "path": "./packages/types" },
+    { "path": "./packages/sdk" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/solana" },
+    { "path": "./packages/hedera" },
+    { "path": "./packages/stellar" },
+    { "path": "./packages/agent-core" },
+    { "path": "./packages/contracts" }
+  ]
+}

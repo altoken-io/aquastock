@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "tagline": "Demo",
+    "title": "Esta es una demo de hackathon",
+    "description": "AquaStock corre en Solana devnet y no constituye una oferta de valores."
+  },
+  "cta": {
+    "primary": {
+      "label": "Entendido"
+    },
+    "secondary": {
+      "href": "/",
+      "label": "Saber más"
+    }
+  }
+}
