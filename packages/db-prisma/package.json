@@ -12,6 +12,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.1",
     "@prisma/client": "^7.4.1",
+    "better-auth": "^1.7.4",
     "dotenv": "^17.3.1",
     "zod": "^4.3.6"
   },
@@ -24,6 +25,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "migrate:deploy:prod": "node scripts/migrate-deploy-prod.mjs",
+    "create-admin-user": "node --experimental-strip-types scripts/create-admin-user.mjs",
     "postinstall": "prisma generate"
   }
 }

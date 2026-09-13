@@ -7,6 +7,9 @@ const serverEnv = {
   RESEND_API_KEY: process.env.RESEND_API_KEY,
   RESEND_NEWSLETTER_AUDIENCE_ID: process.env.RESEND_NEWSLETTER_AUDIENCE_ID,
   NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+  // Admin-console session/cookie signing secret (Better Auth) — see
+  // src/lib/auth/auth.ts. 32+ random chars: `openssl rand -base64 32`.
+  BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
 };
 
 // Optional environment variables in development
@@ -14,6 +17,7 @@ const OPTIONAL_IN_DEV = [
   'ARCJET_KEY',
   'NEXT_PUBLIC_BASE_URL',
   'RESEND_API_KEY',
+  'BETTER_AUTH_SECRET',
 ] as const;
 
 export const env = (key: keyof typeof serverEnv) => {

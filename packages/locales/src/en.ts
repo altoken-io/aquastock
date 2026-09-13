@@ -1,3 +1,4 @@
+import admin from './content/en/admin.json';
 import common from './content/en/common.json';
 import confluence from './content/en/confluence.json';
 import cookies from './content/en/cookies.json';
@@ -21,6 +22,7 @@ import useCases from './content/en/useCases.json';
 import validation from './content/en/validation.json';
 
 export const en = {
+  admin,
   common,
   confluence,
   cookies,

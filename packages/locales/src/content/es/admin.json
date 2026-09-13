@@ -1,0 +1,34 @@
+{
+  "signIn": {
+    "title": "Acceso administrativo",
+    "subtitle": "Para el equipo de AquaStock y socios gubernamentales que gestionan proyectos e hitos.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "error": "Correo electrónico o contraseña inválidos."
+  },
+  "forgotPassword": {
+    "title": "Restablece tu contraseña",
+    "subtitle": "Ingresa tu correo electrónico y te enviaremos un enlace para restablecerla.",
+    "email": "Correo electrónico",
+    "submit": "Enviar enlace de restablecimiento",
+    "success": "Si ese correo tiene una cuenta, un enlace de restablecimiento está en camino.",
+    "backToSignIn": "Volver al inicio de sesión"
+  },
+  "resetPassword": {
+    "title": "Establece una nueva contraseña",
+    "subtitle": "Elige una nueva contraseña para tu cuenta.",
+    "newPassword": "Nueva contraseña",
+    "submit": "Restablecer contraseña",
+    "success": "Contraseña actualizada. Ya puedes iniciar sesión.",
+    "invalidToken": "Este enlace de restablecimiento no es válido o ha expirado.",
+    "backToSignIn": "Volver al inicio de sesión"
+  },
+  "dashboard": {
+    "title": "Panel administrativo",
+    "signedInAs": "Sesión iniciada como {email}",
+    "signOut": "Cerrar sesión",
+    "placeholder": "Las herramientas de gestión de proyectos e hitos llegarán aquí próximamente."
+  }
+}

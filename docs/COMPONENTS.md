@@ -1,6 +1,6 @@
 # AquaStock components
 
-Generic, brand-agnostic component libraries — no AquaStock-specific UI exists yet (Day 1-3 work per `docs/ROADMAP.md`). Check here before adding a new component; reuse before creating.
+Mostly generic, brand-agnostic component libraries — the investor-facing product UI (project browsing, funding, My Impact) doesn't exist yet (Day 1-3 work per `docs/ROADMAP.md`). One AquaStock-specific exception already exists: the `apps/dapp` admin console (see below). Check here before adding a new component; reuse before creating.
 
 ## `packages/ui` (shared, `@aquastock/ui`)
 
@@ -27,6 +27,16 @@ Generic, brand-agnostic component libraries — no AquaStock-specific UI exists 
 - `ui/*` — a smaller equivalent kit: `animated-grid-background`, `arrow-button`, `button`, `button-link`, `combobox`, `diagonal-carousel`, `glowing-card`, `infinite-ticker`, `input`, `onboarding-progress-tracker`, `portal`, `textarea`, `vertical-carousel`.
 - `helpers/*` — same pattern as `apps/web` (`brand-logo` — inline SVG mark, see `docs/ASSETS.md`; `breadcrumbs`, `container`, `section`, `theme-switcher`, `language-switcher`, etc.), plus `update-checker.tsx` (prompts a reload when a new deploy is detected).
 - `hooks/use-effect-mount.tsx` — was on an older `useState`-in-effect pattern that could warn/deadlock a component's mounted flag under React 19.2's `useEffectEvent`; ported to match `apps/web`'s `useSyncExternalStore`-based version (SSR-safe, no `setState` inside the effect). If either app's copy is touched again, keep them in sync or promote to a shared package.
+
+## `apps/dapp/src/modules/auth/components` — admin console login (AquaStock-specific)
+
+The one real, non-placeholder feature in `apps/dapp` so far. Staff/government email-password login — separate from investor wallet-connect, no public sign-up. See `memory: better-auth-scope`.
+
+- `sign-in-form.tsx`, `forgot-password-form.tsx`, `reset-password-form.tsx`, `sign-out-button.tsx` — client components calling `@/lib/auth/auth-client`, rendered by the matching pages under `src/app/[locale]/{sign-in,forgot-password,reset-password,dashboard}/page.tsx`.
+- `src/lib/auth/auth.ts` — server `betterAuth()` config: Prisma adapter (`packages/db-prisma`), email/password only, a `before` hook that blocks `/sign-up/email` (403), `nextCookies()` plugin.
+- `src/lib/auth/auth-client.ts` — `createAuthClient` from `better-auth/react`; exports `signIn`/`signOut`/`useSession`/`requestPasswordReset`/`resetPassword` (not `forgetPassword` — that name exists at runtime but isn't in the TS types for this version).
+- `src/proxy.ts` — this app's first middleware: an optimistic cookie-presence redirect guard on `/en/dashboard` and `/es/dashboard` (the dashboard page itself does the real `auth.api.getSession` check).
+- New admin accounts: `pnpm --filter @aquastock/db-prisma create-admin-user` (see `.context/repo/map.md`) — never a route an agent should call itself.
 
 ## `packages/animation` (shared, `@aquastock/animation`)
 

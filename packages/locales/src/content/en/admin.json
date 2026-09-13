@@ -1,0 +1,34 @@
+{
+  "signIn": {
+    "title": "Admin sign in",
+    "subtitle": "For AquaStock staff and government partners managing projects and milestones.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "forgotPassword": "Forgot password?",
+    "error": "Invalid email or password."
+  },
+  "forgotPassword": {
+    "title": "Reset your password",
+    "subtitle": "Enter your email and we'll send you a reset link.",
+    "email": "Email",
+    "submit": "Send reset link",
+    "success": "If that email has an account, a reset link is on its way.",
+    "backToSignIn": "Back to sign in"
+  },
+  "resetPassword": {
+    "title": "Set a new password",
+    "subtitle": "Choose a new password for your account.",
+    "newPassword": "New password",
+    "submit": "Reset password",
+    "success": "Password updated. You can now sign in.",
+    "invalidToken": "This reset link is invalid or has expired.",
+    "backToSignIn": "Back to sign in"
+  },
+  "dashboard": {
+    "title": "Admin dashboard",
+    "signedInAs": "Signed in as {email}",
+    "signOut": "Sign out",
+    "placeholder": "Project and milestone management tools land here next."
+  }
+}
