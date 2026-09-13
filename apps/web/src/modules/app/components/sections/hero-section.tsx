@@ -7,7 +7,6 @@ import ButtonLink from '@/components/ui/button-link';
 
 export async function HeroSection() {
   const t = await getTranslations('hero');
-  const tProject = await getTranslations('project');
 
   return (
     <section
@@ -43,10 +42,7 @@ export async function HeroSection() {
             {t('description')}
           </MotionDiv>
 
-          <MotionDiv
-            delay={0.5}
-            className="mb-8 flex flex-wrap items-center gap-3"
-          >
+          <MotionDiv delay={0.5} className="flex flex-wrap items-center gap-3">
             <ButtonLink
               variant="primary"
               rounded="full"
@@ -65,17 +61,6 @@ export async function HeroSection() {
             >
               {t('cta.secondary.label')}
             </ButtonLink>
-          </MotionDiv>
-
-          <MotionDiv delay={0.6} className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-public/25 bg-public/8 px-3 py-1.5 text-xs font-medium text-public">
-              <span className="size-1.5 rounded-full bg-public" />
-              {tProject('governmentContribution')}
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-private/25 bg-private/8 px-3 py-1.5 text-xs font-medium text-private">
-              <span className="size-1.5 rounded-full bg-private" />
-              {tProject('communityFunding')}
-            </span>
           </MotionDiv>
         </div>
 
