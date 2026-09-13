@@ -7,7 +7,7 @@
 @source '../../../../packages/ui/src';
 
 @custom-variant dark (&:is(.dark *));
-
+ 
 /* AquaStock palette (docs/VISUAL.md). Neutral scale is true gray (zero
    chroma) so backgrounds read as plain white/black, not a warm or cool
    tint. --primary ("Reservoir") is the one brand/CTA color; --public
