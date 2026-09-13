@@ -1,6 +1,7 @@
 {
   "title": "Preguntas frecuentes",
   "subtitle": "Respuestas provisionales para la demo del hackathon.",
+  "trustNote": "En cadena, no autoreportado.",
   "questions": {
     "faq1": {
       "question": "¿Es esto una oferta real de valores?",

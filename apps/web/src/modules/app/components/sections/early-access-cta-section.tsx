@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
 import {
@@ -18,10 +19,14 @@ export async function EarlyAccessCtaSection() {
       className="relative flex w-full flex-col items-center justify-center px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32"
     >
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center overflow-hidden rounded-[2rem] bg-primary px-6 py-16 text-center text-primary-foreground shadow-2xl shadow-primary/15 sm:px-12 sm:py-20 lg:py-24">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-20 [background-image:linear-gradient(to_right,rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:64px_64px]"
+        <Image
+          src="/assets/brand/early-access-cta.webp"
+          alt={t('imageAlt')}
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
+        <div aria-hidden="true" className="absolute inset-0 bg-primary/80" />
         <TextReveal
           as="h2"
           text={t('title')}

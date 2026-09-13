@@ -12,5 +12,8 @@
       "label": "Leer las preguntas frecuentes"
     }
   },
-  "usersCount": "Demo de hackathon — devnet"
+  "usersCount": "Demo de hackathon — devnet",
+  "legend": {
+    "sameTable": "Ambos en la misma tabla de financiamiento."
+  }
 }

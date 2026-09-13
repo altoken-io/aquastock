@@ -12,5 +12,8 @@
       "label": "Read the FAQ"
     }
   },
-  "usersCount": "Hackathon demo — devnet"
+  "usersCount": "Hackathon demo — devnet",
+  "legend": {
+    "sameTable": "Both on the same funding table."
+  }
 }

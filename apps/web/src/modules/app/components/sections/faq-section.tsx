@@ -1,5 +1,8 @@
 import FaqMenu from '@/components/FaqMenu';
-import { MotionText } from '@/components/helpers/motion/blur-lazy-motion';
+import {
+  MotionDiv,
+  MotionText,
+} from '@/components/helpers/motion/blur-lazy-motion';
 import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
 import { getTranslations } from 'next-intl/server';
 
@@ -49,6 +52,13 @@ export async function FaqSection() {
           >
             {t('subtitle')}
           </MotionText>
+          <MotionDiv
+            delay={0.3}
+            className="mt-8 hidden items-center gap-2 rounded-full border border-border bg-muted/40 px-3 py-1.5 text-xs text-muted-foreground lg:inline-flex"
+          >
+            <span className="size-1.5 rounded-full bg-ok" aria-hidden="true" />
+            {t('trustNote')}
+          </MotionDiv>
         </div>
         <div className="lg:col-span-7">
           <FaqMenu faqs={faqs} />

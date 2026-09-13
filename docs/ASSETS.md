@@ -29,6 +29,11 @@ file at all.
 - `brand/hero-infrastructure.webp` — portrait documentary photography of a
   water-treatment facility in an Andean setting, used as the homepage hero's
   supporting visual.
+- `brand/how-it-works.webp` — portrait documentary photography of a municipal
+  and community representative verifying a water-treatment site together,
+  used beside the homepage process steps.
+- `brand/early-access-cta.webp` — wide documentary photograph of a community
+  water project in an Andean valley, used behind the homepage closing CTA.
 
 ## `apps/dapp/public/assets`
 

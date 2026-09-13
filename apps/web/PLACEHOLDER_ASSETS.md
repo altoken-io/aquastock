@@ -1,8 +1,8 @@
 # Placeholder assets to replace
 
 This tracks every place in `apps/web` that renders a placeholder graphic instead of
-real photography. The list is currently empty: the hero uses the production asset
-`apps/web/public/assets/brand/hero-infrastructure.webp`.
+real photography. The list is currently empty: the homepage uses production image
+assets in `apps/web/public/assets/brand/`.
 
 ## Deliberately not on this list
 

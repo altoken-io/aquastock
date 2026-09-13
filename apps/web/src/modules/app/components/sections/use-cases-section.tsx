@@ -13,21 +13,25 @@ const CASES = [
     id: 'government',
     icon: Landmark,
     tone: 'bg-public/10 text-public',
+    accent: 'before:bg-public',
   },
   {
     id: 'community',
     icon: Users,
     tone: 'bg-private/10 text-private',
+    accent: 'before:bg-private',
   },
   {
     id: 'investors',
     icon: TrendingUp,
     tone: 'bg-primary/10 text-primary',
+    accent: 'before:bg-primary',
   },
   {
     id: 'generalized',
     icon: Waves,
     tone: 'bg-muted text-muted-foreground',
+    accent: 'before:bg-muted-foreground/40',
   },
 ] as const;
 
@@ -66,7 +70,10 @@ export async function UseCasesSection() {
               <MotionDiv
                 key={useCase.id}
                 delay={0.2 + index * 0.1}
-                className="rounded-2xl border border-border bg-card p-7"
+                className={cn(
+                  'relative overflow-hidden rounded-2xl border border-border bg-card p-7 before:absolute before:inset-x-0 before:top-0 before:h-1',
+                  useCase.accent,
+                )}
               >
                 <span
                   className={cn(

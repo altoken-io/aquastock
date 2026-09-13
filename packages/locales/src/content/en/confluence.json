@@ -4,5 +4,8 @@
   "subtitle": "A government position and a community position, funding the same table — visible on-chain, not self-reported.",
   "preview": {
     "label": "What that looks like"
+  },
+  "visual": {
+    "label": "The two currents"
   }
 }

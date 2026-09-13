@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { MotionDiv } from '@/components/helpers/motion/blur-lazy-motion';
 import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
@@ -66,30 +67,51 @@ export async function HowItWorksSection() {
           </MotionDiv>
         </div>
 
-        <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
-          <div className="absolute top-8 left-1/8 hidden h-px w-3/4 bg-border lg:block" />
+        <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
+          <MotionDiv delay={0.2} className="lg:col-span-1">
+            <div className="relative aspect-4/5 w-full overflow-hidden rounded-3xl lg:aspect-auto lg:h-full">
+              <Image
+                src="/assets/brand/how-it-works.webp"
+                alt={t('photoAlt')}
+                fill
+                sizes="(min-width: 1024px) 33vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </MotionDiv>
 
-          {steps.map((step, index) => (
-            <MotionDiv
-              key={step.id}
-              delay={0.4 + index * 0.1}
-              className="relative flex flex-col items-center text-center"
-            >
-              <div
-                className={cn(
-                  'relative z-10 mb-8 flex h-16 w-16 items-center justify-center rounded-full text-2xl',
-                  STEP_TONE[step.id],
-                )}
+          <div className="relative flex flex-col gap-10 lg:col-span-2">
+            <div
+              aria-hidden="true"
+              className="absolute top-8 bottom-8 left-8 hidden w-px bg-border sm:block"
+            />
+
+            {steps.map((step, index) => (
+              <MotionDiv
+                key={step.id}
+                delay={0.3 + index * 0.1}
+                className="relative flex gap-6"
               >
-                {step.order}
-              </div>
+                <div
+                  className={cn(
+                    'relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-2xl',
+                    STEP_TONE[step.id],
+                  )}
+                >
+                  {step.order}
+                </div>
 
-              <h3 className="mb-4 text-2xl text-foreground">{step.title}</h3>
-              <p className="max-w-sm text-lg font-light text-muted-foreground">
-                {step.description}
-              </p>
-            </MotionDiv>
-          ))}
+                <div className="pt-3">
+                  <h3 className="mb-2 text-2xl text-foreground">
+                    {step.title}
+                  </h3>
+                  <p className="max-w-lg text-lg font-light text-muted-foreground">
+                    {step.description}
+                  </p>
+                </div>
+              </MotionDiv>
+            ))}
+          </div>
         </div>
 
         <MotionDiv delay={0.9} className="mt-20 text-center">

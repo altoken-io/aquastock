@@ -1,6 +1,7 @@
 {
   "title": "Frequently asked questions",
   "subtitle": "Placeholder answers for the hackathon demo.",
+  "trustNote": "On-chain, not self-reported.",
   "questions": {
     "faq1": {
       "question": "Is this a real offer of securities?",
