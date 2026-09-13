@@ -26,9 +26,9 @@ file at all.
 
 ## `apps/web/public/assets`
 
-- `brand/hero-infrastructure-placeholder.svg` — the one remaining placeholder
-  image on the site (the hero's supporting visual). See `apps/web/PLACEHOLDER_ASSETS.md`
-  for exactly what to replace it with and where.
+- `brand/hero-infrastructure.webp` — portrait documentary photography of a
+  water-treatment facility in an Andean setting, used as the homepage hero's
+  supporting visual.
 
 ## `apps/dapp/public/assets`
 
@@ -45,4 +45,4 @@ placeholder shell needs an image asset (see `components/dapp-shell.tsx` /
   — see the brand mark above for the pattern. Reach for a real file only for
   actual photography or footage.
 - Check `apps/web/PLACEHOLDER_ASSETS.md` before adding a new placeholder —
-  it's the single list of what's still awaiting real imagery.
+  it tracks any imagery still awaiting a production asset.

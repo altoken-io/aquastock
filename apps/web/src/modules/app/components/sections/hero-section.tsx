@@ -71,7 +71,7 @@ export async function HeroSection() {
           className="relative hidden aspect-4/5 w-full max-w-md justify-self-end overflow-hidden rounded-3xl lg:block"
         >
           <Image
-            src="/assets/brand/hero-infrastructure-placeholder.svg"
+            src="/assets/brand/hero-infrastructure.webp"
             alt="Water infrastructure — reservoir and treatment plant"
             fill
             priority
