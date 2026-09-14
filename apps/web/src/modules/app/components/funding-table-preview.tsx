@@ -25,10 +25,12 @@ const STATUS_STYLES = {
 
 /**
  * A concrete answer to "what does one project actually look like" for the
- * marketing site. Demo data only, matching the illustrative dataset
- * `apps/dapp` itself now uses (`apps/dapp/src/lib/demo/projects.ts`) — this
- * stays explicitly labeled as an example rather than a screenshot of the
- * product, since neither app is reading from a live database yet.
+ * marketing site, styled as a ledger/receipt rather than a generic progress
+ * card — line items with dotted leaders, mono numerals, a stamped status.
+ * Demo data only, matching the illustrative dataset `apps/dapp` itself now
+ * uses (`apps/dapp/src/lib/demo/projects.ts`) — stays explicitly labeled as
+ * an example rather than a screenshot of the product, since neither app is
+ * reading from a live database yet.
  */
 export async function FundingTablePreview({
   className,
@@ -41,30 +43,32 @@ export async function FundingTablePreview({
   return (
     <div
       className={cn(
-        'rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-7',
+        'relative overflow-hidden rounded-md border border-border bg-card p-6 sm:p-7',
         className,
       )}
     >
-      <div className="mb-5 flex items-start justify-between gap-4">
+      <div className="mb-5 flex items-start justify-between gap-4 border-b border-dashed border-border pb-5">
         <div>
-          <p className="text-xs font-medium tracking-[0.14em] text-muted-foreground uppercase">
-            Example project
+          <p className="font-mono-ui text-[10px] tracking-[0.22em] text-muted-foreground uppercase">
+            Ledger — example project
           </p>
           <h3 className="mt-1 text-xl">Water treatment upgrade</h3>
         </div>
-        <span className="shrink-0 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs text-muted-foreground">
+        <span className="font-mono-ui shrink-0 rounded-sm border border-ok/30 bg-ok/10 px-2 py-1 text-[10px] tracking-[0.14em] text-ok uppercase">
           {t('status.ACTIVE')}
         </span>
       </div>
 
       <div className="mb-6">
         <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
-          <span>{t('goal')}</span>
-          <span className="tabular-nums">
+          <span className="font-mono-ui tracking-[0.1em] uppercase">
+            {t('goal')}
+          </span>
+          <span className="font-mono-ui text-foreground tabular-nums">
             {FUNDING_SPLIT.public + FUNDING_SPLIT.private}%
           </span>
         </div>
-        <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-muted">
+        <div className="flex h-2.5 w-full overflow-hidden rounded-xs border border-border">
           <div
             className="h-full bg-public"
             style={{ width: `${FUNDING_SPLIT.public}%` }}
@@ -83,7 +87,7 @@ export async function FundingTablePreview({
               aria-hidden="true"
             />
             {t('governmentContribution')}
-            <span className="tabular-nums text-muted-foreground">
+            <span className="font-mono-ui text-muted-foreground tabular-nums">
               {FUNDING_SPLIT.public}%
             </span>
           </span>
@@ -93,28 +97,32 @@ export async function FundingTablePreview({
               aria-hidden="true"
             />
             {t('communityFunding')}
-            <span className="tabular-nums text-muted-foreground">
+            <span className="font-mono-ui text-muted-foreground tabular-nums">
               {FUNDING_SPLIT.private}%
             </span>
           </span>
         </div>
       </div>
 
-      <ul className="flex flex-col gap-3 border-t border-border pt-4">
+      <ul className="flex flex-col gap-1 border-t border-border pt-4">
         {MILESTONES.map((milestone) => {
           const { icon: Icon, className: statusClassName } =
             STATUS_STYLES[milestone.status];
           return (
             <li
               key={milestone.id}
-              className="flex items-center justify-between gap-3 text-sm"
+              className="flex items-baseline gap-2 py-1.5 text-sm"
             >
-              <span className="text-foreground/90">
+              <span className="shrink-0 text-foreground/90">
                 {MILESTONE_LABELS[milestone.id]}
               </span>
               <span
+                aria-hidden="true"
+                className="h-px flex-1 border-b border-dotted border-border"
+              />
+              <span
                 className={cn(
-                  'flex items-center gap-1.5 text-xs font-medium',
+                  'font-mono-ui flex shrink-0 items-center gap-1.5 text-[11px] tracking-[0.06em] uppercase',
                   statusClassName,
                 )}
               >

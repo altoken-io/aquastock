@@ -13,16 +13,16 @@ export async function ConfluenceSection() {
   const tProject = await getTranslations('project');
 
   return (
-    <section id="confluence" className="relative w-full py-10 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24">
-        <div className="mb-16 max-w-2xl lg:mb-20">
-          <p className="mb-4 text-xs font-medium tracking-[0.14em] text-primary uppercase">
+    <section id="confluence" className="relative w-full py-20 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24 xl:pl-32">
+        <div className="mb-16 max-w-2xl border-b border-border pb-10 lg:mb-20">
+          <p className="font-mono-ui mb-4 text-[11px] tracking-[0.2em] text-primary uppercase">
             {t('eyebrow')}
           </p>
           <RichTextReveal
             as="h2"
             trigger="view"
-            className="mb-6 text-4xl leading-[0.95] tracking-[-0.03em] sm:text-5xl"
+            className="mb-6 text-4xl leading-[0.98] tracking-tight sm:text-5xl"
           >
             {t('title')}
           </RichTextReveal>
@@ -50,7 +50,7 @@ export async function ConfluenceSection() {
           </div>
 
           <MotionDiv delay={0.15}>
-            <p className="mb-4 text-xs font-medium tracking-[0.14em] text-muted-foreground uppercase">
+            <p className="font-mono-ui mb-4 text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
               {t('visual.label')}
             </p>
             <ConfluenceVisual className="aspect-square w-full sm:aspect-video lg:aspect-square" />
@@ -73,7 +73,7 @@ export async function ConfluenceSection() {
           </MotionDiv>
 
           <MotionDiv delay={0.25}>
-            <p className="mb-4 text-xs font-medium tracking-[0.14em] text-muted-foreground uppercase">
+            <p className="font-mono-ui mb-4 text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
               {t('preview.label')}
             </p>
             <FundingTablePreview />

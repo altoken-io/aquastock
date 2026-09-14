@@ -21,5 +21,7 @@
     }
   },
   "summary": "Public and private capital, one dashboard, fully on-chain.",
-  "photoAlt": "A municipal representative and a community member inspecting water-treatment infrastructure together."
+  "photoAlt": "A municipal representative and a community member inspecting water-treatment infrastructure together.",
+  "gaugeLabel": "Process",
+  "benchmarkLabel": "BM"
 }

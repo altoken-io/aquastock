@@ -40,7 +40,7 @@ export function ConfluenceVisual({
   return (
     <div
       className={cn(
-        'relative isolate overflow-hidden rounded-3xl bg-neutral-950',
+        'relative isolate overflow-hidden rounded-md border border-border bg-neutral-950',
         className,
       )}
     >

@@ -21,5 +21,7 @@
     }
   },
   "summary": "Capital público y privado, un solo dashboard, todo en cadena.",
-  "photoAlt": "Un representante municipal y una integrante de la comunidad inspeccionan juntos infraestructura de tratamiento de agua."
+  "photoAlt": "Un representante municipal y una integrante de la comunidad inspeccionan juntos infraestructura de tratamiento de agua.",
+  "gaugeLabel": "Proceso",
+  "benchmarkLabel": "BM"
 }

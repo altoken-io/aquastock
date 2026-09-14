@@ -37,12 +37,15 @@ export async function FaqSection() {
 
   return (
     <section id="faq" className="w-full py-20 sm:py-24 lg:py-32">
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-10">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 sm:px-12 lg:grid-cols-12 lg:gap-8 lg:px-24 xl:pl-32">
         <div className="lg:col-span-5 lg:pr-12">
+          <p className="font-mono-ui mb-4 text-[11px] tracking-[0.2em] text-primary uppercase">
+            {t('badge')}
+          </p>
           <RichTextReveal
             as="h2"
             trigger="view"
-            className="text-4xl leading-[0.95] tracking-[-0.045em] text-balance sm:text-5xl lg:text-6xl"
+            className="text-4xl leading-[0.98] tracking-tight text-balance sm:text-5xl lg:text-6xl"
           >
             {t('title')}
           </RichTextReveal>
@@ -54,7 +57,7 @@ export async function FaqSection() {
           </MotionText>
           <MotionDiv
             delay={0.3}
-            className="mt-8 hidden items-center gap-2 rounded-full border border-border bg-muted/40 px-3 py-1.5 text-xs text-muted-foreground lg:inline-flex"
+            className="font-mono-ui mt-8 hidden items-center gap-2 rounded-sm border border-border bg-muted/40 px-3 py-1.5 text-[11px] tracking-[0.1em] text-muted-foreground uppercase lg:inline-flex"
           >
             <span className="size-1.5 rounded-full bg-ok" aria-hidden="true" />
             {t('trustNote')}

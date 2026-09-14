@@ -6,5 +6,9 @@
       "label": "Conectar billetera"
     }
   },
-  "imageAlt": "Un proyecto comunitario de infraestructura de agua en un valle andino al atardecer."
+  "imageAlt": "Un proyecto comunitario de infraestructura de agua en un valle andino al atardecer.",
+  "gaugeLabel": "Abrir",
+  "notice": {
+    "tag": "Aviso del sitio"
+  }
 }

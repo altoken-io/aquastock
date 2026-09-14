@@ -15,5 +15,12 @@
   "usersCount": "Demo de hackathon — devnet",
   "legend": {
     "sameTable": "Ambos en la misma tabla de financiamiento."
+  },
+  "gaugeLabel": "Sitio",
+  "panel": {
+    "ariaLabel": "Lectura en vivo del modelo de financiamiento",
+    "recordLabel": "Registro del sitio",
+    "projectName": "Mejora de planta de tratamiento — Sitio 04",
+    "caption": "Ilustrativo — coincide con el conjunto de datos de la demo usado en todo el producto."
   }
 }

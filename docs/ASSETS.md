@@ -26,14 +26,20 @@ file at all.
 
 ## `apps/web/public/assets`
 
-- `brand/hero-infrastructure.webp` — portrait documentary photography of a
-  water-treatment facility in an Andean setting, used as the homepage hero's
-  supporting visual.
-- `brand/how-it-works.webp` — portrait documentary photography of a municipal
-  and community representative verifying a water-treatment site together,
-  used beside the homepage process steps.
-- `brand/early-access-cta.webp` — wide documentary photograph of a community
-  water project in an Andean valley, used behind the homepage closing CTA.
+- `brand/process-site-verification.webp` — portrait documentary photograph of
+  a municipal engineer and a community member inspecting water-treatment
+  infrastructure together, used beside the homepage's "The Process" steps.
+- `brand/site-notice.webp` — wide documentary photograph of a community water
+  reservoir in an Andean valley at sunset, used behind the homepage's closing
+  panel under a teal overlay.
+
+Both were generated (see `apps/web/PLACEHOLDER_ASSETS.md` for the brief each
+was generated against) for the 2026 marketing-site redesign (the
+"Gauge"/instrument direction — see `apps/web/PRODUCT.md`), replacing the
+three photos this app shipped before that redesign
+(`hero-infrastructure.webp`, `how-it-works.webp`, `early-access-cta.webp` —
+the new layout dropped the hero photo entirely in favor of the hero ledger
+panel).
 
 ## `apps/dapp/public/assets`
 

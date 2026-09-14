@@ -6,5 +6,9 @@
       "label": "Connect wallet"
     }
   },
-  "imageAlt": "A community water-infrastructure project in an Andean valley at sunset."
+  "imageAlt": "A community water-infrastructure project in an Andean valley at sunset.",
+  "gaugeLabel": "Open",
+  "notice": {
+    "tag": "Site notice"
+  }
 }

@@ -15,5 +15,12 @@
   "usersCount": "Hackathon demo — devnet",
   "legend": {
     "sameTable": "Both on the same funding table."
+  },
+  "gaugeLabel": "Site",
+  "panel": {
+    "ariaLabel": "Live reading of the funding model",
+    "recordLabel": "Site record",
+    "projectName": "Water treatment upgrade — Site 04",
+    "caption": "Illustrative — matches the demo dataset used across the product."
   }
 }

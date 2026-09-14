@@ -85,7 +85,7 @@ const MobileMenu = ({ className }: { className?: string }) => {
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-controls={PANEL_ID}
-        className="flex size-10 items-center justify-center rounded-full bg-foreground text-background transition-transform active:scale-95"
+        className="flex size-10 items-center justify-center rounded-sm bg-foreground text-background transition-transform active:scale-95"
       >
         <Menu className="size-4.5" />
       </button>
@@ -122,10 +122,10 @@ const MobileMenu = ({ className }: { className?: string }) => {
                 <Link
                   href="/#home"
                   onClick={handleClose}
-                  className="flex items-center gap-2 rounded-full py-1 pr-2"
+                  className="flex items-center gap-2.5 rounded-sm py-1"
                 >
-                  <BrandLogo alt={t('logo.alt')} size={40} className="size-8" />
-                  <span className="font-headline text-lg font-extrabold tracking-tight text-foreground">
+                  <BrandLogo alt={t('logo.alt')} size={40} className="size-7" />
+                  <span className="font-mono-ui text-sm font-medium tracking-[0.14em] text-foreground uppercase">
                     {t('logo.label')}
                   </span>
                 </Link>
@@ -134,7 +134,7 @@ const MobileMenu = ({ className }: { className?: string }) => {
                   type="button"
                   onClick={handleClose}
                   aria-label={t('mobileMenu.ariaClose')}
-                  className="flex size-10 items-center justify-center rounded-full bg-foreground text-background transition-transform active:scale-95"
+                  className="flex size-10 items-center justify-center rounded-sm bg-foreground text-background transition-transform active:scale-95"
                 >
                   <X className="size-4.5" />
                 </button>
@@ -185,7 +185,7 @@ const MobileMenu = ({ className }: { className?: string }) => {
                 <a
                   href={DAPP_LOGIN_URL}
                   onClick={handleClose}
-                  className="flex h-12 flex-1 items-center justify-center rounded-full border border-border text-sm font-semibold text-foreground/80 transition-colors hover:border-foreground/30 hover:text-foreground"
+                  className="flex h-12 flex-1 items-center justify-center rounded-md border border-border text-sm font-semibold text-foreground/80 transition-colors hover:border-foreground/30 hover:text-foreground"
                 >
                   {t('cta.signIn')}
                 </a>
@@ -193,7 +193,7 @@ const MobileMenu = ({ className }: { className?: string }) => {
                   href={t('cta.earlyAccess.href')}
                   onClick={handleClose}
                   variant="primary"
-                  className="h-12 flex-1 rounded-full text-sm font-semibold"
+                  className="h-12 flex-1 rounded-md text-sm font-semibold"
                 >
                   {t('cta.earlyAccess.label')}
                 </ButtonLink>

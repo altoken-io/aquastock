@@ -92,9 +92,11 @@
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
 
-  /* Radius */
-
-  --radius: 1.25rem;
+  /* Radius — tighter than apps/dapp's on purpose: the marketing site's
+     instrument-panel/ledger direction wants drawn rectangles and hairline
+     rules, not soft pill shapes. Each app keeps its own copy of this token
+     set (see docs/VISUAL.md), so this doesn't affect apps/dapp. */
+  --radius: 0.625rem;
 }
 
 .dark {
@@ -196,6 +198,7 @@
 
   --font-headline: var(--font-headline);
   --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -227,15 +230,24 @@
   h5,
   h6 {
     font-family: var(--font-headline), sans-serif;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
-    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.96;
+    font-weight: 600;
   }
   p,
   button,
   input {
     font-family: var(--font-body);
   }
+}
+
+/* Datum labels, tick numerals, ledger figures, timestamps — the "read off
+   an instrument" register. Reserved for short UI metadata, never body
+   copy. */
+.font-mono-ui {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-feature-settings: 'tnum' 1;
+  font-variant-numeric: tabular-nums;
 }
 
 html {

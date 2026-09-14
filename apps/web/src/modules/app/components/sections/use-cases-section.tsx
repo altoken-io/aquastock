@@ -12,26 +12,26 @@ const CASES = [
   {
     id: 'government',
     icon: Landmark,
-    tone: 'bg-public/10 text-public',
-    accent: 'before:bg-public',
+    tag: 'GOV',
+    accent: 'border-l-public text-public',
   },
   {
     id: 'community',
     icon: Users,
-    tone: 'bg-private/10 text-private',
-    accent: 'before:bg-private',
+    tag: 'COM',
+    accent: 'border-l-private text-private',
   },
   {
     id: 'investors',
     icon: TrendingUp,
-    tone: 'bg-primary/10 text-primary',
-    accent: 'before:bg-primary',
+    tag: 'INV',
+    accent: 'border-l-primary text-primary',
   },
   {
     id: 'generalized',
     icon: Waves,
-    tone: 'bg-muted text-muted-foreground',
-    accent: 'before:bg-muted-foreground/40',
+    tag: 'GEN',
+    accent: 'border-l-muted-foreground/40 text-muted-foreground',
   },
 ] as const;
 
@@ -45,15 +45,18 @@ export async function UseCasesSection() {
   return (
     <section
       id="use-cases"
-      className="relative flex w-full flex-col py-10 lg:py-32"
+      className="relative flex w-full flex-col py-20 lg:py-32"
     >
-      <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24">
-        <div className="mb-16 flex flex-col lg:mb-20 lg:max-w-xl">
+      <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24 xl:pl-32">
+        <div className="mb-16 flex flex-col border-b border-border pb-10 lg:mb-20 lg:max-w-xl">
+          <p className="font-mono-ui mb-4 text-[11px] tracking-[0.2em] text-primary uppercase">
+            {t('badge')}
+          </p>
           <RichTextReveal
             as="h2"
             trigger="view"
             start="top"
-            className="mb-6 text-5xl leading-[0.95] tracking-tighter md:text-6xl lg:text-7xl"
+            className="mb-6 text-5xl leading-[0.98] tracking-tight md:text-6xl lg:text-7xl"
           >
             {t('title')}
           </RichTextReveal>
@@ -62,7 +65,7 @@ export async function UseCasesSection() {
           </MotionText>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-px overflow-hidden rounded-md border border-border bg-border sm:grid-cols-2">
           {CASES.map((useCase, index) => {
             const Icon = useCase.icon;
             const content = caseContent[useCase.id];
@@ -71,24 +74,24 @@ export async function UseCasesSection() {
                 key={useCase.id}
                 delay={0.2 + index * 0.1}
                 className={cn(
-                  'relative overflow-hidden rounded-2xl border border-border bg-card p-7 before:absolute before:inset-x-0 before:top-0 before:h-1',
+                  'relative flex flex-col gap-4 border-l-4 bg-card p-7',
                   useCase.accent,
                 )}
               >
-                <span
-                  className={cn(
-                    'mb-5 flex size-12 items-center justify-center rounded-xl',
-                    useCase.tone,
-                  )}
-                >
-                  <Icon className="size-6" aria-hidden="true" />
-                </span>
-                <h3 className="mb-2 text-xl text-foreground">
-                  {content.title}
-                </h3>
-                <p className="text-base text-muted-foreground">
-                  {content.description}
-                </p>
+                <div className="flex items-center gap-3">
+                  <Icon className="size-5" aria-hidden="true" />
+                  <span className="font-mono-ui text-[10px] tracking-[0.2em] uppercase">
+                    {useCase.tag}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="mb-2 text-xl text-foreground">
+                    {content.title}
+                  </h3>
+                  <p className="text-base text-muted-foreground">
+                    {content.description}
+                  </p>
+                </div>
               </MotionDiv>
             );
           })}

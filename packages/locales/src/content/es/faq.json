@@ -1,4 +1,6 @@
 {
+  "badge": "En registro",
+  "gaugeLabel": "FAQ",
   "title": "Preguntas frecuentes",
   "subtitle": "Respuestas provisionales para la demo del hackathon.",
   "trustNote": "En cadena, no autoreportado.",

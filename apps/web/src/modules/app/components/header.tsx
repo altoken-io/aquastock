@@ -38,26 +38,26 @@ const Header = () => {
     <>
       <a
         href="#main-content"
-        className="fixed top-4 left-4 z-10000 -translate-y-24 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform focus-visible:translate-y-0 focus-visible:outline-none"
+        className="fixed top-4 left-4 z-10000 -translate-y-24 rounded-sm bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform focus-visible:translate-y-0 focus-visible:outline-none"
       >
         {t('skipToContent')}
       </a>
-      <header className="fixed inset-x-0 top-0 z-9999 flex justify-center px-3 pt-3">
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-9999 border-b bg-background/85 backdrop-blur-md transition-colors duration-300',
+          isScrolled ? 'border-border' : 'border-transparent',
+        )}
+      >
         <nav
           aria-label={t('logo.label')}
-          className={cn(
-            'flex w-full max-w-6xl items-center justify-between gap-3 rounded-full border bg-background/60 px-3 py-2 backdrop-blur-md transition-[box-shadow,border-color] duration-300',
-            isScrolled
-              ? 'border-border shadow-[0_10px_30px_-14px_rgba(0,0,0,0.3)]'
-              : 'border-border/50 shadow-none',
-          )}
+          className="mx-auto flex h-16 w-full max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 xl:pl-28 xl:pr-10"
         >
           <Link
             href="/#home"
-            className="flex shrink-0 items-center gap-2 rounded-full py-1 pr-2 focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="flex shrink-0 items-center gap-2.5 rounded-sm py-1 focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
-            <BrandLogo alt={t('logo.alt')} size={40} className="size-8" />
-            <span className="font-headline text-lg font-extrabold tracking-tight text-foreground">
+            <BrandLogo alt={t('logo.alt')} size={40} className="size-7" />
+            <span className="font-mono-ui text-sm font-medium tracking-[0.14em] text-foreground uppercase">
               {t('logo.label')}
             </span>
           </Link>
@@ -69,7 +69,7 @@ const Header = () => {
           >
             <motion.span
               aria-hidden
-              className="bg-accent pointer-events-none absolute inset-y-1 rounded-full"
+              className="bg-primary pointer-events-none absolute bottom-0 left-0 h-0.5"
               animate={{
                 left: indicator?.left ?? 0,
                 width: indicator?.width ?? 0,
@@ -95,7 +95,7 @@ const Header = () => {
                         ? `${link.title} — ${link.description}`
                         : undefined
                     }
-                    className="focus-visible:ring-ring relative z-10 block rounded-full px-2 py-2 text-sm font-medium text-foreground/75 transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none xl:px-3"
+                    className="font-mono-ui focus-visible:ring-ring relative z-10 block px-3 py-2 text-xs tracking-[0.1em] text-foreground/70 uppercase transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none"
                   >
                     {link.title}
                   </Link>
@@ -105,13 +105,13 @@ const Header = () => {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <div className="mr-1 flex items-center gap-1 border-r border-border/70 pr-3">
+            <div className="mr-1 flex items-center gap-1 border-r border-border pr-3">
               <ThemeSwitcher wrapperClassName="size-8" />
               <LanguageSwitcher />
             </div>
             <a
               href={DAPP_LOGIN_URL}
-              className="focus-visible:ring-ring rounded-full px-2 py-1 text-sm font-medium text-foreground/75 transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none"
+              className="focus-visible:ring-ring rounded-sm px-2 py-1 text-sm font-medium text-foreground/75 transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none"
             >
               {t('cta.signIn')}
             </a>
@@ -119,7 +119,8 @@ const Header = () => {
               href={t('cta.earlyAccess.href')}
               variant="primary"
               padding="sm"
-              className="h-9 rounded-full px-4 text-sm font-semibold"
+              rounded="md"
+              className="h-9 px-4 text-sm font-semibold"
             >
               {t('cta.earlyAccess.label')}
             </ButtonLink>

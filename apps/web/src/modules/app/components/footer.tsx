@@ -12,7 +12,7 @@ const linkClass =
   'text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-xs';
 
 const eyebrowClass =
-  'text-xs font-medium tracking-widest text-muted-foreground uppercase';
+  'font-mono-ui text-[11px] font-medium tracking-[0.2em] text-muted-foreground uppercase';
 
 const Footer = async () => {
   const currentYear = new Date().getFullYear();
@@ -20,14 +20,14 @@ const Footer = async () => {
 
   return (
     <footer className="relative flex min-h-0 w-full flex-col overflow-hidden border-t border-border bg-muted/25">
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col gap-10 px-5 py-16 sm:px-8 lg:px-10">
+      <div className="relative mx-auto flex w-full max-w-[1600px] flex-1 flex-col gap-10 px-6 py-16 sm:px-8 lg:px-10 xl:pl-28 xl:pr-16">
         <div className="flex flex-col items-start gap-4">
           <Link
             href="/"
-            className="flex items-center gap-2 rounded-full transition-opacity hover:opacity-80"
+            className="flex items-center gap-2.5 rounded-sm transition-opacity hover:opacity-80"
           >
-            <BrandLogo alt="AquaStock" size={40} className="size-9" />
-            <span className="font-headline text-xl font-extrabold tracking-tight text-foreground">
+            <BrandLogo alt="AquaStock" size={40} className="size-8" />
+            <span className="font-mono-ui text-sm font-medium tracking-[0.14em] text-foreground uppercase">
               AquaStock
             </span>
           </Link>
@@ -49,7 +49,7 @@ const Footer = async () => {
           </ul>
         </nav>
 
-        <div className="flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="font-mono-ui flex flex-col gap-2 border-t border-dashed border-border pt-6 text-[11px] tracking-[0.04em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <span>{t('legal.copyright', { year: currentYear })}</span>
           <span>{t('legal.disclaimer')}</span>
         </div>

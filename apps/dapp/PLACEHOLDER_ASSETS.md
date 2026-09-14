@@ -18,8 +18,8 @@ layout changes are needed.
 - **Suggested dimensions:** 1200 × 900px.
 - **Subject:** landscape documentary photography of that specific project's
   water infrastructure (the treatment plant, well, desalination unit, or
-  irrigation canal named on the card) in its real setting — matching
-  `apps/web/public/assets/brand/hero-infrastructure.webp`'s documentary style,
+  irrigation canal named on the card) in its real setting — the same honest
+  documentary style as `apps/web/public/assets/brand/process-site-verification.webp`,
   not stock/generic water imagery.
 - **Alt text:** none needed on the placeholder (it's `aria-hidden`, decorative
   — the project name/location already render as real text beside it); once

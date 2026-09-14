@@ -13,7 +13,7 @@ import {
   getTranslations,
   setRequestLocale,
 } from 'next-intl/server';
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
+import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { hasLocale } from 'next-intl';
@@ -59,16 +59,31 @@ function getBrowserPreferredLocale(
   return availableLocales[0]; // fallback al locale por defecto
 }
 
-const plus_jakarta_sans = Plus_Jakarta_Sans({
+// Type system for the marketing site's "civic instrument" direction (see
+// docs/VISUAL.md for the shared color tokens this pairs with): Space Grotesk
+// carries headline personality with technical, well-drawn numerals; IBM Plex
+// Sans is the quieter civic/engineering-register body face; IBM Plex Mono
+// renders the gauge rail's datum labels, ledger numerals, and benchmark
+// stamps. apps/dapp keeps its own separate Geist-based system — these are
+// deliberately not shared, see docs/COMPONENTS.md.
+const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '600', '700', '800'],
+  weight: ['500', '600', '700'],
   variable: '--font-headline',
   display: 'swap',
 });
 
-const inter = Inter({
+const ibm_plex_sans = IBM_Plex_Sans({
   subsets: ['latin'],
+  weight: ['400', '500', '600'],
   variable: '--font-body',
+  display: 'swap',
+});
+
+const ibm_plex_mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -200,7 +215,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${plus_jakarta_sans.variable} ${inter.variable} light`}
+      className={`${space_grotesk.variable} ${ibm_plex_sans.variable} ${ibm_plex_mono.variable} light`}
       suppressHydrationWarning
     >
       <body>

@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
 import { MotionDiv } from '@/components/helpers/motion/blur-lazy-motion';
 import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
 import ButtonLink from '@/components/ui/button-link';
+import { HeroLedgerPanel } from '@/modules/app/components/hero-ledger-panel';
 
 export async function HeroSection() {
   const t = await getTranslations('hero');
@@ -12,11 +12,11 @@ export async function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex w-full items-center overflow-hidden px-4 pt-32 pb-16 sm:px-10 sm:pt-40 lg:px-10 lg:pt-44 xl:px-20 2xl:px-36"
+      className="relative flex w-full items-center overflow-hidden px-6 pt-32 pb-16 sm:px-10 sm:pt-40 lg:px-10 lg:pt-44 xl:pl-28 xl:pr-16 2xl:pl-36 2xl:pr-24"
     >
-      <div className="grid w-full items-center gap-16 lg:grid-cols-2 lg:gap-12">
+      <div className="grid w-full items-start gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
         <div>
-          <MotionDiv className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 bg-muted/60 px-3 py-1 text-xs font-medium text-muted-foreground">
+          <MotionDiv className="font-mono-ui mb-6 inline-flex items-center gap-2 rounded-sm border border-border/70 bg-muted/60 px-3 py-1 text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
             <span className="size-1.5 rounded-full bg-primary" />
             {t('usersCount')}
           </MotionDiv>
@@ -25,7 +25,7 @@ export async function HeroSection() {
             as="h1"
             trigger="load"
             stagger={0.03}
-            className="mb-6 text-4xl sm:text-5xl md:text-6xl xl:text-7xl"
+            className="mb-6 max-w-2xl text-4xl sm:text-5xl md:text-6xl xl:text-[4.5rem] xl:leading-[0.98]"
           >
             {t('title')}
           </RichTextReveal>
@@ -46,7 +46,7 @@ export async function HeroSection() {
           <MotionDiv delay={0.5} className="flex flex-wrap items-center gap-3">
             <ButtonLink
               variant="primary"
-              rounded="full"
+              rounded="md"
               padding="lg"
               href={t('cta.primary.href')}
               className="h-12 font-medium"
@@ -55,7 +55,7 @@ export async function HeroSection() {
             </ButtonLink>
             <ButtonLink
               variant="outline"
-              rounded="full"
+              rounded="md"
               padding="lg"
               href={t('cta.secondary.href')}
               className="h-12 font-medium"
@@ -82,23 +82,19 @@ export async function HeroSection() {
               />
               {tProject('communityFunding')}
             </span>
-            <span className="text-foreground/50">{t('legend.sameTable')}</span>
+            <span className="font-mono-ui text-[11px] tracking-[0.08em] text-foreground/45 uppercase">
+              {t('legend.sameTable')}
+            </span>
           </MotionDiv>
         </div>
 
         <MotionDiv
-          delay={0.3}
+          delay={0.35}
           direction="horizontal"
           x={24}
-          className="relative hidden aspect-4/5 w-full max-w-md justify-self-end overflow-hidden rounded-3xl lg:block"
+          className="lg:pt-2"
         >
-          <Image
-            src="/assets/brand/hero-infrastructure.webp"
-            alt="Water infrastructure — reservoir and treatment plant"
-            fill
-            priority
-            className="object-cover"
-          />
+          <HeroLedgerPanel />
         </MotionDiv>
       </div>
     </section>
