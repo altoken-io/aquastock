@@ -12,9 +12,9 @@ export async function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex w-full items-center overflow-hidden px-6 pt-32 pb-16 sm:px-10 sm:pt-40 lg:px-10 lg:pt-44 xl:pl-28 xl:pr-16 2xl:pl-36 2xl:pr-24"
+      className="relative flex w-full items-center overflow-hidden pt-32 pb-16 sm:pt-40 lg:pt-44"
     >
-      <div className="grid w-full items-start gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+      <div className="mx-auto grid w-full max-w-7xl items-start gap-16 px-6 sm:px-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-24 xl:pl-32">
         <div>
           <MotionDiv className="font-mono-ui mb-6 inline-flex items-center gap-2 rounded-sm border border-border/70 bg-muted/60 px-3 py-1 text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
             <span className="size-1.5 rounded-full bg-primary" />

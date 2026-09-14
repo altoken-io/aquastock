@@ -46,7 +46,7 @@ export async function HowItWorksSection() {
       id="how-it-works"
       className="relative flex w-full flex-col items-center justify-center overflow-hidden py-20 lg:py-40"
     >
-      <div className="container relative z-10 mx-auto max-w-7xl px-6 sm:px-12 lg:px-24 xl:pl-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-12 lg:px-24 xl:pl-32">
         <div className="mb-24 flex flex-col border-b border-border pb-10">
           <p className="font-mono-ui mb-4 text-[11px] tracking-[0.2em] text-primary uppercase">
             {t('badge')}
