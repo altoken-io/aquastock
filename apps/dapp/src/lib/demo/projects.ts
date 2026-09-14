@@ -364,13 +364,6 @@ export function getDemoProjectBySlug(slug: string): DemoProject | undefined {
   return DEMO_PROJECTS.find((project) => project.slug === slug);
 }
 
-export function getFeaturedDemoProjects(limit = 3): readonly DemoProject[] {
-  return DEMO_PROJECTS.filter((project) => project.status === 'ACTIVE').slice(
-    0,
-    limit,
-  );
-}
-
 export function getDemoProjectSplit(project: Project): {
   publicAmount: number;
   privateAmount: number;

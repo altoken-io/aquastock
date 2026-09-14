@@ -12,7 +12,7 @@ export function SignOutButton({ className }: { className?: string }) {
 
   const handleSignOut = async () => {
     await signOut();
-    router.push('/sign-in');
+    router.push('/');
     router.refresh();
   };
 

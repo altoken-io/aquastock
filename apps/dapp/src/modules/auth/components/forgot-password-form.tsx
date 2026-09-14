@@ -38,7 +38,7 @@ export function ForgotPasswordForm() {
           {t('forgotPassword.success')}
         </p>
         <Link
-          href="/sign-in"
+          href="/"
           className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
         >
           {t('forgotPassword.backToSignIn')}
@@ -73,7 +73,7 @@ export function ForgotPasswordForm() {
       </Button>
 
       <Link
-        href="/sign-in"
+        href="/"
         className="text-center text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
       >
         {t('forgotPassword.backToSignIn')}

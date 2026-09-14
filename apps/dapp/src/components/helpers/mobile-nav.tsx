@@ -61,7 +61,7 @@ export function MobileNav({
         </nav>
         <div className="mt-2 border-t border-border/70 pt-3">
           <Link
-            href="/sign-in"
+            href="/"
             onClick={() => actionsRef.current?.close()}
             className="block rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-secondary/70 hover:text-foreground"
           >

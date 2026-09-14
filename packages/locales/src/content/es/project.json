@@ -2,6 +2,7 @@
   "governmentContribution": "Aporte del gobierno",
   "communityFunding": "Financiación comunitaria",
   "allProjectsTitle": "Todos los proyectos",
+  "emptyState": "Aún no hay proyectos.",
   "goal": "Meta de financiamiento",
   "raised": "Recaudado",
   "status": {

@@ -24,19 +24,22 @@ Locale-aware under `apps/dapp/src/app/[locale]`. Two separate shells, chosen
 per page rather than shared in `layout.tsx` (see `docs/COMPONENTS.md`):
 `PublicShell` (investor-facing: real nav, theme/language switchers, the
 sandbox-demo notice) and `DashboardShell` (staff admin console: dark-first
-sidebar). `AuthShell` wraps the three auth pages with its own split-panel
-layout. All investor-facing project/funding/impact content below is backed
-by **static demo data** (`src/lib/demo/*`), not a live database or the
-Solana program — see `docs/ROADMAP.md`; there is still no wallet-adapter,
-no on-chain program, and no route handlers over `packages/db-prisma`.
+sidebar). `AuthShell` wraps the auth pages with its own split-panel layout.
+All investor-facing project/funding/impact content below is backed by
+**static demo data** (`src/lib/demo/*`), not a live database or the Solana
+program — see `docs/ROADMAP.md`; there is still no wallet-adapter, no
+on-chain program, and no route handlers over `packages/db-prisma`.
+
+**`/` is the login page, not a marketing home** — `apps/dapp` has no
+marketing/pitch content at all; that lives exclusively in `apps/web`. See
+memory: dapp-home-is-login.
 
 | URL shape                        | Source                                   | Purpose                                                                                                                               |
 | -------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `/{locale}`                      | `[locale]/page.tsx`                      | Home: hero, "Confluence" framing, how-it-works, featured active projects.                                                             |
-| `/{locale}/projects`             | `[locale]/projects/page.tsx`             | Browse every demo project.                                                                                                            |
+| `/{locale}`                      | `[locale]/page.tsx`                      | Staff/government admin console sign-in (the app's home route). No public sign-up — see memory: better-auth-scope.                     |
+| `/{locale}/projects`             | `[locale]/projects/page.tsx`             | Browse every demo project. The de facto investor landing (linked from the shell's brand mark).                                        |
 | `/{locale}/projects/{slug}`      | `[locale]/projects/[slug]/page.tsx`      | Project detail: funding split (government/community), milestone timeline, impact records, demo "fund"/Explorer CTAs.                  |
 | `/{locale}/impact`               | `[locale]/impact/page.tsx`               | My Impact: empty state (no wallet-connect yet) + a worked example from the demo dataset.                                              |
-| `/{locale}/sign-in`              | `[locale]/sign-in/page.tsx`              | Staff/government admin console sign-in. No public sign-up — see memory: better-auth-scope.                                            |
 | `/{locale}/forgot-password`      | `[locale]/forgot-password/page.tsx`      | Admin password-reset request.                                                                                                         |
 | `/{locale}/reset-password`       | `[locale]/reset-password/page.tsx`       | Admin password-reset completion (token in the URL).                                                                                   |
 | `/{locale}/dashboard`            | `[locale]/dashboard/page.tsx`            | Admin command center: KPI stats, milestone-verification queue, recent activity, projects table. Session-gated.                        |

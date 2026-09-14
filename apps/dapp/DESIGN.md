@@ -179,7 +179,7 @@ Mostly flat with soft ambient shadows rather than hard drop shadows — `dapp-pa
 
 ### Navigation
 
-- **Investor-facing (`components/public-shell.tsx`):** logo, primary nav (Home, Projects, My Impact), theme/language switchers, a low-emphasis "Staff sign in" text link, and a dismissible sandbox-demo notice bar. Collapses to a Sheet-based drawer below `md`.
+- **Investor-facing (`components/public-shell.tsx`):** logo (links to `/projects` — `/` is the login page, not part of this nav), primary nav (Projects, My Impact), theme/language switchers, a low-emphasis "Staff sign in" text link, and a dismissible sandbox-demo notice bar. Collapses to a Sheet-based drawer below `md`.
 - **Admin console (`modules/dashboard/components/dashboard-shell.tsx`):** a dark-first, always-dark sidebar (Command center, Projects, Milestones with a pending-count badge) plus a topbar (page title, signed-in-as chip, language switcher). Collapses to a Sheet-based drawer below `lg`. Deliberately dark regardless of the visitor's site-wide theme choice — see the "Dashboard theme" direction chosen for this console.
 - **Auth (`components/auth-shell.tsx`):** a split panel — a dark brand/context panel (with the `ConfluenceRing` signature visual) beside the form, collapsing to a single column on mobile.
 

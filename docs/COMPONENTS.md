@@ -25,7 +25,7 @@ Mostly generic, brand-agnostic component libraries, plus AquaStock-specific prod
 
 Three page shells, chosen per page rather than shared in `layout.tsx` (different route groups need different shells; see `loading.tsx`'s own comment for the tradeoff):
 
-- `public-shell.tsx` — the investor-facing shell (home, projects, project detail, impact): logo, real primary nav (server component; `helpers/primary-nav.tsx` and `helpers/mobile-nav.tsx` are the two client leaves that need `usePathname`/interactivity), theme/language switchers, a "Staff sign in" link, and `modules/product/components/sandbox-notice-bar.tsx` (the dismissible devnet-demo notice, using the previously-unused `importantNotice` locale namespace).
+- `public-shell.tsx` — the investor-facing shell (projects, project detail, impact — `/` is the login page, not part of this shell; see memory: dapp-home-is-login): logo (links to `/projects`), real primary nav (server component; `helpers/primary-nav.tsx` and `helpers/mobile-nav.tsx` are the two client leaves that need `usePathname`/interactivity), theme/language switchers, a "Staff sign in" link, and `modules/product/components/sandbox-notice-bar.tsx` (the dismissible devnet-demo notice, using the previously-unused `importantNotice` locale namespace).
 - `auth-shell.tsx` — split-panel layout for sign-in/forgot-password/reset-password: a dark brand/context panel (with `ConfluenceRing`, see below) beside the form.
 - `modules/dashboard/components/dashboard-shell.tsx` — the admin console shell: a dark-first sidebar + topbar. See its own section below.
 - `ui/*` — a smaller equivalent kit: `animated-grid-background`, `arrow-button`, `button`, `button-link`, `combobox`, `diagonal-carousel`, `glowing-card`, `infinite-ticker`, `input`, `onboarding-progress-tracker`, `portal`, `textarea`, `vertical-carousel`.
@@ -34,11 +34,11 @@ Three page shells, chosen per page rather than shared in `layout.tsx` (different
 
 ## `apps/dapp/src/modules/product` (AquaStock-specific, investor-facing UI)
 
-Shared across home, project list/detail, My Impact, and the admin dashboard — all driven by the static demo dataset in `src/lib/demo/*` (see below), never a live database.
+Shared across project list/detail, My Impact, the admin dashboard, and the `/` sign-in page's `AuthShell` (for `confluence-ring.tsx`) — all driven by the static demo dataset in `src/lib/demo/*` (see below), never a live database.
 
 - `confluence-ring.tsx` — the dApp's own signature visual (see `docs/VISUAL.md`): an SVG ring where a government arc and a community arc close into one circle. Distinct from `apps/web`'s OGL `Strands` canvas — used both as a hero-scale decorative mark and, at data-bound sizes, as the actual funding-split widget.
 - `funding-split-bar.tsx`, `investor-type-badge.tsx`, `milestone-status-badge.tsx`, `milestone-timeline.tsx` — the government/community split and milestone-status treatments `docs/VISUAL.md` previously flagged as not yet built; each pairs color with an icon+label per DESIGN.md's Named Rules.
-- `project-card.tsx`, `project-image-placeholder.tsx` — the project list/home card and its abstract on-brand placeholder image (see `apps/dapp/PLACEHOLDER_ASSETS.md` for the real-photography replacement spec).
+- `project-card.tsx`, `project-image-placeholder.tsx` — the project list card and its abstract on-brand placeholder image (see `apps/dapp/PLACEHOLDER_ASSETS.md` for the real-photography replacement spec).
 - `explorer-link.tsx` — a "View on Explorer" affordance that renders inert (not a real, 404-ing devnet link) since every `txSignature` in the demo dataset is fake.
 - `sandbox-notice-bar.tsx` — see `public-shell.tsx` above.
 

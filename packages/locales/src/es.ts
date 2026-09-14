@@ -6,7 +6,6 @@ import earlyAccessCta from './content/es/earlyAccessCta.json';
 import faq from './content/es/faq.json';
 import footer from './content/es/footer.json';
 import hero from './content/es/hero.json';
-import home from './content/es/home.json';
 import howItWorks from './content/es/howItWorks.json';
 import impact from './content/es/impact.json';
 import importantNotice from './content/es/importantNotice.json';
@@ -30,7 +29,6 @@ export const es = {
   faq,
   footer,
   hero,
-  home,
   howItWorks,
   impact,
   importantNotice,

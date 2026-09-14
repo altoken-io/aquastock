@@ -61,11 +61,7 @@ export function ResetPasswordForm() {
         <p className="text-sm text-foreground/90">
           {t('resetPassword.success')}
         </p>
-        <Button
-          variant="solid"
-          width="full"
-          onClick={() => router.push('/sign-in')}
-        >
+        <Button variant="solid" width="full" onClick={() => router.push('/')}>
           {t('resetPassword.backToSignIn')}
         </Button>
       </div>

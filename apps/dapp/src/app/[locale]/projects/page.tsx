@@ -31,10 +31,7 @@ export default async function ProjectsPage({ params }: PageProps) {
   }
   setRequestLocale(locale);
 
-  const [tProject, tHome] = await Promise.all([
-    getTranslations({ locale, namespace: 'project' }),
-    getTranslations({ locale, namespace: 'home' }),
-  ]);
+  const tProject = await getTranslations({ locale, namespace: 'project' });
 
   const currency = currencyFormatter({
     locale,
@@ -68,7 +65,7 @@ export default async function ProjectsPage({ params }: PageProps) {
             </div>
           ) : (
             <p className="text-sm text-muted-foreground">
-              {tHome('featured.empty')}
+              {tProject('emptyState')}
             </p>
           )}
         </div>

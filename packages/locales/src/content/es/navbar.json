@@ -5,7 +5,6 @@
     "tagline": "Infraestructura de agua, financiada en Solana"
   },
   "navigation": [
-    { "href": "/", "title": "Inicio", "description": "Ir al inicio" },
     {
       "href": "/projects",
       "title": "Proyectos",

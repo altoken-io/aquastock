@@ -11,8 +11,9 @@ layout changes are needed.
 
 ## Project card thumbnail
 
-- **Where:** `modules/product/components/project-card.tsx` (project list/grid,
-  `/[locale]/projects`) and the home page's "Active projects" section.
+- **Where:** `modules/product/components/project-card.tsx`, used on the
+  `/[locale]/projects` list — the dApp's home route (`/`) is the login page
+  and carries no project cards of its own; see memory: dapp-home-is-login.
 - **Ratio:** 4:3 landscape (`ratio="card"`).
 - **Suggested dimensions:** 1200 × 900px.
 - **Subject:** landscape documentary photography of that specific project's

@@ -2,6 +2,7 @@
   "governmentContribution": "Government contribution",
   "communityFunding": "Community funding",
   "allProjectsTitle": "All projects",
+  "emptyState": "No projects yet.",
   "goal": "Funding goal",
   "raised": "Raised",
   "status": {

@@ -5,7 +5,6 @@
     "tagline": "Water infrastructure, funded on Solana"
   },
   "navigation": [
-    { "href": "/", "title": "Home", "description": "Go to home" },
     {
       "href": "/projects",
       "title": "Projects",

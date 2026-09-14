@@ -15,7 +15,7 @@ A Solana Anchor program is the source of truth for `Project`, `Position` (`inves
 **Application layer (Next.js, partially built)**
 
 - `apps/web` — public marketing site. Introduces the model, links into the dApp. No accounts, no wallet-connect.
-- `apps/dapp` — the actual product surface: wallet-connect, browse projects, fund a position, view milestones, "My Impact." The screens themselves are built (home, project list/detail, My Impact, plus a staff admin console) but run entirely on a static, checked-in demo dataset (`src/lib/demo/*`) — wallet-connect and the route handlers to serve real data are still Day 3+ work. See `docs/ROUTES.md`.
+- `apps/dapp` — the actual product surface: wallet-connect, browse projects, fund a position, view milestones, "My Impact." Its `/` route is the login page, not a marketing home — that content lives only in `apps/web` (see memory: dapp-home-is-login). The product screens themselves are built (project list/detail, My Impact, plus a staff admin console) but run entirely on a static, checked-in demo dataset (`src/lib/demo/*`) — wallet-connect and the route handlers to serve real data are still Day 3+ work. See `docs/ROUTES.md`.
 
 Both apps serve their own data. There is **no separate backend service** — `apps/dapp` reads/writes `packages/db-prisma` through its own Next.js route handlers (none written yet). This intentionally differs from a typical split-service setup: for a 5-day build, one deployable Next.js app per surface is simpler to ship and debug than a Next.js app plus a separate API service.
 

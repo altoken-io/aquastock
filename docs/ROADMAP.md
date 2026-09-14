@@ -8,7 +8,7 @@
 - Off-chain schema in `packages/db-prisma`: `Project`, `Position` (`investorType: PUBLIC | PRIVATE`), `Milestone`, `Impact`.
 - Placeholder pages that build and pass `pnpm check` cleanly, ready for the team to fill in.
 
-**Status:** complete. What's _not_ done yet, explicitly: the Anchor program, wallet-connect, and Solana Pay — all below. The project/admin-dashboard UI itself has since been built ahead of schedule (home, project list/detail, My Impact, and the admin console), but entirely against a static demo dataset (`apps/dapp/src/lib/demo/*`) rather than live on-chain/off-chain data — see `docs/ROUTES.md` and `apps/dapp/PRODUCT.md`'s current-build-state note.
+**Status:** complete. What's _not_ done yet, explicitly: the Anchor program, wallet-connect, and Solana Pay — all below. The project/admin-dashboard UI itself has since been built ahead of schedule (project list/detail, My Impact, and the admin console — `apps/dapp`'s `/` route is the login page, not a marketing home; see memory: dapp-home-is-login), but entirely against a static demo dataset (`apps/dapp/src/lib/demo/*`) rather than live on-chain/off-chain data — see `docs/ROUTES.md` and `apps/dapp/PRODUCT.md`'s current-build-state note.
 
 ## Day 2 — Anchor program
 

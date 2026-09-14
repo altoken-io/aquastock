@@ -13,7 +13,7 @@ import { redirect } from '@/lib/i18n/navigation';
 export async function requireAdminSession(locale: Locale) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) {
-    redirect({ href: '/sign-in', locale });
+    redirect({ href: '/', locale });
     throw new Error('Unreachable: redirect() interrupts rendering');
   }
   return session;
