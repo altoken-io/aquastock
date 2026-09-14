@@ -100,19 +100,19 @@ const CookieBanner = () => {
             <div
               role="region"
               aria-label={bannerContent.title}
-              className="w-full max-w-md overflow-hidden rounded-3xl bg-popover text-popover-foreground shadow-xl ring-1 ring-foreground/10"
+              className="w-full max-w-md overflow-hidden rounded-md border border-border bg-card text-card-foreground shadow-lg"
             >
-              <div
+              <span
                 aria-hidden="true"
-                className="h-[3px] w-full bg-gradient-to-r from-primary via-primary/50 to-transparent"
+                className="block h-1.5 w-full bg-primary"
               />
               <div className="flex flex-col gap-4 p-5 sm:p-6">
                 <div className="flex items-start gap-3">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-muted text-primary">
                     <ShieldCheck className="h-4 w-4" aria-hidden="true" />
                   </span>
                   <div className="space-y-1">
-                    <p className="text-xs font-medium tracking-[0.14em] text-muted-foreground uppercase">
+                    <p className="font-mono-ui text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
                       {bannerContent.tagline}
                     </p>
                     <h2 className="text-base text-foreground sm:text-lg">
@@ -133,7 +133,7 @@ const CookieBanner = () => {
                 <div className="flex flex-wrap items-center gap-2.5 pt-1">
                   <Button
                     variant="none"
-                    rounded="full"
+                    rounded="md"
                     padding="md"
                     shadow="none"
                     animation="grow"
@@ -144,7 +144,7 @@ const CookieBanner = () => {
                   </Button>
                   <Button
                     variant="transparent"
-                    rounded="full"
+                    rounded="md"
                     padding="md"
                     shadow="none"
                     className="border-border text-foreground hover:bg-secondary"
