@@ -306,6 +306,14 @@ body {
   @apply rounded-2xl border border-border/85 bg-background/85 shadow-inner;
 }
 
+/* Tighter-radius counterpart to `dapp-panel` (32px) for data-dense surfaces
+   (the admin console) — DESIGN.md flags 32px as worth reconsidering once
+   real screens exist; this is that reconsideration for the console only,
+   the marketing-facing `dapp-panel` is unchanged. */
+@utility dapp-console-panel {
+  @apply rounded-2xl border border-border/85 bg-card shadow-sm;
+}
+
 @utility dapp-panel-accent {
   @apply rounded-[32px] border border-primary/20 bg-linear-to-br from-primary/6 via-card to-background shadow-sm;
 }

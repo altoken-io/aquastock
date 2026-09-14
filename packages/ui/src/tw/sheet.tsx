@@ -18,6 +18,9 @@ export const Sheet = BaseDialog.Root;
 export const SheetTrigger = BaseDialog.Trigger;
 export const SheetClose = BaseDialog.Close;
 
+/** Imperative handle for `actionsRef` — lets a nav link inside the sheet close it without controlled `open` state. */
+export type SheetActions = BaseDialog.Root.Actions;
+
 // No unconditional transform here — the settled/open state must render at
 // translate-x-0 (its natural position). Only the starting/ending transition
 // phases push the panel off-screen, same convention as dialog.tsx's

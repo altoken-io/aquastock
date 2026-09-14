@@ -4,5 +4,7 @@
     "PENDING": "Pending",
     "IN_PROGRESS": "In progress",
     "VERIFIED": "Verified"
-  }
+  },
+  "verifiedOn": "Verified {date}",
+  "empty": "No milestones yet."
 }

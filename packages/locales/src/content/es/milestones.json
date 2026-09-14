@@ -4,5 +4,7 @@
     "PENDING": "Pendiente",
     "IN_PROGRESS": "En progreso",
     "VERIFIED": "Verificado"
-  }
+  },
+  "verifiedOn": "Verificado el {date}",
+  "empty": "Aún no hay hitos."
 }

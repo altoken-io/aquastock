@@ -25,10 +25,64 @@
     "invalidToken": "This reset link is invalid or has expired.",
     "backToSignIn": "Back to sign in"
   },
+  "console": {
+    "eyebrow": "Admin console",
+    "title": "Where public and community capital meet.",
+    "description": "Sign in to verify milestones and manage the projects government and community investors are funding together.",
+    "ringLabel": "Government and community capital across all demo projects"
+  },
+  "sidebar": {
+    "tagline": "Admin console",
+    "commandCenter": "Command center",
+    "projects": "Projects",
+    "milestones": "Milestones",
+    "mobileOpen": "Open dashboard menu",
+    "mobileClose": "Close dashboard menu"
+  },
   "dashboard": {
     "title": "Admin dashboard",
     "signedInAs": "Signed in as {email}",
     "signOut": "Sign out",
-    "placeholder": "Project and milestone management tools land here next."
+    "description": "An overview of every project, position, and milestone in the demo dataset.",
+    "demoDataNotice": "Demo data — no live on-chain feed yet.",
+    "stats": {
+      "activeProjects": "Active projects",
+      "milestonesPending": "Milestones awaiting verification",
+      "totalRaised": "Total raised",
+      "totalRaisedCaption": "{publicAmount} government · {privateAmount} community",
+      "impactRecords": "Impact records logged"
+    },
+    "queue": {
+      "title": "Milestones awaiting verification",
+      "viewAll": "View all",
+      "verify": "Mark verified",
+      "verifyDisabledReason": "Verification requires the on-chain program — not built yet in this hackathon build.",
+      "empty": "Nothing awaiting verification."
+    },
+    "activity": {
+      "title": "Recent activity",
+      "empty": "No activity yet.",
+      "positionFunded": "{investorType} position funded on {project}",
+      "milestoneVerified": "“{milestone}” verified on {project}"
+    },
+    "projectsTable": {
+      "title": "Projects",
+      "viewAll": "View all projects",
+      "columns": {
+        "project": "Project",
+        "status": "Status",
+        "goal": "Goal",
+        "raised": "Raised"
+      },
+      "milestonesProgress": "{verified}/{total} milestones verified"
+    }
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "description": "Every project in the demo dataset, government and community positions included."
+  },
+  "milestonesPage": {
+    "title": "Milestones",
+    "description": "Every milestone still awaiting verification, across all projects."
   }
 }

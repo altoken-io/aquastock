@@ -1,6 +1,7 @@
 {
   "governmentContribution": "Government contribution",
   "communityFunding": "Community funding",
+  "allProjectsTitle": "All projects",
   "goal": "Funding goal",
   "raised": "Raised",
   "status": {
@@ -9,5 +10,15 @@
     "FUNDED": "Funded",
     "COMPLETED": "Completed",
     "CLOSED": "Closed"
-  }
+  },
+  "investorType": {
+    "PUBLIC": "Government",
+    "PRIVATE": "Community"
+  },
+  "fundCta": "Fund this position",
+  "fundCtaSoon": "Wallet connect is coming soon — this is a devnet demo.",
+  "viewProject": "View project",
+  "backToProjects": "Back to projects",
+  "explorer": "View on Explorer",
+  "explorerDemo": "Demo data — not a real transaction."
 }

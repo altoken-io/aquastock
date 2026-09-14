@@ -165,9 +165,10 @@ Mostly flat with soft ambient shadows rather than hard drop shadows — `dapp-pa
 
 ### Cards / Panels
 
-- **`.dapp-panel`:** 32px radius, `border-border/85`, card background, `shadow-sm` — the primary content-panel wrapper. Worth reconsidering (12–16px reads more disciplined) once the real brand personality is set.
+- **`.dapp-panel`:** 32px radius, `border-border/85`, card background, `shadow-sm` — the primary content-panel wrapper on investor-facing marketing-style surfaces (home, auth pages).
 - **`.dapp-panel-accent`:** same shape with a subtle primary-tinted gradient wash (`from-primary/6 via-card to-background`) for a single emphasized panel per view (e.g. the funding-goal summary). Use the dedicated `public`/`private` tokens, not this, for the government/community distinction.
 - **`.dapp-panel-muted`:** 16px radius (`rounded-2xl`), background-tinted, `shadow-inner` — for secondary/nested surfaces.
+- **`.dapp-console-panel`:** 16px radius (`rounded-2xl`), card background, `shadow-sm` — the reconsidered, tighter panel for data-dense surfaces (the admin console: stat tiles, queues, tables). This is the "worth reconsidering" the 32px radius previously flagged here; `.dapp-panel` itself is unchanged for the surfaces it already suited.
 - **Internal padding:** 16–24px, generous around headline numbers, tighter (8–12px) in list rows.
 
 ### Inputs / Fields
@@ -178,7 +179,9 @@ Mostly flat with soft ambient shadows rather than hard drop shadows — `dapp-pa
 
 ### Navigation
 
-- **Header (current placeholder shell, `components/dapp-shell.tsx`):** logo + theme/language switchers only — no primary navigation exists yet. Building out real navigation (Home, Project, Milestones, My Impact) is Day 1-3 work.
+- **Investor-facing (`components/public-shell.tsx`):** logo, primary nav (Home, Projects, My Impact), theme/language switchers, a low-emphasis "Staff sign in" text link, and a dismissible sandbox-demo notice bar. Collapses to a Sheet-based drawer below `md`.
+- **Admin console (`modules/dashboard/components/dashboard-shell.tsx`):** a dark-first, always-dark sidebar (Command center, Projects, Milestones with a pending-count badge) plus a topbar (page title, signed-in-as chip, language switcher). Collapses to a Sheet-based drawer below `lg`. Deliberately dark regardless of the visitor's site-wide theme choice — see the "Dashboard theme" direction chosen for this console.
+- **Auth (`components/auth-shell.tsx`):** a split panel — a dark brand/context panel (with the `ConfluenceRing` signature visual) beside the form, collapsing to a single column on mobile.
 
 ### Badges / Pills
 

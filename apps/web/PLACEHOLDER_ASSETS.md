@@ -18,4 +18,5 @@ These render as code, not images, and don't need a placeholder:
   `packages/animation`'s `Strands` WebGL component, not an image.
 - **The funding-table preview card** — plain markup with illustrative demo
   data, clearly labeled as an example, not a screenshot of the real product
-  (the dApp's own UI doesn't exist yet — see `docs/ROADMAP.md`).
+  (matching the same illustrative dataset `apps/dapp` itself now uses —
+  neither app reads from a live database yet, see `docs/ROADMAP.md`).

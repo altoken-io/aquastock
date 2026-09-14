@@ -15,6 +15,7 @@
   "dependencies": {
     "@aquastock/db-prisma": "workspace:*",
     "@aquastock/locales": "workspace:*",
+    "@aquastock/types": "workspace:*",
     "@aquastock/ui": "workspace:*",
     "@arcjet/next": "^1.8.0",
     "@floating-ui/react-dom": "^2.1.9",

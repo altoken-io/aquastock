@@ -37,11 +37,12 @@ file at all.
 
 ## `apps/dapp/public/assets`
 
-Empty — the inherited `brand/`, `favicon/`, `media/` (Next.js scaffolding
-leftovers), and `videos/` directories are gone. Nothing in the current
-placeholder shell needs an image asset (see `components/dapp-shell.tsx` /
-`app/[locale]/page.tsx`); add real assets here once actual product screens
-(project imagery, etc.) are built.
+Empty. Project photography (project cards, the project detail hero banner)
+is rendered as an abstract on-brand placeholder in code
+(`src/modules/product/components/project-image-placeholder.tsx`) rather than
+a checked-in file for now — see `apps/dapp/PLACEHOLDER_ASSETS.md` for the
+exact ratio/dimensions each slot needs so real photography can drop in
+later without a layout change.
 
 ## Using assets
 
@@ -49,5 +50,6 @@ placeholder shell needs an image asset (see `components/dapp-shell.tsx` /
   rendered as code (an inline SVG component, or a `next/og` `ImageResponse`)
   — see the brand mark above for the pattern. Reach for a real file only for
   actual photography or footage.
-- Check `apps/web/PLACEHOLDER_ASSETS.md` before adding a new placeholder —
-  it tracks any imagery still awaiting a production asset.
+- Check `apps/web/PLACEHOLDER_ASSETS.md` and `apps/dapp/PLACEHOLDER_ASSETS.md`
+  before adding a new placeholder — each tracks the imagery still awaiting a
+  production asset in that app.

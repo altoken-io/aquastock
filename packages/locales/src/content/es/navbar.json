@@ -5,17 +5,29 @@
     "tagline": "Infraestructura de agua, financiada en Solana"
   },
   "navigation": [
-    { "href": "/", "title": "Inicio", "description": "Ir al inicio" }
+    { "href": "/", "title": "Inicio", "description": "Ir al inicio" },
+    {
+      "href": "/projects",
+      "title": "Proyectos",
+      "description": "Explorar proyectos financiados"
+    },
+    {
+      "href": "/impact",
+      "title": "Mi Impacto",
+      "description": "Ver el impacto de tu financiamiento"
+    }
   ],
   "skipToContent": "Saltar al contenido",
   "cta": {
     "signIn": "Conectar billetera",
+    "admin": "Acceso del equipo",
     "earlyAccess": {
       "href": "/#faq",
       "label": "Saber más"
     }
   },
   "mobileMenu": {
+    "title": "Menú",
     "contact": "Contáctanos",
     "ariaOpen": "Abrir menú de navegación",
     "ariaClose": "Cerrar menú de navegación"

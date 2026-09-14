@@ -24,11 +24,11 @@ const STATUS_STYLES = {
 } as const;
 
 /**
- * A concrete answer to "what does one project actually look like" — the
- * public/private funding split docs/VISUAL.md flags as not yet built
- * anywhere. Demo data only; the dApp's real project UI doesn't exist yet
- * (docs/ROADMAP.md), so this is explicitly labeled as an example rather than
- * a screenshot of the product.
+ * A concrete answer to "what does one project actually look like" for the
+ * marketing site. Demo data only, matching the illustrative dataset
+ * `apps/dapp` itself now uses (`apps/dapp/src/lib/demo/projects.ts`) — this
+ * stays explicitly labeled as an example rather than a screenshot of the
+ * product, since neither app is reading from a live database yet.
  */
 export async function FundingTablePreview({
   className,

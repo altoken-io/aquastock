@@ -36,11 +36,16 @@ Geist for display/body/label (`apps/dapp/DESIGN.md`'s `typography` block has exa
 
 Don't scatter arbitrary values like `bg-[#0c7489]`. Define semantic variables in `:root`/`.dark`, expose them via `@theme inline`, and consume them as semantic utilities — this is already the pattern in both apps' `globals.css`.
 
+## Resolved
+
+- **The milestone-status data-viz treatment inside the dApp itself is built.** `apps/dapp/src/modules/product/components/` has the real versions: `milestone-timeline.tsx` (dot-and-line vertical timeline, icon+label status), `funding-split-bar.tsx` (segmented public/private progress bar), `investor-type-badge.tsx` / `milestone-status-badge.tsx` (the icon+label pairing DESIGN.md's Named Rules require). Used on the project detail page, project cards, and the admin dashboard.
+- **`apps/dapp` develops its own "Confluence" visual, distinct from the marketing site's.** `apps/dapp/src/modules/product/components/confluence-ring.tsx` — two arcs (government/community) closing into one ring — is a plain SVG, not an OGL canvas, chosen so the same shape works both as a hero-scale decorative mark and, at data-bound sizes, as the actual funding-split widget on project cards, the project detail page, and the admin console's sign-in panel. `apps/web`'s OGL `Strands` composition (`modules/app/components/confluence-visual.tsx`) remains that app's own expression of the same "Confluence" concept — the two are deliberately different renderings of the same idea, not a shared component.
+
+`apps/web`'s home page also leans into `public`/`private` visually on purpose — see `modules/app/components/sections/confluence-section.tsx` and the government/community position chips in the hero — as a deliberate, hero-scoped exception to "dApp-scoped only."
+
 ## What still needs a real design pass
 
-- A milestone-status data-viz treatment inside the dApp itself (project detail, My Impact) — `apps/web`'s home page now has a funding-goal progress bar (`modules/app/components/funding-table-preview.tsx`) using the `public`/`private` tokens as a preview of the concept, but the dApp's own real version doesn't exist yet.
-- Whether `apps/dapp` should visually echo the marketing site's "Confluence" treatment once its real UI is built, or develop its own equivalent.
-
-`apps/web`'s home page now leans into `public`/`private` visually on purpose — see `modules/app/components/sections/confluence-section.tsx` and the government/community position chips in the hero — as a deliberate, hero-scoped exception to "dApp-scoped only." The "Confluence" signature visual itself is built: `modules/app/components/confluence-visual.tsx`, an OGL `Strands` composition from `packages/animation`.
+- The admin console's dark-first sidebar (`apps/dapp/src/modules/dashboard/components/`) is new and has only had one design/build pass — worth a second look once real usage (not just the demo dataset) surfaces what staff actually need to scan quickly.
+- Real project photography to replace the abstract placeholder used on project cards and the project detail hero banner — see `apps/dapp/PLACEHOLDER_ASSETS.md` for the exact ratio/dimensions each slot needs.
 
 Until the remaining items get a real pass, prefer the existing token set above over inventing new one-off colors.

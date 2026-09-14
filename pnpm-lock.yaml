@@ -29,6 +29,9 @@ importers:
       '@aquastock/locales':
         specifier: workspace:*
         version: link:../../packages/locales
+      '@aquastock/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@aquastock/ui':
         specifier: workspace:*
         version: link:../../packages/ui

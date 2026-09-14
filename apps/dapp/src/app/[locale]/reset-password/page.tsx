@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { DappShell } from '@/components/dapp-shell';
+import { AuthShell } from '@/components/auth-shell';
 import { routing } from '@/lib/i18n/routing';
 import { ResetPasswordForm } from '@/modules/auth/components/reset-password-form';
 
@@ -32,22 +32,14 @@ export default async function ResetPasswordPage({ params }: PageProps) {
   const t = await getTranslations({ locale, namespace: 'admin' });
 
   return (
-    <DappShell>
-      <div className="flex flex-1 items-center justify-center">
-        <div className="dapp-panel flex w-full max-w-sm flex-col gap-6 px-8 py-10 sm:px-10">
-          <div className="text-center">
-            <h1 className="text-2xl text-foreground">
-              {t('resetPassword.title')}
-            </h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {t('resetPassword.subtitle')}
-            </p>
-          </div>
-          <Suspense>
-            <ResetPasswordForm />
-          </Suspense>
-        </div>
-      </div>
-    </DappShell>
+    <AuthShell
+      locale={locale}
+      title={t('resetPassword.title')}
+      subtitle={t('resetPassword.subtitle')}
+    >
+      <Suspense>
+        <ResetPasswordForm />
+      </Suspense>
+    </AuthShell>
   );
 }

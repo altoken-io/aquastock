@@ -25,10 +25,64 @@
     "invalidToken": "Este enlace de restablecimiento no es válido o ha expirado.",
     "backToSignIn": "Volver al inicio de sesión"
   },
+  "console": {
+    "eyebrow": "Consola administrativa",
+    "title": "Donde se encuentran el capital público y el comunitario.",
+    "description": "Inicia sesión para verificar hitos y gestionar los proyectos que el gobierno y los inversionistas comunitarios financian juntos.",
+    "ringLabel": "Capital del gobierno y de la comunidad en todos los proyectos de la demo"
+  },
+  "sidebar": {
+    "tagline": "Consola administrativa",
+    "commandCenter": "Centro de mando",
+    "projects": "Proyectos",
+    "milestones": "Hitos",
+    "mobileOpen": "Abrir menú del panel",
+    "mobileClose": "Cerrar menú del panel"
+  },
   "dashboard": {
     "title": "Panel administrativo",
     "signedInAs": "Sesión iniciada como {email}",
     "signOut": "Cerrar sesión",
-    "placeholder": "Las herramientas de gestión de proyectos e hitos llegarán aquí próximamente."
+    "description": "Un resumen de cada proyecto, posición e hito en el conjunto de datos de la demo.",
+    "demoDataNotice": "Datos de demo — aún no hay una transmisión en cadena en vivo.",
+    "stats": {
+      "activeProjects": "Proyectos activos",
+      "milestonesPending": "Hitos por verificar",
+      "totalRaised": "Total recaudado",
+      "totalRaisedCaption": "{publicAmount} gobierno · {privateAmount} comunidad",
+      "impactRecords": "Registros de impacto"
+    },
+    "queue": {
+      "title": "Hitos por verificar",
+      "viewAll": "Ver todos",
+      "verify": "Marcar como verificado",
+      "verifyDisabledReason": "La verificación requiere el programa en cadena — aún no está construido en esta versión de hackathon.",
+      "empty": "No hay nada pendiente de verificación."
+    },
+    "activity": {
+      "title": "Actividad reciente",
+      "empty": "Aún no hay actividad.",
+      "positionFunded": "Posición {investorType} financiada en {project}",
+      "milestoneVerified": "“{milestone}” verificado en {project}"
+    },
+    "projectsTable": {
+      "title": "Proyectos",
+      "viewAll": "Ver todos los proyectos",
+      "columns": {
+        "project": "Proyecto",
+        "status": "Estado",
+        "goal": "Meta",
+        "raised": "Recaudado"
+      },
+      "milestonesProgress": "{verified}/{total} hitos verificados"
+    }
+  },
+  "projectsPage": {
+    "title": "Proyectos",
+    "description": "Cada proyecto en el conjunto de datos de la demo, incluidas las posiciones del gobierno y de la comunidad."
+  },
+  "milestonesPage": {
+    "title": "Hitos",
+    "description": "Cada hito aún pendiente de verificación, en todos los proyectos."
   }
 }

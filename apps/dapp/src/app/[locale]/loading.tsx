@@ -21,11 +21,11 @@ const RIPPLE_TRANSITION = {
  * while it resolves. Mirrors apps/web's loading.tsx so the mark reads the
  * same way across both apps.
  *
- * `DappShell` (header included) is rendered inside `page.tsx` rather than
- * `layout.tsx` today, so this fallback replaces the header too rather than
- * leaving it mounted — the right tradeoff while there's a single route; once
- * Day 1-3 nav lands and the shell moves to the layout, this will only need
- * to cover `<main>`.
+ * Each page's shell (`PublicShell`/`AuthShell`/`DashboardShell`) renders
+ * inside `page.tsx` rather than `layout.tsx` — different route groups need
+ * different shells, so this fallback replaces the header too rather than
+ * leaving one mounted. Moving to per-section layouts (route groups) so this
+ * could cover just `<main>` is a reasonable follow-up, not done here.
  */
 export default function Loading() {
   const prefersReducedMotion = useReducedMotion();

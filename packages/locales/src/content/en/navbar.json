@@ -4,16 +4,30 @@
     "label": "AquaStock",
     "tagline": "Water infrastructure, funded on Solana"
   },
-  "navigation": [{ "href": "/", "title": "Home", "description": "Go to home" }],
+  "navigation": [
+    { "href": "/", "title": "Home", "description": "Go to home" },
+    {
+      "href": "/projects",
+      "title": "Projects",
+      "description": "Browse funded projects"
+    },
+    {
+      "href": "/impact",
+      "title": "My Impact",
+      "description": "See your funding impact"
+    }
+  ],
   "skipToContent": "Skip to content",
   "cta": {
     "signIn": "Connect wallet",
+    "admin": "Staff sign in",
     "earlyAccess": {
       "href": "/#faq",
       "label": "Learn more"
     }
   },
   "mobileMenu": {
+    "title": "Menu",
     "contact": "Contact us",
     "ariaOpen": "Open navigation menu",
     "ariaClose": "Close navigation menu"

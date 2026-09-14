@@ -1,10 +1,19 @@
 {
   "title": "Mi Impacto",
+  "subtitle": "Cuando conectes una billetera y financies una posición, esta página seguirá tu capital desde el proyecto hasta el hito y el impacto real.",
   "empty": "Aún no has financiado ninguna posición.",
   "timeline": {
     "capital": "Capital",
     "project": "Proyecto",
     "milestone": "Hito",
     "impact": "Impacto"
-  }
+  },
+  "connectCta": "Conectar billetera",
+  "connectCtaSoon": "Conectar billetera estará disponible pronto — esta es una demo en devnet.",
+  "exampleLabel": "Ejemplo — un proyecto una vez verificados sus hitos",
+  "metrics": {
+    "households_connected": "Hogares conectados",
+    "liters_treated_per_day": "Litros tratados por día"
+  },
+  "recordedOn": "Registrado el {date}"
 }

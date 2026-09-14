@@ -1,10 +1,19 @@
 {
   "title": "My Impact",
+  "subtitle": "Once you connect a wallet and fund a position, this page tracks your capital from project to milestone to real-world impact.",
   "empty": "No positions funded yet.",
   "timeline": {
     "capital": "Capital",
     "project": "Project",
     "milestone": "Milestone",
     "impact": "Impact"
-  }
+  },
+  "connectCta": "Connect wallet",
+  "connectCtaSoon": "Wallet connect is coming soon — this is a devnet demo.",
+  "exampleLabel": "Example — a project once its milestones are verified",
+  "metrics": {
+    "households_connected": "Households connected",
+    "liters_treated_per_day": "Liters treated per day"
+  },
+  "recordedOn": "Recorded {date}"
 }
