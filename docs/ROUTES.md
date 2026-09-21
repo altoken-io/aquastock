@@ -20,45 +20,49 @@ No project-browsing, funding, or dashboard UI exists on the public site — that
 
 ## dApp (`apps/dapp`)
 
-Locale-aware under `apps/dapp/src/app/[locale]`. Two separate shells, chosen
-per page rather than shared in `layout.tsx` (see `docs/COMPONENTS.md`):
-`PublicShell` (investor-facing: real nav, theme/language switchers, the
-sandbox-demo notice) and `DashboardShell` (staff admin console: dark-first
-sidebar). `AuthShell` wraps the auth pages with its own split-panel layout.
-All investor-facing project/funding/impact content below is backed by
-**static demo data** (`src/lib/demo/*`), not a live database or the Solana
-program — see `docs/ROADMAP.md`; there is still no wallet-adapter, no
-on-chain program, and no route handlers over `packages/db-prisma`.
+Locale-aware under `apps/dapp/src/app/[locale]`. Three shells, chosen per page rather than shared in `layout.tsx` (see `docs/COMPONENTS.md`): `PublicShell` (savers and sponsors: nav, wallet button, theme/language switchers, the sandbox-demo notice), `DashboardShell` (the operator console: dark-first sidebar) and `AuthShell` (the sign-in pages, split panel).
 
-**`/` is the login page, not a marketing home** — `apps/dapp` has no
-marketing/pitch content at all; that lives exclusively in `apps/web`. See
-memory: dapp-home-is-login.
+The wallet pages live in the `(wallet)` route group, which adds no URL segment. Its layout mounts the wallet provider, so web3.js, Anchor and the wallet adapter load only there and the operator pages stay light. Savers and sponsors have no accounts: they connect a wallet, and every write is a transaction the wallet signs.
 
-| URL shape                        | Source                                   | Purpose                                                                                                                               |
-| -------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `/{locale}`                      | `[locale]/page.tsx`                      | Staff/government admin console sign-in (the app's home route). No public sign-up — see memory: better-auth-scope.                     |
-| `/{locale}/projects`             | `[locale]/projects/page.tsx`             | Browse every demo project. The de facto investor landing (linked from the shell's brand mark).                                        |
-| `/{locale}/projects/{slug}`      | `[locale]/projects/[slug]/page.tsx`      | Project detail: funding split (government/community), milestone timeline, impact records, demo "fund"/Explorer CTAs.                  |
-| `/{locale}/impact`               | `[locale]/impact/page.tsx`               | My Impact: empty state (no wallet-connect yet) + a worked example from the demo dataset.                                              |
-| `/{locale}/forgot-password`      | `[locale]/forgot-password/page.tsx`      | Admin password-reset request.                                                                                                         |
-| `/{locale}/reset-password`       | `[locale]/reset-password/page.tsx`       | Admin password-reset completion (token in the URL).                                                                                   |
-| `/{locale}/dashboard`            | `[locale]/dashboard/page.tsx`            | Admin command center: KPI stats, milestone-verification queue, recent activity, projects table. Session-gated.                        |
-| `/{locale}/dashboard/projects`   | `[locale]/dashboard/projects/page.tsx`   | Admin: every project in the demo dataset. Session-gated.                                                                              |
-| `/{locale}/dashboard/milestones` | `[locale]/dashboard/milestones/page.tsx` | Admin: every milestone awaiting verification, across projects. "Mark verified" stays disabled — no Anchor program yet. Session-gated. |
-| `/api/auth/[...all]`             | `app/api/auth/[...all]/route.ts`         | Better Auth route handler (email/password only).                                                                                      |
-| `/api/trpc/[trpc]`               | `app/api/trpc/[trpc]/route.ts`           | Local tRPC route handler (a `hello` procedure only so far).                                                                           |
-| `/api/version`                   | `app/api/version/route.ts`               | Version/health endpoint.                                                                                                              |
+**`/` is the login page, not a marketing home.** `apps/dapp` has no marketing content at all; that lives exclusively in `apps/web`. See memory: dapp-home-is-login.
 
-### Planned (Day 2-4, not yet implemented)
+| URL shape                   | Source                                       | Purpose                                                                                                                                                                                                                                                                                              |
+| --------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/{locale}`                 | `[locale]/page.tsx`                          | Operator console sign-in (the app's home route). No public sign-up: see memory: better-auth-scope.                                                                                                                                                                                                   |
+| `/{locale}/pools`           | `[locale]/(wallet)/pools/page.tsx`           | Browse pools, filtered by open/closed. Server-rendered from the chain, then kept live.                                                                                                                                                                                                               |
+| `/{locale}/pools/new`       | `[locale]/(wallet)/pools/new/page.tsx`       | Create a pool: details, rules, fund, review. One transaction creates and funds it, then the sponsor's wallet signs the name. Mainnet is capped by `NEXT_PUBLIC_MAINNET_DEMO_CAP`.                                                                                                                    |
+| `/{locale}/pools/{address}` | `[locale]/(wallet)/pools/[address]/page.tsx` | One pool: the instrument, its rules, what the token's issuer can do, and the activity feed. The action panel depends on who is connected: connect prompt, deposit, your position (claim, withdraw, close), or the sponsor's controls (fund, reclaim). An unknown address renders the not-found page. |
+| `/{locale}/my-match`        | `[locale]/(wallet)/my-match/page.tsx`        | A wallet's positions across pools with totals and vesting, and the pools it sponsors.                                                                                                                                                                                                                |
+| `/{locale}/forgot-password` | `[locale]/forgot-password/page.tsx`          | Operator password-reset request.                                                                                                                                                                                                                                                                     |
+| `/{locale}/reset-password`  | `[locale]/reset-password/page.tsx`           | Operator password-reset completion (token in the URL).                                                                                                                                                                                                                                               |
+| `/{locale}/dashboard`       | `[locale]/dashboard/page.tsx`                | Operator overview: totals across pools, the pools, recent activity, and the deployment (program, upgrade authority, token, issuer powers). Read-only; session-gated.                                                                                                                                 |
+| `/{locale}/dashboard/pools` | `[locale]/dashboard/pools/page.tsx`          | Operator: every pool on the deployment. Session-gated.                                                                                                                                                                                                                                               |
+| `/{locale}/{anything else}` | `[locale]/[...rest]/page.tsx`                | Renders the localized not-found page.                                                                                                                                                                                                                                                                |
+| `/api/auth/[...all]`        | `app/api/auth/[...all]/route.ts`             | Better Auth route handler (email/password only).                                                                                                                                                                                                                                                     |
+| `/api/trpc/[trpc]`          | `app/api/trpc/[trpc]/route.ts`               | Local tRPC route handler (a `hello` procedure only so far).                                                                                                                                                                                                                                          |
+| `/api/version`              | `app/api/version/route.ts`                   | Version/health endpoint.                                                                                                                                                                                                                                                                             |
 
-No source file exists for any of these yet — do not treat this as a promise
-of exact shape or timing.
+Old water-funding URLs are permanent (308) redirects, set in `next.config.ts`: `/{locale}/projects` and `/{locale}/projects/*` to `/{locale}/pools`, `/{locale}/impact` to `/{locale}/my-match`, `/{locale}/dashboard/projects` to `/{locale}/dashboard/pools`, `/{locale}/dashboard/milestones` to `/{locale}/dashboard`.
 
-| Planned surface                          | Purpose                                                                                                                             |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Wallet-connect + fund-a-position         | Real Solana wallet adapter wiring behind the project detail page's (currently disabled, demo-labeled) "Fund this position" control. |
-| Live milestone verification              | Wiring `/dashboard/milestones`' "Mark verified" control to the Anchor program once it exists, replacing the demo dataset.           |
-| Route handlers over `packages/db-prisma` | Serving real project/position/milestone/impact data instead of `src/lib/demo/*`'s static dataset.                                   |
+`error.tsx` (a render error: says nothing was changed, offers a retry, shows the digest) and `not-found.tsx` sit at the `[locale]` level; `pools/[address]/not-found.tsx` is the pool-specific one. The not-found pages are client components on purpose: there is no next-intl middleware, so only the layout's provider knows the locale. A missing pool answers 200 (not 404) because `loading.tsx` starts streaming first; the page carries `noindex`.
+
+## Match Pools API (`apps/dapp`)
+
+Route handlers under `src/app/api`, implemented and tested. The chain is the source of truth for every number; the database adds pool descriptions and a verified activity feed (see `DATABASE.md`). Every route validates its input with zod, is rate limited per IP, and answers errors as `{ "error": { "code", "message" } }`; a validation failure adds `issues`. Amounts are decimal strings of raw units; times are unix seconds.
+
+| Route                                | Purpose                                                                                                                                                                                    | Notes                                                                      |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| `GET /api/deployment`                | Program id, network, the allowed mint (from the on-chain `Config`), the upgrade authority, and what the token's issuer can do (paused, freeze, permanent delegate, multiplier), read live. | Public, cached 3s.                                                         |
+| `GET /api/pools`                     | Pools of this deployment, newest first. Query: `sponsor`, `status` (`open`, `ended`, `all`), `limit` (1–100).                                                                              | Public, cached 3s.                                                         |
+| `GET /api/pools/{address}`           | One pool, its first page of activity, and with `?wallet=` that wallet's position with vesting computed as of now.                                                                          | 404 `pool_not_found`. `no-store`.                                          |
+| `GET /api/pools/{address}/activity`  | The verified activity feed. Query: `limit` (1–50), `cursor` (opaque, from `nextCursor`).                                                                                                   | 400 `invalid_cursor`. Public, cached 3s.                                   |
+| `POST /api/pools/{address}/metadata` | Saves a pool's name and description. Body: `name`, `description?`, `issuedAt`, `signature` (base64 ed25519 by the pool's on-chain sponsor).                                                | 401 `invalid_signature` or `stale_signature` (10 min window).              |
+| `GET /api/positions?wallet=`         | A wallet's positions across pools, each with its pool.                                                                                                                                     | `no-store`.                                                                |
+| `POST /api/activity`                 | Body `{ "signature" }`. The server re-reads that transaction from the chain and records its events. Idempotent; a caller cannot invent activity.                                           | 404 `transaction_not_found`, 422 `transaction_failed` or `logs_truncated`. |
+
+The signed message a sponsor signs is built by `buildMetadataMessage` in `src/lib/pools/signed-message.ts`: a readable header plus one JSON object binding the program, the pool, the name, the description and `issuedAt`. A signature cannot be replayed for another pool, program or text.
+
+Status codes: 400 invalid input, 401 bad or stale signature, 404 not found, 413/415 body too large or wrong type, 422 a transaction that cannot be used, 429 rate limited (`Retry-After`), 503 `rate_limiter_unavailable`, 500 anything else (details stay in the server log).
 
 ## Route rules
 

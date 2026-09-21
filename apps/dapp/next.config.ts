@@ -3,6 +3,12 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   compress: true,
+  // An empty string when unset, so the test wallet's dynamic import (a `NEXT_PUBLIC` check in
+  // providers/solana-provider.tsx) is dead code and never reaches a production bundle.
+  env: {
+    NEXT_PUBLIC_E2E_WALLET_SECRET:
+      process.env.NEXT_PUBLIC_E2E_WALLET_SECRET ?? '',
+  },
   // Turbopack cannot resolve @arcjet/analyze-wasm's internal `_.` path on
   // Windows. Arcjet is server-only, so let Node resolve the package directly.
   serverExternalPackages: ['@arcjet/analyze-wasm'],
@@ -12,6 +18,27 @@ const nextConfig: NextConfig = {
         source: '/',
         destination: '/en',
         permanent: false,
+      },
+      // The water-funding pages this product replaced. Old links land somewhere useful.
+      {
+        source: '/:locale(en|es)/projects/:path*',
+        destination: '/:locale/pools',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|es)/impact',
+        destination: '/:locale/my-match',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|es)/dashboard/projects',
+        destination: '/:locale/dashboard/pools',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|es)/dashboard/milestones',
+        destination: '/:locale/dashboard',
+        permanent: true,
       },
     ];
   },
@@ -52,6 +79,7 @@ const nextConfig: NextConfig = {
   enablePrerenderSourceMaps: false,
   reactCompiler: true,
   transpilePackages: [
+    '@aquastock/types',
     '@aquastock/locales',
     '@aquastock/db-prisma',
     '@aquastock/ui',

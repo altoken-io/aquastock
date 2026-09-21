@@ -1,27 +1,34 @@
 {
   "badge": "How it works",
-  "title": "One project, two kinds of investor",
-  "subtitle": "Public and private capital converge on the same funding table.",
+  "title": "Save. Stay. The match is yours.",
+  "subtitle": "A sponsor's match, reserved on-chain the moment you deposit and earned in a straight line.",
   "steps": {
     "firstStep": {
-      "title": "A project goes live",
-      "description": "A water infrastructure project is published with a funding goal and milestones."
+      "title": "A sponsor funds a match",
+      "description": "They lock tokens in a pool and set the rules: the match rate, the most one saver can deposit, how long the match takes to vest, and when deposits close."
     },
     "secondStep": {
-      "title": "Government anchors it",
-      "description": "A government position, tagged public, signals the project is validated."
+      "title": "You deposit SPYx",
+      "description": "The matching amount is reserved for you on-chain in the same transaction. If the pool can't match in full, you see that before you sign."
     },
     "thirdStep": {
-      "title": "Community co-invests",
-      "description": "Local residents, diaspora, and outside investors fund the rest, tagged private."
+      "title": "The match vests",
+      "description": "In a straight line, starting the moment you deposit. You can claim what has vested at any time."
     },
     "fourthStep": {
-      "title": "Milestones get verified",
-      "description": "Progress and impact are recorded on-chain as the project delivers."
+      "title": "Leave whenever you like",
+      "description": "You always get your whole deposit back. Match that hasn't vested returns to the sponsor; what has vested stays yours."
     }
   },
-  "summary": "Public and private capital, one dashboard, fully on-chain.",
-  "photoAlt": "A municipal representative and a community member inspecting water-treatment infrastructure together.",
+  "summary": "Rules that can't change once a pool exists, and numbers anyone can check.",
+  "illustration": {
+    "label": "A vesting line: the match rises in a straight line from the day of the deposit. Leaving early returns the part that has not vested yet to the sponsor.",
+    "start": "Deposit",
+    "end": "Fully vested",
+    "vested": "Vested: yours",
+    "unvested": "Not vested yet: returns to the sponsor if you leave",
+    "here": "You are here"
+  },
   "gaugeLabel": "Process",
-  "benchmarkLabel": "BM"
+  "benchmarkLabel": "STEP"
 }

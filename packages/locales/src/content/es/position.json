@@ -1,0 +1,39 @@
+{
+  "title": "Tu posición",
+  "status": {
+    "vesting": "Liberándose",
+    "vested": "Totalmente liberado",
+    "withdrawn": "Depósito retirado",
+    "done": "Todo reclamado"
+  },
+  "ring": {
+    "label": "Se liberaron {vested} de {reserved} {symbol} de aporte",
+    "unit": "de {reserved} liberados"
+  },
+  "ledger": {
+    "deposit": "Tu depósito",
+    "match": "Aporte reservado del patrocinador",
+    "vested": "Liberado hasta ahora",
+    "claimed": "Reclamado",
+    "claimable": "Listo para reclamar"
+  },
+  "schedule": "Se libera de forma lineal durante {duration}, desde {date}.",
+  "actions": {
+    "claim": "Reclamar {amount} {symbol}",
+    "claimNothing": "Aún no hay nada para reclamar",
+    "withdraw": "Retirar depósito",
+    "close": "Cerrar posición",
+    "closeHint": "Todo está pagado. Al cerrar se devuelve la renta de la cuenta y puedes volver a depositar aquí."
+  },
+  "withdrawn": "Recuperaste tu depósito. Lo que ya se había liberado sigue siendo tuyo para reclamar.",
+  "confirm": {
+    "title": "¿Retirar tu depósito?",
+    "returns": "Recuperas",
+    "keeps": "Aporte liberado que aún puedes reclamar",
+    "forfeits": "Aporte al que renuncias",
+    "forfeitsHint": "El aporte al que renuncias vuelve al patrocinador. No se puede deshacer.",
+    "nothingForfeited": "No renuncias a nada: el aporte ya se liberó por completo.",
+    "confirm": "Retirar {amount} {symbol}",
+    "cancel": "Seguir ahorrando"
+  }
+}

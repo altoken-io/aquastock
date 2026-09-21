@@ -1,6 +1,10 @@
 {
   "extends": "../config/typescript/base.json",
   "compilerOptions": {
+    // Bundlers (Next, Vite) resolve extensionless imports; NodeNext would demand `.js`
+    // specifiers that webpack cannot map back to the `.ts` sources.
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "rootDir": "src",
     "outDir": "dist"
   },

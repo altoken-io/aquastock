@@ -1,0 +1,35 @@
+{
+  "title": "Your pool",
+  "role": "You're the sponsor",
+  "summary": {
+    "total": "Match budget",
+    "reserved": "Reserved for savers",
+    "available": "Not reserved yet",
+    "balance": "Your balance"
+  },
+  "fund": {
+    "title": "Add match budget",
+    "description": "A bigger budget lets more deposits be matched in full. Open until the pool closes.",
+    "field": "Amount to add",
+    "submit": "Add {amount} {symbol}",
+    "submitIdle": "Enter an amount",
+    "closed": "The pool has closed, so the budget can't grow."
+  },
+  "reclaim": {
+    "title": "Reclaim unused match",
+    "description": "Match that no saver has a claim on comes back to you once the pool closes. Match a saver gives up by leaving early counts too.",
+    "button": "Reclaim {amount} {symbol}",
+    "waiting": "Available after the pool closes on {date}.",
+    "nothing": "Nothing to reclaim right now."
+  },
+  "problems": {
+    "format": "Enter a number, like 25 or 25.5.",
+    "precision": "{symbol} has at most {decimals} decimal places.",
+    "too-small": "That's too small to send.",
+    "too-large": "That number is too large.",
+    "decimals": "Couldn't read this token's settings. Try again in a moment.",
+    "multiplier": "Couldn't read this token's settings. Try again in a moment.",
+    "paused": "The issuer has paused {symbol} transfers, so nothing can move.",
+    "insufficient-balance": "You hold {balance} {symbol}."
+  }
+}

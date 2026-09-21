@@ -10,34 +10,35 @@ web
 
 ## Users
 
-Primary: community investors and diaspora — people who want to co-fund a water-infrastructure project alongside their government, connect a Solana wallet, fund a position, and track what their money is doing against real milestones. Secondary: the government "anchor" side — whoever holds the public position posts alongside the same community investors on the same project, in the same dashboard. Both read this as "where do I see the project, and where do I see my position in it."
+Primary: **savers**, people holding (or about to hold) tokenized SPYx who want to see exactly what a sponsor's match is worth if they stay and if they don't, and to deposit, claim and withdraw with a wallet they already have. Second: **sponsors**, who create and fund a pool and later manage it. Third: **operators**, the team, who watch pools, the deployment and the token's issuer through a staff-only console. Savers and sponsors have no accounts and no KYC; they connect a Solana wallet.
 
 ## Product Purpose
 
-This is the AquaStock dApp — the actual product: browse water-infrastructure projects, connect a Solana wallet, fund a position tagged `investor_type: public` (government) or `private` (community/outside investor), watch milestones move from pending to verified, and see a personal "My Impact" timeline (capital → project → milestone → impact). The defining feature is that a government position and a community position live in the _same_ schema and the _same_ project page — visibly split ("government contribution" vs. "community funding") rather than tracked on separate systems that never reconcile.
+This is the AquaStock dApp, the actual product: **Match Pools**. Browse pools, deposit into one, watch the sponsor's match vest, claim what has vested, and withdraw whenever you like (the unvested match goes back to the sponsor; the whole deposit always comes back). A sponsor creates a pool and funds it in one transaction, signs its name with their wallet, and can add budget or reclaim what nobody reserved once it closes.
 
-**Current build state (be accurate about this — do not describe unbuilt features as live):** `apps/dapp`'s `/` is the staff/government admin sign-in page — the dApp has no marketing/pitch content at all; that lives exclusively in `apps/web` (see memory: dapp-home-is-login). Beyond sign-in, the full investor-facing UI exists — project list, project detail (funding split, milestone timeline, impact records), and My Impact — but it is built entirely against a **static demo dataset** (`apps/dapp/src/lib/demo/projects.ts`, `impact.ts`), not a live database or the Solana program. Off-chain project/position/milestone/impact data has a Prisma schema (`packages/db-prisma/prisma/schema.prisma`) but still no route handlers serving it. `@solana/web3.js` is installed; wallet-adapter connect and Solana Pay funding are not built — the project detail page's "Fund this position" control renders disabled with a "coming soon" label rather than faking a working flow. There is no Solana Anchor program in this repo yet — the on-chain Project/Position/Milestone/Impact accounts and their instructions (`create_project`, `create_position`, `fund_position`, `verify_milestone`, `record_impact`, `close_project`) are Day 2+ work per the team's 5-day build plan. The admin console (`/dashboard` + sub-pages, behind the `/` sign-in) also reads the same demo dataset; its "Mark verified" control is likewise disabled pending the Anchor program.
+**Current build state (be accurate about this: do not describe unbuilt features as live):** everything above is built and runs end to end on a local validator (`pnpm dev:stack`). Nothing is deployed: no program id, mint or keypair exists outside the local validator, and deploys are run by a human. The program is unaudited. `apps/dapp`'s `/` is the operator sign-in page; the dApp has no marketing content at all (that lives only in `apps/web`; see memory: dapp-home-is-login). The operator console is read-only. There is no saver or sponsor login, no in-app swap (buying SPYx is a link out to Jupiter), and no devnet faucet.
 
 ## Positioning
 
-One project, one funding table, two kinds of investor — government and community — both tracked on-chain, both visible on the same screen. Not a DeFi yield product, not a KYC-gated custodial wallet: a transparency layer over public-private infrastructure funding.
+A match you can check: locked in a program, visible, earned in a straight line. Not a yield product, not a custodial wallet, and not investment advice: a savings rule enforced on-chain.
 
 ## Brand Personality
 
-Direct, credible, calm under real stakes — this handles public money and public trust, so it should feel exact and unhurried rather than flashy. Plain numbers over persuasive copy. Confident about what's verified on-chain; honest about what's still a placeholder in a 5-day build.
+Direct, credible, calm under real stakes. It handles people's money, so it should feel exact and unhurried rather than flashy. Plain numbers over persuasive copy. Confident about what the chain confirms; honest about what is a demo stand-in.
 
 ## Anti-references
 
-No token-price charts, no DeFi-protocol staking/yield framing, no neon-Web3 visual tropes, no literal national-flag imagery to imply locality. No implying a government partnership, a real deployed program, or production money movement that doesn't exist yet — this is a devnet hackathon demo and must say so.
+No token-price charts, no DeFi staking or yield framing, no neon-Web3 visual tropes. Never imply a sponsor, a partnership, a deployed program or production money movement that doesn't exist. Never show a return.
 
 ## Design Principles
 
-- **The split is the product.** Government (public) and community (private) positions must be visually distinguishable on the same project page at all times — that's the entire pitch.
-- **On-chain evidence over claims.** Every funded position and verified milestone should link to its transaction/Explorer proof, not just display a number.
-- **Useful before technical.** Lead with "fund this project" / "see this milestone," never with account/PDA/instruction terminology.
-- **No false certainty.** Never show a milestone as verified or a position as funded before the chain confirms it.
-- **Build honestly for a 5-day timeline.** Prefer a smaller, real, working slice over a larger, faked one.
+- **Two currents, one position.** The sponsor's match and the saver's own savings are always distinguishable, and always carry an icon and a label, never colour alone.
+- **On-chain evidence over claims.** Every action ends in a transaction link. Nothing shows as vested, claimed or paid before the chain says so.
+- **Say the cost before the click.** Withdrawing shows exactly what comes back, what is kept and what is given up. A partial match is stated before signing, and the deposit carries a minimum match so the person is never silently matched less than they saw.
+- **Disclose, next to the action.** The token's issuer can pause transfers, freeze accounts, move tokens and change the multiplier; the program's upgrade authority is the team's deploy wallet. Both are on the page, not in fine print.
+- **Useful before technical.** Lead with "Deposit 40 dSPYx", never with account, PDA or instruction terms. Program errors are translated into what happened and what to do.
+- **Build honestly for a hackathon timeline.** A smaller, real, working slice over a larger, faked one.
 
 ## Accessibility & Inclusion
 
-WCAG 2.1 AA. Visible focus states on every interactive element, 4.5:1 minimum contrast on body and placeholder text, no color-only status communication (pair public/private and milestone status with icon + label, not color alone), reduced-motion-safe transitions throughout.
+WCAG 2.1 AA. Visible focus states on every interactive element, 4.5:1 minimum contrast on body and placeholder text, no color-only status communication (pair sponsor/saver and vesting status with icon + label, not color alone), reduced-motion-safe transitions throughout.

@@ -1,0 +1,58 @@
+{
+  "status": {
+    "signing": "Approve in your wallet",
+    "signingHint": "Nothing has been sent yet.",
+    "confirming": "Confirming on Solana…",
+    "confirmingHint": "This usually takes a few seconds.",
+    "done": "Confirmed on Solana",
+    "viewTx": "View transaction",
+    "retry": "Try again",
+    "dismiss": "Dismiss"
+  },
+  "errors": {
+    "title": "That didn't go through",
+    "kinds": {
+      "wallet-rejected": "You cancelled the request in your wallet. Nothing was sent.",
+      "wallet-not-connected": "Connect your wallet first.",
+      "insufficient-sol": "Your wallet needs a little SOL to pay the network fee.",
+      "expired": "The request expired before it was confirmed. Nothing was spent. Try again.",
+      "network": "Couldn't reach Solana. Check your connection and try again.",
+      "unknown": "Something went wrong and nothing was changed. Try again."
+    },
+    "program": {
+      "MathOverflow": "These amounts are too large to process.",
+      "Unauthorized": "This wallet isn't allowed to do that.",
+      "WrongMint": "That isn't the token this pool uses.",
+      "WrongVault": "That account doesn't belong to this pool.",
+      "InvalidMatchBps": "The match must be between 0.01% and 100%.",
+      "InvalidPerSaverCap": "The per-saver limit must be more than zero.",
+      "InvalidVestingDuration": "The vesting period must be between 30 seconds and 5 years.",
+      "InvalidPoolWindow": "The deposit window must end in the future, within 5 years.",
+      "InvalidMintDecimals": "This token isn't supported.",
+      "UnsupportedMintExtension": "This token has features a pool can't hold safely.",
+      "TransferHookEnabled": "The token's issuer switched on a transfer hook, so pools can't move it right now.",
+      "FrozenByDefault": "This token freezes new accounts by default, so a pool can't hold it.",
+      "MintPaused": "The token's issuer has paused transfers. Nothing is lost; try again once they resume.",
+      "ZeroAmount": "Enter an amount greater than zero.",
+      "PoolEnded": "This pool's deposit window has closed.",
+      "PoolNotEnded": "The sponsor can reclaim unused match only after the pool closes.",
+      "DepositExceedsCap": "That is more than this pool allows per saver.",
+      "BudgetExhausted": "The pool's match budget is fully reserved.",
+      "MatchBelowMinimum": "The match available dropped while you were confirming. Review the new amount and try again.",
+      "NothingToClaim": "There is nothing vested to claim yet.",
+      "AlreadyWithdrawn": "You have already withdrawn from this pool.",
+      "MintNotAllowed": "This deployment accepts one token, and this isn't it.",
+      "NothingToReclaim": "There is no unused match to reclaim.",
+      "PositionStillActive": "Withdraw your deposit and claim what has vested before closing."
+    }
+  },
+  "done": {
+    "deposit": "Deposited. Your match is reserved and already vesting.",
+    "claim": "Claimed. The tokens are in your wallet.",
+    "withdraw": "Withdrawn. Your deposit is back in your wallet.",
+    "close": "Position closed.",
+    "fund": "Match budget added.",
+    "reclaim": "Reclaimed. The tokens are back in your wallet.",
+    "create": "Pool created and funded."
+  }
+}

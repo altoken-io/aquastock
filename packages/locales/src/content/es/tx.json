@@ -1,0 +1,58 @@
+{
+  "status": {
+    "signing": "Aprueba en tu billetera",
+    "signingHint": "Todavía no se ha enviado nada.",
+    "confirming": "Confirmando en Solana…",
+    "confirmingHint": "Suele tardar unos segundos.",
+    "done": "Confirmado en Solana",
+    "viewTx": "Ver transacción",
+    "retry": "Intentar de nuevo",
+    "dismiss": "Cerrar"
+  },
+  "errors": {
+    "title": "No se pudo completar",
+    "kinds": {
+      "wallet-rejected": "Cancelaste la solicitud en tu billetera. No se envió nada.",
+      "wallet-not-connected": "Primero conecta tu billetera.",
+      "insufficient-sol": "Tu billetera necesita un poco de SOL para pagar la comisión de red.",
+      "expired": "La solicitud venció antes de confirmarse. No se gastó nada. Inténtalo de nuevo.",
+      "network": "No pudimos conectar con Solana. Revisa tu conexión e inténtalo de nuevo.",
+      "unknown": "Algo salió mal y no se cambió nada. Inténtalo de nuevo."
+    },
+    "program": {
+      "MathOverflow": "Estos montos son demasiado grandes para procesarlos.",
+      "Unauthorized": "Esta billetera no tiene permiso para hacer eso.",
+      "WrongMint": "Ese no es el token que usa este fondo.",
+      "WrongVault": "Esa cuenta no pertenece a este fondo.",
+      "InvalidMatchBps": "El aporte debe estar entre 0,01 % y 100 %.",
+      "InvalidPerSaverCap": "El límite por ahorrador debe ser mayor que cero.",
+      "InvalidVestingDuration": "El periodo de liberación debe estar entre 30 segundos y 5 años.",
+      "InvalidPoolWindow": "El plazo de depósito debe terminar en el futuro, dentro de 5 años.",
+      "InvalidMintDecimals": "Este token no es compatible.",
+      "UnsupportedMintExtension": "Este token tiene funciones que un fondo no puede custodiar con seguridad.",
+      "TransferHookEnabled": "El emisor del token activó un hook de transferencia, así que los fondos no pueden moverlo por ahora.",
+      "FrozenByDefault": "Este token congela las cuentas nuevas por defecto, así que un fondo no puede custodiarlo.",
+      "MintPaused": "El emisor del token pausó las transferencias. No se pierde nada; inténtalo de nuevo cuando las reanude.",
+      "ZeroAmount": "Ingresa un monto mayor que cero.",
+      "PoolEnded": "El plazo de depósito de este fondo ya cerró.",
+      "PoolNotEnded": "El patrocinador solo puede recuperar el aporte sin usar cuando el fondo cierra.",
+      "DepositExceedsCap": "Eso supera lo que este fondo permite por ahorrador.",
+      "BudgetExhausted": "El presupuesto de aporte del fondo ya está totalmente reservado.",
+      "MatchBelowMinimum": "El aporte disponible bajó mientras confirmabas. Revisa el nuevo monto e inténtalo de nuevo.",
+      "NothingToClaim": "Todavía no hay nada liberado para reclamar.",
+      "AlreadyWithdrawn": "Ya retiraste tu depósito de este fondo.",
+      "MintNotAllowed": "Esta implementación acepta un solo token, y este no lo es.",
+      "NothingToReclaim": "No hay aporte sin usar para recuperar.",
+      "PositionStillActive": "Retira tu depósito y reclama lo liberado antes de cerrar."
+    }
+  },
+  "done": {
+    "deposit": "Depositado. Tu aporte quedó reservado y ya se está liberando.",
+    "claim": "Reclamado. Los tokens están en tu billetera.",
+    "withdraw": "Retirado. Tu depósito volvió a tu billetera.",
+    "close": "Posición cerrada.",
+    "fund": "Presupuesto del aporte ampliado.",
+    "reclaim": "Recuperado. Los tokens volvieron a tu billetera.",
+    "create": "Fondo creado y financiado."
+  }
+}

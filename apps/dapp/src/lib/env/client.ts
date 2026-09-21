@@ -5,6 +5,8 @@ const clientEnv = {
   NEXT_PUBLIC_SOLANA_NETWORK: process.env.NEXT_PUBLIC_SOLANA_NETWORK,
   NEXT_PUBLIC_SOLANA_RPC_URL: process.env.NEXT_PUBLIC_SOLANA_RPC_URL,
   NEXT_PUBLIC_ANCHOR_PROGRAM_ID: process.env.NEXT_PUBLIC_ANCHOR_PROGRAM_ID,
+  NEXT_PUBLIC_STOCK_MINT: process.env.NEXT_PUBLIC_STOCK_MINT,
+  NEXT_PUBLIC_MAINNET_DEMO_CAP: process.env.NEXT_PUBLIC_MAINNET_DEMO_CAP,
 };
 
 export const env = (key: keyof typeof clientEnv, optional = false) => {

@@ -1,15 +1,15 @@
 ---
 name: AquaStock dApp
-description: AquaStock's dApp — a Solana public/private infrastructure-funding console for the Stocklana hackathon.
+description: AquaStock's dApp: Match Pools, a sponsor-funded vesting match on tokenized SPYx deposits, for the Stocklana hackathon.
 colors:
   primary: 'oklch(0.52 0.10 200)' # "Reservoir" — teal/cyan, the one brand/CTA color
   primary-hover: 'oklch(0.44 0.10 200)'
   primary-foreground: 'oklch(1 0 0)'
   accent: 'oklch(0.94 0.025 196)' # soft teal tint — hover/highlight surfaces only
   accent-foreground: 'oklch(0.28 0.05 196)'
-  public: 'oklch(0.34 0.07 260)' # "Anchor" — government-position tag, never a general accent
+  public: 'oklch(0.34 0.07 260)' # "Anchor": the sponsor's match, never a general accent
   public-foreground: 'oklch(1 0 0)'
-  private: 'oklch(0.55 0.13 45)' # "Terra" — community-position tag, never a general accent
+  private: 'oklch(0.55 0.13 45)' # "Terra": the saver's own savings, never a general accent
   private-foreground: 'oklch(1 0 0)'
   background: 'oklch(1 0 0)' # true neutral scale — zero chroma
   foreground: 'oklch(0.145 0 0)'
@@ -76,18 +76,18 @@ components:
 
 **Creative North Star: "The Confluence"**
 
-The AquaStock dApp is where a government position and a community position sit on the same funding table, in the open — two sources of capital converging on one project, the way two streams meet at a confluence and become one river. Every surface should be built to be read in one glance: a project, a split between government and community funding, a milestone status — never a chart to interpret.
+The AquaStock dApp is where a sponsor's match and a saver's own savings become one position, in the open: two sources converging, the way two streams meet at a confluence and become one river. Every surface should be built to be read in one glance: a pool, the match and the deposit it reserves, how much has vested, what leaving now would cost, never a chart to interpret.
 
-The palette is built around that convergence: **Reservoir**, a deep teal/cyan, is the one brand/CTA color (water, clarity, the product itself). **Anchor**, a deep institutional navy, and **Terra**, a warm terracotta, are reserved specifically for tagging a position's `investor_type` — public vs. private — never used as a general accent. Cool institutional blue against warm grounded clay is a deliberate pairing: the two capital sources read as distinct and equally legitimate, not as "official" vs. "informal."
+The palette is built around that convergence: **Reservoir**, a deep teal/cyan, is the one brand/CTA color (clarity, the product itself). **Anchor**, a deep institutional navy, is the sponsor's match, and **Terra**, a warm terracotta, is the saver's own savings; they are reserved for telling those two streams apart and never used as a general accent. Cool institutional blue against warm grounded clay is a deliberate pairing: the money that is promised against the money that is yours. The signature element is the **match ring** (`modules/pools/components/match-ring.tsx`): the two streams as arcs closing into one ring, with a bezel of 60 ticks that fills in green as the match vests, so time is visible on the same instrument as the money.
 
-This system rejects a speculative-crypto aesthetic: no neon gradients, no glassmorphism as a default surface treatment, no token-price decoration. It also rejects a sterile corporate-bank feel — this is public-interest infrastructure funding, not a trading terminal.
+This system rejects a speculative-crypto aesthetic: no neon gradients, no glassmorphism as a default surface treatment, no token-price decoration. It also rejects a sterile corporate-bank feel — this is a savings rule you can check, not a trading terminal.
 
 **Key Characteristics:**
 
-- One brand color (Reservoir teal) carrying primary actions, active states, and focus rings — never used for the public/private distinction.
-- Two dedicated semantic colors (Anchor navy, Terra terracotta) exist solely to tag investor_type — see the Named Rule below.
+- One brand color (Reservoir teal) carrying primary actions, active states, and focus rings, never used for the sponsor/saver distinction.
+- Two dedicated semantic colors (Anchor navy for the sponsor's match, Terra terracotta for the saver's savings) exist solely to tell the two streams apart; see the Named Rule below. The tokens are `public`/`private`, with the aliases `sponsor`/`saver` for new code.
 - True neutral backgrounds (zero-chroma gray, not the warm off-white this repo inherited) — plain white in light mode, near-black in dark mode.
-- Soft, deep-rounded panels (`dapp-panel` at 32px) over hard-edged cards.
+- Soft rounded panels: `dapp-panel` (32px) on the auth pages, and the tighter `dapp-console-panel` (16px) on wallet screens and the console, where dense numbers need room.
 - Geist as the single sans-serif voice across display and body text.
 - OKLCH as the canonical color format throughout `globals.css`.
 
@@ -98,10 +98,10 @@ This system rejects a speculative-crypto aesthetic: no neon gradients, no glassm
 - **Reservoir** (`oklch(0.52 0.10 200)` / dark: `oklch(0.72 0.12 196)`): primary buttons, active sidebar/nav states, focus rings, links.
 - **Accent** (`oklch(0.94 0.025 196)` / dark: `oklch(0.28 0.045 196)`): a soft teal-tinted surface for hover states and subtle highlights — not a second CTA color.
 
-### Public / Private (funding-table tags)
+### Sponsor / Saver (the two streams)
 
-- **Anchor** (`oklch(0.34 0.07 260)` / dark: `oklch(0.58 0.09 258)`): tags a `PUBLIC` (government-anchor) position.
-- **Terra** (`oklch(0.55 0.13 45)` / dark: `oklch(0.68 0.14 48)`): tags a `PRIVATE` (community/investor) position.
+- **Anchor** (`oklch(0.34 0.07 260)` / dark: `oklch(0.63 0.09 258)`): the sponsor's match (`sponsor`).
+- **Terra** (`oklch(0.55 0.13 45)` / dark: `oklch(0.68 0.14 48)`): the saver's own savings (`saver`).
 
 ### Neutral
 
@@ -114,12 +114,12 @@ This system rejects a speculative-crypto aesthetic: no neon gradients, no glassm
 ### Semantic
 
 - **Destructive** (`oklch(0.58 0.21 25)`): errors, destructive actions.
-- **OK** (`oklch(0.56 0.12 150)` / dark: `oklch(0.7 0.15 150)`): completed/verified milestone states — a leafy green, distinct in hue from both Reservoir and Terra.
-- **Warning** (`oklch(0.74 0.15 75)` / dark: `oklch(0.72 0.15 65)`): review-needed or time-sensitive state.
+- **OK** (`oklch(0.56 0.12 150)` / dark: `oklch(0.7 0.15 150)`): vested, confirmed and success states, a leafy green distinct in hue from both Reservoir and Terra. **OK text** (`ok-text`, `oklch(0.4 0.1 150)` / dark: `oklch(0.78 0.15 150)`) is for small text on a tinted `ok` surface, where `ok` itself is 3.9:1 and AA needs 4.5:1.
+- **Warning** (`oklch(0.74 0.15 75)` / dark: `oklch(0.72 0.15 65)`): closing soon, a partial match, a paused token: things to read before acting.
 
 ### Named Rules
 
-**The Government/Community Split Rule.** A position always shows its `investor_type` with both color (`public`/`private` token) _and_ an icon or label — never color alone. `public`/`private` are reserved exclusively for this distinction; don't reach for them as a general-purpose second/third accent elsewhere in the UI.
+**The Sponsor/Saver Split Rule.** The two streams always appear with both color (`public`/`private` token) _and_ an icon or label (`StreamTag`, `LedgerRow`), never color alone. The tokens are reserved exclusively for this distinction; don't reach for them as a general-purpose second/third accent elsewhere in the UI.
 
 **The Never-Red-For-Success Rule.** Success and verified states use `ok` (green), never `primary` — reserve the brand teal for actions, not celebration.
 
@@ -165,8 +165,9 @@ Mostly flat with soft ambient shadows rather than hard drop shadows — `dapp-pa
 
 ### Cards / Panels
 
-- **`.dapp-panel`:** 32px radius, `border-border/85`, card background, `shadow-sm` — the primary content-panel wrapper on investor-facing marketing-style surfaces (home, auth pages).
-- **`.dapp-panel-accent`:** same shape with a subtle primary-tinted gradient wash (`from-primary/6 via-card to-background`) for a single emphasized panel per view (e.g. the funding-goal summary). Use the dedicated `public`/`private` tokens, not this, for the government/community distinction.
+- **`.dapp-panel`:** 32px radius, `border-border/85`, card background, `shadow-sm` — the content-panel wrapper on the auth pages.
+- **`.dapp-panel-accent`:** same shape with a subtle primary-tinted gradient wash (`from-primary/6 via-card to-background`) for a single emphasized panel per view. Use the dedicated `public`/`private` tokens, not this, for the sponsor/saver distinction.
+- **`.dapp-console-panel`:** 16px radius, the panel for wallet screens and the console, where numbers and controls sit close together.
 - **`.dapp-panel-muted`:** 16px radius (`rounded-2xl`), background-tinted, `shadow-inner` — for secondary/nested surfaces.
 - **`.dapp-console-panel`:** 16px radius (`rounded-2xl`), card background, `shadow-sm` — the reconsidered, tighter panel for data-dense surfaces (the admin console: stat tiles, queues, tables). This is the "worth reconsidering" the 32px radius previously flagged here; `.dapp-panel` itself is unchanged for the surfaces it already suited.
 - **Internal padding:** 16–24px, generous around headline numbers, tighter (8–12px) in list rows.
@@ -179,19 +180,19 @@ Mostly flat with soft ambient shadows rather than hard drop shadows — `dapp-pa
 
 ### Navigation
 
-- **Investor-facing (`components/public-shell.tsx`):** logo (links to `/projects` — `/` is the login page, not part of this nav), primary nav (Projects, My Impact), theme/language switchers, a low-emphasis "Staff sign in" text link, and a dismissible sandbox-demo notice bar. Collapses to a Sheet-based drawer below `md`.
-- **Admin console (`modules/dashboard/components/dashboard-shell.tsx`):** a dark-first, always-dark sidebar (Command center, Projects, Milestones with a pending-count badge) plus a topbar (page title, signed-in-as chip, language switcher). Collapses to a Sheet-based drawer below `lg`. Deliberately dark regardless of the visitor's site-wide theme choice — see the "Dashboard theme" direction chosen for this console.
+- **Wallet screens (`components/public-shell.tsx`):** logo (links to `/pools`; `/` is the operator sign-in page, not part of this nav), primary nav (Pools, My match), the wallet button (icon-only below `sm`), theme/language switchers, a low-emphasis "Staff sign in" text link, and a dismissible sandbox-demo notice bar. Collapses to a Sheet-based drawer below `md`.
+- **Operator console (`modules/dashboard/components/dashboard-shell.tsx`):** a dark-first, always-dark sidebar (Overview, Pools) plus a topbar (page title, signed-in-as chip, language switcher). Collapses to a Sheet-based drawer below `lg`. Deliberately dark regardless of the visitor's site-wide theme choice — see the "Dashboard theme" direction chosen for this console.
 - **Auth (`components/auth-shell.tsx`):** a split panel — a dark brand/context panel (with the `ConfluenceRing` signature visual) beside the form, collapsing to a single column on mobile.
 
 ### Badges / Pills
 
-- **`.badge` / `dapp-pill`:** `rounded-full`, bordered, muted text — low-emphasis metadata (milestone status, investor-type labels).
+- **`.badge` / `dapp-pill`:** `rounded-full`, bordered, muted text — low-emphasis metadata (pool phase, demo timescale). Phase and status badges always pair an icon with a word.
 
 ## 6. Do's and Don'ts
 
 ### Do:
 
-- **Do** keep the government/community split visually unambiguous everywhere a position or funding total is shown — pair the `public`/`private` token with an icon/label, never color alone.
+- **Do** keep the sponsor/saver split visually unambiguous everywhere a position or pool total is shown: pair the `public`/`private` token with an icon/label, never color alone.
 - **Do** use the neutral ambient panel shadow as the default card treatment; reserve any colored glow for one highest-stakes action per screen.
 - **Do** pair every status (danger/warning/ok, pending/verified) with an icon and label.
 - **Do** keep Geist as the only typeface; differentiate hierarchy through weight/size only.
@@ -201,6 +202,6 @@ Mostly flat with soft ambient shadows rather than hard drop shadows — `dapp-pa
 - **Don't** ship neon gradients, everywhere-glassmorphism, token-price charts as default decoration, or "cyber" crypto-terminal grid backgrounds.
 - **Don't** carry the `.dapp-panel`'s 32px radius forward into new surfaces without reconsidering it.
 - **Don't** use gradient text or color-only status indicators anywhere in this system.
-- **Don't** use `public`/`private` as a general-purpose accent — they exist only to tag investor_type.
-- **Don't** show a position as funded or a milestone as verified before the chain confirms it.
-- **Don't** claim a government partnership, deployed program, or production money movement in UI copy — this is a devnet hackathon demo (see the required disclaimer in PRODUCT.md / packages/locales' `legal` namespace).
+- **Don't** use `public`/`private` as a general-purpose accent: they exist only to tell the sponsor's match from the saver's savings.
+- **Don't** show a match as vested, claimed or paid before the chain confirms it.
+- **Don't** claim a sponsor, partnership, deployed program or production money movement in UI copy, or state a return; this is a hackathon demo (see the required disclaimer in PRODUCT.md / packages/locales' `legal` namespace).

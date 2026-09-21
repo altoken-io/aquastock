@@ -1,0 +1,43 @@
+{
+  "title": "Deposit {symbol}",
+  "subtitle": "The sponsor adds {percent} of what you deposit. It vests over {duration}.",
+  "field": {
+    "label": "Amount",
+    "placeholder": "0",
+    "balance": "Your balance: {amount} {symbol}",
+    "balanceLoading": "Checking your balance…",
+    "max": "Max",
+    "maxLabel": "Fill in the most you can deposit",
+    "cap": "This pool allows up to {amount} {symbol} per saver."
+  },
+  "noBalance": {
+    "title": "You don't hold any {symbol}",
+    "body": "You need some to take part.",
+    "buy": "Get {symbol} on Jupiter",
+    "demo": "This is a demo network with no exchange. Ask the team for demo tokens."
+  },
+  "preview": {
+    "title": "What you'd lock in",
+    "deposit": "Your deposit",
+    "match": "Sponsor match",
+    "matchHint": "Reserved for you now. It vests over {duration}.",
+    "partial": "Only {matched} {symbol} of match is left, so you'd get {matched} instead of {wanted}."
+  },
+  "problems": {
+    "format": "Enter a number, like 25 or 25.5.",
+    "precision": "{symbol} has at most {decimals} decimal places.",
+    "too-small": "That's too small to send.",
+    "too-large": "That number is too large.",
+    "decimals": "Couldn't read this token's settings. Try again in a moment.",
+    "multiplier": "Couldn't read this token's settings. Try again in a moment.",
+    "ended": "This pool's deposit window has closed.",
+    "paused": "The issuer has paused {symbol} transfers, so deposits are on hold.",
+    "transfer-hook": "The issuer switched on a transfer hook, so this pool can't move {symbol} right now.",
+    "over-cap": "This pool allows up to {cap} {symbol} per saver.",
+    "budget-exhausted": "The match budget is fully reserved. A new deposit would get no match.",
+    "insufficient-balance": "You hold {balance} {symbol}."
+  },
+  "submit": "Deposit {amount} {symbol}",
+  "submitIdle": "Enter an amount",
+  "terms": "Withdraw your whole deposit at any time. Leave early and the match that hasn't vested goes back to the sponsor."
+}

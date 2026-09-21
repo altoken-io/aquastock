@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "listTitle": "Match pools",
+    "listDescription": "Sponsors fund a match on tokenized SPYx savings. Deposit, hold, and the match vests.",
+    "notFoundTitle": "Pool not found"
+  },
+  "list": {
+    "eyebrow": "Match pools",
+    "title": "The employer match, for people without an employer",
+    "description": "A sponsor funds a match. You deposit SPYx. The match is reserved for you on-chain and vests the longer you stay.",
+    "create": "Create a pool",
+    "filterLabel": "Show",
+    "filters": {
+      "open": "Open",
+      "ended": "Closed",
+      "all": "All"
+    },
+    "count": "{count, plural, =0 {No pools} one {# pool} other {# pools}}",
+    "empty": {
+      "title": "No pools here yet",
+      "description": "Set a match, fund it, and let savers in. It takes one transaction.",
+      "cta": "Create the first pool"
+    },
+    "error": {
+      "title": "Can't reach Solana right now",
+      "description": "This list is read straight from the chain. Check your connection and try again.",
+      "retry": "Try again"
+    }
+  },
+  "card": {
+    "match": "{percent} match",
+    "matchLeft": "Match left",
+    "matchLeftValue": "{amount} {symbol}",
+    "cap": "Limit per saver",
+    "vests": "Vests over",
+    "closes": "Closes",
+    "closesIn": "in {duration}",
+    "closedOn": "{date}",
+    "sponsor": "Sponsor",
+    "ringLabel": "{percent} of the match budget is reserved"
+  },
+  "phase": {
+    "open": "Open",
+    "ending-soon": "Closing soon",
+    "budget-full": "Match fully reserved",
+    "ended": "Closed"
+  },
+  "demo": {
+    "badge": "Demo timescale",
+    "note": "Vests over {duration} so you can watch it happen. A real pool would vest over months."
+  },
+  "detail": {
+    "back": "All pools",
+    "sponsor": "Sponsor",
+    "you": "You",
+    "explorer": "View on Explorer",
+    "unnamed": "Pool #{id}",
+    "instrument": {
+      "title": "Match budget",
+      "ringLabel": "{reserved} of {total} {symbol} of match is reserved for savers",
+      "left": "left to match",
+      "ledger": {
+        "total": "Funded by the sponsor",
+        "reserved": "Reserved for savers",
+        "available": "Still available",
+        "deposits": "Deposited by savers",
+        "claimed": "Claimed so far"
+      }
+    },
+    "rules": {
+      "title": "How this pool works",
+      "match": "The sponsor matches {percent} of each deposit, first come first served.",
+      "cap": "Each saver can deposit up to {amount} {symbol}.",
+      "vesting": "The match vests in a straight line over {duration}, starting when you deposit.",
+      "closesIn": "Deposits close in {duration}.",
+      "closedOn": "Deposits closed {date}.",
+      "leaveEarly": "Leave early and your whole deposit comes back. The part of the match that hasn't vested returns to the sponsor. What has vested stays yours.",
+      "reclaim": "After the pool closes, the sponsor can reclaim match nobody reserved."
+    },
+    "actionsLabel": "Your actions in this pool"
+  },
+  "issuer": {
+    "title": "What you actually own",
+    "intro": "{symbol} is a tokenized stock. Its issuer keeps some control over the token, and a pool can't change that. Here is what the issuer can do, read live from the chain:",
+    "status": {
+      "live": "Transfers are live",
+      "paused": "Transfers are paused by the issuer"
+    },
+    "powers": {
+      "pause": {
+        "title": "Pause transfers",
+        "body": "While paused, nobody can deposit, claim or withdraw. Funds are stalled, not lost."
+      },
+      "freeze": {
+        "title": "Freeze an account",
+        "body": "The freeze authority can lock any token account, including this pool's vault."
+      },
+      "delegate": {
+        "title": "Move tokens out of any account",
+        "body": "A permanent delegate can transfer tokens from any holder, including this pool's vault. The program can't prevent it."
+      },
+      "multiplier": {
+        "title": "Change the display multiplier",
+        "body": "Dividends and splits change how many tokens your wallet shows, not how many you hold. Current multiplier: {multiplier}."
+      }
+    },
+    "authority": "Held by",
+    "noAuthority": "No key holds this power",
+    "demoNote": "This is a demo. Nothing here is an offer of securities, and the program is unaudited.",
+    "loading": "Reading the token from the chain…",
+    "unavailable": "Couldn't read the token's issuer settings right now."
+  },
+  "activity": {
+    "title": "Activity",
+    "subtitle": "Every entry was re-read from the chain before it was recorded.",
+    "empty": {
+      "title": "No activity yet",
+      "description": "Transactions appear here once they are confirmed on Solana."
+    },
+    "kinds": {
+      "POOL_CREATED": "{who} created the pool",
+      "MATCH_FUNDED": "{who} funded {amount} {symbol} of match",
+      "DEPOSITED": "{who} deposited {amount} {symbol} and had {match} {symbol} of match reserved",
+      "CLAIMED": "{who} claimed {amount} {symbol} of vested match",
+      "WITHDRAWN": "{who} withdrew {amount} {symbol}; {match} {symbol} of unvested match went back to the sponsor",
+      "UNMATCHED_RECLAIMED": "{who} reclaimed {amount} {symbol} of unused match",
+      "POSITION_CLOSED": "{who} closed their position"
+    },
+    "viewTx": "View transaction",
+    "loadMore": "Show older activity",
+    "loading": "Loading…",
+    "error": "Couldn't load more activity.",
+    "you": "You"
+  },
+  "states": {
+    "notFoundTitle": "That pool doesn't exist",
+    "notFoundDescription": "Check the address, or browse the pools that do.",
+    "errorTitle": "Couldn't load this pool",
+    "errorDescription": "The pool is read straight from Solana. Try again in a moment.",
+    "retry": "Try again",
+    "backToPools": "Browse pools"
+  }
+}

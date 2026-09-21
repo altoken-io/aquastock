@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { Landmark, TrendingUp, Users, Waves } from 'lucide-react';
+import { Building2, Coins, PiggyBank, Users } from 'lucide-react';
 
 import {
   MotionDiv,
@@ -10,27 +10,27 @@ import { cn } from '@/utils/classNames';
 
 const CASES = [
   {
-    id: 'government',
-    icon: Landmark,
-    tag: 'GOV',
+    id: 'employers',
+    icon: Building2,
+    tag: 'EMP',
     accent: 'border-l-public text-public',
   },
   {
-    id: 'community',
+    id: 'communities',
     icon: Users,
     tag: 'COM',
     accent: 'border-l-private text-private',
   },
   {
-    id: 'investors',
-    icon: TrendingUp,
-    tag: 'INV',
+    id: 'protocols',
+    icon: Coins,
+    tag: 'PRO',
     accent: 'border-l-primary text-primary',
   },
   {
-    id: 'generalized',
-    icon: Waves,
-    tag: 'GEN',
+    id: 'savers',
+    icon: PiggyBank,
+    tag: 'YOU',
     accent: 'border-l-muted-foreground/40 text-muted-foreground',
   },
 ] as const;

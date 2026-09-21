@@ -4,14 +4,12 @@ import { getTranslations } from 'next-intl/server';
 
 import BrandLogo from '@/components/helpers/brand-logo';
 import { Link } from '@/lib/i18n/navigation';
-import { getDemoTotals } from '@/lib/demo/projects';
-import { ConfluenceRing } from '@/modules/product/components/confluence-ring';
+import { MatchRing } from '@/modules/pools/components/match-ring';
 
 /**
- * Split-panel layout for the staff/government admin console
- * (sign-in/forgot-password/reset-password) — distinct from the investor-
- * facing PublicShell on purpose: this audience is signing in to verify
- * milestones, not browsing projects. See memory: better-auth-scope.
+ * Split-panel layout for the operator console (sign-in/forgot-password/reset-password),
+ * distinct from the wallet-facing PublicShell on purpose: this audience signs in to watch
+ * pools and the program, not to save. Savers and sponsors never sign in: they connect a wallet.
  */
 export async function AuthShell({
   locale,
@@ -26,7 +24,6 @@ export async function AuthShell({
 }) {
   const t = await getTranslations({ locale, namespace: 'admin' });
   const tLegal = await getTranslations({ locale, namespace: 'legal' });
-  const totals = getDemoTotals();
 
   return (
     <div className="grid min-h-dvh w-full lg:grid-cols-2">
@@ -43,11 +40,15 @@ export async function AuthShell({
         </Link>
 
         <div className="flex flex-col items-start gap-6">
-          <ConfluenceRing
-            publicValue={totals.totalPublic}
-            privateValue={totals.totalPrivate}
+          <MatchRing
+            segments={[
+              { token: 'sponsor', value: 1 },
+              { token: 'saver', value: 1 },
+            ]}
             size={200}
             strokeWidth={16}
+            // The panel is dark whatever the theme: use the dark tokens so both arcs read on it.
+            className="dark"
             label={t('console.ringLabel')}
           />
           <div>

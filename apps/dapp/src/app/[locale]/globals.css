@@ -1,7 +1,16 @@
-@import 'tailwindcss';
-
-/* Explicit @source: pnpm workspace symlinks can be unreliable for Tailwind's
-   automatic content detection under WSL, so shared packages are scanned explicitly. */
+/*
+ * Automatic content detection is off (`source(none)`) and every source is listed. Auto-detection
+ * walks the whole app directory, which through pnpm's workspace symlinks means whole
+ * node_modules trees: ~11,500 files, and the scanner turns some of their bytes into corrupted
+ * class candidates. Arbitrary-value utilities such as `origin-[var(--...)]` accept any bytes, so
+ * one such candidate becomes broken CSS: the dev server's "Parsing CSS source code failed"
+ * overlay, and a production build that fails with "Missed semicolon". Listing the two source
+ * directories scans 256 files and never produced a corrupted candidate.
+ *
+ * A package that ships Tailwind classes must be added here, or its classes will silently vanish.
+ */
+@import 'tailwindcss' source(none);
+@source "../../";
 @source "../../../../../packages/ui/src";
 
 @custom-variant dark (&:is(.dark *));
@@ -50,9 +59,16 @@
   --color-public-foreground: var(--public-foreground);
   --color-private: var(--private);
   --color-private-foreground: var(--private-foreground);
+  /* The two streams of every position (see DESIGN.md, "Confluence"). New code names them by
+     meaning; they resolve to the Anchor and Terra tokens above, which stay as they were. */
+  --color-sponsor: var(--public);
+  --color-sponsor-foreground: var(--public-foreground);
+  --color-saver: var(--private);
+  --color-saver-foreground: var(--private-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
   --color-ok: var(--ok);
+  --color-ok-text: var(--ok-text);
   --font-display: var(--font-plus-jakarta);
   /* Changelog-page-local mono face; see changelog-view.tsx. Registered here
      (rather than an arbitrary font-[family-name:var(...)] class) for the
@@ -125,6 +141,10 @@
   --sidebar-ring: var(--primary);
 
   --ok: oklch(0.56 0.12 150);
+  /* Strong ease-out for UI motion; the built-in easings are too weak to feel intentional. */
+  --dapp-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  /* --ok for small text on a tinted ok background: --ok itself is 3.9:1 there, AA needs 4.5:1. */
+  --ok-text: oklch(0.4 0.1 150);
   --warning: oklch(0.74 0.15 75);
   /* Dark text on the amber --warning surface — used by the sandbox-mode
      banner/badge, kept as its own token (rather than reusing
@@ -152,7 +172,7 @@
   --primary-foreground: oklch(0.15 0.02 200);
   --primary-pressed: color-mix(in srgb, var(--primary) 82%, white 18%);
 
-  --public: oklch(0.58 0.09 258);
+  --public: oklch(0.63 0.09 258);
   --public-foreground: oklch(0.98 0.004 85);
   --private: oklch(0.68 0.14 48);
   --private-foreground: oklch(0.16 0.02 45);
@@ -193,6 +213,7 @@
   --sidebar-ring: var(--primary);
 
   --ok: oklch(0.7 0.15 150);
+  --ok-text: oklch(0.78 0.15 150);
   --warning: oklch(0.72 0.15 65);
   --warning-foreground: oklch(0.18 0.03 65);
 }
@@ -320,6 +341,39 @@ body {
 
 @utility dapp-icon-tile {
   @apply flex h-10 w-10 items-center justify-center rounded-2xl border border-border/85 bg-secondary/85 text-foreground/72 shadow-inner;
+}
+
+/*
+ * Enter transition for content that swaps in (a new panel, wizard step, status message).
+ * A transition on @starting-style, not a keyframe, so it can be interrupted and retargeted.
+ * Reduced motion keeps the fade and drops the movement.
+ */
+@utility dapp-enter {
+  transition:
+    opacity 200ms var(--dapp-ease-out),
+    translate 200ms var(--dapp-ease-out);
+  @starting-style {
+    opacity: 0;
+    translate: 0 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition: opacity 150ms linear;
+    @starting-style {
+      opacity: 0;
+      translate: none;
+    }
+  }
+}
+
+/*
+ * The Confluence closing: a ring's arcs draw in from nothing once, when it first appears.
+ * Used on the two hero rings only (pool page, your position); list and preview rings just sit.
+ * Reduced motion removes the arc transition itself (see MatchRing), so this has no effect.
+ */
+@utility dapp-arc-in {
+  @starting-style {
+    stroke-dasharray: 0 1000;
+  }
 }
 
 @utility dapp-icon-accent {

@@ -252,7 +252,7 @@ export default async function RootLayout({
               url: baseUrl,
               logo: `${baseUrl}/icon.svg`,
               description:
-                'AquaStock lets a government anchor and community investors co-fund water infrastructure projects, tracked on-chain on Solana.',
+                "AquaStock lets a sponsor fund a match on savers' deposits of tokenized SPYx. The match vests on-chain; leave early and keep your deposit and what has vested.",
             }),
           }}
         />

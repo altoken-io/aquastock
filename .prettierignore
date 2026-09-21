@@ -10,3 +10,7 @@ pnpm-lock.yaml
 # copy of apps/dapp's got committed once and broke CI's format check for
 # several pushes since nested .gitignore isn't read by the Prettier CLI.
 next-env.d.ts
+
+# Anchor/Cargo build output and the generated IDL + TS types under it (nested
+# .gitignore isn't read by the Prettier CLI).
+programs/target/

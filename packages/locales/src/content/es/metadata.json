@@ -1,28 +1,30 @@
 {
   "title": {
-    "default": "AquaStock — Financiamiento de Infraestructura de Agua en Solana",
+    "default": "AquaStock — el aporte del empleador, en Solana",
     "template": "%s | AquaStock"
   },
   "category": "Finanzas",
-  "classification": "Financiamiento de infraestructura público-privada",
-  "abstract": "AquaStock permite que un gobierno ancla e inversionistas comunitarios co-financien proyectos de infraestructura de agua, con seguimiento en cadena en Solana.",
-  "description": "AquaStock permite que un gobierno ancla e inversionistas comunitarios co-financien proyectos de infraestructura de agua, con seguimiento en cadena en Solana.",
+  "classification": "Aporte a los ahorros con acciones tokenizadas",
+  "abstract": "AquaStock permite que un patrocinador financie un aporte sobre los depósitos de SPYx tokenizado. El aporte se libera en la cadena; si te retiras antes, conservas tu depósito y lo que ya se liberó.",
+  "description": "AquaStock permite que un patrocinador financie un aporte sobre los depósitos de SPYx tokenizado. El aporte se libera en la cadena; si te retiras antes, conservas tu depósito y lo que ya se liberó.",
   "keywords": [
     "Solana",
-    "infraestructura de agua",
-    "financiamiento público-privado",
+    "acciones tokenizadas",
+    "SPYx",
+    "aporte al ahorro",
+    "liberación gradual",
     "hackathon"
   ],
   "openGraph": {
     "locale": "es_PE",
     "title": "AquaStock",
-    "description": "Infraestructura de agua, financiada en Solana.",
+    "description": "El aporte del empleador, para quienes no tienen empleador.",
     "siteName": "AquaStock"
   },
   "twitter": {
     "site": "@aquastock",
     "creator": "@aquastock",
     "title": "AquaStock",
-    "description": "Infraestructura de agua, financiada en Solana."
+    "description": "El aporte del empleador, para quienes no tienen empleador."
   }
 }

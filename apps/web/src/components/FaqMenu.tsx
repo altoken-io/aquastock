@@ -25,7 +25,7 @@ export default function FaqMenu({
         >
           <AccordionTrigger className="w-full cursor-pointer items-start gap-6 py-6 text-left hover:no-underline [&_[data-slot=accordion-trigger-icon]]:hidden">
             <span className="flex items-baseline gap-4">
-              <span className="font-mono-ui pt-0.5 text-xs text-muted-foreground/60 tabular-nums">
+              <span className="font-mono-ui pt-0.5 text-xs text-muted-foreground tabular-nums">
                 Q{String(index + 1).padStart(2, '0')}
               </span>
               <span className="text-lg leading-snug font-semibold sm:text-xl">

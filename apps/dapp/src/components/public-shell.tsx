@@ -7,14 +7,15 @@ import { LanguageSwitcher } from '@/components/helpers/language-switcher';
 import { MobileNav } from '@/components/helpers/mobile-nav';
 import { PrimaryNav, type NavItem } from '@/components/helpers/primary-nav';
 import ThemeSwitcher from '@/components/helpers/theme-switcher';
+import { WalletButton } from '@/modules/wallet/wallet-button';
 import { Link } from '@/lib/i18n/navigation';
 import { WEB_BASE_URL } from '@/lib/web-url';
 import { SandboxNoticeBar } from '@/modules/product/components/sandbox-notice-bar';
 
 /**
- * The investor-facing shell — real navigation (Projects, My Impact). `/` is
+ * The product shell — real navigation (Pools, My match) and the wallet button. `/` is
  * the login page (see memory: dapp-home-is-login), not part of this
- * product-browsing nav, so the brand mark links to `/projects` instead — the
+ * product-browsing nav, so the brand mark links to `/pools` instead — the
  * actual landing for someone browsing the product. A server component: only
  * the mobile-menu Sheet and the active-state desktop nav need to be client
  * leaves (see PrimaryNav/MobileNav).
@@ -35,9 +36,9 @@ export async function PublicShell({
       <SandboxNoticeBar />
       <header className="sticky top-0 z-40 border-b border-border/85 bg-background/85 backdrop-blur-md">
         <div className="container flex items-center justify-between gap-3 py-3.5">
-          <Link href="/projects" className="flex min-w-0 items-center gap-2.5">
+          <Link href="/pools" className="flex min-w-0 items-center gap-2.5">
             <BrandLogo alt={t('logo.alt')} size={30} className="size-7" />
-            <span className="truncate text-sm font-semibold tracking-[0.14em] text-foreground uppercase">
+            <span className="hidden truncate text-sm font-semibold tracking-[0.14em] text-foreground uppercase md:inline">
               {t('logo.label')}
             </span>
           </Link>
@@ -51,6 +52,7 @@ export async function PublicShell({
             >
               {t('cta.admin')}
             </Link>
+            <WalletButton />
             <LanguageSwitcher />
             <ThemeSwitcher />
             <MobileNav

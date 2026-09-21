@@ -58,6 +58,8 @@ jobs:
       # point at the throwaway service container above — never a real DB.
       DIRECT_URL: postgresql://postgres:postgres@localhost:5432/aquastock?schema=public
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/aquastock?schema=public
+      # Opt-in for the store integration tests, which refuse any non-localhost URL.
+      INTEGRATION_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/aquastock?schema=public
       TURBO_TELEMETRY_DISABLED: '1'
       NEXT_TELEMETRY_DISABLED: '1'
 

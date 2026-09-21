@@ -1,0 +1,20 @@
+# Tests are in-process (LiteSVM), so `anchor test` does not start a validator.
+skip_local_validator = true
+
+[toolchain]
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+match_pools = "92EVZikCaJ1SXTJAq7e8NzzZg5zLKjK2LyX14SQeQRfE"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "cargo test"
+
+[hooks]

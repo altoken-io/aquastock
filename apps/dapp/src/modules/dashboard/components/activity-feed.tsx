@@ -1,4 +1,15 @@
-import { CircleDollarSign, ShieldCheck } from 'lucide-react';
+import {
+  ArrowDownToLine,
+  ArrowUpFromLine,
+  CircleCheck,
+  Landmark,
+  PackageOpen,
+  Sparkles,
+  Undo2,
+  type LucideIcon,
+} from 'lucide-react';
+
+import type { PoolActivityKind } from '@aquastock/types';
 
 import { Link } from '@/lib/i18n/navigation';
 import { cn } from '@/utils/classNames';
@@ -8,10 +19,20 @@ export type ActivityRow = {
   text: string;
   date: string;
   href: string;
-  kind: 'position_funded' | 'milestone_verified';
+  kind: PoolActivityKind;
 };
 
-/** Demo activity only — no live on-chain feed exists yet (docs/ROADMAP.md). */
+const ICONS: Record<PoolActivityKind, LucideIcon> = {
+  POOL_CREATED: Sparkles,
+  MATCH_FUNDED: Landmark,
+  DEPOSITED: ArrowDownToLine,
+  CLAIMED: CircleCheck,
+  WITHDRAWN: ArrowUpFromLine,
+  UNMATCHED_RECLAIMED: Undo2,
+  POSITION_CLOSED: PackageOpen,
+};
+
+/** Recent events across pools, each already re-read from the chain before it was recorded. */
 export function ActivityFeed({
   entries,
   emptyLabel,
@@ -32,18 +53,10 @@ export function ActivityFeed({
   return (
     <ul className={cn('flex flex-col gap-4', className)}>
       {entries.map((entry) => {
-        const Icon =
-          entry.kind === 'milestone_verified' ? ShieldCheck : CircleDollarSign;
+        const Icon = ICONS[entry.kind];
         return (
           <li key={entry.id} className="flex items-start gap-3">
-            <span
-              className={cn(
-                'dapp-icon-tile shrink-0',
-                entry.kind === 'milestone_verified'
-                  ? 'text-ok'
-                  : 'text-primary',
-              )}
-            >
+            <span className="dapp-icon-tile shrink-0 text-primary">
               <Icon className="size-4" aria-hidden="true" />
             </span>
             <div className="min-w-0">

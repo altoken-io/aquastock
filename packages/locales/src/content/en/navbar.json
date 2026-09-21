@@ -2,18 +2,18 @@
   "logo": {
     "alt": "AquaStock logo",
     "label": "AquaStock",
-    "tagline": "Water infrastructure, funded on Solana"
+    "tagline": "The employer match, on Solana"
   },
   "navigation": [
     {
-      "href": "/projects",
-      "title": "Projects",
-      "description": "Browse funded projects"
+      "href": "/pools",
+      "title": "Pools",
+      "description": "Browse match pools"
     },
     {
-      "href": "/impact",
-      "title": "My Impact",
-      "description": "See your funding impact"
+      "href": "/my-match",
+      "title": "My match",
+      "description": "Track your deposits and vesting"
     }
   ],
   "skipToContent": "Skip to content",

@@ -75,6 +75,7 @@ export function ResetPasswordForm() {
       className="flex w-full flex-col gap-4"
     >
       <Input
+        placeholder=""
         label={t('resetPassword.newPassword')}
         name="newPassword"
         type="password"

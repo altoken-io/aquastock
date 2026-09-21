@@ -8,32 +8,21 @@ import { getTranslations } from 'next-intl/server';
 
 export async function FaqSection() {
   const t = await getTranslations('faq');
-  const faqs = [
-    {
-      question: t('questions.faq1.question'),
-      answer: t('questions.faq1.answer'),
-    },
-    {
-      question: t('questions.faq2.question'),
-      answer: t('questions.faq2.answer'),
-    },
-    {
-      question: t('questions.faq3.question'),
-      answer: t('questions.faq3.answer'),
-    },
-    {
-      question: t('questions.faq4.question'),
-      answer: t('questions.faq4.answer'),
-    },
-    {
-      question: t('questions.faq5.question'),
-      answer: t('questions.faq5.answer'),
-    },
-    {
-      question: t('questions.faq6.question'),
-      answer: t('questions.faq6.answer'),
-    },
-  ];
+  const ids = [
+    'faq1',
+    'faq2',
+    'faq3',
+    'faq4',
+    'faq5',
+    'faq6',
+    'faq7',
+    'faq8',
+    'faq9',
+  ] as const;
+  const faqs = ids.map((id) => ({
+    question: t(`questions.${id}.question`),
+    answer: t(`questions.${id}.answer`),
+  }));
 
   return (
     <section id="faq" className="w-full py-20 sm:py-24 lg:py-32">

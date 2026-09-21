@@ -1,7 +1,7 @@
 {
-  "title": "Infraestructura de agua, financiada en Solana.",
-  "subtitle": "Un gobierno ancla e inversionistas comunitarios co-financian el mismo proyecto.",
-  "description": "AquaStock registra cada posición — pública y privada — contra hitos reales, en cadena.",
+  "title": "El aporte del empleador, para quienes no tienen empleador.",
+  "subtitle": "Un patrocinador financia un aporte. Tú depositas SPYx tokenizado. El aporte queda reservado para ti en Solana y se libera mientras más te quedas.",
+  "description": "Si te retiras antes, conservas tu depósito y lo que ya se liberó. El resto vuelve al patrocinador. Cada cifra está en la cadena.",
   "cta": {
     "primary": {
       "href": "/#how-it-works",
@@ -14,13 +14,20 @@
   },
   "usersCount": "Demo de hackathon — devnet",
   "legend": {
-    "sameTable": "Ambos en la misma tabla de financiamiento."
+    "sponsor": "Aporte del patrocinador",
+    "saver": "Tus ahorros",
+    "sameTable": "Una posición, dos fuentes."
   },
-  "gaugeLabel": "Sitio",
+  "gaugeLabel": "Aporte",
   "panel": {
-    "ariaLabel": "Lectura en vivo del modelo de financiamiento",
-    "recordLabel": "Registro del sitio",
-    "projectName": "Mejora de planta de tratamiento — Sitio 04",
-    "caption": "Ilustrativo — coincide con el conjunto de datos de la demo usado en todo el producto."
+    "ariaLabel": "Una posición de ejemplo: lo que depositas, el aporte del patrocinador y cuánto se ha liberado",
+    "recordLabel": "Posición — ilustrativa",
+    "projectName": "Aporte al ahorro de docentes",
+    "status": "Liberándose",
+    "deposit": "Tu depósito",
+    "match": "Aporte del patrocinador",
+    "vested": "Liberado hasta ahora",
+    "claimable": "Listo para reclamar",
+    "caption": "Cifras ilustrativas, no un fondo real."
   }
 }

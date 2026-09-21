@@ -1,27 +1,34 @@
 {
   "badge": "Cómo funciona",
-  "title": "Un proyecto, dos tipos de inversionista",
-  "subtitle": "Capital público y privado convergen en la misma tabla de financiamiento.",
+  "title": "Ahorra. Quédate. El aporte es tuyo.",
+  "subtitle": "El aporte de un patrocinador, reservado en la cadena en cuanto depositas y ganado de forma lineal.",
   "steps": {
     "firstStep": {
-      "title": "Se publica un proyecto",
-      "description": "Un proyecto de infraestructura de agua se publica con una meta de financiamiento e hitos."
+      "title": "Un patrocinador financia un aporte",
+      "description": "Bloquea tokens en un fondo y define las reglas: la tasa de aporte, lo máximo que puede depositar un ahorrador, cuánto tarda en liberarse el aporte y cuándo cierran los depósitos."
     },
     "secondStep": {
-      "title": "El gobierno lo ancla",
-      "description": "Una posición gubernamental, etiquetada como pública, señala que el proyecto está validado."
+      "title": "Depositas SPYx",
+      "description": "El monto del aporte queda reservado para ti en la cadena, en la misma transacción. Si el fondo no puede igualar por completo, lo ves antes de firmar."
     },
     "thirdStep": {
-      "title": "La comunidad co-invierte",
-      "description": "Vecinos, diáspora e inversionistas externos financian el resto, etiquetado como privado."
+      "title": "El aporte se libera",
+      "description": "De forma lineal, desde el momento en que depositas. Puedes reclamar lo que ya se liberó cuando quieras."
     },
     "fourthStep": {
-      "title": "Se verifican los hitos",
-      "description": "El progreso y el impacto se registran en cadena a medida que el proyecto avanza."
+      "title": "Retírate cuando quieras",
+      "description": "Siempre recuperas todo tu depósito. El aporte que aún no se liberó vuelve al patrocinador; lo que ya se liberó sigue siendo tuyo."
     }
   },
-  "summary": "Capital público y privado, un solo dashboard, todo en cadena.",
-  "photoAlt": "Un representante municipal y una integrante de la comunidad inspeccionan juntos infraestructura de tratamiento de agua.",
+  "summary": "Reglas que no cambian una vez creado el fondo, y cifras que cualquiera puede comprobar.",
+  "illustration": {
+    "label": "Una línea de liberación: el aporte sube en línea recta desde el día del depósito. Si te retiras antes, la parte que aún no se liberó vuelve al patrocinador.",
+    "start": "Depósito",
+    "end": "Todo liberado",
+    "vested": "Liberado: es tuyo",
+    "unvested": "Aún sin liberar: vuelve al patrocinador si te retiras",
+    "here": "Estás aquí"
+  },
   "gaugeLabel": "Proceso",
-  "benchmarkLabel": "BM"
+  "benchmarkLabel": "PASO"
 }

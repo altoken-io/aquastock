@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { MotionDiv } from '@/components/helpers/motion/blur-lazy-motion';
 import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
 import { cn } from '@/utils/classNames';
+import { VestingLine } from '@/modules/app/components/vesting-line';
 
 const STEP_TONE = {
   first: 'border-primary text-primary',
@@ -69,14 +69,8 @@ export async function HowItWorksSection() {
 
         <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
           <MotionDiv delay={0.2} className="lg:col-span-1">
-            <div className="relative aspect-4/5 w-full overflow-hidden rounded-md border border-border lg:aspect-auto lg:h-full">
-              <Image
-                src="/assets/brand/process-site-verification.webp"
-                alt={t('photoAlt')}
-                fill
-                sizes="(min-width: 1024px) 33vw, 100vw"
-                className="object-cover"
-              />
+            <div className="w-full rounded-md border border-border bg-card p-5 lg:sticky lg:top-28">
+              <VestingLine />
             </div>
           </MotionDiv>
 

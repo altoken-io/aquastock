@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "listTitle": "Fondos de aporte",
+    "listDescription": "Los patrocinadores aportan un complemento a los ahorros en SPYx tokenizado. Deposita, mantén, y el aporte se libera.",
+    "notFoundTitle": "Fondo no encontrado"
+  },
+  "list": {
+    "eyebrow": "Fondos de aporte",
+    "title": "El aporte del empleador, para quienes no tienen empleador",
+    "description": "Un patrocinador financia un aporte. Tú depositas SPYx. El aporte queda reservado para ti en la cadena y se libera mientras más tiempo te quedas.",
+    "create": "Crear un fondo",
+    "filterLabel": "Mostrar",
+    "filters": {
+      "open": "Abiertos",
+      "ended": "Cerrados",
+      "all": "Todos"
+    },
+    "count": "{count, plural, =0 {Ningún fondo} one {# fondo} other {# fondos}}",
+    "empty": {
+      "title": "Todavía no hay fondos aquí",
+      "description": "Define un aporte, fináncialo y deja entrar a los ahorradores. Toma una sola transacción.",
+      "cta": "Crear el primer fondo"
+    },
+    "error": {
+      "title": "No podemos conectar con Solana ahora",
+      "description": "Esta lista se lee directamente de la cadena. Revisa tu conexión e inténtalo de nuevo.",
+      "retry": "Intentar de nuevo"
+    }
+  },
+  "card": {
+    "match": "Aporte de {percent}",
+    "matchLeft": "Aporte disponible",
+    "matchLeftValue": "{amount} {symbol}",
+    "cap": "Límite por ahorrador",
+    "vests": "Se libera en",
+    "closes": "Cierra",
+    "closesIn": "en {duration}",
+    "closedOn": "{date}",
+    "sponsor": "Patrocinador",
+    "ringLabel": "{percent} del presupuesto de aporte está reservado"
+  },
+  "phase": {
+    "open": "Abierto",
+    "ending-soon": "Cierra pronto",
+    "budget-full": "Aporte totalmente reservado",
+    "ended": "Cerrado"
+  },
+  "demo": {
+    "badge": "Escala de tiempo de demo",
+    "note": "Se libera en {duration} para que puedas verlo ocurrir. Un fondo real se liberaría en meses."
+  },
+  "detail": {
+    "back": "Todos los fondos",
+    "sponsor": "Patrocinador",
+    "you": "Tú",
+    "explorer": "Ver en Explorer",
+    "unnamed": "Fondo n.º {id}",
+    "instrument": {
+      "title": "Presupuesto de aporte",
+      "ringLabel": "{reserved} de {total} {symbol} de aporte está reservado para ahorradores",
+      "left": "por aportar",
+      "ledger": {
+        "total": "Financiado por el patrocinador",
+        "reserved": "Reservado para ahorradores",
+        "available": "Aún disponible",
+        "deposits": "Depositado por ahorradores",
+        "claimed": "Reclamado hasta ahora"
+      }
+    },
+    "rules": {
+      "title": "Cómo funciona este fondo",
+      "match": "El patrocinador aporta {percent} de cada depósito, por orden de llegada.",
+      "cap": "Cada ahorrador puede depositar hasta {amount} {symbol}.",
+      "vesting": "El aporte se libera de forma lineal durante {duration}, desde que depositas.",
+      "closesIn": "Los depósitos cierran en {duration}.",
+      "closedOn": "Los depósitos cerraron {date}.",
+      "leaveEarly": "Si te retiras antes, recuperas todo tu depósito. La parte del aporte que aún no se liberó vuelve al patrocinador. Lo que ya se liberó sigue siendo tuyo.",
+      "reclaim": "Cuando el fondo cierra, el patrocinador puede recuperar el aporte que nadie reservó."
+    },
+    "actionsLabel": "Tus acciones en este fondo"
+  },
+  "issuer": {
+    "title": "Qué posees realmente",
+    "intro": "{symbol} es una acción tokenizada. Su emisor conserva cierto control sobre el token y un fondo no puede cambiarlo. Esto es lo que el emisor puede hacer, leído en vivo de la cadena:",
+    "status": {
+      "live": "Las transferencias están activas",
+      "paused": "El emisor pausó las transferencias"
+    },
+    "powers": {
+      "pause": {
+        "title": "Pausar las transferencias",
+        "body": "Mientras estén pausadas, nadie puede depositar, reclamar ni retirar. Los fondos quedan detenidos, no perdidos."
+      },
+      "freeze": {
+        "title": "Congelar una cuenta",
+        "body": "La autoridad de congelamiento puede bloquear cualquier cuenta de tokens, incluida la bóveda de este fondo."
+      },
+      "delegate": {
+        "title": "Mover tokens desde cualquier cuenta",
+        "body": "Un delegado permanente puede transferir tokens de cualquier titular, incluida la bóveda de este fondo. El programa no puede impedirlo."
+      },
+      "multiplier": {
+        "title": "Cambiar el multiplicador de visualización",
+        "body": "Los dividendos y las divisiones cambian cuántos tokens muestra tu billetera, no cuántos tienes. Multiplicador actual: {multiplier}."
+      }
+    },
+    "authority": "En manos de",
+    "noAuthority": "Ninguna llave tiene este poder",
+    "demoNote": "Esto es una demo. Nada aquí es una oferta de valores y el programa no ha sido auditado.",
+    "loading": "Leyendo el token desde la cadena…",
+    "unavailable": "No pudimos leer la configuración del emisor del token ahora."
+  },
+  "activity": {
+    "title": "Actividad",
+    "subtitle": "Cada entrada se volvió a leer de la cadena antes de registrarse.",
+    "empty": {
+      "title": "Aún no hay actividad",
+      "description": "Las transacciones aparecen aquí cuando se confirman en Solana."
+    },
+    "kinds": {
+      "POOL_CREATED": "{who} creó el fondo",
+      "MATCH_FUNDED": "{who} financió {amount} {symbol} de aporte",
+      "DEPOSITED": "{who} depositó {amount} {symbol} y se le reservaron {match} {symbol} de aporte",
+      "CLAIMED": "{who} reclamó {amount} {symbol} de aporte liberado",
+      "WITHDRAWN": "{who} retiró {amount} {symbol}; {match} {symbol} de aporte sin liberar volvieron al patrocinador",
+      "UNMATCHED_RECLAIMED": "{who} recuperó {amount} {symbol} de aporte sin usar",
+      "POSITION_CLOSED": "{who} cerró su posición"
+    },
+    "viewTx": "Ver transacción",
+    "loadMore": "Mostrar actividad anterior",
+    "loading": "Cargando…",
+    "error": "No pudimos cargar más actividad.",
+    "you": "Tú"
+  },
+  "states": {
+    "notFoundTitle": "Ese fondo no existe",
+    "notFoundDescription": "Revisa la dirección o explora los fondos que sí existen.",
+    "errorTitle": "No pudimos cargar este fondo",
+    "errorDescription": "El fondo se lee directamente de Solana. Inténtalo de nuevo en un momento.",
+    "retry": "Intentar de nuevo",
+    "backToPools": "Explorar fondos"
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "title": "Water infrastructure, funded on Solana.",
-  "subtitle": "A government anchor and community investors co-fund the same project.",
-  "description": "AquaStock tracks every position — public and private — against real milestones, on-chain.",
+  "title": "The employer match, for people without an employer.",
+  "subtitle": "A sponsor funds a match. You deposit tokenized SPYx. The match is reserved for you on Solana and vests the longer you stay.",
+  "description": "Leave early and you keep your deposit and whatever has vested. The rest goes back to the sponsor. Every number is on-chain.",
   "cta": {
     "primary": {
       "href": "/#how-it-works",
@@ -14,13 +14,20 @@
   },
   "usersCount": "Hackathon demo — devnet",
   "legend": {
-    "sameTable": "Both on the same funding table."
+    "sponsor": "Sponsor's match",
+    "saver": "Your savings",
+    "sameTable": "One position, two sources."
   },
-  "gaugeLabel": "Site",
+  "gaugeLabel": "Match",
   "panel": {
-    "ariaLabel": "Live reading of the funding model",
-    "recordLabel": "Site record",
-    "projectName": "Water treatment upgrade — Site 04",
-    "caption": "Illustrative — matches the demo dataset used across the product."
+    "ariaLabel": "An illustrative position: what you deposit, the sponsor's match, and how much has vested",
+    "recordLabel": "Position — illustrative",
+    "projectName": "Teachers' savings match",
+    "status": "Vesting",
+    "deposit": "Your deposit",
+    "match": "Sponsor match",
+    "vested": "Vested so far",
+    "claimable": "Ready to claim",
+    "caption": "Illustrative numbers, not a live pool."
   }
 }

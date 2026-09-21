@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "title": "Create a match pool",
+    "description": "Fund a match on tokenized SPYx savings in one transaction. Savers earn it as it vests."
+  },
+  "eyebrow": "Sponsors",
+  "title": "Create a match pool",
+  "subtitle": "Fund a match. People who deposit {symbol} earn it as it vests.",
+  "steps": {
+    "label": "Steps",
+    "details": "Details",
+    "rules": "Rules",
+    "fund": "Fund",
+    "review": "Review"
+  },
+  "stepOf": "Step {current} of {total}",
+  "nav": {
+    "back": "Back",
+    "next": "Continue"
+  },
+  "details": {
+    "title": "Name your pool",
+    "description": "Savers see this on the pool page. You sign it with your wallet, so nobody else can change it.",
+    "name": {
+      "label": "Name",
+      "placeholder": "Lima teachers' savings match",
+      "hint": "Up to 80 characters."
+    },
+    "about": {
+      "label": "What is this pool for?",
+      "optional": "Optional",
+      "placeholder": "Who it's for, and why you're funding it.",
+      "count": "{count} / 500"
+    }
+  },
+  "rules": {
+    "title": "Set the rules",
+    "description": "Rules can't change after the pool is created, so savers can rely on them.",
+    "match": {
+      "label": "Match rate",
+      "hint": "The sponsor adds this share of every deposit. 100% is one-for-one."
+    },
+    "cap": {
+      "label": "Most one saver can deposit",
+      "hint": "This also limits the match one saver can earn."
+    },
+    "vesting": {
+      "label": "Match vests over",
+      "hint": "Savers earn the match in a straight line over this time, starting when they deposit."
+    },
+    "window": {
+      "label": "Deposits stay open for",
+      "hint": "Then the pool closes to new deposits, and you can reclaim match nobody reserved."
+    },
+    "unit": "Unit",
+    "units": {
+      "minutes": "minutes",
+      "hours": "hours",
+      "days": "days"
+    },
+    "quickPicks": "Quick picks",
+    "demoTag": "demo"
+  },
+  "fund": {
+    "title": "Fund the match",
+    "description": "When you create the pool, this much {symbol} moves from your wallet into the pool's vault. You can reclaim whatever savers haven't reserved once the pool closes.",
+    "budget": {
+      "label": "Match budget",
+      "balance": "Your balance: {amount} {symbol}",
+      "balanceLoading": "Checking your balance…",
+      "max": "Max",
+      "maxLabel": "Use your whole balance",
+      "notConnected": "Connect a wallet to see your balance."
+    },
+    "reach": {
+      "title": "What this buys",
+      "savers": "{count, plural, one {# saver} other {# savers}} matched in full",
+      "each": "Each deposits up to {cap} {symbol} and earns {match} {symbol}.",
+      "none": "At these rules a deposit at the limit earns no match, so the budget would never be spent."
+    },
+    "demoCap": "Demo limit: on mainnet, the budget and each saver's limit are capped at {cap} {symbol}.",
+    "noBalance": "You don't hold any {symbol}. Get some first, then come back to fund a pool."
+  },
+  "review": {
+    "title": "Review and create",
+    "description": "One transaction creates the pool and funds it. Your wallet asks you to approve it once.",
+    "rows": {
+      "name": "Name",
+      "match": "Match rate",
+      "cap": "Most per saver",
+      "vesting": "Vests over",
+      "window": "Open for",
+      "budget": "Locked in the pool"
+    },
+    "edit": "Edit",
+    "disclosureTitle": "Before you create",
+    "disclosure": {
+      "locked": "{amount} {symbol} moves into the pool. Matches are paid from it. After {date} you can reclaim what savers haven't reserved.",
+      "final": "The rules above can't be changed once the pool exists.",
+      "issuer": "{symbol}'s issuer can pause transfers, freeze accounts and move tokens out of any account, including this pool's vault. The pool page lists these powers, read live from the chain.",
+      "upgrade": "The program can be upgraded by {authority}, who could change how pools behave.",
+      "upgradeNone": "The program can't be upgraded.",
+      "demo": "Demo — this does not constitute an offer of securities."
+    },
+    "submit": "Create pool and lock {amount} {symbol}",
+    "connect": "Connect a wallet to create the pool",
+    "paused": "The issuer has paused {symbol} transfers, so a pool can't be funded right now.",
+    "notReady": "The pool program isn't configured on this deployment."
+  },
+  "created": {
+    "title": "Your pool is live",
+    "description": "It's on Solana and open for deposits until {date}.",
+    "publish": {
+      "title": "Publish its name",
+      "description": "Sign a message so savers see \"{name}\". Signing is free and moves nothing.",
+      "action": "Sign and publish",
+      "signing": "Approve the signature in your wallet",
+      "saving": "Publishing the name…",
+      "done": "Name published",
+      "error": "Couldn't publish the name. The pool works without it, and you can try again.",
+      "unsupported": "This wallet can't sign messages, so the pool shows a numbered name for now.",
+      "cancelled": "You cancelled the signature. Nothing was published."
+    },
+    "open": "Open your pool",
+    "later": "Skip for now"
+  },
+  "problems": {
+    "required": "This field is required.",
+    "invalid": "Enter a valid number.",
+    "tooLong": "That's too long.",
+    "singleLine": "Use a single line.",
+    "characters": "That contains characters that aren't allowed.",
+    "precision": "{symbol} has at most {decimals} decimal places.",
+    "tooSmall": "That's too small to send.",
+    "tooLarge": "That number is too large.",
+    "overBalance": "You hold {balance} {symbol}.",
+    "overDemoCap": "Demo limit: at most {cap} {symbol} here.",
+    "demoCapUnset": "Pool creation is closed on mainnet until a demo limit is configured.",
+    "outOfRange": {
+      "matchPercent": "The match rate must be between 0.01% and 100%.",
+      "vesting": "Vesting must last between 30 seconds and 5 years.",
+      "window": "Deposits must stay open between 10 minutes and 5 years."
+    }
+  },
+  "preview": {
+    "title": "Your pool so far",
+    "unnamed": "Untitled pool",
+    "pending": "Fill in the numbers and the pool takes shape here.",
+    "ringLabel": "The sponsor adds {percent} of every deposit",
+    "savers": "{count, plural, one {saver} other {savers}} matched in full"
+  }
+}

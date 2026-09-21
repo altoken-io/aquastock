@@ -1,12 +1,12 @@
 'use client';
 
-import { ClipboardCheck, FolderKanban, LayoutDashboard } from 'lucide-react';
+import { Layers, LayoutDashboard } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 import { Link, usePathname } from '@/lib/i18n/navigation';
 import { cn } from '@/utils/classNames';
 
-export type DashboardNavIcon = 'command' | 'projects' | 'milestones';
+export type DashboardNavIcon = 'overview' | 'pools';
 export type DashboardNavItem = {
   href: string;
   label: string;
@@ -15,9 +15,8 @@ export type DashboardNavItem = {
 };
 
 const ICONS: Record<DashboardNavIcon, LucideIcon> = {
-  command: LayoutDashboard,
-  projects: FolderKanban,
-  milestones: ClipboardCheck,
+  overview: LayoutDashboard,
+  pools: Layers,
 };
 
 export function SidebarNav({

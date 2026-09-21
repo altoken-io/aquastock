@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
 import {
@@ -18,15 +17,7 @@ export async function EarlyAccessCtaSection() {
       id="early-access"
       className="relative flex w-full flex-col items-center justify-center px-6 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32 xl:pl-32"
     >
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center overflow-hidden rounded-md border border-border px-6 py-16 text-center sm:px-12 sm:py-20 lg:py-24">
-        <Image
-          src="/assets/brand/site-notice.webp"
-          alt={t('imageAlt')}
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div aria-hidden="true" className="absolute inset-0 bg-primary/85" />
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center overflow-hidden rounded-md border border-border bg-primary px-6 py-16 text-center sm:px-12 sm:py-20 lg:py-24">
         <span
           aria-hidden="true"
           className="font-mono-ui absolute top-6 left-6 rounded-sm border border-primary-foreground/25 px-2 py-1 text-[10px] tracking-[0.18em] text-primary-foreground/70 uppercase"
@@ -43,7 +34,7 @@ export async function EarlyAccessCtaSection() {
         />
 
         <MotionText
-          className="relative mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg"
+          className="relative mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground sm:text-lg"
           delay={0.2}
         >
           {t('subtitle')}

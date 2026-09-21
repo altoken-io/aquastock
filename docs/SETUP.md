@@ -21,19 +21,42 @@ cp apps/dapp/.env.example apps/dapp/.env.local
 
 # Apply the Prisma schema
 pnpm --filter @aquastock/db-prisma exec prisma migrate dev
-pnpm --filter @aquastock/db-prisma exec tsx seed.ts   # optional: seed one demo project
 
 pnpm dev            # apps/web on :3000, apps/dapp on :3003
 ```
 
 Each app's `.env.example` documents its own required variables — there is no shared root `.env`. See `docs/ENV_VARS.md`.
 
+## Try the whole product locally
+
+```bash
+pnpm dev:stack
+```
+
+One command, no keys of yours, no real network: a disposable Postgres (port 5434), a local Solana validator with the program and the mainnet Token-2022 build, a demo replica mint and pool, a throwaway browser test wallet (funded with SOL and demo tokens), and the app on <http://localhost:3003/en/pools>. Ctrl+C stops it all. Needs Docker and the Solana/Anchor toolchain (see `docs/PROGRAM.md`).
+
+Pick the "E2E Test Wallet" in the connect dialog to deposit, claim, withdraw or create a pool without a wallet extension. That wallet is registered only on `localnet`. To see the operator console, create a throwaway admin in the local database (there is no public sign-up):
+
+```bash
+cd packages/db-prisma
+DATABASE_URL=postgresql://postgres:postgres@localhost:5434/aquastock \
+DIRECT_URL=postgresql://postgres:postgres@localhost:5434/aquastock \
+BETTER_AUTH_SECRET=local-dev-only-placeholder-secret-0123456789abcdef \
+BETTER_AUTH_URL=http://localhost:3003 \
+  node --experimental-strip-types scripts/create-admin-user.mjs \
+    --email admin@local.test --name "Local Admin" --env /dev/null
+```
+
+It asks for a password; then sign in at `/`. The stack uses Turbopack because the project's webpack dev server (`pnpm dev`) grows to several GB with the wallet stack loaded and can serve truncated chunks; `pnpm dev:stack --webpack` opts back in.
+
 ## Validation
+
+- `pnpm test:e2e` runs the Playwright golden path (sponsor creates a pool; saver deposits, claims, withdraws and closes) on a desktop and a 390 px viewport. It starts `pnpm dev:stack` itself (or reuses a running one), so it needs Docker and the Solana toolchain and is not part of `pnpm check`. `pnpm test:e2e demo-dry-run` times the demo script's beats.
 
 - `pnpm check` — the full gate: format, lint, typecheck, test, build. Run this before every commit.
 - `pnpm lint` / `pnpm check-types` / `pnpm test` / `pnpm build` — individual checks, workspace-wide.
 - `pnpm --filter web <script>` / `pnpm --filter dapp <script>` — scope any script to one app.
-- `pnpm clean:cache` — clears every `.next` directory; the fix if dev mode throws a Turbopack "Parsing CSS source code failed" error (a known Tailwind v4 + Turbopack cache-corruption bug — see `CLAUDE.md`).
+- `pnpm clean:cache` — clears every `.next` directory. Rarely needed now: the dev-mode "Parsing CSS source code failed" error came from Tailwind's automatic source detection, which `apps/dapp/src/app/[locale]/globals.css` now has switched off (sources are listed explicitly; a package that ships Tailwind classes must be added there).
 
 ## Once the Anchor program exists (Day 2+)
 

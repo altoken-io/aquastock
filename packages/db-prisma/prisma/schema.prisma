@@ -7,30 +7,10 @@ datasource db {
   provider = "postgresql"
 }
 
-// Off-chain cache/display layer mirroring the Solana Anchor program's
-// account types (Project, Position, Milestone, Impact). The program is the
-// source of truth; these rows exist so the dashboard can query/paginate
-// without hitting an RPC for every render. `onchainAddress` links each row
-// back to its on-chain PDA once the program writes it.
-
-enum ProjectStatus {
-  DRAFT
-  ACTIVE
-  FUNDED
-  COMPLETED
-  CLOSED
-}
-
-enum InvestorType {
-  PUBLIC
-  PRIVATE
-}
-
-enum MilestoneStatus {
-  PENDING
-  IN_PROGRESS
-  VERIFIED
-}
+// Off-chain data for AquaStock Match Pools. The Anchor program is the source of truth for
+// every pool, position and balance; this database only holds what the chain cannot:
+// descriptive metadata for a pool, and a feed of transactions the server has verified.
+// It never holds funds or rules. The Better Auth tables below serve the operator console.
 
 // Better Auth core tables (apps/dapp admin console login — email/password
 // only, staff/government accounts, no public sign-up). Generated with
@@ -102,68 +82,61 @@ model Verification {
   @@map("verification")
 }
 
-model Project {
-  id             String        @id @default(cuid())
-  slug           String        @unique
+enum PoolActivityKind {
+  POOL_CREATED
+  MATCH_FUNDED
+  DEPOSITED
+  CLAIMED
+  WITHDRAWN
+  UNMATCHED_RECLAIMED
+  POSITION_CLOSED
+}
+
+// Off-chain description of a Match Pool that exists on-chain. The Solana program is the
+// source of truth for every number and every rule; nothing in this table can move funds
+// or change how a pool behaves, and a row is only created after the pool is verified
+// on-chain. Money columns are exact Decimal(20,0) because a u64 does not fit in bigint.
+model Pool {
+  id             String   @id @default(cuid())
+  // The pool PDA, base58.
+  onchainAddress String   @unique
+  // The deployment this pool belongs to, so devnet and mainnet rows never mix.
+  programId      String
+  sponsorWallet  String
+  // The u64 the sponsor chose, part of the PDA seeds.
+  poolId         Decimal  @db.Decimal(20, 0)
   name           String
   description    String?
-  location       String
-  goalAmount     Decimal
-  raisedAmount   Decimal       @default(0)
-  status         ProjectStatus @default(DRAFT)
-  onchainAddress String?       @unique
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @db.Timestamptz(3)
 
-  positions  Position[]
-  milestones Milestone[]
-  impacts    Impact[]
+  activities PoolActivity[]
+
+  @@index([programId, createdAt(sort: Desc)])
+  @@index([sponsorWallet])
 }
 
-model Position {
-  id             String       @id @default(cuid())
-  projectId      String
-  project        Project      @relation(fields: [projectId], references: [id])
-  investorType   InvestorType
-  walletAddress  String
-  amount         Decimal
-  txSignature    String?
-  onchainAddress String?      @unique
-  createdAt      DateTime     @default(now())
+// One verified event from a Match Pools transaction, for the activity feed and Explorer
+// links. Rows are written only after the server re-reads the transaction from the chain,
+// so a client cannot invent one. (txSignature, eventIndex) makes recording idempotent.
+model PoolActivity {
+  id          String           @id @default(cuid())
+  poolId      String
+  pool        Pool             @relation(fields: [poolId], references: [id], onDelete: Cascade)
+  kind        PoolActivityKind
+  wallet      String
+  // Principal or funded amount, in raw token units.
+  amount      Decimal?         @db.Decimal(20, 0)
+  // Match reserved on a deposit, or match forfeited on a withdrawal.
+  matchAmount Decimal?         @db.Decimal(20, 0)
+  txSignature String
+  // Position of the event within its transaction, so one transaction can hold several.
+  eventIndex  Int
+  occurredAt  DateTime         @db.Timestamptz(3)
+  recordedAt  DateTime         @default(now()) @db.Timestamptz(3)
 
-  @@index([projectId])
-  @@index([walletAddress])
-}
-
-model Milestone {
-  id             String          @id @default(cuid())
-  projectId      String
-  project        Project         @relation(fields: [projectId], references: [id])
-  title          String
-  description    String?
-  targetAmount   Decimal?
-  status         MilestoneStatus @default(PENDING)
-  order          Int
-  verifiedAt     DateTime?
-  onchainAddress String?         @unique
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-
-  impacts Impact[]
-
-  @@index([projectId])
-}
-
-model Impact {
-  id             String     @id @default(cuid())
-  projectId      String
-  project        Project    @relation(fields: [projectId], references: [id])
-  milestoneId    String?
-  milestone      Milestone? @relation(fields: [milestoneId], references: [id])
-  metric         String
-  value          Decimal
-  recordedAt     DateTime   @default(now())
-  onchainAddress String?    @unique
-
-  @@index([projectId])
+  @@unique([txSignature, eventIndex])
+  // Feed order, newest first, with a stable tiebreak for keyset pagination.
+  @@index([poolId, occurredAt(sort: Desc), id(sort: Desc)])
+  @@index([wallet])
 }

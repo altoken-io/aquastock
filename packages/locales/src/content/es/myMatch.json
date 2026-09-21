@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Mi aporte",
+    "description": "Tus depósitos, el aporte que se libera sobre ellos y los fondos que patrocinas."
+  },
+  "eyebrow": "Tus ahorros",
+  "title": "Mi aporte",
+  "subtitle": "Cada fondo donde has depositado, y cuánto de su aporte ya se liberó.",
+  "connect": {
+    "title": "Conecta una billetera para ver tu aporte",
+    "description": "Todo lo que ves aquí se lee de las cuentas de tu propia billetera en Solana. No hay registro."
+  },
+  "summary": {
+    "label": "Totales de todos tus fondos",
+    "deposited": "Depositado",
+    "reserved": "Aporte reservado",
+    "claimed": "Reclamado",
+    "claimable": "Listo para reclamar"
+  },
+  "positions": {
+    "title": "Tus posiciones",
+    "empty": {
+      "title": "Aún no has depositado en ningún fondo",
+      "description": "Elige un fondo y deposita. Tu aporte queda reservado en la cadena y empieza a liberarse de inmediato.",
+      "cta": "Ver fondos"
+    }
+  },
+  "row": {
+    "deposit": "Depósito",
+    "match": "Aporte reservado",
+    "claimable": "Listo para reclamar",
+    "vested": "{vested} de {reserved} liberados",
+    "progress": "Se liberó {percent} del aporte",
+    "claim": "Reclamar {amount} {symbol}",
+    "open": "Abrir fondo"
+  },
+  "sponsored": {
+    "title": "Fondos que patrocinas",
+    "empty": {
+      "title": "Aún no patrocinas ningún fondo",
+      "description": "Financia un aporte y deja entrar a los ahorradores. Toma una sola transacción.",
+      "cta": "Crear un fondo"
+    }
+  },
+  "error": {
+    "title": "No se pudieron cargar tus posiciones",
+    "description": "Se leen directamente de Solana. Revisa tu conexión e inténtalo de nuevo.",
+    "retry": "Intentar de nuevo"
+  }
+}

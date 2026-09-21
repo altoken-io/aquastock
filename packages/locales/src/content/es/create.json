@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "title": "Crear un fondo de aporte",
+    "description": "Financia un aporte sobre ahorros en SPYx tokenizado en una sola transacción. Los ahorradores lo ganan a medida que se libera."
+  },
+  "eyebrow": "Patrocinadores",
+  "title": "Crear un fondo de aporte",
+  "subtitle": "Financia un aporte. Quien deposita {symbol} lo gana a medida que se libera.",
+  "steps": {
+    "label": "Pasos",
+    "details": "Detalles",
+    "rules": "Reglas",
+    "fund": "Fondos",
+    "review": "Revisión"
+  },
+  "stepOf": "Paso {current} de {total}",
+  "nav": {
+    "back": "Atrás",
+    "next": "Continuar"
+  },
+  "details": {
+    "title": "Ponle nombre a tu fondo",
+    "description": "Los ahorradores lo ven en la página del fondo. Lo firmas con tu billetera, así nadie más puede cambiarlo.",
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Aporte para el ahorro de docentes de Lima",
+      "hint": "Hasta 80 caracteres."
+    },
+    "about": {
+      "label": "¿Para qué es este fondo?",
+      "optional": "Opcional",
+      "placeholder": "A quién va dirigido y por qué lo financias.",
+      "count": "{count} / 500"
+    }
+  },
+  "rules": {
+    "title": "Define las reglas",
+    "description": "Las reglas no cambian después de crear el fondo, así los ahorradores pueden confiar en ellas.",
+    "match": {
+      "label": "Tasa de aporte",
+      "hint": "El patrocinador suma este porcentaje de cada depósito. 100 % es uno por uno."
+    },
+    "cap": {
+      "label": "Máximo que puede depositar un ahorrador",
+      "hint": "También limita el aporte que puede ganar cada ahorrador."
+    },
+    "vesting": {
+      "label": "El aporte se libera durante",
+      "hint": "Los ahorradores ganan el aporte de forma lineal durante este tiempo, desde que depositan."
+    },
+    "window": {
+      "label": "Los depósitos siguen abiertos por",
+      "hint": "Luego el fondo cierra a nuevos depósitos y puedes recuperar el aporte que nadie reservó."
+    },
+    "unit": "Unidad",
+    "units": {
+      "minutes": "minutos",
+      "hours": "horas",
+      "days": "días"
+    },
+    "quickPicks": "Opciones rápidas",
+    "demoTag": "demo"
+  },
+  "fund": {
+    "title": "Financia el aporte",
+    "description": "Al crear el fondo, esta cantidad de {symbol} pasa de tu billetera a la bóveda del fondo. Puedes recuperar lo que los ahorradores no hayan reservado cuando el fondo cierre.",
+    "budget": {
+      "label": "Presupuesto del aporte",
+      "balance": "Tu saldo: {amount} {symbol}",
+      "balanceLoading": "Consultando tu saldo…",
+      "max": "Máx.",
+      "maxLabel": "Usar todo tu saldo",
+      "notConnected": "Conecta una billetera para ver tu saldo."
+    },
+    "reach": {
+      "title": "Lo que logra",
+      "savers": "{count, plural, one {# ahorrador} other {# ahorradores}} con aporte completo",
+      "each": "Cada uno deposita hasta {cap} {symbol} y gana {match} {symbol}.",
+      "none": "Con estas reglas, un depósito en el máximo no gana aporte, así que el presupuesto nunca se gastaría."
+    },
+    "demoCap": "Límite de demostración: en mainnet, el presupuesto y el máximo por ahorrador están limitados a {cap} {symbol}.",
+    "noBalance": "No tienes {symbol}. Consigue algo primero y vuelve para financiar un fondo."
+  },
+  "review": {
+    "title": "Revisa y crea",
+    "description": "Una sola transacción crea el fondo y lo financia. Tu billetera te pide aprobarla una vez.",
+    "rows": {
+      "name": "Nombre",
+      "match": "Tasa de aporte",
+      "cap": "Máximo por ahorrador",
+      "vesting": "Se libera durante",
+      "window": "Abierto durante",
+      "budget": "Bloqueado en el fondo"
+    },
+    "edit": "Editar",
+    "disclosureTitle": "Antes de crear",
+    "disclosure": {
+      "locked": "{amount} {symbol} pasan al fondo. De ahí se pagan los aportes. Después del {date} puedes recuperar lo que los ahorradores no hayan reservado.",
+      "final": "Las reglas de arriba no se pueden cambiar una vez creado el fondo.",
+      "issuer": "El emisor de {symbol} puede pausar transferencias, congelar cuentas y mover tokens fuera de cualquier cuenta, incluida la bóveda de este fondo. La página del fondo enumera estos poderes, leídos en vivo desde la cadena.",
+      "upgrade": "El programa puede ser actualizado por {authority}, quien podría cambiar cómo se comportan los fondos.",
+      "upgradeNone": "El programa no se puede actualizar.",
+      "demo": "Demo — no constituye una oferta de valores."
+    },
+    "submit": "Crear fondo y bloquear {amount} {symbol}",
+    "connect": "Conecta una billetera para crear el fondo",
+    "paused": "El emisor pausó las transferencias de {symbol}, así que ahora no se puede financiar un fondo.",
+    "notReady": "El programa de fondos no está configurado en este despliegue."
+  },
+  "created": {
+    "title": "Tu fondo ya está activo",
+    "description": "Está en Solana y abierto a depósitos hasta el {date}.",
+    "publish": {
+      "title": "Publica su nombre",
+      "description": "Firma un mensaje para que los ahorradores vean \"{name}\". Firmar es gratis y no mueve nada.",
+      "action": "Firmar y publicar",
+      "signing": "Aprueba la firma en tu billetera",
+      "saving": "Publicando el nombre…",
+      "done": "Nombre publicado",
+      "error": "No se pudo publicar el nombre. El fondo funciona sin él y puedes intentarlo de nuevo.",
+      "unsupported": "Esta billetera no puede firmar mensajes, así que el fondo muestra un nombre numerado por ahora.",
+      "cancelled": "Cancelaste la firma. No se publicó nada."
+    },
+    "open": "Abrir tu fondo",
+    "later": "Omitir por ahora"
+  },
+  "problems": {
+    "required": "Este campo es obligatorio.",
+    "invalid": "Ingresa un número válido.",
+    "tooLong": "Es demasiado largo.",
+    "singleLine": "Usa una sola línea.",
+    "characters": "Contiene caracteres que no están permitidos.",
+    "precision": "{symbol} tiene como máximo {decimals} decimales.",
+    "tooSmall": "Es demasiado pequeño para enviarlo.",
+    "tooLarge": "Ese número es demasiado grande.",
+    "overBalance": "Tienes {balance} {symbol}.",
+    "overDemoCap": "Límite de demostración: como máximo {cap} {symbol} aquí.",
+    "demoCapUnset": "La creación de fondos está cerrada en mainnet hasta que se configure un límite de demostración.",
+    "outOfRange": {
+      "matchPercent": "La tasa de aporte debe estar entre 0.01 % y 100 %.",
+      "vesting": "La liberación debe durar entre 30 segundos y 5 años.",
+      "window": "Los depósitos deben seguir abiertos entre 10 minutos y 5 años."
+    }
+  },
+  "preview": {
+    "title": "Tu fondo hasta ahora",
+    "unnamed": "Fondo sin nombre",
+    "pending": "Completa los números y el fondo toma forma aquí.",
+    "ringLabel": "El patrocinador suma {percent} de cada depósito",
+    "savers": "{count, plural, one {ahorrador} other {ahorradores}} con aporte completo"
+  }
+}

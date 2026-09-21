@@ -43,6 +43,7 @@ export function SignInForm() {
       className="flex w-full flex-col gap-4"
     >
       <Input
+        placeholder=""
         label={t('signIn.email')}
         name="email"
         type="email"
@@ -51,6 +52,7 @@ export function SignInForm() {
         disabled={isSubmitting}
       />
       <Input
+        placeholder=""
         label={t('signIn.password')}
         name="password"
         type="password"

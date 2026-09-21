@@ -1,29 +1,27 @@
-import { Activity, ClipboardCheck, Coins, FolderKanban } from 'lucide-react';
+import { Coins, Layers, PiggyBank, Wallet } from 'lucide-react';
 import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import ButtonLink from '@/components/ui/button-link';
-import { currencyFormatter, dateFormatter } from '@/lib/utils';
 import { requireAdminSession } from '@/lib/auth/require-admin-session';
-import {
-  DEMO_PROJECTS,
-  getDemoActivityFeed,
-  getDemoMilestoneQueue,
-  getDemoTotals,
-} from '@/lib/demo/projects';
-import { DEMO_IMPACT_ENTRIES } from '@/lib/demo/impact';
+import { routing } from '@/lib/i18n/routing';
+import { unixNow } from '@/lib/pools/clock';
+import { loadConsole, summarizePools } from '@/lib/pools/console';
+import { getPoolServices } from '@/lib/pools/server';
 import {
   ActivityFeed,
   type ActivityRow,
 } from '@/modules/dashboard/components/activity-feed';
 import { DashboardShell } from '@/modules/dashboard/components/dashboard-shell';
-import { DemoDataPill } from '@/modules/dashboard/components/demo-data-pill';
-import { MilestoneQueue } from '@/modules/dashboard/components/milestone-queue';
-import { ProjectsTable } from '@/modules/dashboard/components/projects-table';
+import { DeploymentCard } from '@/modules/dashboard/components/deployment-card';
+import { PoolsTable } from '@/modules/dashboard/components/pools-table';
 import { StatTile } from '@/modules/dashboard/components/stat-tile';
-import { routing } from '@/lib/i18n/routing';
+import { getConsoleFormatters } from '@/modules/dashboard/lib/console-view';
+import { shortAddress } from '@/modules/pools/lib/format';
+
+export const dynamic = 'force-dynamic';
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -48,158 +46,150 @@ export default async function DashboardPage({ params }: PageProps) {
   setRequestLocale(locale);
 
   const session = await requireAdminSession(locale);
+  const snapshot = await loadConsole(getPoolServices());
+  const now = unixNow();
 
-  const [t, tProject, tMilestones] = await Promise.all([
+  const [t, tActivity, fmt] = await Promise.all([
     getTranslations({ locale, namespace: 'admin' }),
-    getTranslations({ locale, namespace: 'project' }),
-    getTranslations({ locale, namespace: 'milestones' }),
+    getTranslations({ locale, namespace: 'pools.activity' }),
+    getConsoleFormatters(locale, snapshot.deployment),
   ]);
 
-  const totals = getDemoTotals();
-  const queue = getDemoMilestoneQueue().slice(0, 5);
-  const activity = getDemoActivityFeed(6);
-  const currency = currencyFormatter({
-    locale,
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  });
-  const formatAmount = (value: number) => currency.format(value);
-  const dateFmt = dateFormatter({ locale });
+  const totals = summarizePools(snapshot.pools ?? [], now);
+  const reservedShare =
+    totals.budget > 0n
+      ? Number((totals.reserved * 10_000n) / totals.budget) / 10_000
+      : 0;
 
-  const activityRows: ActivityRow[] = activity.map((entry) =>
-    entry.kind === 'position_funded'
-      ? {
-          id: entry.id,
-          kind: entry.kind,
-          href: `/projects/${entry.projectSlug}`,
-          date: dateFmt.format(new Date(entry.occurredAt)),
-          text: t('dashboard.activity.positionFunded', {
-            investorType: tProject(`investorType.${entry.investorType}`),
-            project: entry.projectName,
-          }),
-        }
-      : {
-          id: entry.id,
-          kind: entry.kind,
-          href: `/projects/${entry.projectSlug}`,
-          date: dateFmt.format(new Date(entry.occurredAt)),
-          text: t('dashboard.activity.milestoneVerified', {
-            milestone: entry.milestoneTitle,
-            project: entry.projectName,
-          }),
-        },
-  );
-
-  const statusLabels = {
-    PENDING: tMilestones('status.PENDING'),
-    IN_PROGRESS: tMilestones('status.IN_PROGRESS'),
-    VERIFIED: tMilestones('status.VERIFIED'),
-  } as const;
-
-  const projectStatusLabels = {
-    DRAFT: tProject('status.DRAFT'),
-    ACTIVE: tProject('status.ACTIVE'),
-    FUNDED: tProject('status.FUNDED'),
-    COMPLETED: tProject('status.COMPLETED'),
-    CLOSED: tProject('status.CLOSED'),
-  } as const;
+  const activityRows: ActivityRow[] = snapshot.activity.map((entry) => ({
+    id: entry.id,
+    kind: entry.kind,
+    href: `/pools/${entry.pool.address}`,
+    date: fmt.dateIso(entry.occurredAt),
+    text: tActivity(`kinds.${entry.kind}`, {
+      who: shortAddress(entry.wallet),
+      amount: fmt.amount(entry.amount ?? '0'),
+      match: fmt.amount(entry.matchAmount ?? '0'),
+      symbol: fmt.symbol,
+    }),
+  }));
 
   return (
     <DashboardShell
       locale={locale}
       userEmail={session.user.email}
-      title={t('sidebar.commandCenter')}
+      title={t('sidebar.overview')}
       description={t('dashboard.description')}
     >
-      <div className="mb-6 flex justify-end">
-        <DemoDataPill label={t('dashboard.demoDataNotice')} />
-      </div>
-
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatTile
-          icon={FolderKanban}
-          label={t('dashboard.stats.activeProjects')}
-          value={String(totals.activeProjectCount)}
-          caption={`${totals.projectCount} total`}
-        />
-        <StatTile
-          icon={ClipboardCheck}
-          label={t('dashboard.stats.milestonesPending')}
-          value={String(totals.milestonesPending)}
-          caption={`${totals.milestonesVerified} ${tMilestones('status.VERIFIED').toLowerCase()}`}
-        />
-        <StatTile
-          icon={Coins}
-          label={t('dashboard.stats.totalRaised')}
-          value={formatAmount(totals.totalRaised)}
-          caption={t('dashboard.stats.totalRaisedCaption', {
-            publicAmount: formatAmount(totals.totalPublic),
-            privateAmount: formatAmount(totals.totalPrivate),
+          icon={Layers}
+          label={t('dashboard.stats.pools')}
+          value={String(totals.poolCount)}
+          caption={t('dashboard.stats.poolsCaption', {
+            open: totals.openCount,
           })}
         />
         <StatTile
-          icon={Activity}
-          label={t('dashboard.stats.impactRecords')}
-          value={String(DEMO_IMPACT_ENTRIES.length)}
+          icon={Coins}
+          label={t('dashboard.stats.budget')}
+          value={`${fmt.amount(totals.budget)} ${fmt.symbol}`}
+          caption={t('dashboard.stats.budgetCaption')}
+        />
+        <StatTile
+          icon={PiggyBank}
+          label={t('dashboard.stats.reserved')}
+          value={`${fmt.amount(totals.reserved)} ${fmt.symbol}`}
+          caption={t('dashboard.stats.reservedCaption', {
+            percent: fmt.percent(reservedShare),
+          })}
+        />
+        <StatTile
+          icon={Wallet}
+          label={t('dashboard.stats.deposits')}
+          value={`${fmt.amount(totals.deposits)} ${fmt.symbol}`}
+          caption={t('dashboard.stats.depositsCaption', {
+            claimed: fmt.amount(totals.claimed),
+            symbol: fmt.symbol,
+          })}
         />
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-        <div className="dapp-console-panel p-5 sm:p-6">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <h2 className="text-base font-medium text-foreground">
-              {t('dashboard.queue.title')}
+      <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="flex min-w-0 flex-col gap-6">
+          <section className="dapp-console-panel p-5 sm:p-6">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h2 className="text-base font-semibold">
+                {t('dashboard.poolsTable.title')}
+              </h2>
+              <ButtonLink href="/dashboard/pools" variant="link">
+                {t('dashboard.poolsTable.viewAll')}
+              </ButtonLink>
+            </div>
+            {snapshot.pools === null ? (
+              <p className="text-sm text-muted-foreground">
+                {t('dashboard.poolsTable.unavailable')}
+              </p>
+            ) : snapshot.pools.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                {t('dashboard.poolsTable.empty')}
+              </p>
+            ) : (
+              <PoolsTable
+                label={t('dashboard.poolsTable.title')}
+                pools={snapshot.pools.slice(0, 6)}
+                now={now}
+                columnLabels={{
+                  pool: t('dashboard.poolsTable.columns.pool'),
+                  status: t('dashboard.poolsTable.columns.status'),
+                  budget: t('dashboard.poolsTable.columns.budget'),
+                  reserved: t('dashboard.poolsTable.columns.reserved'),
+                  closes: t('dashboard.poolsTable.columns.closes'),
+                }}
+                displayName={fmt.poolName}
+                formatAmount={fmt.amount}
+                formatDate={fmt.dateShort}
+              />
+            )}
+          </section>
+
+          <section className="dapp-console-panel p-5 sm:p-6">
+            <h2 className="mb-2 text-base font-semibold">
+              {t('dashboard.deployment.title')}
             </h2>
-            <ButtonLink href="/dashboard/milestones" variant="linkText">
-              {t('dashboard.queue.viewAll')}
-            </ButtonLink>
-          </div>
-          <MilestoneQueue
-            entries={queue}
-            statusLabels={statusLabels}
-            verifyLabel={t('dashboard.queue.verify')}
-            verifyDisabledReason={t('dashboard.queue.verifyDisabledReason')}
-            emptyLabel={t('dashboard.queue.empty')}
-          />
+            <DeploymentCard
+              deployment={snapshot.deployment}
+              labels={{
+                network: t('dashboard.deployment.network'),
+                program: t('dashboard.deployment.program'),
+                upgradeAuthority: t('dashboard.deployment.upgradeAuthority'),
+                upgradeNone: t('dashboard.deployment.upgradeNone'),
+                token: t('dashboard.deployment.token'),
+                transfers: t('dashboard.deployment.transfers'),
+                live: t('dashboard.deployment.live'),
+                paused: t('dashboard.deployment.paused'),
+                multiplier: t('dashboard.deployment.multiplier'),
+                pauseAuthority: t('dashboard.deployment.pauseAuthority'),
+                freezeAuthority: t('dashboard.deployment.freezeAuthority'),
+                permanentDelegate: t('dashboard.deployment.permanentDelegate'),
+                none: t('dashboard.deployment.none'),
+                notInitialized: t('dashboard.deployment.notInitialized'),
+                unavailable: t('dashboard.deployment.unavailable'),
+              }}
+              explorer={fmt.explorer}
+            />
+          </section>
         </div>
 
-        <div className="dapp-console-panel p-5 sm:p-6">
-          <h2 className="mb-4 text-base font-medium text-foreground">
+        <section className="dapp-console-panel h-fit p-5 sm:p-6">
+          <h2 className="mb-4 text-base font-semibold">
             {t('dashboard.activity.title')}
           </h2>
           <ActivityFeed
             entries={activityRows}
             emptyLabel={t('dashboard.activity.empty')}
           />
-        </div>
-      </div>
-
-      <div className="dapp-console-panel mt-6 p-5 sm:p-6">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 className="text-base font-medium text-foreground">
-            {t('dashboard.projectsTable.title')}
-          </h2>
-          <ButtonLink href="/dashboard/projects" variant="linkText">
-            {t('dashboard.projectsTable.viewAll')}
-          </ButtonLink>
-        </div>
-        <ProjectsTable
-          projects={DEMO_PROJECTS}
-          columnLabels={{
-            project: t('dashboard.projectsTable.columns.project'),
-            status: t('dashboard.projectsTable.columns.status'),
-            goal: t('dashboard.projectsTable.columns.goal'),
-            raised: t('dashboard.projectsTable.columns.raised'),
-          }}
-          statusLabels={projectStatusLabels}
-          milestonesLabel={(verified, total) =>
-            t('dashboard.projectsTable.milestonesProgress', {
-              verified,
-              total,
-            })
-          }
-          formatAmount={formatAmount}
-        />
+        </section>
       </div>
     </DashboardShell>
   );

@@ -1,24 +1,24 @@
 {
-  "badge": "Scope",
+  "badge": "Who it's for",
   "gaugeLabel": "Scope",
-  "title": "Where it applies",
-  "subtitle": "The same public/private funding model works anywhere infrastructure needs both.",
+  "title": "Who a pool is for",
+  "subtitle": "Four ways a pool could be used. This is a demo, and none of them is a live program.",
   "cases": {
-    "government": {
-      "title": "Government-anchored projects",
-      "description": "A municipal or national government seeds a project with a public position."
+    "employers": {
+      "title": "Employers and DAOs",
+      "description": "Match your team's savings without running a pension."
     },
-    "community": {
-      "title": "Community funding",
-      "description": "Local residents and diaspora co-invest alongside the government."
+    "communities": {
+      "title": "Communities and diaspora",
+      "description": "Fund a match on the savings of people you want to keep saving."
     },
-    "investors": {
-      "title": "Outside investors",
-      "description": "Impact investors fund the remaining gap through the same table."
+    "protocols": {
+      "title": "Protocols and brands",
+      "description": "Reward holders who stay, with a match that vests instead of a giveaway."
     },
-    "generalized": {
-      "title": "Any essential infrastructure",
-      "description": "The model generalizes beyond water to any public-private funding gap."
+    "savers": {
+      "title": "Anyone with SPYx",
+      "description": "Deposit and see exactly what the match is worth if you stay, and if you don't."
     }
   }
 }

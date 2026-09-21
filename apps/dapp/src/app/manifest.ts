@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'AquaStock dApp',
     short_name: 'AquaStock',
     description:
-      'Connect a Solana wallet, fund a water-infrastructure position, and track it against real milestones.',
+      "Connect a Solana wallet, deposit tokenized SPYx into a match pool, and watch the sponsor's match vest on-chain.",
     start_url: '/',
     display: 'standalone',
     orientation: 'portrait',

@@ -7,7 +7,6 @@ import { HeroLedgerPanel } from '@/modules/app/components/hero-ledger-panel';
 
 export async function HeroSection() {
   const t = await getTranslations('hero');
-  const tProject = await getTranslations('project');
 
   return (
     <section
@@ -73,16 +72,16 @@ export async function HeroSection() {
                 className="size-2 rounded-full bg-public"
                 aria-hidden="true"
               />
-              {tProject('governmentContribution')}
+              {t('legend.sponsor')}
             </span>
             <span className="flex items-center gap-2 text-foreground/80">
               <span
                 className="size-2 rounded-full bg-private"
                 aria-hidden="true"
               />
-              {tProject('communityFunding')}
+              {t('legend.saver')}
             </span>
-            <span className="font-mono-ui text-[11px] tracking-[0.08em] text-foreground/45 uppercase">
+            <span className="font-mono-ui text-[11px] tracking-[0.08em] text-muted-foreground uppercase">
               {t('legend.sameTable')}
             </span>
           </MotionDiv>

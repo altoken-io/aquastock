@@ -3,6 +3,8 @@ const serverEnv = {
   UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
   UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
   DATABASE_URL: process.env.DATABASE_URL,
+  // Server-only RPC endpoint for route handlers; keep its key out of NEXT_PUBLIC_*.
+  SOLANA_RPC_URL: process.env.SOLANA_RPC_URL,
   DIRECT_URL: process.env.DIRECT_URL,
   RESEND_API_KEY: process.env.RESEND_API_KEY,
   RESEND_NEWSLETTER_AUDIENCE_ID: process.env.RESEND_NEWSLETTER_AUDIENCE_ID,
@@ -46,4 +48,15 @@ export const env = (key: keyof typeof serverEnv) => {
     );
   }
   return serverEnv[key];
+};
+
+/**
+ * A server variable that may legitimately be absent. Unlike `env()`, it never throws and
+ * never invents a development placeholder, so callers choose their own fallback.
+ */
+export const optionalServerEnv = (
+  key: keyof typeof serverEnv,
+): string | undefined => {
+  const value = serverEnv[key]?.trim();
+  return value ? value : undefined;
 };

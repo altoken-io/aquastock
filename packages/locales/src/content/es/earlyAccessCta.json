@@ -1,14 +1,13 @@
 {
-  "title": "Sigue el desarrollo",
-  "subtitle": "AquaStock es una construcción de hackathon de 5 días — esto es un trabajo en progreso.",
+  "title": "Prueba la demo",
+  "subtitle": "AquaStock es un desarrollo de hackathon en Solana. Deposita, mira cómo se libera el aporte y retírate cuando quieras. Es una demo, así que usa montos que puedas permitirte perder.",
   "cta": {
     "primary": {
-      "label": "Conectar billetera"
+      "label": "Abrir la app"
     }
   },
-  "imageAlt": "Un proyecto comunitario de infraestructura de agua en un valle andino al atardecer.",
   "gaugeLabel": "Abrir",
   "notice": {
-    "tag": "Aviso del sitio"
+    "tag": "Demo de hackathon"
   }
 }

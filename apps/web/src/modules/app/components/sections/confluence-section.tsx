@@ -6,11 +6,10 @@ import {
 } from '@/components/helpers/motion/blur-lazy-motion';
 import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
 import { ConfluenceVisual } from '@/modules/app/components/confluence-visual';
-import { FundingTablePreview } from '@/modules/app/components/funding-table-preview';
+import { LeavingEarlyPreview } from '@/modules/app/components/leaving-early-preview';
 
 export async function ConfluenceSection() {
   const t = await getTranslations('confluence');
-  const tProject = await getTranslations('project');
 
   return (
     <section id="confluence" className="relative w-full py-20 lg:py-32">
@@ -60,14 +59,14 @@ export async function ConfluenceSection() {
                   className="size-2 rounded-full bg-public"
                   aria-hidden="true"
                 />
-                {tProject('governmentContribution')}
+                {t('legend.sponsor')}
               </span>
               <span className="flex items-center gap-2 text-foreground/80">
                 <span
                   className="size-2 rounded-full bg-private"
                   aria-hidden="true"
                 />
-                {tProject('communityFunding')}
+                {t('legend.saver')}
               </span>
             </div>
           </MotionDiv>
@@ -76,7 +75,7 @@ export async function ConfluenceSection() {
             <p className="font-mono-ui mb-4 text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
               {t('preview.label')}
             </p>
-            <FundingTablePreview />
+            <LeavingEarlyPreview />
           </MotionDiv>
         </div>
       </div>

@@ -1,12 +1,29 @@
 {
   "eyebrow": "La Confluencia",
-  "title": "Dos corrientes. Un mismo proyecto.",
-  "subtitle": "Una posición del gobierno y una posición comunitaria, financiando la misma tabla — visible en cadena, no autoreportada.",
+  "title": "Dos corrientes. Una posición.",
+  "subtitle": "El aporte del patrocinador y tus propios ahorros se cierran en un solo anillo. El aporte pasa a ser tuyo a medida que se libera, y la cadena, no una promesa, dice cuánto se ha liberado.",
   "preview": {
-    "label": "Así se ve"
+    "label": "Cómo se ve retirarse antes",
+    "kicker": "Posición — ilustrativa",
+    "title": "Retirarse en el mes 3 de 12",
+    "badge": "Ilustrativo",
+    "lead": "Tu depósito siempre vuelve completo.",
+    "rows": {
+      "deposit": "Depositaste",
+      "match": "Aporte reservado para ti",
+      "vested": "Liberado en el mes 3",
+      "back": "Recuperas",
+      "keep": "Aporte liberado que conservas",
+      "giveUp": "Aporte al que renuncias"
+    },
+    "giveUpNote": "vuelve al patrocinador"
   },
   "visual": {
     "label": "Las dos corrientes"
   },
-  "gaugeLabel": "Libro"
+  "legend": {
+    "sponsor": "Aporte del patrocinador",
+    "saver": "Tus ahorros"
+  },
+  "gaugeLabel": "Posición"
 }

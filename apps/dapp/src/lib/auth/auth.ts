@@ -11,10 +11,9 @@ import { resend } from '@/lib/resend';
 const baseUrl = env('NEXT_PUBLIC_BASE_URL');
 
 /**
- * Admin console auth only — the staff/government login for managing
- * projects and verifying milestones. Investor-facing auth stays pure
- * Solana wallet-connect; this is a separate concern (see memory:
- * better-auth-scope).
+ * Operator console auth only: the staff login for watching pools and the
+ * program. Savers and sponsors never sign in; they connect a Solana wallet.
+ * This is a separate concern (see memory: better-auth-scope).
  */
 export const auth = betterAuth({
   baseURL: baseUrl,

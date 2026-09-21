@@ -26,29 +26,11 @@ file at all.
 
 ## `apps/web/public/assets`
 
-- `brand/process-site-verification.webp` — portrait documentary photograph of
-  a municipal engineer and a community member inspecting water-treatment
-  infrastructure together, used beside the homepage's "The Process" steps.
-- `brand/site-notice.webp` — wide documentary photograph of a community water
-  reservoir in an Andean valley at sunset, used behind the homepage's closing
-  panel under a teal overlay.
-
-Both were generated (see `apps/web/PLACEHOLDER_ASSETS.md` for the brief each
-was generated against) for the 2026 marketing-site redesign (the
-"Gauge"/instrument direction — see `apps/web/PRODUCT.md`), replacing the
-three photos this app shipped before that redesign
-(`hero-infrastructure.webp`, `how-it-works.webp`, `early-access-cta.webp` —
-the new layout dropped the hero photo entirely in favor of the hero ledger
-panel).
+Empty of imagery. The marketing site uses no photography: the hero, "leaving early" and vesting visuals are drawn in code (`modules/app/components/{hero-ledger-panel,leaving-early-preview,vesting-line}.tsx`, an SVG and HTML, so they follow the theme and need no file). The two water-infrastructure photographs it shipped before the Match Pools pivot (`brand/process-site-verification.webp`, `brand/site-notice.webp`) were removed with that model.
 
 ## `apps/dapp/public/assets`
 
-Empty. Project photography (project cards, the project detail hero banner)
-is rendered as an abstract on-brand placeholder in code
-(`src/modules/product/components/project-image-placeholder.tsx`) rather than
-a checked-in file for now — see `apps/dapp/PLACEHOLDER_ASSETS.md` for the
-exact ratio/dimensions each slot needs so real photography can drop in
-later without a layout change.
+Empty. The app has no photography: pool cards and pages show the match ring (SVG) instead of an image.
 
 ## Using assets
 
@@ -56,6 +38,5 @@ later without a layout change.
   rendered as code (an inline SVG component, or a `next/og` `ImageResponse`)
   — see the brand mark above for the pattern. Reach for a real file only for
   actual photography or footage.
-- Check `apps/web/PLACEHOLDER_ASSETS.md` and `apps/dapp/PLACEHOLDER_ASSETS.md`
-  before adding a new placeholder — each tracks the imagery still awaiting a
-  production asset in that app.
+- `apps/web/PLACEHOLDER_ASSETS.md` and `apps/dapp/PLACEHOLDER_ASSETS.md` say
+  what art would be needed if any is wanted; nothing is waiting on an asset.

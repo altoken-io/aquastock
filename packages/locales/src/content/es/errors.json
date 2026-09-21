@@ -1,0 +1,17 @@
+{
+  "title": "Algo salió mal",
+  "description": "No pudimos cargar esta página. No se cambió nada. Inténtalo de nuevo o vuelve a los fondos.",
+  "retry": "Intentar de nuevo",
+  "home": "Ver fondos",
+  "reference": "Referencia {digest}",
+  "notFound": {
+    "title": "No encontramos esa página",
+    "description": "Puede que el enlace esté desactualizado o que la dirección tenga un error.",
+    "cta": "Ver fondos"
+  },
+  "poolNotFound": {
+    "title": "Ese fondo no existe",
+    "description": "Revisa la dirección o mira los fondos que sí existen.",
+    "cta": "Ver fondos"
+  }
+}

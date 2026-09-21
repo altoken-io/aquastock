@@ -5,15 +5,16 @@
 ## Product and safety
 
 - This is a hackathon demo, not a real offering — never let copy, UI, or docs imply otherwise. Every legal-facing surface carries "Demo — this does not constitute an offer of securities" / "Demo — no constituye una oferta de valores."
-- Treat funding amounts, `investor_type` (public/private), milestone status, and on-chain addresses as correctness-sensitive once the Anchor program exists — a milestone should never read as "verified" in the UI unless the on-chain state actually says so.
-- Represent any settlement-partner or government-confirmation step as a clearly labeled demo step, never as a real integration, unless one is actually built.
+- Treat token amounts, vesting and claimed figures, pool rules and on-chain addresses as correctness-sensitive. Never show a match as vested, claimed or paid unless the chain says so; amounts are exact BigInt arithmetic (never floats), and typed amounts round up while balances display rounded down.
+- Disclose what is real, next to the action it affects: the token's issuer can pause transfers, freeze accounts, move tokens out of any account and change the display multiplier, and the program's upgrade authority is the team's deploy wallet. Label every stand-in (illustrative numbers, demo timescales) as exactly that.
+- Never add a server-held signing key, and never move funds from the server. Every write is a transaction the person's wallet signs; a sponsor's off-chain edits are proven by a wallet-signed message.
 - Read [ABOUT.md](ABOUT.md) and [TONE.md](TONE.md) before changing public product copy.
 
 ## Architecture
 
-- Keep public marketing in `apps/web`, the actual product (wallet-connect, projects, positions, milestones, impact) in `apps/dapp`. There is no `apps/api` and no `apps/mobile` in this repo — don't invent server-authority code that assumes either exists.
+- Keep public marketing in `apps/web`, the actual product (wallet-connect, pools, positions, sponsor tools, operator console) in `apps/dapp`. There is no `apps/api` and no `apps/mobile` in this repo — don't invent server-authority code that assumes either exists.
 - Keep feature-specific code in its owning app. Promote code to `packages/*` only after it has a stable, genuinely cross-consumer contract.
-- `packages/db-prisma/prisma/schema.prisma` and its checked-in migrations are the off-chain database source of truth, until the Anchor program exists — after that, on-chain state wins and Prisma rows are a display cache. Follow [ARCHITECTURE.md](ARCHITECTURE.md).
+- `packages/db-prisma/prisma/schema.prisma` and its checked-in migrations are the off-chain database source of truth, for descriptive pool text and the verified activity feed only: on-chain state always wins, and Prisma rows are a display cache. Follow [ARCHITECTURE.md](ARCHITECTURE.md).
 - `apps/dapp` accesses the database and any future on-chain program directly through its own Next.js route handlers — there's no separate backend to delegate privileged operations to.
 - Validate all untrusted input (wallet addresses, amounts, form data) at the server boundary with explicit schemas.
 

@@ -1,0 +1,39 @@
+{
+  "title": "Your position",
+  "status": {
+    "vesting": "Vesting",
+    "vested": "Fully vested",
+    "withdrawn": "Deposit withdrawn",
+    "done": "All claimed"
+  },
+  "ring": {
+    "label": "{vested} of {reserved} {symbol} of match has vested",
+    "unit": "of {reserved} vested"
+  },
+  "ledger": {
+    "deposit": "Your deposit",
+    "match": "Sponsor match reserved",
+    "vested": "Vested so far",
+    "claimed": "Claimed",
+    "claimable": "Ready to claim"
+  },
+  "schedule": "Vests in a straight line over {duration}, from {date}.",
+  "actions": {
+    "claim": "Claim {amount} {symbol}",
+    "claimNothing": "Nothing to claim yet",
+    "withdraw": "Withdraw deposit",
+    "close": "Close position",
+    "closeHint": "Everything is paid out. Closing returns the account's rent and lets you deposit here again."
+  },
+  "withdrawn": "You took your deposit back. What had vested is still yours to claim.",
+  "confirm": {
+    "title": "Withdraw your deposit?",
+    "returns": "You get back",
+    "keeps": "Vested match you can still claim",
+    "forfeits": "Match you give up",
+    "forfeitsHint": "Match you give up goes back to the sponsor. This can't be undone.",
+    "nothingForfeited": "Nothing is given up: the match has fully vested.",
+    "confirm": "Withdraw {amount} {symbol}",
+    "cancel": "Keep saving"
+  }
+}

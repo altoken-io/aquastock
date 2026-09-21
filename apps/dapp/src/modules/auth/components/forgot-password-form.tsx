@@ -54,6 +54,7 @@ export function ForgotPasswordForm() {
       className="flex w-full flex-col gap-4"
     >
       <Input
+        placeholder=""
         label={t('forgotPassword.email')}
         name="email"
         type="email"

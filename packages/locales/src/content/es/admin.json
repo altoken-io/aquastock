@@ -1,7 +1,7 @@
 {
   "signIn": {
     "title": "Acceso administrativo",
-    "subtitle": "Para el equipo de AquaStock y socios gubernamentales que gestionan proyectos e hitos.",
+    "subtitle": "Para el equipo de AquaStock que opera el programa de fondos de aporte.",
     "email": "Correo electrónico",
     "password": "Contraseña",
     "submit": "Iniciar sesión",
@@ -26,63 +26,71 @@
     "backToSignIn": "Volver al inicio de sesión"
   },
   "console": {
-    "eyebrow": "Consola administrativa",
-    "title": "Donde se encuentran el capital público y el comunitario.",
-    "description": "Inicia sesión para verificar hitos y gestionar los proyectos que el gobierno y los inversionistas comunitarios financian juntos.",
-    "ringLabel": "Capital del gobierno y de la comunidad en todos los proyectos de la demo"
+    "eyebrow": "Consola del operador",
+    "title": "Vigila los fondos, el programa y el token.",
+    "description": "Inicia sesión para ver cada fondo, lo que hay bloqueado en él y lo que puede hacer el emisor del token. La consola lee la cadena; nunca mueve fondos.",
+    "ringLabel": "El aporte de un patrocinador cerrando el círculo alrededor de los depósitos de los ahorradores"
   },
   "sidebar": {
-    "tagline": "Consola administrativa",
-    "commandCenter": "Centro de mando",
-    "projects": "Proyectos",
-    "milestones": "Hitos",
     "mobileOpen": "Abrir menú del panel",
-    "mobileClose": "Cerrar menú del panel"
+    "mobileClose": "Cerrar menú del panel",
+    "tagline": "Consola del operador",
+    "overview": "Resumen",
+    "pools": "Fondos"
   },
   "dashboard": {
-    "title": "Panel administrativo",
     "signedInAs": "Sesión iniciada como {email}",
     "signOut": "Cerrar sesión",
-    "description": "Un resumen de cada proyecto, posición e hito en el conjunto de datos de la demo.",
-    "demoDataNotice": "Datos de demo — aún no hay una transmisión en cadena en vivo.",
+    "title": "Resumen del operador",
+    "description": "En vivo desde Solana: cada fondo, el programa y el emisor del token.",
     "stats": {
-      "activeProjects": "Proyectos activos",
-      "milestonesPending": "Hitos por verificar",
-      "totalRaised": "Total recaudado",
-      "totalRaisedCaption": "{publicAmount} gobierno · {privateAmount} comunidad",
-      "impactRecords": "Registros de impacto"
+      "pools": "Fondos",
+      "poolsCaption": "{open} abiertos",
+      "budget": "Presupuesto del aporte",
+      "budgetCaption": "Bloqueado en todos los fondos",
+      "reserved": "Reservado para ahorradores",
+      "reservedCaption": "{percent} del presupuesto",
+      "deposits": "Depositado por ahorradores",
+      "depositsCaption": "{claimed} {symbol} de aporte reclamados"
     },
-    "queue": {
-      "title": "Hitos por verificar",
-      "viewAll": "Ver todos",
-      "verify": "Marcar como verificado",
-      "verifyDisabledReason": "La verificación requiere el programa en cadena — aún no está construido en esta versión de hackathon.",
-      "empty": "No hay nada pendiente de verificación."
+    "deployment": {
+      "title": "Despliegue",
+      "network": "Red",
+      "program": "Programa",
+      "upgradeAuthority": "Autoridad de actualización",
+      "upgradeNone": "Ninguna: el programa no se puede actualizar",
+      "token": "Token",
+      "transfers": "Transferencias",
+      "live": "Activas",
+      "paused": "Pausadas",
+      "multiplier": "Multiplicador de visualización",
+      "pauseAuthority": "Autoridad de pausa",
+      "freezeAuthority": "Autoridad de congelamiento",
+      "permanentDelegate": "Delegado permanente",
+      "none": "Ninguna llave",
+      "notInitialized": "El programa aún no se ha inicializado en esta red.",
+      "unavailable": "No se pudo leer la cadena ahora. El resto de esta página sigue funcionando."
     },
     "activity": {
       "title": "Actividad reciente",
-      "empty": "Aún no hay actividad.",
-      "positionFunded": "Posición {investorType} financiada en {project}",
-      "milestoneVerified": "“{milestone}” verificado en {project}"
+      "empty": "Aún no hay actividad."
     },
-    "projectsTable": {
-      "title": "Proyectos",
-      "viewAll": "Ver todos los proyectos",
+    "poolsTable": {
+      "title": "Fondos",
+      "viewAll": "Ver todos los fondos",
+      "empty": "Aún no hay fondos.",
+      "unavailable": "No se pudieron leer los fondos ahora.",
       "columns": {
-        "project": "Proyecto",
+        "pool": "Fondo",
         "status": "Estado",
-        "goal": "Meta",
-        "raised": "Recaudado"
-      },
-      "milestonesProgress": "{verified}/{total} hitos verificados"
+        "budget": "Presupuesto",
+        "reserved": "Reservado",
+        "closes": "Cierra"
+      }
     }
   },
-  "projectsPage": {
-    "title": "Proyectos",
-    "description": "Cada proyecto en el conjunto de datos de la demo, incluidas las posiciones del gobierno y de la comunidad."
-  },
-  "milestonesPage": {
-    "title": "Hitos",
-    "description": "Cada hito aún pendiente de verificación, en todos los proyectos."
+  "poolsPage": {
+    "title": "Fondos",
+    "description": "Cada fondo de este despliegue, leído directamente de la cadena."
   }
 }

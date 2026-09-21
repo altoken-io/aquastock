@@ -1,33 +1,45 @@
 {
-  "badge": "En registro",
+  "badge": "En el registro",
   "gaugeLabel": "FAQ",
   "title": "Preguntas frecuentes",
-  "subtitle": "Respuestas provisionales para la demo del hackathon.",
-  "trustNote": "En cadena, no autoreportado.",
+  "subtitle": "Respuestas directas para la demo del hackathon.",
+  "trustNote": "En la cadena, no autodeclarado.",
   "questions": {
     "faq1": {
-      "question": "¿Es esto una oferta real de valores?",
-      "answer": "No. Esta es una demo de hackathon y no constituye una oferta de valores."
+      "question": "¿Esto es una oferta de valores?",
+      "answer": "No. Es una demo de hackathon y no constituye una oferta de valores. El programa no ha sido auditado. Usa solo montos que puedas permitirte perder."
     },
     "faq2": {
-      "question": "¿En qué cadena corre AquaStock?",
-      "answer": "Solana. Las posiciones e hitos se registran en cadena mediante un programa Anchor."
+      "question": "¿Qué poseo realmente cuando tengo SPYx?",
+      "answer": "SPYx es una acción tokenizada, y su emisor conserva control real sobre el token: puede pausar transferencias, congelar cuentas, mover tokens fuera de cualquier cuenta y cambiar el multiplicador de visualización. Un fondo no puede cambiar eso. La página de cada fondo enumera estos poderes, leídos en vivo desde la cadena."
     },
     "faq3": {
-      "question": "¿Cuál es la diferencia entre posiciones públicas y privadas?",
-      "answer": "Las posiciones públicas vienen de un ancla gubernamental; las privadas, de la comunidad o inversionistas externos."
+      "question": "¿Qué pasa si me retiro antes?",
+      "answer": "Siempre recuperas todo tu depósito. La parte del aporte que aún no se liberó vuelve al patrocinador; lo que ya se liberó sigue siendo tuyo para reclamar."
     },
     "faq4": {
-      "question": "¿Cómo financio una posición?",
-      "answer": "Conecta una billetera de Solana y financia un proyecto vía Solana Pay."
+      "question": "¿Puede el patrocinador quitar el aporte?",
+      "answer": "No mientras esté reservado para ti. Cuando el fondo cierra, el patrocinador solo puede recuperar el aporte que nadie reservó, más lo que los ahorradores dejaron al retirarse antes. Las reglas no cambian una vez creado el fondo."
     },
     "faq5": {
-      "question": "¿Cómo se verifican los hitos?",
-      "answer": "Los hitos se marcan como verificados en cadena a medida que el proyecto avanza."
+      "question": "¿Quién controla el programa?",
+      "answer": "La autoridad de actualización del programa es la billetera de despliegue del equipo, así que el equipo podría cambiar cómo se comportan los fondos. La app lo revela, y es una razón más para tratar esto como una demo."
     },
     "faq6": {
-      "question": "¿Dónde veo el impacto del proyecto?",
-      "answer": "La página Mi Impacto muestra la línea de tiempo capital → proyecto → hito → impacto."
+      "question": "¿Necesito una cuenta?",
+      "answer": "No. Conecta una billetera de Solana. No hay registro ni KYC, y cada acción es una transacción que firma tu billetera. Solo la consola del operador del equipo tiene inicio de sesión."
+    },
+    "faq7": {
+      "question": "¿Qué red usa la demo?",
+      "answer": "Solana devnet, con una réplica del token SPYx que tiene las mismas extensiones. Donde se habilite mainnet, la app limita el tamaño de un fondo."
+    },
+    "faq8": {
+      "question": "¿Dónde consigo SPYx?",
+      "answer": "Cómpralo en Jupiter. La app enlaza allí y no vende tokens."
+    },
+    "faq9": {
+      "question": "¿Por qué la demo se libera en minutos?",
+      "answer": "Para que puedas verlo ocurrir. Los fondos que se liberan en menos de una semana llevan la etiqueta \"Escala de tiempo de demo\". Un fondo real se liberaría durante meses."
     }
   }
 }

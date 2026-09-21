@@ -59,3 +59,10 @@ yarn-error.log*
 # Mobile store credentials (docs/MOBILE_STORE_SETUP.md) — never commit
 google-play-service-account.json
 *.p8
+
+# Playwright
+test-results/
+playwright-report/
+
+# Solana keypairs (programs/keys holds program and test-wallet secrets)
+programs/keys/

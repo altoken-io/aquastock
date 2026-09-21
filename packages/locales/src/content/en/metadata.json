@@ -1,28 +1,30 @@
 {
   "title": {
-    "default": "AquaStock — Solana Water Infrastructure Funding",
+    "default": "AquaStock — the employer match, on Solana",
     "template": "%s | AquaStock"
   },
   "category": "Finance",
-  "classification": "Public-private infrastructure funding",
-  "abstract": "AquaStock lets a government anchor and community investors co-fund water infrastructure projects, tracked on-chain on Solana.",
-  "description": "AquaStock lets a government anchor and community investors co-fund water infrastructure projects, tracked on-chain on Solana.",
+  "classification": "Savings match on tokenized stocks",
+  "abstract": "AquaStock lets a sponsor fund a match on savers' deposits of tokenized SPYx. The match vests on-chain; leave early and keep your deposit and what has vested.",
+  "description": "AquaStock lets a sponsor fund a match on savers' deposits of tokenized SPYx. The match vests on-chain; leave early and keep your deposit and what has vested.",
   "keywords": [
     "Solana",
-    "water infrastructure",
-    "public-private funding",
+    "tokenized stocks",
+    "SPYx",
+    "savings match",
+    "vesting",
     "hackathon"
   ],
   "openGraph": {
     "locale": "en_US",
     "title": "AquaStock",
-    "description": "Water infrastructure, funded on Solana.",
+    "description": "The employer match, for people without an employer.",
     "siteName": "AquaStock"
   },
   "twitter": {
     "site": "@aquastock",
     "creator": "@aquastock",
     "title": "AquaStock",
-    "description": "Water infrastructure, funded on Solana."
+    "description": "The employer match, for people without an employer."
   }
 }

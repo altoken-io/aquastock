@@ -1,24 +1,24 @@
 {
-  "badge": "Alcance",
+  "badge": "Para quién es",
   "gaugeLabel": "Alcance",
-  "title": "Dónde aplica",
-  "subtitle": "El mismo modelo de financiamiento público-privado funciona donde la infraestructura lo necesite.",
+  "title": "Para quién es un fondo",
+  "subtitle": "Cuatro formas en que se podría usar un fondo. Es una demo, y ninguna es un programa real.",
   "cases": {
-    "government": {
-      "title": "Proyectos anclados por el gobierno",
-      "description": "Un gobierno municipal o nacional inicia un proyecto con una posición pública."
+    "employers": {
+      "title": "Empleadores y DAOs",
+      "description": "Iguala los ahorros de tu equipo sin administrar una pensión."
     },
-    "community": {
-      "title": "Financiación comunitaria",
-      "description": "Vecinos y diáspora co-invierten junto al gobierno."
+    "communities": {
+      "title": "Comunidades y diáspora",
+      "description": "Financia un aporte sobre los ahorros de quienes quieres que sigan ahorrando."
     },
-    "investors": {
-      "title": "Inversionistas externos",
-      "description": "Inversionistas de impacto financian la brecha restante en la misma tabla."
+    "protocols": {
+      "title": "Protocolos y marcas",
+      "description": "Premia a quienes se quedan, con un aporte que se libera en lugar de un regalo."
     },
-    "generalized": {
-      "title": "Cualquier infraestructura esencial",
-      "description": "El modelo se generaliza más allá del agua a cualquier brecha público-privada."
+    "savers": {
+      "title": "Cualquiera con SPYx",
+      "description": "Deposita y mira exactamente cuánto vale el aporte si te quedas, y si no."
     }
   }
 }

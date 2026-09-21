@@ -1,0 +1,29 @@
+{
+  "connect": "Conectar billetera",
+  "connecting": "Conectando…",
+  "dialog": {
+    "title": "Conecta una billetera",
+    "description": "Elige la billetera de Solana que usas. AquaStock nunca guarda tus llaves ni firma por ti.",
+    "detected": "Encontradas en este navegador",
+    "noWallets": "No encontramos ninguna billetera de Solana en este navegador.",
+    "install": "Obtener Phantom",
+    "installHint": "Instala una billetera y vuelve a cargar esta página."
+  },
+  "menu": {
+    "label": "Menú de la billetera",
+    "copy": "Copiar dirección",
+    "copied": "Dirección copiada",
+    "explorer": "Ver en Explorer",
+    "disconnect": "Desconectar"
+  },
+  "network": {
+    "localnet": "Validador local",
+    "devnet": "Devnet",
+    "mainnet-beta": "Mainnet"
+  },
+  "connectFailed": "No pudimos conectar tu billetera. Inténtalo de nuevo.",
+  "prompt": {
+    "title": "Conecta una billetera para continuar",
+    "description": "Tu billetera firma cada acción. Nada se mueve sin tu aprobación."
+  }
+}

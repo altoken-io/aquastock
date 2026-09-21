@@ -1,0 +1,13 @@
+.anchor
+.DS_Store
+target
+**/*.rs.bk
+node_modules
+test-ledger
+.surfpool
+# Mainnet Token-2022 program dump, fetched by `pnpm program:fixtures`.
+**/tests/fixtures/*.so
+
+# Keypairs: throwaway local keys and, later, the real program and deployer keys. Never commit.
+keys/
+*.keypair.json

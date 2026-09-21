@@ -1,0 +1,29 @@
+{
+  "connect": "Connect wallet",
+  "connecting": "Connecting…",
+  "dialog": {
+    "title": "Connect a wallet",
+    "description": "Choose the Solana wallet you use. AquaStock never holds your keys and never signs for you.",
+    "detected": "Found in this browser",
+    "noWallets": "No Solana wallet found in this browser.",
+    "install": "Get Phantom",
+    "installHint": "Install a wallet, then reload this page."
+  },
+  "menu": {
+    "label": "Wallet menu",
+    "copy": "Copy address",
+    "copied": "Address copied",
+    "explorer": "View on Explorer",
+    "disconnect": "Disconnect"
+  },
+  "network": {
+    "localnet": "Local validator",
+    "devnet": "Devnet",
+    "mainnet-beta": "Mainnet"
+  },
+  "connectFailed": "Couldn't connect to your wallet. Try again.",
+  "prompt": {
+    "title": "Connect a wallet to continue",
+    "description": "Your wallet signs every action. Nothing moves without your approval."
+  }
+}

@@ -2,13 +2,12 @@ import type { ReactNode } from 'react';
 import type { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
-import { getDemoMilestoneQueue } from '@/lib/demo/projects';
 import { DashboardTopbar } from './dashboard-topbar';
 import { Sidebar } from './sidebar';
 import type { DashboardNavItem } from './sidebar-nav';
 
 /**
- * The staff/government admin console shell — a dark-first "command center"
+ * The operator console shell — a dark-first "command center"
  * (see the chosen dashboard-theme direction), distinct from the light-first
  * investor-facing PublicShell. Forces `.dark` on its own subtree via a plain
  * class (not next-themes) so the console reads as dark regardless of the
@@ -29,21 +28,9 @@ export async function DashboardShell({
   children: ReactNode;
 }) {
   const t = await getTranslations({ locale, namespace: 'admin' });
-  const pendingCount = getDemoMilestoneQueue().length;
-
   const navItems: DashboardNavItem[] = [
-    { href: '/dashboard', label: t('sidebar.commandCenter'), icon: 'command' },
-    {
-      href: '/dashboard/projects',
-      label: t('sidebar.projects'),
-      icon: 'projects',
-    },
-    {
-      href: '/dashboard/milestones',
-      label: t('sidebar.milestones'),
-      icon: 'milestones',
-      count: pendingCount,
-    },
+    { href: '/dashboard', label: t('sidebar.overview'), icon: 'overview' },
+    { href: '/dashboard/pools', label: t('sidebar.pools'), icon: 'pools' },
   ];
 
   return (

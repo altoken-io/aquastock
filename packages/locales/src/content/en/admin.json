@@ -1,7 +1,7 @@
 {
   "signIn": {
     "title": "Admin sign in",
-    "subtitle": "For AquaStock staff and government partners managing projects and milestones.",
+    "subtitle": "For AquaStock staff who operate the Match Pools program.",
     "email": "Email",
     "password": "Password",
     "submit": "Sign in",
@@ -26,63 +26,71 @@
     "backToSignIn": "Back to sign in"
   },
   "console": {
-    "eyebrow": "Admin console",
-    "title": "Where public and community capital meet.",
-    "description": "Sign in to verify milestones and manage the projects government and community investors are funding together.",
-    "ringLabel": "Government and community capital across all demo projects"
+    "eyebrow": "Operator console",
+    "title": "Watch the pools, the program and the token.",
+    "description": "Sign in to see every pool, what is locked in it, and what the token's issuer can do. The console reads the chain; it never moves funds.",
+    "ringLabel": "A sponsor's match closing around savers' deposits"
   },
   "sidebar": {
-    "tagline": "Admin console",
-    "commandCenter": "Command center",
-    "projects": "Projects",
-    "milestones": "Milestones",
     "mobileOpen": "Open dashboard menu",
-    "mobileClose": "Close dashboard menu"
+    "mobileClose": "Close dashboard menu",
+    "tagline": "Operator console",
+    "overview": "Overview",
+    "pools": "Pools"
   },
   "dashboard": {
-    "title": "Admin dashboard",
     "signedInAs": "Signed in as {email}",
     "signOut": "Sign out",
-    "description": "An overview of every project, position, and milestone in the demo dataset.",
-    "demoDataNotice": "Demo data — no live on-chain feed yet.",
+    "title": "Operator overview",
+    "description": "Live from Solana: every pool, the program and the token's issuer.",
     "stats": {
-      "activeProjects": "Active projects",
-      "milestonesPending": "Milestones awaiting verification",
-      "totalRaised": "Total raised",
-      "totalRaisedCaption": "{publicAmount} government · {privateAmount} community",
-      "impactRecords": "Impact records logged"
+      "pools": "Pools",
+      "poolsCaption": "{open} open",
+      "budget": "Match budget",
+      "budgetCaption": "Locked across all pools",
+      "reserved": "Reserved for savers",
+      "reservedCaption": "{percent} of the budget",
+      "deposits": "Deposited by savers",
+      "depositsCaption": "{claimed} {symbol} of match claimed"
     },
-    "queue": {
-      "title": "Milestones awaiting verification",
-      "viewAll": "View all",
-      "verify": "Mark verified",
-      "verifyDisabledReason": "Verification requires the on-chain program — not built yet in this hackathon build.",
-      "empty": "Nothing awaiting verification."
+    "deployment": {
+      "title": "Deployment",
+      "network": "Network",
+      "program": "Program",
+      "upgradeAuthority": "Upgrade authority",
+      "upgradeNone": "None: the program can't be upgraded",
+      "token": "Token",
+      "transfers": "Transfers",
+      "live": "Live",
+      "paused": "Paused",
+      "multiplier": "Display multiplier",
+      "pauseAuthority": "Pause authority",
+      "freezeAuthority": "Freeze authority",
+      "permanentDelegate": "Permanent delegate",
+      "none": "No key",
+      "notInitialized": "The program hasn't been initialized on this network yet.",
+      "unavailable": "Couldn't read the chain right now. The rest of this page still works."
     },
     "activity": {
       "title": "Recent activity",
-      "empty": "No activity yet.",
-      "positionFunded": "{investorType} position funded on {project}",
-      "milestoneVerified": "“{milestone}” verified on {project}"
+      "empty": "No activity yet."
     },
-    "projectsTable": {
-      "title": "Projects",
-      "viewAll": "View all projects",
+    "poolsTable": {
+      "title": "Pools",
+      "viewAll": "View all pools",
+      "empty": "No pools yet.",
+      "unavailable": "Couldn't read pools right now.",
       "columns": {
-        "project": "Project",
+        "pool": "Pool",
         "status": "Status",
-        "goal": "Goal",
-        "raised": "Raised"
-      },
-      "milestonesProgress": "{verified}/{total} milestones verified"
+        "budget": "Budget",
+        "reserved": "Reserved",
+        "closes": "Closes"
+      }
     }
   },
-  "projectsPage": {
-    "title": "Projects",
-    "description": "Every project in the demo dataset, government and community positions included."
-  },
-  "milestonesPage": {
-    "title": "Milestones",
-    "description": "Every milestone still awaiting verification, across all projects."
+  "poolsPage": {
+    "title": "Pools",
+    "description": "Every pool on this deployment, read straight from the chain."
   }
 }

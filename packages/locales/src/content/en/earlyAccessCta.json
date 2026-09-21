@@ -1,14 +1,13 @@
 {
-  "title": "Follow the build",
-  "subtitle": "AquaStock is a 5-day hackathon build — this is a work in progress.",
+  "title": "Try the demo",
+  "subtitle": "AquaStock is a hackathon build on Solana. Deposit, watch the match vest, and leave whenever you like. It is a demo, so use amounts you can afford to lose.",
   "cta": {
     "primary": {
-      "label": "Connect wallet"
+      "label": "Open the app"
     }
   },
-  "imageAlt": "A community water-infrastructure project in an Andean valley at sunset.",
   "gaugeLabel": "Open",
   "notice": {
-    "tag": "Site notice"
+    "tag": "Hackathon demo"
   }
 }

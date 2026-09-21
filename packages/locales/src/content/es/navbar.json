@@ -2,18 +2,18 @@
   "logo": {
     "alt": "Logo de AquaStock",
     "label": "AquaStock",
-    "tagline": "Infraestructura de agua, financiada en Solana"
+    "tagline": "El aporte del empleador, en Solana"
   },
   "navigation": [
     {
-      "href": "/projects",
-      "title": "Proyectos",
-      "description": "Explorar proyectos financiados"
+      "href": "/pools",
+      "title": "Fondos",
+      "description": "Explora los fondos de aporte"
     },
     {
-      "href": "/impact",
-      "title": "Mi Impacto",
-      "description": "Ver el impacto de tu financiamiento"
+      "href": "/my-match",
+      "title": "Mi aporte",
+      "description": "Sigue tus depósitos y su liberación"
     }
   ],
   "skipToContent": "Saltar al contenido",

@@ -64,6 +64,13 @@ const unavailableProductionRateLimit: RateLimiter = {
   limit: async () => ({ success: false }),
 };
 
+/**
+ * False only in production with no Upstash credentials, where `rateLimit` refuses every
+ * request. Callers use it to report a misconfiguration instead of a misleading "slow down".
+ */
+export const rateLimitConfigured =
+  remoteRateLimit !== null || process.env.NODE_ENV !== 'production';
+
 export const rateLimit: RateLimiter =
   remoteRateLimit ??
   (process.env.NODE_ENV === 'production'

@@ -1,0 +1,43 @@
+{
+  "title": "Depositar {symbol}",
+  "subtitle": "El patrocinador aporta {percent} de lo que depositas. Se libera durante {duration}.",
+  "field": {
+    "label": "Monto",
+    "placeholder": "0",
+    "balance": "Tu saldo: {amount} {symbol}",
+    "balanceLoading": "Consultando tu saldo…",
+    "max": "Máx.",
+    "maxLabel": "Completar con lo máximo que puedes depositar",
+    "cap": "Este fondo permite hasta {amount} {symbol} por ahorrador."
+  },
+  "noBalance": {
+    "title": "No tienes {symbol}",
+    "body": "Necesitas algo para participar.",
+    "buy": "Consigue {symbol} en Jupiter",
+    "demo": "Esta es una red de demostración, sin casa de cambio. Pide tokens de prueba al equipo."
+  },
+  "preview": {
+    "title": "Lo que quedaría asegurado",
+    "deposit": "Tu depósito",
+    "match": "Aporte del patrocinador",
+    "matchHint": "Queda reservado para ti ahora. Se libera durante {duration}.",
+    "partial": "Solo quedan {matched} {symbol} de aporte, así que recibirías {matched} en lugar de {wanted}."
+  },
+  "problems": {
+    "format": "Ingresa un número, como 25 o 25.5.",
+    "precision": "{symbol} tiene como máximo {decimals} decimales.",
+    "too-small": "Es demasiado pequeño para enviarlo.",
+    "too-large": "Ese número es demasiado grande.",
+    "decimals": "No se pudo leer la configuración del token. Inténtalo de nuevo en un momento.",
+    "multiplier": "No se pudo leer la configuración del token. Inténtalo de nuevo en un momento.",
+    "ended": "Este fondo ya cerró los depósitos.",
+    "paused": "El emisor pausó las transferencias de {symbol}, así que los depósitos están en espera.",
+    "transfer-hook": "El emisor activó un transfer hook, así que este fondo no puede mover {symbol} por ahora.",
+    "over-cap": "Este fondo permite hasta {cap} {symbol} por ahorrador.",
+    "budget-exhausted": "El presupuesto del aporte está totalmente reservado. Un nuevo depósito no recibiría aporte.",
+    "insufficient-balance": "Tienes {balance} {symbol}."
+  },
+  "submit": "Depositar {amount} {symbol}",
+  "submitIdle": "Ingresa un monto",
+  "terms": "Retira todo tu depósito cuando quieras. Si te retiras antes, el aporte que aún no se liberó vuelve al patrocinador."
+}

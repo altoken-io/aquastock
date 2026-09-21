@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "My match",
+    "description": "Your deposits, the match vesting on them, and the pools you sponsor."
+  },
+  "eyebrow": "Your savings",
+  "title": "My match",
+  "subtitle": "Every pool you've deposited into, and how much of its match has vested.",
+  "connect": {
+    "title": "Connect a wallet to see your match",
+    "description": "Everything here is read from your wallet's own accounts on Solana. There's no sign-up."
+  },
+  "summary": {
+    "label": "Totals across your pools",
+    "deposited": "Deposited",
+    "reserved": "Match reserved",
+    "claimed": "Claimed",
+    "claimable": "Ready to claim"
+  },
+  "positions": {
+    "title": "Your positions",
+    "empty": {
+      "title": "You haven't deposited anywhere yet",
+      "description": "Pick a pool and deposit. Your match is reserved on-chain and starts vesting straight away.",
+      "cta": "Browse pools"
+    }
+  },
+  "row": {
+    "deposit": "Deposit",
+    "match": "Match reserved",
+    "claimable": "Ready to claim",
+    "vested": "{vested} of {reserved} vested",
+    "progress": "{percent} of the match has vested",
+    "claim": "Claim {amount} {symbol}",
+    "open": "Open pool"
+  },
+  "sponsored": {
+    "title": "Pools you sponsor",
+    "empty": {
+      "title": "You haven't sponsored a pool",
+      "description": "Fund a match and let savers in. It takes one transaction.",
+      "cta": "Create a pool"
+    }
+  },
+  "error": {
+    "title": "Can't load your positions",
+    "description": "They're read straight from Solana. Check your connection and try again.",
+    "retry": "Try again"
+  }
+}

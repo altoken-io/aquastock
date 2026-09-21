@@ -1,0 +1,35 @@
+{
+  "title": "Tu fondo",
+  "role": "Eres el patrocinador",
+  "summary": {
+    "total": "Presupuesto del aporte",
+    "reserved": "Reservado para ahorradores",
+    "available": "Aún sin reservar",
+    "balance": "Tu saldo"
+  },
+  "fund": {
+    "title": "Ampliar el presupuesto",
+    "description": "Un presupuesto mayor permite igualar más depósitos por completo. Disponible hasta que el fondo cierre.",
+    "field": "Monto a agregar",
+    "submit": "Agregar {amount} {symbol}",
+    "submitIdle": "Ingresa un monto",
+    "closed": "El fondo cerró, así que el presupuesto ya no puede crecer."
+  },
+  "reclaim": {
+    "title": "Recuperar aporte sin usar",
+    "description": "El aporte que ningún ahorrador tiene reservado vuelve a ti cuando el fondo cierra. También cuenta el que un ahorrador deja al retirarse antes.",
+    "button": "Recuperar {amount} {symbol}",
+    "waiting": "Disponible cuando el fondo cierre, el {date}.",
+    "nothing": "No hay nada que recuperar por ahora."
+  },
+  "problems": {
+    "format": "Ingresa un número, como 25 o 25.5.",
+    "precision": "{symbol} tiene como máximo {decimals} decimales.",
+    "too-small": "Es demasiado pequeño para enviarlo.",
+    "too-large": "Ese número es demasiado grande.",
+    "decimals": "No se pudo leer la configuración del token. Inténtalo de nuevo en un momento.",
+    "multiplier": "No se pudo leer la configuración del token. Inténtalo de nuevo en un momento.",
+    "paused": "El emisor pausó las transferencias de {symbol}, así que nada puede moverse.",
+    "insufficient-balance": "Tienes {balance} {symbol}."
+  }
+}
