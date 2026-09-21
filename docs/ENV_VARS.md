@@ -6,9 +6,24 @@ Each app reads its own `.env.local`, copied from its own `.env.example`. Prisma 
 
 Index-only — points to `apps/web/.env.example` and `apps/dapp/.env.example`, and notes that off-chain data is served through `apps/dapp`'s own route handlers rather than a separate API service.
 
-## What you actually need for local development
+## What each environment needs
 
-Only two variables are load-bearing right now: `DATABASE_URL`/`DIRECT_URL` (Postgres) and `BETTER_AUTH_SECRET`, and only for `apps/dapp`'s admin-console login (Better Auth's session/user tables) — nothing on the public `apps/web` marketing site touches a database. Everything else below (Resend, PostHog, Upstash, Arcjet) is present in the code but not wired into anything currently reachable on either live site — the contact/newsletter form components that use Resend/Upstash aren't rendered on any page, PostHog's provider no-ops cleanly if its key is unset, and Arcjet is already documented as optional locally. The one exception: `apps/dapp`'s real "Forgot password" flow does call Resend — only matters if you test that specific flow.
+**Local development** needs nothing you have to fetch: `pnpm dev:stack` starts a disposable Postgres and a local validator, and exports the variables the app needs for that run (`DATABASE_URL`, `NEXT_PUBLIC_ANCHOR_PROGRAM_ID`, `NEXT_PUBLIC_STOCK_MINT`, `NEXT_PUBLIC_SOLANA_NETWORK=localnet`, the RPC URLs, and a throwaway test wallet).
+
+**A deployed `apps/dapp` (Vercel)** needs all of these, set before the build because every `NEXT_PUBLIC_*` value is inlined at build time (change one, redeploy):
+
+- `DATABASE_URL`, `DIRECT_URL`: Postgres (Neon).
+- `BETTER_AUTH_SECRET`: the operator login's signing secret.
+- `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`: without them every API route answers 503 by design.
+- `SOLANA_RPC_URL` (server) and `NEXT_PUBLIC_SOLANA_RPC_URL` (browser): RPC endpoints.
+- `NEXT_PUBLIC_SOLANA_NETWORK`: `devnet` or `mainnet-beta`. **It defaults to `localnet` if unset**, which would mislabel Explorer links, so always set it.
+- `NEXT_PUBLIC_ANCHOR_PROGRAM_ID`, `NEXT_PUBLIC_STOCK_MINT`: from your deploy (see below).
+- `NEXT_PUBLIC_BASE_URL`, `NEXT_PUBLIC_WEB_URL`: the two public URLs.
+- On mainnet also `NEXT_PUBLIC_MAINNET_DEMO_CAP`, or pool creation stays closed.
+
+**A deployed `apps/web`** needs `NEXT_PUBLIC_BASE_URL` and `NEXT_PUBLIC_DAPP_URL`. Nothing on the marketing site touches a database, so its other variables are optional.
+
+Never set `NEXT_PUBLIC_E2E_WALLET_SECRET` anywhere that is deployed. Resend, PostHog and Arcjet are optional.
 
 ## `apps/web/.env.example`
 
@@ -29,8 +44,8 @@ Only two variables are load-bearing right now: `DATABASE_URL`/`DIRECT_URL` (Post
 | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `NEXT_PUBLIC_BASE_URL`                                 | Public URL of the dApp.                                                                                                                                                                                                                                                                                  |
 | `NEXT_PUBLIC_WEB_URL`                                  | Public URL of `apps/web`, for links back to the marketing site. Same "falls back to prod" caveat.                                                                                                                                                                                                        |
-| `NEXT_PUBLIC_SOLANA_NETWORK`                           | Cluster for the hackathon build — `devnet`. Declared but not yet read anywhere (no wallet-adapter wired up).                                                                                                                                                                                             |
-| `NEXT_PUBLIC_SOLANA_RPC_URL`                           | RPC endpoint for wallet-adapter connect + on-chain reads (once wired). Same "not yet read" caveat.                                                                                                                                                                                                       |
+| `NEXT_PUBLIC_SOLANA_NETWORK`                           | `localnet`, `devnet` or `mainnet-beta`. Read by the wallet UI (Explorer links, the mainnet demo cap, the test wallet) and the server. Defaults to `localnet` if unset, so set it in every deployed environment.                                                                                          |
+| `NEXT_PUBLIC_SOLANA_RPC_URL`                           | The **browser's** RPC endpoint (balances, sending and confirming transactions). It is public, so use a key restricted to your domain, or a separate one from the server's.                                                                                                                               |
 | `NEXT_PUBLIC_ANCHOR_PROGRAM_ID`                        | Deployed Match Pools program id, printed by `pnpm program:deploy`. Required by the API routes.                                                                                                                                                                                                           |
 | `SOLANA_RPC_URL`                                       | **Server-only** RPC endpoint for the API routes (reading pools and positions, verifying transactions). Use a provider key (Helius, QuickNode) and keep it out of `NEXT_PUBLIC_*`. Falls back to `NEXT_PUBLIC_SOLANA_RPC_URL`, then to a local validator in development; required in production.          |
 | `NEXT_PUBLIC_STOCK_MINT`                               | The one Token-2022 mint this deployment allows: mainnet SPYx (`XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W`) or the devnet replica from `pnpm solana:replica-mint`. Must equal the mint given to `init_config`.                                                                                          |
