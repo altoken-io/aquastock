@@ -152,10 +152,10 @@ Prisma migrations read the root `.env`. The apps read `apps/dapp/.env.local`, or
 
 ## 8. Open decisions
 
-1. Approve the Match Pools pivot, or redirect.
-2. Hard-capped mainnet demo, or devnet-only with the replica mint (safer, weaker on "working code").
+1. Approve the Match Pools pivot, or redirect. **Decided: approved.**
+2. Hard-capped mainnet demo, or devnet-only with the replica mint (safer, weaker on "working code"). **Decided (2026-09-22): devnet-only.** No hackathon rule was found requiring this either way (checked the official hackathon page directly); the only mainnet-specific line found anywhere is bounty-specific to a Meteora track this repo isn't pursuing. Devnet avoids a real SPYx purchase and real funds in an unaudited program. `NEXT_PUBLIC_SOLANA_NETWORK=devnet`, `NEXT_PUBLIC_STOCK_MINT` is the devnet replica mint from `scripts/solana/replica-mint.ts`, and `NEXT_PUBLIC_MAINNET_DEMO_CAP` is not set.
 3. Team size, and who owns the Rust program.
-4. Keep the AquaStock name and water metaphor, or rename.
+4. Keep the AquaStock name and water metaphor, or rename. **Decided: keep AquaStock.**
 
 ## 9. Risks
 

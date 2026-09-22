@@ -6,8 +6,18 @@
 //
 // Usage:
 //   node scripts/create-admin-user.mjs --email you@example.com --name "Your Name" [--env .env.prod]
-// Prompts for a password interactively (not passed as a CLI arg, so it
-// never ends up in shell history).
+// Prompts for a password interactively by default (not a CLI arg, so it
+// never ends up in shell history). Two non-interactive alternatives, for
+// scripting or CI, neither of which puts a password on the command line:
+//   --generate-password         a strong random password is generated and
+//                                printed once after the account is created;
+//                                nothing needs to be typed or stored ahead of time
+//   --password-env SOME_VAR     reads the password from that already-set
+//                                environment variable (e.g. loaded from --env)
+// There is no runtime env var the app itself reads for this: Better Auth only
+// ever checks the password hash this script writes to the database, so
+// nothing needs adding to .env.example or Vercel for the app to work.
+import { randomBytes } from 'node:crypto';
 import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 
@@ -20,6 +30,8 @@ function parseArgs(argv) {
     if (arg === '--email') args.email = argv[++i];
     else if (arg === '--name') args.name = argv[++i];
     else if (arg === '--env') args.env = argv[++i];
+    else if (arg === '--generate-password') args.generatePassword = true;
+    else if (arg === '--password-env') args.passwordEnv = argv[++i];
   }
   return args;
 }
@@ -31,12 +43,24 @@ async function promptPassword() {
   return password;
 }
 
-async function main() {
-  const { email, name, env: envPath } = parseArgs(process.argv.slice(2));
+/** 24 random bytes as base64url: 32 characters, no ambiguous padding, ~192 bits. */
+function generatePassword() {
+  return randomBytes(24).toString('base64url');
+}
 
-  if (!email || !name) {
+async function main() {
+  const {
+    email,
+    name,
+    env: envPath,
+    generatePassword: shouldGenerate,
+    passwordEnv,
+  } = parseArgs(process.argv.slice(2));
+
+  if (!email || !name || (shouldGenerate && passwordEnv)) {
     console.error(
-      'Usage: node scripts/create-admin-user.mjs --email you@example.com --name "Your Name" [--env .env.prod]',
+      'Usage: node scripts/create-admin-user.mjs --email you@example.com --name "Your Name" ' +
+        '[--env .env.prod] [--generate-password | --password-env SOME_VAR]',
     );
     process.exit(1);
   }
@@ -47,7 +71,22 @@ async function main() {
     process.exit(1);
   }
 
-  const password = await promptPassword();
+  let password;
+  let generated = false;
+  if (shouldGenerate) {
+    password = generatePassword();
+    generated = true;
+  } else if (passwordEnv) {
+    password = process.env[passwordEnv];
+    if (!password) {
+      console.error(
+        `${passwordEnv} is not set (checked ${envPath} and the shell).`,
+      );
+      process.exit(1);
+    }
+  } else {
+    password = await promptPassword();
+  }
   if (password.length < 8) {
     console.error('Password must be at least 8 characters.');
     process.exit(1);
@@ -70,16 +109,29 @@ async function main() {
     emailAndPassword: { enabled: true },
   });
 
-  const { error } = await auth.api.signUpEmail({
-    body: { email, name, password },
-  });
+  // A duplicate email (a re-run, or a typo matching an existing account) throws
+  // here instead of resolving with `{ error }` — catch both shapes the same way.
+  let error;
+  try {
+    ({ error } = await auth.api.signUpEmail({
+      body: { email, name, password },
+    }));
+  } catch (thrown) {
+    error = thrown.body ?? thrown;
+  }
 
   if (error) {
     console.error(`Failed to create admin user: ${error.message ?? error}`);
+    await prisma.$disconnect();
     process.exit(1);
   }
 
   console.log(`Created admin account for ${email}.`);
+  if (generated) {
+    console.log(
+      `Password (shown once, not stored anywhere by this script): ${password}`,
+    );
+  }
   await prisma.$disconnect();
 }
 

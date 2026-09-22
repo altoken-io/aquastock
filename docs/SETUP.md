@@ -49,6 +49,8 @@ BETTER_AUTH_URL=http://localhost:3003 \
 
 It asks for a password; then sign in at `/`. The stack uses Turbopack because the project's webpack dev server (`pnpm dev`) grows to several GB with the wallet stack loaded and can serve truncated chunks; `pnpm dev:stack --webpack` opts back in.
 
+For a deployed environment (production or a demo account), run the same script pointed at that database instead — for example with `--env .env.prod` holding its `DATABASE_URL`/`DIRECT_URL`/`BETTER_AUTH_SECRET`. Two non-interactive flags avoid typing a password by hand: `--generate-password` has the script generate a strong random one and print it once (nothing is stored anywhere but the database's password hash), or `--password-env SOME_VAR` reads it from an already-set environment variable. Neither puts a password on the command line or in shell history.
+
 ## Validation
 
 - `pnpm test:e2e` runs the Playwright golden path (sponsor creates a pool; saver deposits, claims, withdraws and closes) on a desktop and a 390 px viewport. It starts `pnpm dev:stack` itself (or reuses a running one), so it needs Docker and the Solana toolchain and is not part of `pnpm check`. `pnpm test:e2e demo-dry-run` times the demo script's beats.

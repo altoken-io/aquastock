@@ -18,7 +18,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("92EVZikCaJ1SXTJAq7e8NzzZg5zLKjK2LyX14SQeQRfE");
+declare_id!("8wnjTUiMQaPxdgfgZdJUGAWBgdPqKoVUAtcWgpgs3GXR");
 
 #[program]
 pub mod match_pools {

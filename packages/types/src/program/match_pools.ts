@@ -2,7 +2,7 @@
 // Do not edit by hand. Review the diff whenever the on-chain interface changes.
 
 export type MatchPools = {
-  address: '92EVZikCaJ1SXTJAq7e8NzzZg5zLKjK2LyX14SQeQRfE';
+  address: '8wnjTUiMQaPxdgfgZdJUGAWBgdPqKoVUAtcWgpgs3GXR';
   metadata: {
     name: 'matchPools';
     version: '0.1.0';
@@ -296,7 +296,7 @@ export type MatchPools = {
         },
         {
           name: 'program';
-          address: '92EVZikCaJ1SXTJAq7e8NzzZg5zLKjK2LyX14SQeQRfE';
+          address: '8wnjTUiMQaPxdgfgZdJUGAWBgdPqKoVUAtcWgpgs3GXR';
         },
         {
           name: 'programData';
@@ -1010,7 +1010,7 @@ export type MatchPools = {
 };
 
 export const matchPoolsIdl: MatchPools = {
-  address: '92EVZikCaJ1SXTJAq7e8NzzZg5zLKjK2LyX14SQeQRfE',
+  address: '8wnjTUiMQaPxdgfgZdJUGAWBgdPqKoVUAtcWgpgs3GXR',
   metadata: {
     name: 'matchPools',
     version: '0.1.0',
@@ -1305,7 +1305,7 @@ export const matchPoolsIdl: MatchPools = {
         },
         {
           name: 'program',
-          address: '92EVZikCaJ1SXTJAq7e8NzzZg5zLKjK2LyX14SQeQRfE',
+          address: '8wnjTUiMQaPxdgfgZdJUGAWBgdPqKoVUAtcWgpgs3GXR',
         },
         {
           name: 'programData',
