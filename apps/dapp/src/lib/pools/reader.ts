@@ -2,8 +2,6 @@
 // Anchor client; tests supply plain fakes, so the service never depends on RPC details.
 import type { PublicKey } from '@solana/web3.js';
 
-import type { DeploymentDto } from '@aquastock/types';
-
 import { positionPda } from '../solana/pdas';
 import { fetchTransactionEvents, type PoolEvents } from './activity';
 import {
@@ -13,6 +11,7 @@ import {
   fetchPositionForWallet,
   fetchPositionsForWallet,
   type ChainClient,
+  type ChainDeployment,
   type ChainPool,
   type ChainPosition,
 } from './chain';
@@ -27,7 +26,7 @@ export interface ChainReader {
     network: string,
     fallbackMint: PublicKey | null,
     now: number,
-  ): Promise<DeploymentDto>;
+  ): Promise<ChainDeployment>;
   transactionEvents(signature: string): Promise<PoolEvents[]>;
 }
 

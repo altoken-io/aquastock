@@ -3,7 +3,11 @@
 import { useLocale } from 'next-intl';
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
 
-import type { DeploymentDto, IssuerPowersDto } from '@aquastock/types';
+import type {
+  DeploymentDto,
+  FaucetInfoDto,
+  IssuerPowersDto,
+} from '@aquastock/types';
 
 import { useDeployment } from './hooks/queries';
 import { env } from '@/lib/env/client';
@@ -31,6 +35,8 @@ export interface TokenInfo {
   /** Who can change the program's code. Disclosed wherever a sponsor commits funds. */
   upgradeAuthority: string | null;
   network: string;
+  /** The demo faucet's terms; null when this deployment has none (always on mainnet). */
+  faucet: FaucetInfoDto | null;
   /** False until the deployment has been read at least once. */
   ready: boolean;
 }
@@ -46,6 +52,7 @@ const FALLBACK: TokenInfo = {
   issuer: null,
   upgradeAuthority: null,
   network: 'localnet',
+  faucet: null,
   ready: false,
 };
 
@@ -74,6 +81,7 @@ export function TokenProvider({
       issuer,
       upgradeAuthority: data.upgradeAuthority,
       network: data.network,
+      faucet: data.faucet ?? null,
       ready: true,
     };
   }, [data]);

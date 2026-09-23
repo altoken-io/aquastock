@@ -2,6 +2,8 @@
 // handlers and server components; it is the one place that touches the environment.
 import prisma from '@aquastock/db-prisma';
 
+import { FAUCET_INFO } from '../faucet/config';
+import { getFaucetServices } from '../faucet/server';
 import { createChainClient } from './chain';
 import { loadPoolsConfig } from './config';
 import { createChainReader } from './reader';
@@ -21,6 +23,7 @@ export function getPoolServices(): PoolServiceDeps {
       now: () => Math.floor(Date.now() / 1000),
       network: config.network,
       stockMint: config.stockMint,
+      faucet: getFaucetServices() ? FAUCET_INFO : null,
     };
   }
   return cached;

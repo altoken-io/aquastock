@@ -34,6 +34,7 @@
     "solana:mint-replica": "tsx scripts/solana/mint-replica.ts",
     "solana:init-config": "tsx scripts/solana/init-config.ts",
     "solana:demo-pool": "tsx scripts/solana/demo-pool.ts",
+    "solana:faucet": "tsx scripts/solana/faucet-setup.ts",
     "lint": "turbo run lint",
     "check-types": "turbo run check-types",
     "test": "turbo run test",

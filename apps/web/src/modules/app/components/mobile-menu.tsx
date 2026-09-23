@@ -5,10 +5,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { AnimatePresence, useReducedMotion } from 'motion/react';
 import * as motion from 'motion/react-m';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { DotBackground } from '@/modules/app/components/dot-background';
-import { DAPP_LOGIN_URL } from '@/lib/dapp-url';
+import { dappPoolsUrl } from '@/lib/dapp-url';
 
 import BrandLogo from '@/components/helpers/brand-logo';
 import ButtonLink from '@/components/ui/button-link';
@@ -25,6 +25,7 @@ const PANEL_ID = 'mobile-menu-panel';
 
 const MobileMenu = ({ className }: { className?: string }) => {
   const t = useTranslations('navbar');
+  const locale = useLocale();
   const navLinks = t.raw('navigation') as NavLink[];
   const prefersReducedMotion = useReducedMotion();
 
@@ -183,7 +184,7 @@ const MobileMenu = ({ className }: { className?: string }) => {
               </div>
               <div className="flex items-center gap-3 border-t border-border/70 bg-background px-4 py-4 sm:px-6">
                 <a
-                  href={DAPP_LOGIN_URL}
+                  href={dappPoolsUrl(locale)}
                   onClick={handleClose}
                   className="flex h-12 flex-1 items-center justify-center rounded-md border border-border text-sm font-semibold text-foreground/80 transition-colors hover:border-foreground/30 hover:text-foreground"
                 >

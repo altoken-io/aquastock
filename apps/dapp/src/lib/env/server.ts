@@ -12,6 +12,10 @@ const serverEnv = {
   // Admin-console session/cookie signing secret (Better Auth) — see
   // src/lib/auth/auth.ts. 32+ random chars: `openssl rand -base64 32`.
   BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+  // Demo faucet wallet (devnet/localnet only), as the JSON array a Solana keypair file holds.
+  // A dedicated hot wallet that holds only demo tokens and a little SOL: never the deployer,
+  // the upgrade authority or the mint authority. Unset means no faucet.
+  FAUCET_SECRET_KEY: process.env.FAUCET_SECRET_KEY,
 };
 
 // Optional environment variables in development

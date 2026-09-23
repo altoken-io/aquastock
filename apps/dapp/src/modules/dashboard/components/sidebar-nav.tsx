@@ -1,12 +1,12 @@
 'use client';
 
-import { Layers, LayoutDashboard } from 'lucide-react';
+import { AppWindow, Layers, LayoutDashboard } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 import { Link, usePathname } from '@/lib/i18n/navigation';
 import { cn } from '@/utils/classNames';
 
-export type DashboardNavIcon = 'overview' | 'pools';
+export type DashboardNavIcon = 'overview' | 'pools' | 'app';
 export type DashboardNavItem = {
   href: string;
   label: string;
@@ -17,6 +17,7 @@ export type DashboardNavItem = {
 const ICONS: Record<DashboardNavIcon, LucideIcon> = {
   overview: LayoutDashboard,
   pools: Layers,
+  app: AppWindow,
 };
 
 export function SidebarNav({

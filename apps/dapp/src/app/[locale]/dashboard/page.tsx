@@ -6,6 +6,9 @@ import { notFound } from 'next/navigation';
 
 import ButtonLink from '@/components/ui/button-link';
 import { requireAdminSession } from '@/lib/auth/require-admin-session';
+import { isFaucetNetwork, lamportsToSol } from '@/lib/faucet/config';
+import { getFaucetServices } from '@/lib/faucet/server';
+import { faucetStatus } from '@/lib/faucet/service';
 import { routing } from '@/lib/i18n/routing';
 import { unixNow } from '@/lib/pools/clock';
 import { loadConsole, summarizePools } from '@/lib/pools/console';
@@ -15,7 +18,10 @@ import {
   type ActivityRow,
 } from '@/modules/dashboard/components/activity-feed';
 import { DashboardShell } from '@/modules/dashboard/components/dashboard-shell';
-import { DeploymentCard } from '@/modules/dashboard/components/deployment-card';
+import {
+  DeploymentCard,
+  type FaucetRow,
+} from '@/modules/dashboard/components/deployment-card';
 import { PoolsTable } from '@/modules/dashboard/components/pools-table';
 import { StatTile } from '@/modules/dashboard/components/stat-tile';
 import { getConsoleFormatters } from '@/modules/dashboard/lib/console-view';
@@ -46,7 +52,12 @@ export default async function DashboardPage({ params }: PageProps) {
   setRequestLocale(locale);
 
   const session = await requireAdminSession(locale);
-  const snapshot = await loadConsole(getPoolServices());
+  const poolServices = getPoolServices();
+  const faucetServices = getFaucetServices();
+  const [snapshot, faucet] = await Promise.all([
+    loadConsole(poolServices),
+    faucetServices ? faucetStatus(faucetServices).catch(() => null) : null,
+  ]);
   const now = unixNow();
 
   const [t, tActivity, fmt] = await Promise.all([
@@ -54,6 +65,24 @@ export default async function DashboardPage({ params }: PageProps) {
     getTranslations({ locale, namespace: 'pools.activity' }),
     getConsoleFormatters(locale, snapshot.deployment),
   ]);
+
+  // Only demo networks have a faucet, so mainnet shows no row at all.
+  const faucetRow: FaucetRow | null = !isFaucetNetwork(poolServices.network)
+    ? null
+    : !faucetServices
+      ? { state: 'off' }
+      : !faucet
+        ? { state: 'unreadable' }
+        : {
+            state: 'ok',
+            address: faucet.address,
+            balance: t('dashboard.deployment.faucetBalance', {
+              tokens: fmt.amount(faucet.tokensRaw.toString()),
+              symbol: fmt.symbol,
+              sol: lamportsToSol(faucet.lamports),
+            }),
+            low: faucet.low,
+          };
 
   const totals = summarizePools(snapshot.pools ?? [], now);
   const reservedShare =
@@ -175,8 +204,13 @@ export default async function DashboardPage({ params }: PageProps) {
                 none: t('dashboard.deployment.none'),
                 notInitialized: t('dashboard.deployment.notInitialized'),
                 unavailable: t('dashboard.deployment.unavailable'),
+                faucet: t('dashboard.deployment.faucet'),
+                faucetOff: t('dashboard.deployment.faucetOff'),
+                faucetLow: t('dashboard.deployment.faucetLow'),
+                faucetUnreadable: t('dashboard.deployment.faucetUnreadable'),
               }}
               explorer={fmt.explorer}
+              faucet={faucetRow}
             />
           </section>
         </div>

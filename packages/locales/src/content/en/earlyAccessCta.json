@@ -1,6 +1,6 @@
 {
   "title": "Try the demo",
-  "subtitle": "AquaStock is a hackathon build on Solana. Deposit, watch the match vest, and leave whenever you like. It is a demo, so use amounts you can afford to lose.",
+  "subtitle": "AquaStock is a hackathon build on Solana devnet. Get free demo tokens in the app, deposit, watch the match vest, and leave whenever you like. Demo tokens have no value.",
   "cta": {
     "primary": {
       "label": "Open the app"

@@ -24,6 +24,7 @@ import { buildDeposit } from '../tx/builders';
 import type { PoolTx } from '../tx/use-pool-transaction';
 import { ActionButton } from './actions';
 import { AmountField } from './amount-field';
+import { FaucetOffer } from './faucet-offer';
 import { Notice } from './notice';
 import { LedgerRow } from './stream-legend';
 
@@ -134,6 +135,8 @@ export function DepositPanel({
 
       {hardBlocked && problem ? (
         <Notice tone="warning">{problem}</Notice>
+      ) : noBalance && !isMainnet(token.network) && token.faucet ? (
+        <FaucetOffer />
       ) : noBalance ? (
         <Notice>
           <p className="font-medium">

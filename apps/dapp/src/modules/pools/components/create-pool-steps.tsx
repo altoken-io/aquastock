@@ -24,6 +24,7 @@ import {
   TextInput,
   describedBy,
 } from './create-pool-fields';
+import { FaucetOffer } from './faucet-offer';
 import { Notice } from './notice';
 
 export interface StepProps {
@@ -318,7 +319,10 @@ export function FundStep({
       </p>
 
       {balanceRaw === 0n ? (
-        <Notice tone="warning">{t('noBalance', { symbol })}</Notice>
+        <>
+          <Notice tone="warning">{t('noBalance', { symbol })}</Notice>
+          <FaucetOffer />
+        </>
       ) : null}
 
       <Field

@@ -36,7 +36,8 @@
     "mobileClose": "Cerrar menú del panel",
     "tagline": "Consola del operador",
     "overview": "Resumen",
-    "pools": "Fondos"
+    "pools": "Fondos",
+    "openApp": "Abrir la app"
   },
   "dashboard": {
     "signedInAs": "Sesión iniciada como {email}",
@@ -69,7 +70,12 @@
       "permanentDelegate": "Delegado permanente",
       "none": "Ninguna llave",
       "notInitialized": "El programa aún no se ha inicializado en esta red.",
-      "unavailable": "No se pudo leer la cadena ahora. El resto de esta página sigue funcionando."
+      "unavailable": "No se pudo leer la cadena ahora. El resto de esta página sigue funcionando.",
+      "faucet": "Grifo de prueba",
+      "faucetBalance": "Quedan {tokens} {symbol} · {sol} SOL",
+      "faucetOff": "Apagado: FAUCET_SECRET_KEY no está configurada, así que las billeteras nuevas no pueden recibir tokens de prueba",
+      "faucetLow": "Se está agotando. Recárgalo con pnpm solana:faucet.",
+      "faucetUnreadable": "No se pudo leer el saldo del grifo ahora."
     },
     "activity": {
       "title": "Actividad reciente",

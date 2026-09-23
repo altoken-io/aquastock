@@ -1,0 +1,16 @@
+{
+  "title": "Get demo tokens",
+  "body": "This demo runs on a Solana test network, where tokens have no value. The faucet sends {tokens} {symbol} and {sol} SOL for network fees.",
+  "request": "Get {tokens} {symbol}",
+  "sending": "Sending demo tokens…",
+  "sent": "Demo tokens and SOL are in your wallet.",
+  "viewTx": "View transaction",
+  "errors": {
+    "alreadyFunded": "Your wallet already has enough to try the demo.",
+    "rateLimited": "This wallet has had its demo tokens for today. Try again tomorrow or use another wallet.",
+    "empty": "The demo faucet is empty. The team has been told.",
+    "failed": "The network didn't confirm the transfer. Try again.",
+    "unavailable": "This deployment has no demo faucet.",
+    "generic": "Couldn't reach the faucet. Try again in a moment."
+  }
+}

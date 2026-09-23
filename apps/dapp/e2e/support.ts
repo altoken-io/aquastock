@@ -10,25 +10,30 @@ interface StackInfo {
   wallet: string;
 }
 
-/** The pool `scripts/dev-stack.sh` seeded: sponsored by someone other than the test wallet. */
-export function seededPool(): string {
+function isStackInfo(value: unknown): value is StackInfo {
+  if (typeof value !== 'object' || value === null) return false;
+  return ['pool', 'mint', 'programId', 'wallet'].every(
+    (key) => typeof Reflect.get(value, key) === 'string',
+  );
+}
+
+/** Public addresses `scripts/dev-stack.sh` wrote for the tests. */
+export function readStack(): StackInfo {
   const file = join(__dirname, '../../../programs/target/dev-stack.json');
   try {
     const info: unknown = JSON.parse(readFileSync(file, 'utf8'));
-    if (
-      typeof info === 'object' &&
-      info !== null &&
-      'pool' in info &&
-      typeof info.pool === 'string'
-    ) {
-      return info.pool;
-    }
+    if (isStackInfo(info)) return info;
   } catch {
     // Falls through to the message below.
   }
   throw new Error(
     `Could not read ${file}. Start the stack with \`pnpm dev:stack\` (or let Playwright start it).`,
   );
+}
+
+/** The pool `scripts/dev-stack.sh` seeded: sponsored by someone other than the test wallet. */
+export function seededPool(): string {
+  return readStack().pool;
 }
 
 export type { StackInfo };

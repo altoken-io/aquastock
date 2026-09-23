@@ -1,4 +1,4 @@
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 import {
   MotionDiv,
@@ -6,11 +6,14 @@ import {
 } from '@/components/helpers/motion/blur-lazy-motion';
 import ButtonLink from '@/components/ui/button-link';
 import { TextReveal } from '@/components/helpers/motion/text-reveal';
-import { DAPP_BASE_URL } from '@/lib/dapp-url';
+import { dappPoolsUrl } from '@/lib/dapp-url';
 import { ArrowRight } from 'lucide-react';
 
 export async function EarlyAccessCtaSection() {
-  const t = await getTranslations('earlyAccessCta');
+  const [t, locale] = await Promise.all([
+    getTranslations('earlyAccessCta'),
+    getLocale(),
+  ]);
 
   return (
     <section
@@ -42,7 +45,7 @@ export async function EarlyAccessCtaSection() {
 
         <MotionDiv delay={0.3} className="relative mt-9">
           <ButtonLink
-            href={DAPP_BASE_URL}
+            href={dappPoolsUrl(locale)}
             variant="none"
             rounded="md"
             animation="grow"

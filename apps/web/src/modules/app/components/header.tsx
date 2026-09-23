@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import * as motion from 'motion/react-m';
 import { useReducedMotion } from 'motion/react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { Link } from '@/lib/i18n/navigation';
 import BrandLogo from '@/components/helpers/brand-logo';
@@ -13,12 +13,13 @@ import { LanguageSwitcher } from '@/components/helpers/language-switcher';
 import ThemeSwitcher from '@/components/helpers/theme-switcher';
 import { useIsScrolled } from '@/hooks/use-scroll-position';
 import { cn } from '@/utils/classNames';
-import { DAPP_LOGIN_URL } from '@/lib/dapp-url';
+import { dappPoolsUrl } from '@/lib/dapp-url';
 
 type IndicatorRect = { left: number; width: number };
 
 const Header = () => {
   const t = useTranslations('navbar');
+  const locale = useLocale();
   const navLinks = t.raw('navigation') as NavLink[];
   const isScrolled = useIsScrolled();
   const prefersReducedMotion = useReducedMotion();
@@ -110,7 +111,7 @@ const Header = () => {
               <LanguageSwitcher />
             </div>
             <a
-              href={DAPP_LOGIN_URL}
+              href={dappPoolsUrl(locale)}
               className="focus-visible:ring-ring rounded-sm px-2 py-1 text-sm font-medium text-foreground/75 transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none"
             >
               {t('cta.signIn')}

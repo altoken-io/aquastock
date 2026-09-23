@@ -1,6 +1,6 @@
 # Demo script — Match Pools
 
-**Status (2026-09-20): every beat below is built and was dry-run against a local validator with the timed spec `apps/dapp/e2e/demo-dry-run.spec.ts` (`pnpm test:e2e demo-dry-run`). Nothing was cut. See section 5 for the results and for what the dry run did not prove.** The script still needs one rehearsal on the day's real network, by a person, with real wallets.
+**Status (2026-09-20): every beat below is built and was dry-run against a local validator with the timed spec `apps/dapp/e2e/demo-dry-run.spec.ts` (`pnpm test:e2e demo-dry-run`). Nothing was cut. See section 9 for the results and for what the dry run did not prove.** Since 2026-09-22 the app is live on devnet with a demo faucet and a standing pool (section 7), so a person can rehearse it with real wallets; that rehearsal is still to do.
 
 Judges ask one question: _could this be a real app people will use?_ They look for a real user and problem, a working end-to-end demo, a reason it belongs on Solana, and execution quality. Every beat below serves one of those four.
 
@@ -20,7 +20,7 @@ The demo uses three wallets (sponsor, saver A, saver B) and a pool with a **demo
 Rules for the live run:
 
 - Open every transaction's Explorer link in a tab before you start. Do not wait for pages to load on stage.
-- Say "demo timescale" when you mention vesting. Say "capped mainnet demo" or "devnet replica", whichever is true on the day.
+- Say "demo timescale" when you mention vesting. Say "devnet replica": the team decided on devnet only (see `PIVOT_PLAN.md` section 8).
 - If a step fails, narrate what the chain says and move on. Do not debug live.
 
 ## 2. The 2–3 minute video
@@ -69,7 +69,7 @@ Captions in English, with Spanish subtitles if there is time. Record at 1080p. S
 
 ## 6. Pre-flight checklist
 
-- [ ] Three wallets funded: sponsor, saver A, saver B (SPYx or replica tokens, plus SOL for fees).
+- [ ] Three wallets funded: sponsor, saver A, saver B. On devnet, connect each one and press **Get demo tokens** (100 dSPYx and 0.02 SOL; three times per wallet a day). Check the operator console's Deployment card first: it shows what the faucet has left.
 - [ ] Neon database pinged (the free tier suspends after about 5 minutes idle).
 - [ ] Primary RPC and a backup RPC both tested.
 - [ ] Demo pool created, budget funded, demo timescale set.
@@ -80,11 +80,22 @@ Captions in English, with Spanish subtitles if there is time. Record at 1080p. S
 - [ ] Upgrade authority decision made and written on slide 5.
 - [ ] Disclaimer visible on every page: "Demo — this does not constitute an offer of securities."
 
-## 7. What must exist for this script to be true
+## 7. Letting judges try it themselves
+
+The live app is on Solana devnet with demo tokens that have no value, so a judge can run the whole saver flow alone in about two minutes:
+
+1. Open https://aquastock-dapp.vercel.app/en/pools (the marketing site's "Open the app" goes there too; the dApp's bare `/` is the staff sign-in, so never share that).
+2. Switch the wallet to devnet (Phantom: Settings, Developer Settings, Testnet Mode, Solana Devnet; Solflare: Settings, Network, Devnet). A wallet left on mainnet will warn that the transaction may fail.
+3. Connect, open the pool "Try it: 1:1 match, 10-minute vesting" (`45K6H9DxvtYnmuXQDVjwFn3V4mgLbT3wYLBGfdfTHTSf`), and press **Get demo tokens**.
+4. Deposit up to 100 dSPYx, watch the match vest on **My match**, claim, and withdraw early to see the forfeiture preview.
+
+Put the link and these four lines in the submission form and the README. The standing pool is open until 2026-11-06 with a 10,000 dSPYx budget (100 savers at the cap); create another with `pnpm solana:demo-pool` (see `SETUP.md`) if it fills up.
+
+## 8. What must exist for this script to be true
 
 `create_pool`, `fund_match`, `deposit`, `claim_vested`, `withdraw`, wallet connect, the sponsor wizard, pool detail with the Confluence ring, my-match, the forfeiture preview, and the "what you actually own" card. If any is missing at the Thu 2026-09-24 freeze, cut its beat and re-time the script.
 
-## 5. Dry-run results (2026-09-20)
+## 9. Dry-run results (2026-09-20)
 
 **Method.** The timed spec drives each beat in order and records how long the app takes, not the narration. It runs on a desktop and a 390 px mobile viewport, against a local validator with the program, the mainnet Token-2022 build and a demo replica mint. It uses one wallet where the live demo uses three, so that wallet plays sponsor for beat 2 and saver for the rest. A separate golden-path spec (`pnpm test:e2e`) checks the same flows with assertions on the numbers.
 

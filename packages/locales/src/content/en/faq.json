@@ -35,7 +35,7 @@
     },
     "faq8": {
       "question": "Where do I get SPYx?",
-      "answer": "Buy it on Jupiter. The app links out to it and does not sell tokens."
+      "answer": "On the devnet demo, connect a wallet and use the \"Get demo tokens\" button: it sends 100 demo dSPYx, which have no value, and a little SOL for fees. Real SPYx trades on Jupiter; the app would link out to it on mainnet and never sells tokens itself."
     },
     "faq9": {
       "question": "Why does the demo vest in minutes?",

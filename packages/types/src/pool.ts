@@ -103,4 +103,21 @@ export interface DeploymentDto {
   allowedMint: string | null;
   upgradeAuthority: string | null;
   issuer: IssuerPowersDto | null;
+  /** The demo faucet, when this deployment runs one (never on mainnet). */
+  faucet: FaucetInfoDto | null;
+}
+
+/** What one faucet request sends a wallet that needs it. */
+export interface FaucetInfoDto {
+  /** Tokens as a wallet shows them, for example "100". */
+  tokens: string;
+  /** SOL for fees, as a decimal string, for example "0.02". */
+  sol: string;
+}
+
+/** What a faucet request actually sent. Amounts are decimal strings of raw units. */
+export interface FaucetDripDto {
+  signature: string;
+  tokensRaw: string;
+  lamports: string;
 }

@@ -318,12 +318,15 @@ export async function fetchUpgradeAuthority(
     : null;
 }
 
+/** The deployment facts read from chain; the service adds what only the server knows. */
+export type ChainDeployment = Omit<DeploymentDto, 'faucet'>;
+
 export async function fetchDeployment(
   client: ChainClient,
   network: string,
   fallbackMint: PublicKey | null,
   now: number,
-): Promise<DeploymentDto> {
+): Promise<ChainDeployment> {
   const config = await client.program.account.config.fetchNullable(
     configPda(client.programId),
   );

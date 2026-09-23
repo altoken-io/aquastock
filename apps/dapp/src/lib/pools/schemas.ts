@@ -97,6 +97,8 @@ export const activityQuerySchema = z.object({
   cursor: z.string().min(1).max(200).optional(),
 });
 
+export const faucetBodySchema = z.object({ wallet: addressSchema }).strict();
+
 export const recordActivityBodySchema = z
   .object({ signature: txSignatureSchema })
   .strict();

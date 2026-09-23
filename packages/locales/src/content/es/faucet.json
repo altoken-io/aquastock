@@ -1,0 +1,16 @@
+{
+  "title": "Consigue tokens de prueba",
+  "body": "Esta demo funciona en una red de prueba de Solana, donde los tokens no tienen valor. El grifo envía {tokens} {symbol} y {sol} SOL para las comisiones de la red.",
+  "request": "Recibir {tokens} {symbol}",
+  "sending": "Enviando tokens de prueba…",
+  "sent": "Los tokens de prueba y el SOL ya están en tu billetera.",
+  "viewTx": "Ver transacción",
+  "errors": {
+    "alreadyFunded": "Tu billetera ya tiene lo suficiente para probar la demo.",
+    "rateLimited": "Esta billetera ya recibió sus tokens de prueba hoy. Inténtalo mañana o usa otra billetera.",
+    "empty": "El grifo de prueba está vacío. Ya avisamos al equipo.",
+    "failed": "La red no confirmó la transferencia. Inténtalo de nuevo.",
+    "unavailable": "Este despliegue no tiene grifo de prueba.",
+    "generic": "No pudimos conectar con el grifo. Inténtalo en un momento."
+  }
+}

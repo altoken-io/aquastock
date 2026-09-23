@@ -6,6 +6,7 @@ import cookies from './content/en/cookies.json';
 import earlyAccessCta from './content/en/earlyAccessCta.json';
 import errors from './content/en/errors.json';
 import faq from './content/en/faq.json';
+import faucet from './content/en/faucet.json';
 import footer from './content/en/footer.json';
 import hero from './content/en/hero.json';
 import howItWorks from './content/en/howItWorks.json';
@@ -36,6 +37,7 @@ export const en = {
   earlyAccessCta,
   errors,
   faq,
+  faucet,
   footer,
   hero,
   howItWorks,

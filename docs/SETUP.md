@@ -60,6 +60,27 @@ For a deployed environment (production or a demo account), run the same script p
 - `pnpm --filter web <script>` / `pnpm --filter dapp <script>` — scope any script to one app.
 - `pnpm clean:cache` — clears every `.next` directory. Rarely needed now: the dev-mode "Parsing CSS source code failed" error came from Tailwind's automatic source detection, which `apps/dapp/src/app/[locale]/globals.css` now has switched off (sources are listed explicitly; a package that ships Tailwind classes must be added there).
 
-## Once the Anchor program exists (Day 2+)
+## The devnet demo
 
-Not applicable yet — no `programs/` directory exists in this repo. Once it does, expect an `anchor build` / `anchor test` workflow against a local validator or Devnet; document the actual commands here once the program is scaffolded rather than guessing them now.
+The program is deployed on devnet (`8wnjTUiMQaPxdgfgZdJUGAWBgdPqKoVUAtcWgpgs3GXR`) with the replica mint `EHsntaH73d7s3w84Saj8QGAm4Z6YCCx8v7ZeVEM5kRtJ` (dSPYx). `pnpm program:test` and `pnpm program:smoke` cover the program itself. Two more things make the live app usable by someone who is not on the team; both are signed by the deployer wallet (`~/.config/solana/id.json`), which is the replica mint's authority.
+
+1. **The demo faucet**, so any wallet can get dSPYx and fee SOL from the app (`POST /api/faucet`):
+
+   ```bash
+   pnpm solana:faucet --rpc https://api.devnet.solana.com \
+     --mint EHsntaH73d7s3w84Saj8QGAm4Z6YCCx8v7ZeVEM5kRtJ --sol 1.5 --tokens 100000
+   ```
+
+   The first run creates `programs/keys/faucet-devnet.json` (gitignored, mode 600), a wallet used for nothing else. Paste that file's contents into Vercel as `FAUCET_SECRET_KEY` (server-only) and redeploy. Re-run the same command to top it up: it only adds what is missing. The operator console's Deployment card shows the faucet's balance and says when fewer than ten requests' worth is left. It refuses to run on mainnet, and the app ignores the key on any network but devnet and localnet.
+
+2. **A standing pool** that anyone can deposit into, named and recorded in the activity feed exactly as the create-pool wizard would:
+
+   ```bash
+   pnpm solana:demo-pool --rpc https://api.devnet.solana.com \
+     --program 8wnjTUiMQaPxdgfgZdJUGAWBgdPqKoVUAtcWgpgs3GXR \
+     --mint EHsntaH73d7s3w84Saj8QGAm4Z6YCCx8v7ZeVEM5kRtJ \
+     --vesting 600 --window 3888000 --budget 10000 --cap 100 \
+     --api https://aquastock-dapp.vercel.app --name "Pool name" --description "..."
+   ```
+
+   The live one is `45K6H9DxvtYnmuXQDVjwFn3V4mgLbT3wYLBGfdfTHTSf` (10-minute vesting, open until 2026-11-06, 10,000 dSPYx budget, 100 per saver).

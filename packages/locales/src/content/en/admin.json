@@ -36,7 +36,8 @@
     "mobileClose": "Close dashboard menu",
     "tagline": "Operator console",
     "overview": "Overview",
-    "pools": "Pools"
+    "pools": "Pools",
+    "openApp": "Open the app"
   },
   "dashboard": {
     "signedInAs": "Signed in as {email}",
@@ -69,7 +70,12 @@
       "permanentDelegate": "Permanent delegate",
       "none": "No key",
       "notInitialized": "The program hasn't been initialized on this network yet.",
-      "unavailable": "Couldn't read the chain right now. The rest of this page still works."
+      "unavailable": "Couldn't read the chain right now. The rest of this page still works.",
+      "faucet": "Demo faucet",
+      "faucetBalance": "{tokens} {symbol} · {sol} SOL left",
+      "faucetOff": "Off: FAUCET_SECRET_KEY isn't set, so new wallets can't get demo tokens",
+      "faucetLow": "Running low. Top it up with pnpm solana:faucet.",
+      "faucetUnreadable": "Couldn't read the faucet's balance right now."
     },
     "activity": {
       "title": "Recent activity",

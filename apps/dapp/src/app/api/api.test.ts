@@ -2,10 +2,12 @@
 import { Keypair } from '@solana/web3.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import type { FaucetDeps } from '@/lib/faucet/service';
 import type { PoolServiceDeps } from '@/lib/pools/service';
 
 const holder = vi.hoisted(() => ({
   deps: null as PoolServiceDeps | null,
+  faucet: null as FaucetDeps | null,
   allow: true,
   configured: true,
 }));
@@ -15,6 +17,9 @@ vi.mock('@/lib/pools/server', () => ({
     if (!holder.deps) throw new Error('test forgot to set deps');
     return holder.deps;
   },
+}));
+vi.mock('@/lib/faucet/server', () => ({
+  getFaucetServices: () => holder.faucet,
 }));
 vi.mock('@/lib/rate-limit', () => ({
   rateLimit: { limit: () => Promise.resolve({ success: holder.allow }) },
@@ -37,6 +42,7 @@ import {
 
 import { POST as recordActivity } from './activity/route';
 import { GET as getDeploymentRoute } from './deployment/route';
+import { POST as faucetRoute } from './faucet/route';
 import { GET as getPoolRoute } from './pools/[address]/route';
 import { GET as getActivityRoute } from './pools/[address]/activity/route';
 import { POST as saveMetadataRoute } from './pools/[address]/metadata/route';
@@ -65,6 +71,7 @@ async function body(response: Response): Promise<Record<string, any>> {
 
 beforeEach(() => {
   holder.deps = makeDeps(fakeChain([pool]), memoryStore());
+  holder.faucet = null;
   holder.allow = true;
   holder.configured = true;
 });
@@ -314,7 +321,95 @@ describe('GET /api/deployment', () => {
       new Request(`${BASE}/deployment`),
     );
     expect(response.status).toBe(200);
-    expect((await body(response)).network).toBe('localnet');
+    const data = await body(response);
+    expect(data.network).toBe('localnet');
+    expect(data.faucet).toBeNull();
+  });
+
+  it('advertises the faucet terms, and nothing secret, when the deployment runs one', async () => {
+    holder.deps = {
+      ...holder.deps!,
+      faucet: { tokens: '100', sol: '0.02' },
+    };
+    const response = await getDeploymentRoute(
+      new Request(`${BASE}/deployment`),
+    );
+    expect((await body(response)).faucet).toEqual({
+      tokens: '100',
+      sol: '0.02',
+    });
+  });
+});
+
+describe('POST /api/faucet', () => {
+  const faucetKey = Keypair.generate().publicKey;
+  const sent: string[] = [];
+  const allow = { limit: () => Promise.resolve({ success: true }) };
+  const fakeFaucet = (): FaucetDeps => ({
+    faucet: faucetKey,
+    chain: {
+      mint: () => Promise.resolve({ decimals: 8, multiplier: '1' }),
+      tokenBalance: (owner) =>
+        Promise.resolve(owner.equals(faucetKey) ? 10n ** 15n : 0n),
+      lamports: (owner) =>
+        Promise.resolve(owner.equals(faucetKey) ? 10n ** 10n : 0n),
+      send: ({ recipient }) => {
+        sent.push(recipient.toBase58());
+        return Promise.resolve('5sig');
+      },
+    },
+    limiters: { wallet: allow, ip: allow, global: allow },
+  });
+  const request = (payload: unknown, headers?: Record<string, string>) =>
+    faucetRoute(new Request(`${BASE}/faucet`, json(payload, headers)));
+
+  beforeEach(() => {
+    sent.length = 0;
+    holder.faucet = fakeFaucet();
+  });
+
+  it('sends demo tokens and SOL to a wallet and never caches the answer', async () => {
+    const wallet = newKey().toBase58();
+    const response = await request({ wallet });
+    expect(response.status).toBe(200);
+    expect(response.headers.get('cache-control')).toBe('no-store');
+    expect(await body(response)).toEqual({
+      signature: '5sig',
+      tokensRaw: '10000000000',
+      lamports: '20000000',
+    });
+    expect(sent).toEqual([wallet]);
+  });
+
+  it('answers 404 on a deployment without a faucet', async () => {
+    holder.faucet = null;
+    const response = await request({ wallet: newKey().toBase58() });
+    expect(response.status).toBe(404);
+    expect((await body(response)).error.code).toBe('faucet_unavailable');
+  });
+
+  it.each([
+    ['a missing wallet', {}],
+    ['a malformed wallet', { wallet: 'not-a-wallet' }],
+    ['unknown fields', { wallet: 'x', amount: 1_000_000 }],
+  ])('rejects %s', async (_label, payload) => {
+    const response = await request(payload);
+    expect(response.status).toBe(400);
+    expect(sent).toHaveLength(0);
+  });
+
+  it('rejects a body that is not JSON', async () => {
+    const response = await request('wallet=abc', {
+      'content-type': 'application/x-www-form-urlencoded',
+    });
+    expect(response.status).toBe(415);
+  });
+
+  it('is behind the general rate limit too', async () => {
+    holder.allow = false;
+    const response = await request({ wallet: newKey().toBase58() });
+    expect(response.status).toBe(429);
+    expect(sent).toHaveLength(0);
   });
 });
 

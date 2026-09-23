@@ -48,15 +48,9 @@ export const createInMemoryRateLimiter = ({
 
 const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
 const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
-
-const remoteRateLimit =
+const redis =
   redisUrl && redisToken
-    ? new Ratelimit({
-        redis: new Redis({ url: redisUrl, token: redisToken }),
-        limiter: Ratelimit.slidingWindow(10, '10s'),
-        prefix: '@altoken/ratelimit',
-        analytics: true,
-      })
+    ? new Redis({ url: redisUrl, token: redisToken })
     : null;
 
 const unavailableProductionRateLimit: RateLimiter = {
@@ -65,14 +59,53 @@ const unavailableProductionRateLimit: RateLimiter = {
 };
 
 /**
- * False only in production with no Upstash credentials, where `rateLimit` refuses every
+ * False only in production with no Upstash credentials, where every limiter refuses every
  * request. Callers use it to report a misconfiguration instead of a misleading "slow down".
  */
 export const rateLimitConfigured =
-  remoteRateLimit !== null || process.env.NODE_ENV !== 'production';
+  redis !== null || process.env.NODE_ENV !== 'production';
 
-export const rateLimit: RateLimiter =
-  remoteRateLimit ??
-  (process.env.NODE_ENV === 'production'
+export type RateLimiterOptions = {
+  /** Namespaces the Upstash keys, so limiters with different budgets never share a counter. */
+  prefix: string;
+  requests: number;
+  windowSeconds: number;
+};
+
+/**
+ * A limiter with its own budget: Upstash when configured, in memory in development, and
+ * closed in production without Upstash.
+ */
+export const createRateLimiter = ({
+  prefix,
+  requests,
+  windowSeconds,
+}: RateLimiterOptions): RateLimiter => {
+  if (redis) {
+    return new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(requests, `${windowSeconds} s`),
+      prefix: `@altoken/ratelimit/${prefix}`,
+      analytics: true,
+    });
+  }
+  return process.env.NODE_ENV === 'production'
     ? unavailableProductionRateLimit
-    : createInMemoryRateLimiter());
+    : createInMemoryRateLimiter({
+        maxRequests: requests,
+        windowMs: windowSeconds * 1_000,
+      });
+};
+
+// The general per-IP budget. Its Upstash prefix predates `createRateLimiter`, so it is kept
+// as-is rather than resetting live counters.
+export const rateLimit: RateLimiter = redis
+  ? new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(10, '10s'),
+      prefix: '@altoken/ratelimit',
+      analytics: true,
+    })
+  : process.env.NODE_ENV === 'production'
+    ? unavailableProductionRateLimit
+    : createInMemoryRateLimiter();

@@ -13,4 +13,4 @@ This file is history. The original 5-day plan (Stocklana hackathon, NYC) was wri
 
 ## Explicitly cut
 
-Hedera; KYC/AML; real securities structuring; a multi-project marketplace; Solana Pay; an in-app swap; a devnet demo-token faucet; program upgrade/governance tooling. See [PIVOT_PLAN.md](PIVOT_PLAN.md) section 5 for the cut order if time runs short.
+Hedera; KYC/AML; real securities structuring; a multi-project marketplace; Solana Pay; an in-app swap; program upgrade/governance tooling. (A devnet demo-token faucet was cut at first, then added on 2026-09-22 once the demo went devnet-only: without it, nobody outside the team could try the product.) See [PIVOT_PLAN.md](PIVOT_PLAN.md) section 5 for the cut order if time runs short.

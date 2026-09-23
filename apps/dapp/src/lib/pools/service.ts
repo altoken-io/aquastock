@@ -5,6 +5,7 @@ import { PublicKey } from '@solana/web3.js';
 
 import type {
   DeploymentDto,
+  FaucetInfoDto,
   MyPositionDto,
   PoolActivityPageDto,
   PoolDto,
@@ -27,6 +28,8 @@ export interface PoolServiceDeps {
   now: () => number;
   network: string;
   stockMint: PublicKey | null;
+  /** The demo faucet's public terms, when this deployment runs one. */
+  faucet?: FaucetInfoDto | null;
 }
 
 export interface ListPoolsQuery {
@@ -158,8 +161,15 @@ export async function getPositions(
     .sort((a, b) => b.pool.createdAt - a.pool.createdAt);
 }
 
-export function getDeployment(deps: PoolServiceDeps): Promise<DeploymentDto> {
-  return deps.chain.deployment(deps.network, deps.stockMint, deps.now());
+export async function getDeployment(
+  deps: PoolServiceDeps,
+): Promise<DeploymentDto> {
+  const chain = await deps.chain.deployment(
+    deps.network,
+    deps.stockMint,
+    deps.now(),
+  );
+  return { ...chain, faucet: deps.faucet ?? null };
 }
 
 /**

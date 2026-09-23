@@ -31,6 +31,8 @@ export async function DashboardShell({
   const navItems: DashboardNavItem[] = [
     { href: '/dashboard', label: t('sidebar.overview'), icon: 'overview' },
     { href: '/dashboard/pools', label: t('sidebar.pools'), icon: 'pools' },
+    // The public product the console reports on: where the live demo is run.
+    { href: '/pools', label: t('sidebar.openApp'), icon: 'app' },
   ];
 
   return (

@@ -4,10 +4,12 @@
 //
 //   pnpm exec tsx scripts/solana/demo-pool.ts --rpc <url> --wallet <keypair.json> \
 //     --program <id> [--mint <mint>] [--vesting 180] [--window 3600] [--budget 1000] \
-//     [--cap 100] [--with-saver 40]
+//     [--cap 100] [--with-saver 40] [--api <app url> --name "Pool name" [--description "..."]]
 //
 // The wallet is the sponsor and the mint's issuer. `--with-saver` airdrops SOL to a fresh
-// saver, so use it on a local validator or devnet only.
+// saver, so use it on a local validator or devnet only. `--api` points at a running app: the
+// pool's transactions are recorded in its activity feed and, with `--name`, the sponsor signs
+// the pool's name and description exactly as the create-pool wizard does.
 import { AnchorProvider, BN, Wallet } from '@anchor-lang/core';
 import {
   TOKEN_2022_PROGRAM_ID,
@@ -33,7 +35,14 @@ import {
   vaultPda,
 } from '../../apps/dapp/src/lib/solana/pdas';
 import { createMatchPoolsProgram } from '../../apps/dapp/src/lib/solana/program';
-import { context, requirePublicKey } from './lib';
+import { buildMetadataMessage } from '../../apps/dapp/src/lib/pools/metadata-message';
+import {
+  context,
+  postJson,
+  requirePublicKey,
+  signMessageBase64,
+  sleep,
+} from './lib';
 import { multiplierToString } from '../../apps/dapp/src/lib/pools/chain';
 import { createReplicaMint, REPLICA_DECIMALS } from './replica';
 
@@ -226,6 +235,44 @@ async function main(): Promise<void> {
       .signers([saver])
       .rpc();
     result.saver = saver.publicKey.toBase58();
+  }
+
+  const api = flags.get('api')?.replace(/\/+$/, '');
+  if (api) {
+    // The server re-reads each transaction from chain; a lagging node may not have it yet.
+    const poolTxs = ['createPool', 'fundMatch', 'deposit'].flatMap((key) =>
+      signatures[key] ? [signatures[key]] : [],
+    );
+    for (const signature of poolTxs) {
+      for (let attempt = 1; ; attempt += 1) {
+        try {
+          await postJson(`${api}/api/activity`, { signature });
+          break;
+        } catch (error) {
+          if (attempt === 5) throw error;
+          await sleep(2_000);
+        }
+      }
+    }
+    const name = flags.get('name');
+    if (name) {
+      const description = flags.get('description') ?? null;
+      const issuedAt = Math.floor(Date.now() / 1000);
+      const message = buildMetadataMessage({
+        programId: programId.toBase58(),
+        pool: pool.toBase58(),
+        name,
+        description,
+        issuedAt,
+      });
+      await postJson(`${api}/api/pools/${pool.toBase58()}/metadata`, {
+        name,
+        ...(description ? { description } : {}),
+        issuedAt,
+        signature: signMessageBase64(wallet, message),
+      });
+      result.name = name;
+    }
   }
 
   console.log(JSON.stringify(result, null, 2));

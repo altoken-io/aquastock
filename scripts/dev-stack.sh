@@ -35,6 +35,7 @@ export DIRECT_URL="$DATABASE_URL"
 KEYS="$ROOT/programs/keys"
 DEPLOYER="$KEYS/localnet-wallet.json"
 BROWSER_WALLET="$KEYS/e2e-wallet.json"
+FAUCET_WALLET="$KEYS/faucet-localnet.json"
 LOG="$ROOT/programs/target"
 mkdir -p "$KEYS" "$LOG"
 
@@ -69,6 +70,12 @@ MINT="$(printf '%s' "$SEED" | python3 -c 'import sys,json; print(json.load(sys.s
 POOL="$(printf '%s' "$SEED" | python3 -c 'import sys,json; print(json.load(sys.stdin)["pool"])')"
 pnpm exec tsx scripts/solana/mint-replica.ts --rpc "$RPC" --wallet "$DEPLOYER" --mint "$MINT" --to "$BROWSER_PUBKEY" --amount 1000 >/dev/null
 
+echo "==> demo faucet"
+pnpm exec tsx scripts/solana/faucet-setup.ts --rpc "$RPC" --wallet "$DEPLOYER" --mint "$MINT" --faucet "$FAUCET_WALLET" --sol 5 --tokens 100000 >/dev/null
+# Read into the environment, never printed. Server-only: no NEXT_PUBLIC prefix.
+FAUCET_SECRET_KEY="$(cat "$FAUCET_WALLET")"
+export FAUCET_SECRET_KEY
+
 export NEXT_PUBLIC_ANCHOR_PROGRAM_ID="$PROGRAM_ID"
 export NEXT_PUBLIC_STOCK_MINT="$MINT"
 export NEXT_PUBLIC_SOLANA_NETWORK=localnet
@@ -84,6 +91,7 @@ printf '{"pool":"%s","mint":"%s","programId":"%s","wallet":"%s"}\n' "$POOL" "$MI
 
 echo "==> READY  pool: $POOL"
 echo "    browser wallet: $BROWSER_PUBKEY (1000 demo tokens, 20 SOL)"
+echo "    demo faucet: on (POST /api/faucet)"
 echo "    app: http://localhost:3003/en/pools"
 if [ "$MODE" = "--webpack" ]; then
   pnpm --filter dapp dev

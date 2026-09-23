@@ -20,7 +20,17 @@ export interface DeploymentLabels {
   none: string;
   notInitialized: string;
   unavailable: string;
+  faucet: string;
+  faucetOff: string;
+  faucetLow: string;
+  faucetUnreadable: string;
 }
+
+/** The demo faucet as the console shows it; amounts already formatted. */
+export type FaucetRow =
+  | { state: 'off' }
+  | { state: 'unreadable' }
+  | { state: 'ok'; address: string; balance: string; low: boolean };
 
 function Row({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -42,9 +52,12 @@ export function DeploymentCard({
   deployment,
   labels,
   explorer,
+  faucet = null,
 }: {
   deployment: DeploymentDto | null;
   labels: DeploymentLabels;
+  /** Null hides the row (mainnet has no faucet). */
+  faucet?: FaucetRow | null;
   /** A link to an address on the network's explorer. */
   explorer: (kind: 'address', id: string) => string;
 }) {
@@ -119,6 +132,25 @@ export function DeploymentCard({
               {address(issuer.permanentDelegate)}
             </Row>
           </>
+        ) : null}
+        {faucet ? (
+          <Row label={labels.faucet}>
+            {faucet.state === 'off' ? (
+              <span className="text-muted-foreground">{labels.faucetOff}</span>
+            ) : faucet.state === 'unreadable' ? (
+              <span className="text-muted-foreground">
+                {labels.faucetUnreadable}
+              </span>
+            ) : (
+              <span className="flex flex-col gap-1 sm:items-end">
+                <span className="tabular-nums">{faucet.balance}</span>
+                {address(faucet.address)}
+                {faucet.low ? (
+                  <span className="text-warning">{labels.faucetLow}</span>
+                ) : null}
+              </span>
+            )}
+          </Row>
         ) : null}
       </dl>
     </div>

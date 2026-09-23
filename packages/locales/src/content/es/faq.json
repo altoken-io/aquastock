@@ -35,7 +35,7 @@
     },
     "faq8": {
       "question": "¿Dónde consigo SPYx?",
-      "answer": "Cómpralo en Jupiter. La app enlaza allí y no vende tokens."
+      "answer": "En la demo de devnet, conecta una billetera y usa el botón \"Consigue tokens de prueba\": envía 100 dSPYx de prueba, que no tienen valor, y un poco de SOL para las comisiones. El SPYx real se negocia en Jupiter; en mainnet la app enlazaría allí y nunca vende tokens."
     },
     "faq9": {
       "question": "¿Por qué la demo se libera en minutos?",

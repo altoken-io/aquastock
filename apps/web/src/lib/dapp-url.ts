@@ -9,6 +9,9 @@ export const DAPP_BASE_URL = process.env.NEXT_PUBLIC_DAPP_URL?.startsWith(
   ? process.env.NEXT_PUBLIC_DAPP_URL
   : 'https://app.aquastock.io';
 
-// No accounts in AquaStock (pure wallet-connect) — this just links into the
-// dApp itself rather than a login page.
-export const DAPP_LOGIN_URL = DAPP_BASE_URL;
+/**
+ * The product's front door: the pool list, where savers and sponsors connect a wallet. Never
+ * link to the dApp's bare `/`, which is the staff sign-in page.
+ */
+export const dappPoolsUrl = (locale: string): string =>
+  `${DAPP_BASE_URL}/${encodeURIComponent(locale)}/pools`;

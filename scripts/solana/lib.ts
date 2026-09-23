@@ -1,5 +1,6 @@
 // Shared helpers for the Solana scripts. Run with `pnpm exec tsx scripts/solana/<name>.ts`.
 // Keypair files are read from disk on the machine running the script and never logged.
+import { createPrivateKey, sign } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -77,4 +78,39 @@ export function requirePublicKey(
 
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// DER prefix that wraps a 32-byte Ed25519 seed as a PKCS#8 private key.
+const PKCS8_ED25519_PREFIX = Buffer.from(
+  '302e020100300506032b657004220420',
+  'hex',
+);
+
+/** Signs text the way a wallet's `signMessage` does, as base64 for the API. */
+export function signMessageBase64(keypair: Keypair, message: string): string {
+  const key = createPrivateKey({
+    key: Buffer.concat([
+      PKCS8_ED25519_PREFIX,
+      keypair.secretKey.subarray(0, 32),
+    ]),
+    format: 'der',
+    type: 'pkcs8',
+  });
+  return sign(null, Buffer.from(message), key).toString('base64');
+}
+
+/** POSTs JSON to the app's API and throws with the server's error code on failure. */
+export async function postJson(url: string, body: unknown): Promise<unknown> {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const data: unknown = await response.json().catch(() => null);
+  if (!response.ok) {
+    throw new Error(
+      `${url} answered ${response.status}: ${JSON.stringify(data)}`,
+    );
+  }
+  return data;
 }

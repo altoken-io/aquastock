@@ -4,10 +4,10 @@ import { createPrivateKey, sign } from 'node:crypto';
 
 import { Keypair, PublicKey } from '@solana/web3.js';
 
-import type { DeploymentDto, PoolMetadataDto } from '@aquastock/types';
+import type { PoolMetadataDto } from '@aquastock/types';
 
 import type { PoolEvents } from './activity';
-import type { ChainPool, ChainPosition } from './chain';
+import type { ChainDeployment, ChainPool, ChainPosition } from './chain';
 import type { ChainReader } from './reader';
 import { encodeCursor, type ActivityCursor } from './schemas';
 import type { PoolServiceDeps } from './service';
@@ -89,7 +89,7 @@ export function fakeChain(
           (p) => p.pool.equals(pool) && p.saver.equals(saver),
         ) ?? null,
       ),
-    deployment: (network): Promise<DeploymentDto> =>
+    deployment: (network): Promise<ChainDeployment> =>
       Promise.resolve({
         programId: PROGRAM_ID.toBase58(),
         network,

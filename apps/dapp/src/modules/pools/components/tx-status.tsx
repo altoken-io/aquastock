@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl';
 import type { TxState } from '../tx/use-pool-transaction';
 import { useFormatters } from '../token-context';
 import { ActionButton } from './actions';
+import { FaucetOffer } from './faucet-offer';
 
 /**
  * Where the current transaction is, in words a person can act on. The live region is always
@@ -101,6 +102,9 @@ export function TxStatus({
                 ? t(`errors.program.${state.error.code}`)
                 : t(`errors.kinds.${state.error.kind}`)}
             </p>
+            {state.error.kind === 'insufficient-sol' ? (
+              <FaucetOffer className="mt-2" />
+            ) : null}
             <div className="mt-2">
               <ActionButton
                 variant="secondary"
