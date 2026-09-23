@@ -132,6 +132,7 @@ describe('fetchSpyxPrice', () => {
   });
 
   it('refuses a zero or negative price', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
     for (const value of ['0', '-5']) {
       const error = await rejection(
         fetchSpyxPrice('k', NOW, fakeFetch(hermes({ price: value }))),
@@ -140,11 +141,16 @@ describe('fetchSpyxPrice', () => {
     }
   });
 
-  it('refuses a stale price, but keeps one at the age limit', async () => {
+  it('refuses a stale price, says why in the log, but keeps one at the age limit', async () => {
+    const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
     const stale = hermes({ publish_time: NOW - MAX_PRICE_AGE_SECONDS - 1 });
     expect(
       (await rejection(fetchSpyxPrice('k', NOW, fakeFetch(stale)))).code,
     ).toBe('price_unavailable');
+    expect(log).toHaveBeenCalledWith('pyth price refused', {
+      positive: true,
+      ageSeconds: MAX_PRICE_AGE_SECONDS + 1,
+    });
     const edge = hermes({ publish_time: NOW - MAX_PRICE_AGE_SECONDS });
     await expect(
       fetchSpyxPrice('k', NOW, fakeFetch(edge)),

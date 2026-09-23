@@ -103,7 +103,15 @@ export async function fetchSpyxPrice(
 
   const mantissa = BigInt(feed.price.price);
   const age = now - feed.price.publish_time;
-  if (mantissa <= 0n || age > MAX_PRICE_AGE_SECONDS) throw unavailable();
+  if (mantissa <= 0n || age > MAX_PRICE_AGE_SECONDS) {
+    // Every refusal leaves a reason in the server log, so an operator can tell a stalled feed
+    // from a rejected key without guessing.
+    console.error('pyth price refused', {
+      positive: mantissa > 0n,
+      ageSeconds: age,
+    });
+    throw unavailable();
+  }
 
   return {
     pair: 'SPYx/USD',
