@@ -53,12 +53,12 @@ For a deployed environment (production or a demo account), run the same script p
 
 ## Validation
 
-- `pnpm test:e2e` runs the Playwright golden path (sponsor creates a pool; saver deposits, claims, withdraws and closes) on a desktop and a 390 px viewport. It starts `pnpm dev:stack` itself (or reuses a running one), so it needs Docker and the Solana toolchain and is not part of `pnpm check`. `pnpm test:e2e demo-dry-run` times the demo script's beats.
+- `pnpm test:e2e` runs the Playwright specs: the golden path (sponsor creates a pool; saver deposits, claims, withdraws and closes), the sponsor's reclaim after a pool closes, and the demo faucet, on a desktop and a 390 px viewport. It starts `pnpm dev:stack` itself (or reuses a running one), so it needs Docker and the Solana toolchain and is not part of `pnpm check`. `pnpm test:e2e demo-dry-run` times the demo script's beats.
 
 - `pnpm check` — the full gate: format, lint, typecheck, test, build. Run this before every commit.
 - `pnpm lint` / `pnpm check-types` / `pnpm test` / `pnpm build` — individual checks, workspace-wide.
 - `pnpm --filter web <script>` / `pnpm --filter dapp <script>` — scope any script to one app.
-- `pnpm clean:cache` — clears every `.next` directory. Rarely needed now: the dev-mode "Parsing CSS source code failed" error came from Tailwind's automatic source detection, which `apps/dapp/src/app/[locale]/globals.css` now has switched off (sources are listed explicitly; a package that ships Tailwind classes must be added there).
+- `pnpm clean:cache` — clears every `.next` directory. Rarely needed now: the dev-mode "Parsing CSS source code failed" error came from Tailwind's automatic source detection, which both apps now have switched off (`apps/dapp/src/app/[locale]/globals.css` and `apps/web/src/app/globals.css` list their sources explicitly; a package that ships Tailwind classes must be added there).
 
 ## The devnet demo
 

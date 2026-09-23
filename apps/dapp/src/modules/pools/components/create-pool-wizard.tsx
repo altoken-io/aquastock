@@ -538,7 +538,7 @@ function ReviewStep({
       ) : (
         <div className="flex flex-col items-start gap-2">
           <p className="text-sm text-muted-foreground">{t('connect')}</p>
-          <WalletButton />
+          <WalletButton className="h-11 px-4" />
         </div>
       )}
 

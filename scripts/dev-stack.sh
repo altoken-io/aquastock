@@ -14,6 +14,8 @@
 #
 #   pnpm dev:stack             # Ctrl+C stops everything
 #   pnpm dev:stack --webpack   # use the project's webpack dev server instead
+#   DEV_STACK_TEST_WALLET=0 pnpm dev:stack   # no test wallet: see the app as a visitor
+#                                            # without a wallet (the phone connect flow)
 #
 # The app runs on Turbopack here. The project's own `pnpm dev` uses webpack, which with the wallet
 # stack loaded grows to several GB and can serve truncated multi-MB chunks (hydration then fails
@@ -83,8 +85,13 @@ export NEXT_PUBLIC_SOLANA_RPC_URL="$RPC"
 export SOLANA_RPC_URL="$RPC"
 export NEXT_PUBLIC_BASE_URL="http://localhost:3003"
 # The key is read into the environment here and never printed.
-NEXT_PUBLIC_E2E_WALLET_SECRET="$(cat "$BROWSER_WALLET")"
-export NEXT_PUBLIC_E2E_WALLET_SECRET
+if [ "${DEV_STACK_TEST_WALLET:-1}" != "0" ]; then
+  NEXT_PUBLIC_E2E_WALLET_SECRET="$(cat "$BROWSER_WALLET")"
+  export NEXT_PUBLIC_E2E_WALLET_SECRET
+else
+  # An empty value, not unset, so a stray .env.local cannot register the wallet either.
+  export NEXT_PUBLIC_E2E_WALLET_SECRET=""
+fi
 
 # The Playwright golden-path spec reads this to find the seeded pool. Public addresses only.
 printf '{"pool":"%s","mint":"%s","programId":"%s","wallet":"%s"}\n' "$POOL" "$MINT" "$PROGRAM_ID" "$BROWSER_PUBKEY" >"$LOG/dev-stack.json"

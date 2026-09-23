@@ -52,7 +52,7 @@ export async function PublicShell({
             >
               {t('cta.admin')}
             </Link>
-            <WalletButton />
+            <WalletButton compact />
             <LanguageSwitcher />
             <ThemeSwitcher />
             <MobileNav

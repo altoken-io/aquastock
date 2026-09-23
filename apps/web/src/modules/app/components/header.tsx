@@ -13,7 +13,7 @@ import { LanguageSwitcher } from '@/components/helpers/language-switcher';
 import ThemeSwitcher from '@/components/helpers/theme-switcher';
 import { useIsScrolled } from '@/hooks/use-scroll-position';
 import { cn } from '@/utils/classNames';
-import { dappPoolsUrl } from '@/lib/dapp-url';
+import { dappPoolsUrl, dappUrl } from '@/lib/dapp-url';
 
 type IndicatorRect = { left: number; width: number };
 
@@ -85,8 +85,9 @@ const Header = () => {
             <ul className="relative flex items-center gap-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
+                  {/* Product pages live in the dApp, not on this site. */}
+                  <a
+                    href={dappUrl(locale, link.href)}
                     onMouseEnter={(event) =>
                       trackIndicator(event.currentTarget)
                     }
@@ -99,7 +100,7 @@ const Header = () => {
                     className="font-mono-ui focus-visible:ring-ring relative z-10 block px-3 py-2 text-xs tracking-[0.1em] text-foreground/70 uppercase transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none"
                   >
                     {link.title}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

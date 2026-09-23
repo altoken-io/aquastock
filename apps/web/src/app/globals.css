@@ -1,10 +1,18 @@
-@import 'tailwindcss';
+/*
+ * Automatic content detection is off (`source(none)`) and every source is listed, as in
+ * apps/dapp. Auto-detection walks pnpm's workspace symlinks into whole node_modules trees and
+ * turns some of their bytes into corrupted arbitrary-value candidates (e.g. `h-[var(...)]`),
+ * which breaks the dev server ("Parsing CSS source code failed") and can break the build.
+ *
+ * A package that ships Tailwind classes must be added here, or its classes will silently vanish.
+ */
+@import 'tailwindcss' source(none);
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-/* Explicit @source: pnpm workspace symlinks can be unreliable for Tailwind's
-   automatic content detection under WSL, so shared packages are scanned explicitly. */
+@source '../';
 @source '../../../../packages/ui/src';
+@source '../../../../packages/animation/src';
 
 @custom-variant dark (&:is(.dark *));
 

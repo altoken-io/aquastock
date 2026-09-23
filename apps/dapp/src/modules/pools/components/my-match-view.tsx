@@ -55,7 +55,7 @@ export function MyMatchView({ serverNow }: { serverNow: number }) {
       <StateCard
         title={t('connect.title')}
         description={t('connect.description')}
-        action={<WalletButton />}
+        action={<WalletButton className="h-11 px-4" />}
       />
     );
   }

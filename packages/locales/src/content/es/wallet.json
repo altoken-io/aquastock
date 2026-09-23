@@ -6,8 +6,22 @@
     "description": "Elige la billetera de Solana que usas. AquaStock nunca guarda tus llaves ni firma por ti.",
     "detected": "Encontradas en este navegador",
     "noWallets": "No encontramos ninguna billetera de Solana en este navegador.",
-    "install": "Obtener Phantom",
-    "installHint": "Instala una billetera y vuelve a cargar esta página."
+    "installHint": "Instala una billetera y vuelve a cargar esta página.",
+    "mobileApp": "Una app de billetera en este teléfono",
+    "openInApp": {
+      "title": "Abre esta página en tu app de billetera",
+      "body": "El navegador del teléfono no puede guardar una billetera. Tu app de billetera tiene su propio navegador que sí puede, y esta página se abre ahí tal como está.",
+      "row": "Abre esta página en {name}",
+      "or": "O",
+      "copy": "Copiar el enlace de esta página",
+      "copyHint": "¿Usas otra billetera? Abre el enlace en su navegador.",
+      "copied": "Enlace copiado"
+    },
+    "installRow": "Consigue {name}",
+    "devnet": {
+      "label": "Devnet",
+      "body": "Esta demo funciona en Solana devnet. Cambia tu billetera a Devnet antes de aprobar algo. Los tokens de prueba no tienen valor."
+    }
   },
   "menu": {
     "label": "Menú de la billetera",

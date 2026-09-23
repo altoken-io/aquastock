@@ -8,7 +8,7 @@ import * as motion from 'motion/react-m';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { DotBackground } from '@/modules/app/components/dot-background';
-import { dappPoolsUrl } from '@/lib/dapp-url';
+import { dappPoolsUrl, dappUrl } from '@/lib/dapp-url';
 
 import BrandLogo from '@/components/helpers/brand-logo';
 import ButtonLink from '@/components/ui/button-link';
@@ -151,8 +151,8 @@ const MobileMenu = ({ className }: { className?: string }) => {
                       key={link.href}
                       className="border-b border-border/70 last:border-b-0"
                     >
-                      <Link
-                        href={link.href}
+                      <a
+                        href={dappUrl(locale, link.href)}
                         onClick={handleClose}
                         className="group flex items-baseline justify-between gap-4 py-5 sm:py-6"
                       >
@@ -172,7 +172,7 @@ const MobileMenu = ({ className }: { className?: string }) => {
                           </span>
                         </span>
                         <ArrowUpRight className="size-5 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
-                      </Link>
+                      </a>
                     </li>
                   ))}
                 </ol>

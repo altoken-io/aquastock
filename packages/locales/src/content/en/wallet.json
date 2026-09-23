@@ -6,8 +6,22 @@
     "description": "Choose the Solana wallet you use. AquaStock never holds your keys and never signs for you.",
     "detected": "Found in this browser",
     "noWallets": "No Solana wallet found in this browser.",
-    "install": "Get Phantom",
-    "installHint": "Install a wallet, then reload this page."
+    "installHint": "Install a wallet, then reload this page.",
+    "mobileApp": "A wallet app on this phone",
+    "openInApp": {
+      "title": "Open this page in your wallet app",
+      "body": "A phone browser can't hold a wallet. Your wallet app has its own browser that can, and this page opens there as it is.",
+      "row": "Opens this page in {name}",
+      "or": "Or",
+      "copy": "Copy this page's link",
+      "copyHint": "Using another wallet? Open the link in its browser.",
+      "copied": "Link copied"
+    },
+    "installRow": "Get {name}",
+    "devnet": {
+      "label": "Devnet",
+      "body": "This demo runs on Solana devnet. Switch your wallet to Devnet before you approve anything. Demo tokens have no value."
+    }
   },
   "menu": {
     "label": "Wallet menu",

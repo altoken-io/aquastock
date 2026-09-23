@@ -53,7 +53,7 @@ export function PoolActionPanel({
             <h2 className="text-base font-semibold">{t('title')}</h2>
             <p className="text-sm text-muted-foreground">{t('description')}</p>
             <div>
-              <WalletButton />
+              <WalletButton className="h-11 px-4" />
             </div>
           </>
         ) : wallet === pool.sponsor ? (

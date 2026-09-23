@@ -32,6 +32,14 @@ import { env } from '@/lib/env/client';
 import { cn } from '@/utils/classNames';
 
 import { explorerUrl, shortAddress } from '../pools/lib/format';
+import { ConnectOptions } from './connect-options';
+import {
+  MOBILE_WALLET_ADAPTER_NAME,
+  WALLET_INSTALL_LINKS,
+  connectMode,
+  isMobileDevice,
+  walletAppLinks,
+} from './lib/connect-options';
 
 const NETWORK = env('NEXT_PUBLIC_SOLANA_NETWORK', true) ?? 'localnet';
 const RPC_URL =
@@ -44,17 +52,34 @@ const triggerClasses =
  * Connect and account menu. Wallets come from Wallet Standard detection, so there is nothing
  * to configure per wallet; AquaStock never sees a key.
  */
-export function WalletButton({ className }: { className?: string }) {
+export function WalletButton({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  /** Header use: below 640px the label hides and only the icon shows. Elsewhere the button is
+   *  the call to action, so it always says what it does. */
+  compact?: boolean;
+}) {
   const t = useTranslations('wallet');
   const { wallets, publicKey, connected, connecting, select, disconnect } =
     useWallet();
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  // Read from the browser when the dialog opens, never during render, so the server-rendered
+  // button and the first client render always match.
+  const [device, setDevice] = useState({ mobile: false, pageUrl: '' });
 
   const usable = wallets.filter(
     (w) =>
       w.readyState === WalletReadyState.Installed ||
       w.readyState === WalletReadyState.Loadable,
+  );
+  // An extension, or the injected wallet of a wallet app's own browser.
+  const installed = usable.filter(
+    (w) =>
+      w.readyState === WalletReadyState.Installed &&
+      w.adapter.name !== MOBILE_WALLET_ADAPTER_NAME,
   );
 
   if (connected && publicKey) {
@@ -120,12 +145,21 @@ export function WalletButton({ className }: { className?: string }) {
           'border-primary bg-primary text-primary-foreground hover:bg-primary-pressed',
           className,
         )}
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setDevice({
+            mobile: isMobileDevice(
+              navigator.userAgent,
+              navigator.maxTouchPoints,
+            ),
+            pageUrl: window.location.href,
+          });
+          setOpen(true);
+        }}
         disabled={connecting}
         aria-label={connecting ? t('connecting') : t('connect')}
       >
         <Wallet aria-hidden className="size-4" />
-        <span className="max-sm:sr-only">
+        <span className={cn(compact && 'max-sm:sr-only')}>
           {connecting ? t('connecting') : t('connect')}
         </span>
       </button>
@@ -133,49 +167,29 @@ export function WalletButton({ className }: { className?: string }) {
         <DialogContent>
           <DialogTitle>{t('dialog.title')}</DialogTitle>
           <DialogDescription>{t('dialog.description')}</DialogDescription>
-          {usable.length > 0 ? (
-            <div className="mt-4">
-              <p className="mb-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                {t('dialog.detected')}
-              </p>
-              <ul className="flex flex-col gap-2">
-                {usable.map((wallet) => (
-                  <li key={wallet.adapter.name}>
-                    <button
-                      type="button"
-                      className="flex w-full items-center gap-3 rounded-lg border border-border/70 bg-background px-3 py-2.5 text-left text-sm font-medium outline-none transition-colors hover:bg-secondary/70 focus-visible:ring-2 focus-visible:ring-ring"
-                      onClick={() => {
-                        select(wallet.adapter.name);
-                        setOpen(false);
-                      }}
-                    >
-                      <img
-                        src={wallet.adapter.icon}
-                        alt=""
-                        className="size-6 rounded"
-                      />
-                      {wallet.adapter.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <div className="mt-4 rounded-lg border border-dashed border-border p-4 text-sm">
-              <p className="font-medium">{t('dialog.noWallets')}</p>
-              <p className="mt-1 text-muted-foreground">
-                {t('dialog.installHint')}
-              </p>
-              <a
-                href="https://phantom.com/download"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex text-sm font-medium text-primary underline-offset-4 hover:underline"
-              >
-                {t('dialog.install')}
-              </a>
-            </div>
-          )}
+          <ConnectOptions
+            mode={connectMode({
+              mobile: device.mobile,
+              installedCount: installed.length,
+            })}
+            wallets={usable.map((wallet) => ({
+              name: wallet.adapter.name,
+              icon: wallet.adapter.icon,
+              isMobileApp: wallet.adapter.name === MOBILE_WALLET_ADAPTER_NAME,
+              onSelect: () => {
+                select(wallet.adapter.name);
+                setOpen(false);
+              },
+            }))}
+            appLinks={device.pageUrl ? walletAppLinks(device.pageUrl) : []}
+            installLinks={WALLET_INSTALL_LINKS}
+            network={NETWORK}
+            onCopyLink={() => {
+              void navigator.clipboard
+                .writeText(device.pageUrl)
+                .then(() => toast.success(t('dialog.openInApp.copied')));
+            }}
+          />
         </DialogContent>
       </Dialog>
     </>
