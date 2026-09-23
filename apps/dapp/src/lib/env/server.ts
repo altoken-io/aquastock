@@ -16,6 +16,8 @@ const serverEnv = {
   // A dedicated hot wallet that holds only demo tokens and a little SOL: never the deployer,
   // the upgrade authority or the mint authority. Unset means no faucet.
   FAUCET_SECRET_KEY: process.env.FAUCET_SECRET_KEY,
+  // Pyth Hermes API key (server-only; sent as a Bearer token). Unset hides USD values.
+  PYTH_API_KEY: process.env.PYTH_API_KEY,
 };
 
 // Optional environment variables in development

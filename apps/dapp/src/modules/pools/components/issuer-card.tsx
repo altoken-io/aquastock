@@ -9,11 +9,17 @@ import {
   Snowflake,
   type LucideIcon,
 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn } from '@/utils/classNames';
 
-import { shortAddress } from '../lib/format';
+import { usePrice } from '../hooks/use-price';
+import {
+  formatRelativeTime,
+  isMainnet,
+  shortAddress,
+  toIntlLocale,
+} from '../lib/format';
 import { useFormatters, useToken } from '../token-context';
 
 /**
@@ -25,6 +31,8 @@ export function IssuerCard() {
   const token = useToken();
   const f = useFormatters();
   const issuer = token.issuer;
+  const locale = toIntlLocale(useLocale());
+  const { data: price } = usePrice();
 
   const holder = (address: string | null) =>
     address ? (
@@ -139,6 +147,39 @@ export function IssuerCard() {
           </ul>
         </>
       )}
+      {price ? (
+        // The source of every "≈ $" figure in the app, stated once where the token's facts live.
+        <div className="mt-5 border-t border-border/60 pt-4">
+          <p className="text-sm font-medium text-foreground">
+            {t('price.title')}
+          </p>
+          <p className="mt-1 flex items-baseline gap-1.5">
+            <span className="font-display text-2xl font-semibold tabular-nums">
+              {new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: 'USD',
+              }).format(Number(price.price))}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {t('price.perToken')}
+            </span>
+          </p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {t('price.source', {
+              age: formatRelativeTime(
+                new Date(price.publishTime * 1_000),
+                new Date(),
+                locale,
+              ),
+            })}
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            {isMainnet(token.network)
+              ? t('price.live')
+              : t('price.demo', { symbol: token.symbol })}
+          </p>
+        </div>
+      ) : null}
       <p className="mt-5 border-t border-border/60 pt-3 text-xs text-muted-foreground">
         {t('demoNote')}
       </p>

@@ -47,11 +47,14 @@ export function LedgerRow({
   value,
   stream,
   emphasis,
+  usd,
 }: {
   label: string;
   value: string;
   stream?: StreamKind;
   emphasis?: boolean;
+  /** "≈ $612" under the amount; omitted when there is no market price. */
+  usd?: string | null;
 }) {
   const Icon = stream ? STREAMS[stream].icon : null;
   return (
@@ -77,6 +80,11 @@ export function LedgerRow({
         )}
       >
         {value}
+        {usd ? (
+          <span className="block text-xs font-normal text-muted-foreground">
+            {usd}
+          </span>
+        ) : null}
       </dd>
     </div>
   );

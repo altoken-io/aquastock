@@ -115,6 +115,19 @@ export interface FaucetInfoDto {
   sol: string;
 }
 
+/** A live market price from Pyth, for showing what token amounts are worth. */
+export interface PriceDto {
+  /** The Pyth feed's pair, e.g. "SPYx/USD". */
+  pair: string;
+  feedId: string;
+  /** US dollars per token as a wallet shows it, as a decimal string. */
+  price: string;
+  /** Pyth's confidence interval, same units as `price`. */
+  confidence: string;
+  /** Unix seconds when Pyth published this price. */
+  publishTime: number;
+}
+
 /** What a faucet request actually sent. Amounts are decimal strings of raw units. */
 export interface FaucetDripDto {
   signature: string;

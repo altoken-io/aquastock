@@ -14,6 +14,7 @@ import { cn } from '@/utils/classNames';
 
 import { usePositions, useSponsoredPools } from '../hooks/queries';
 import { useNow } from '../hooks/use-now';
+import { useUsd } from '../hooks/use-price';
 import { useMatchPoolsProgram } from '../hooks/use-program';
 import { totalPositions, viewPosition } from '../lib/position-view';
 import { useFormatters, useToken } from '../token-context';
@@ -169,6 +170,7 @@ function Summary({
 }) {
   const t = useTranslations('myMatch.summary');
   const f = useFormatters();
+  const usd = useUsd();
   const { symbol } = useToken();
   const cells = [
     { key: 'deposited', value: totals.deposited, tone: 'saver' },
@@ -198,6 +200,11 @@ function Summary({
             <span className="ml-1.5 text-xs font-medium text-muted-foreground">
               {symbol}
             </span>
+            {loading ? null : (
+              <span className="mt-0.5 block font-sans text-xs font-normal text-muted-foreground">
+                {usd(value)}
+              </span>
+            )}
           </dd>
         </div>
       ))}
@@ -219,6 +226,7 @@ function PositionRow({
   const t = useTranslations('myMatch.row');
   const tStatus = useTranslations('position.status');
   const f = useFormatters();
+  const usd = useUsd();
   const token = useToken();
   const program = useMatchPoolsProgram();
   const name = usePoolName(entry.pool);
@@ -297,11 +305,13 @@ function PositionRow({
         <Row
           label={t('match')}
           value={`${f.tokens(view.state.matchReserved)} ${token.symbol}`}
+          usd={usd(view.state.matchReserved)}
         />
         <Row
           label={t('claimable')}
           value={`${f.tokens(view.claimable)} ${token.symbol}`}
           strong
+          usd={usd(view.claimable)}
         />
       </dl>
 
@@ -327,16 +337,25 @@ function Row({
   label,
   value,
   strong,
+  usd,
 }: {
   label: string;
   value: string;
   strong?: boolean;
+  usd?: string | null;
 }) {
   return (
     <div className="flex items-baseline justify-between gap-4 border-b border-border/60 py-2 last:border-b-0">
       <dt className="text-muted-foreground">{label}</dt>
-      <dd className={cn('tabular-nums', strong ? 'font-semibold' : '')}>
+      <dd
+        className={cn('text-right tabular-nums', strong ? 'font-semibold' : '')}
+      >
         {value}
+        {usd ? (
+          <span className="block text-xs font-normal text-muted-foreground">
+            {usd}
+          </span>
+        ) : null}
       </dd>
     </div>
   );

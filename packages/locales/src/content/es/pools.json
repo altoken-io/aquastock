@@ -108,7 +108,14 @@
     "noAuthority": "Ninguna llave tiene este poder",
     "demoNote": "Esto es una demo. Nada aquí es una oferta de valores y el programa no ha sido auditado.",
     "loading": "Leyendo el token desde la cadena…",
-    "unavailable": "No pudimos leer la configuración del emisor del token ahora."
+    "unavailable": "No pudimos leer la configuración del emisor del token ahora.",
+    "price": {
+      "title": "Precio de mercado de SPYx",
+      "perToken": "por SPYx",
+      "source": "Pyth SPYx/USD, actualizado {age}",
+      "demo": "Cada cifra ≈ $ de esta app usa este precio: lo que vale la misma cantidad de SPYx real. El {symbol} de prueba no tiene valor.",
+      "live": "Cada cifra ≈ $ de esta app usa este precio. Se mueve con el mercado."
+    }
   },
   "activity": {
     "title": "Actividad",

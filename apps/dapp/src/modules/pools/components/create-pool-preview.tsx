@@ -7,6 +7,7 @@ import { poolReach } from '../lib/create-pool';
 import { formatDuration } from '../lib/format';
 import { useFormatters, useToken } from '../token-context';
 import { MatchRing } from './match-ring';
+import { useUsd } from '../hooks/use-price';
 import { LedgerRow } from './stream-legend';
 
 /**
@@ -26,6 +27,7 @@ export function PoolPreview({
   const t = useTranslations('create.preview');
   const tRows = useTranslations('create.review.rows');
   const f = useFormatters();
+  const usd = useUsd();
   const { symbol } = useToken();
 
   const reach =
@@ -84,6 +86,7 @@ export function PoolPreview({
               : `${f.tokens(draft.budgetRaw)} ${symbol}`
           }
           emphasis
+          usd={draft.budgetRaw === null ? null : usd(draft.budgetRaw)}
         />
         <LedgerRow
           stream="sponsor"
@@ -96,6 +99,7 @@ export function PoolPreview({
           value={
             draft.capRaw === null ? '—' : `${f.tokens(draft.capRaw)} ${symbol}`
           }
+          usd={draft.capRaw === null ? null : usd(draft.capRaw)}
         />
         <LedgerRow
           label={tRows('vesting')}

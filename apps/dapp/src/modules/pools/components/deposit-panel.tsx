@@ -12,6 +12,7 @@ import { rawToUi, type AmountErrorCode } from '@/lib/solana/amounts';
 
 import { useTokenBalance } from '../hooks/queries';
 import { useNow } from '../hooks/use-now';
+import { useUsd } from '../hooks/use-price';
 import { useMatchPoolsProgram } from '../hooks/use-program';
 import { amountForParsing } from '../lib/amount-input';
 import {
@@ -54,6 +55,7 @@ export function DepositPanel({
   const fieldId = useId();
   const problemId = useId();
   const [input, setInput] = useState('');
+  const usd = useUsd();
 
   const balanceQuery = useTokenBalance(
     token.mint,
@@ -213,12 +215,14 @@ export function DepositPanel({
                   stream="saver"
                   label={t('preview.deposit')}
                   value={`${f.tokens(preview.amountRaw)} ${token.symbol}`}
+                  usd={usd(preview.amountRaw)}
                 />
                 <LedgerRow
                   stream="sponsor"
                   label={t('preview.match')}
                   value={`${f.tokens(preview.matchedRaw)} ${token.symbol}`}
                   emphasis
+                  usd={usd(preview.matchedRaw)}
                 />
               </dl>
               <p className="pb-2 text-xs text-muted-foreground">

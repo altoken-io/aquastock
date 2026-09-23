@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import { Link } from '@/lib/i18n/navigation';
 
+import { useUsd } from '../hooks/use-price';
 import { usePoolDetail, type PoolDetailData } from '../hooks/queries';
 import { useNow } from '../hooks/use-now';
 import {
@@ -84,6 +85,7 @@ function Loaded({
   const tDemo = useTranslations('pools.demo');
   const locale = toIntlLocale(useLocale());
   const f = useFormatters();
+  const usd = useUsd();
   const { symbol } = useToken();
   const now = useNow(serverNow);
   const { pool } = data;
@@ -185,6 +187,7 @@ function Loaded({
               label={t('instrument.ledger.total')}
               value={`${f.tokens(pool.budgetTotal)} ${symbol}`}
               emphasis
+              usd={usd(pool.budgetTotal)}
             />
             <LedgerRow
               stream="sponsor"
@@ -194,6 +197,7 @@ function Loaded({
             <LedgerRow
               label={t('instrument.ledger.available')}
               value={`${f.tokens(pool.unreserved)} ${symbol}`}
+              usd={usd(pool.unreserved)}
             />
             <LedgerRow
               stream="saver"
