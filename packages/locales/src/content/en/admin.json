@@ -6,7 +6,9 @@
     "password": "Password",
     "submit": "Sign in",
     "forgotPassword": "Forgot password?",
-    "error": "Invalid email or password."
+    "error": "Invalid email or password.",
+    "notStaff": "Saving or sponsoring? You don't need an account.",
+    "openPools": "Open the pools"
   },
   "forgotPassword": {
     "title": "Reset your password",

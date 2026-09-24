@@ -4,3 +4,6 @@
 export const WEB_BASE_URL = process.env.NEXT_PUBLIC_WEB_URL?.startsWith('http')
   ? process.env.NEXT_PUBLIC_WEB_URL
   : 'https://aquastock.io';
+
+/** The marketing site's host, for link text that has to name where the link goes. */
+export const WEB_HOST = new URL(WEB_BASE_URL).host;

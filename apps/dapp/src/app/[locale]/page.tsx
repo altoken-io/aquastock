@@ -2,8 +2,10 @@ import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { ArrowRight } from 'lucide-react';
 
 import { AuthShell } from '@/components/auth-shell';
+import { Link } from '@/lib/i18n/navigation';
 import { routing } from '@/lib/i18n/routing';
 import { SignInForm } from '@/modules/auth/components/sign-in-form';
 
@@ -41,6 +43,17 @@ export default async function HomePage({ params }: PageProps) {
       subtitle={t('signIn.subtitle')}
     >
       <SignInForm />
+      {/* Savers and sponsors never sign in; anyone who lands on the bare app URL needs a way on. */}
+      <p className="border-t border-border pt-6 text-center text-sm text-muted-foreground">
+        {t('signIn.notStaff')}{' '}
+        <Link
+          href="/pools"
+          className="inline-flex items-center gap-1 font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          {t('signIn.openPools')}
+          <ArrowRight aria-hidden="true" className="size-3.5" />
+        </Link>
+      </p>
     </AuthShell>
   );
 }

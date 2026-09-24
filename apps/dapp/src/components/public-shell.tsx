@@ -9,7 +9,7 @@ import { PrimaryNav, type NavItem } from '@/components/helpers/primary-nav';
 import ThemeSwitcher from '@/components/helpers/theme-switcher';
 import { WalletButton } from '@/modules/wallet/wallet-button';
 import { Link } from '@/lib/i18n/navigation';
-import { WEB_BASE_URL } from '@/lib/web-url';
+import { WEB_BASE_URL, WEB_HOST } from '@/lib/web-url';
 import { SandboxNoticeBar } from '@/modules/product/components/sandbox-notice-bar';
 
 /**
@@ -80,7 +80,7 @@ export async function PublicShell({
               href={WEB_BASE_URL}
               className="underline-offset-4 hover:text-foreground hover:underline"
             >
-              aquastock.io
+              {WEB_HOST}
             </Link>
           </div>
         </div>

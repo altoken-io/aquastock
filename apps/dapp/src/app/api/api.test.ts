@@ -238,6 +238,33 @@ describe('POST /api/pools/[address]/metadata', () => {
         )
       ).status,
     ).toBe(415);
+    // A form a browser may post cross-site without a preflight, dressed up to look like JSON.
+    expect(
+      (
+        await saveMetadataRoute(
+          new Request(
+            url,
+            json(signedBody(), {
+              'content-type': 'text/plain;application/json',
+            }),
+          ),
+          ctx(address),
+        )
+      ).status,
+    ).toBe(415);
+    expect(
+      (
+        await saveMetadataRoute(
+          new Request(
+            url,
+            json(signedBody(), {
+              'content-type': 'Application/JSON; charset=utf-8',
+            }),
+          ),
+          ctx(address),
+        )
+      ).status,
+    ).toBe(200);
     expect(
       (
         await saveMetadataRoute(

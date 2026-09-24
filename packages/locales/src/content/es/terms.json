@@ -14,7 +14,7 @@
     "statusLabel": "Estado",
     "statusValue": "Borrador",
     "contactLabel": "Contacto",
-    "contactValue": "admin@aquastock.io"
+    "contactValue": "admin@ddpay.io"
   },
   "tocLabel": "En esta página",
   "sections": [
@@ -38,7 +38,7 @@
   "contact": {
     "title": "¿Preguntas?",
     "body": "Escríbenos y te responderemos.",
-    "email": "admin@aquastock.io",
+    "email": "admin@ddpay.io",
     "buttonLabel": "Contáctanos"
   }
 }

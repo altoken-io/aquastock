@@ -98,14 +98,18 @@ export function parseParam<T>(schema: ZodType<T>, value: unknown): T {
   return schema.parse(value);
 }
 
-/** Reads a small JSON body, refusing other content types and oversized payloads. */
+/**
+ * Reads a small JSON body, refusing other content types and oversized payloads. The media type
+ * must be exactly `application/json`: a browser can only send that cross-site after a CORS
+ * preflight this app never grants, so another site cannot make its visitors post here.
+ */
 export async function readJsonBody(request: Request): Promise<unknown> {
-  if (
-    !request.headers
-      .get('content-type')
-      ?.toLowerCase()
-      .includes('application/json')
-  ) {
+  const mediaType = request.headers
+    .get('content-type')
+    ?.split(';')[0]
+    ?.trim()
+    .toLowerCase();
+  if (mediaType !== 'application/json') {
     throw new ApiError(
       415,
       'unsupported_media_type',

@@ -1,9 +1,26 @@
 ﻿import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
+// Sent on every response. Deliberately no script CSP: wallet extensions inject scripts into the
+// page, and a policy that blocks one breaks connecting. Framing is refused outright, which is
+// what protects the sign-in form and the transaction buttons from clickjacking.
+const SECURITY_HEADERS = [
+  { key: 'Content-Security-Policy', value: "frame-ancestors 'none'" },
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
+  },
+];
+
 const nextConfig: NextConfig = {
   /* config options here */
   compress: true,
+  async headers() {
+    return [{ source: '/:path*', headers: SECURITY_HEADERS }];
+  },
   async redirects() {
     return [
       {

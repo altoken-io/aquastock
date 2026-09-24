@@ -125,11 +125,12 @@ export async function drip(
     );
   }
 
-  // Checked after the plan, so asking for a wallet that needs nothing costs no budget. The
-  // total budget is checked last, so a refused wallet or IP never spends it.
+  // Checked after the plan, so asking for a wallet that needs nothing costs no budget. The IP
+  // goes first, so a caller who is out of requests cannot use up someone else's wallet
+  // allowance by naming it; the total budget goes last, so a refused request never spends it.
+  if (!(await deps.limiters.ip.limit(ip)).success) throw rateLimited();
   if (!(await deps.limiters.wallet.limit(recipient.toBase58())).success)
     throw rateLimited();
-  if (!(await deps.limiters.ip.limit(ip)).success) throw rateLimited();
   if (!(await deps.limiters.global.limit('all')).success) throw rateLimited();
 
   const [faucetTokensRaw, faucetLamports] = await Promise.all([
@@ -146,7 +147,7 @@ export async function drip(
     throw new ApiError(
       503,
       'faucet_empty',
-      'the demo faucet is empty; the team has been told',
+      'the demo faucet is empty right now; try again later',
     );
   }
 

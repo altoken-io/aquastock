@@ -24,7 +24,7 @@ export const auth = betterAuth({
     requireEmailVerification: false,
     sendResetPassword: async ({ user, url }) => {
       await resend.emails.send({
-        from: 'AquaStock Admin <admin@aquastock.io>',
+        from: 'AquaStock Admin <admin@ddpay.io>',
         to: user.email,
         subject: 'Reset your AquaStock admin password',
         html: `<p>Reset your AquaStock admin console password by following this link:</p><p><a href="${url}">${url}</a></p><p>If you didn't request this, you can ignore this email.</p>`,

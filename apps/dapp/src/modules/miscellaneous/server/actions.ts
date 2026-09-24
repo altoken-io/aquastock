@@ -15,8 +15,8 @@ import ContactFormEmail from '@/emails/contact-form';
 
 const MIN_SUBMISSION_TIME = 2000;
 const FALLBACK_EMAIL = 'olivermiguel1129@gmail.com';
-const ADMIN_EMAIL = 'admin@aquastock.io';
-const NO_REPLY_EMAIL = 'no-reply@aquastock.io';
+const ADMIN_EMAIL = 'admin@ddpay.io';
+const NO_REPLY_EMAIL = 'no-reply@ddpay.io';
 
 const getAdminRecipient = () =>
   process.env.NODE_ENV === 'production' ? ADMIN_EMAIL : FALLBACK_EMAIL;

@@ -6,7 +6,9 @@
     "password": "Contraseña",
     "submit": "Iniciar sesión",
     "forgotPassword": "¿Olvidaste tu contraseña?",
-    "error": "Correo electrónico o contraseña inválidos."
+    "error": "Correo electrónico o contraseña inválidos.",
+    "notStaff": "¿Ahorras o patrocinas? No necesitas una cuenta.",
+    "openPools": "Ver los fondos"
   },
   "forgotPassword": {
     "title": "Restablece tu contraseña",

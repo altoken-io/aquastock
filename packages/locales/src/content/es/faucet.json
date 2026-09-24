@@ -8,7 +8,7 @@
   "errors": {
     "alreadyFunded": "Tu billetera ya tiene lo suficiente para probar la demo.",
     "rateLimited": "Esta billetera ya recibió sus tokens de prueba hoy. Inténtalo mañana o usa otra billetera.",
-    "empty": "El grifo de prueba está vacío. Ya avisamos al equipo.",
+    "empty": "El grifo de prueba está vacío por ahora. Inténtalo más tarde.",
     "failed": "La red no confirmó la transferencia. Inténtalo de nuevo.",
     "unavailable": "Este despliegue no tiene grifo de prueba.",
     "generic": "No pudimos conectar con el grifo. Inténtalo en un momento."

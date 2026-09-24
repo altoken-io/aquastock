@@ -8,7 +8,7 @@
   "errors": {
     "alreadyFunded": "Your wallet already has enough to try the demo.",
     "rateLimited": "This wallet has had its demo tokens for today. Try again tomorrow or use another wallet.",
-    "empty": "The demo faucet is empty. The team has been told.",
+    "empty": "The demo faucet is empty right now. Try again later.",
     "failed": "The network didn't confirm the transfer. Try again.",
     "unavailable": "This deployment has no demo faucet.",
     "generic": "Couldn't reach the faucet. Try again in a moment."

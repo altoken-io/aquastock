@@ -187,6 +187,16 @@ describe('drip', () => {
     },
   );
 
+  it('does not spend a named wallet allowance when the caller IP is out of requests', async () => {
+    const walletLimit = vi.fn(() => Promise.resolve({ success: true }));
+    const { deps, sent } = setup({
+      limiters: { ip: deny, wallet: { limit: walletLimit } },
+    });
+    await rejection(drip(deps, wallet(), 'ip'));
+    expect(walletLimit).not.toHaveBeenCalled();
+    expect(sent).toHaveLength(0);
+  });
+
   it('does not spend the global budget when the wallet budget refuses', async () => {
     const global = vi.fn(() => Promise.resolve({ success: true }));
     const { deps } = setup({

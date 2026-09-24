@@ -41,10 +41,11 @@ export function getFaucetServices(): FaucetDeps | null {
               requests: 3,
               windowSeconds: 24 * HOUR,
             }),
+            // A day, not an hour: new keypairs are free, so per-IP is the limit that matters.
             ip: createRateLimiter({
-              prefix: 'faucet-ip',
+              prefix: 'faucet-ip-day',
               requests: 10,
-              windowSeconds: HOUR,
+              windowSeconds: 24 * HOUR,
             }),
             global: createRateLimiter({
               prefix: 'faucet-all',

@@ -43,7 +43,7 @@ export default function GlobalNotFound() {
                 Back to home
               </Link>
               <Link
-                href="mailto:admin@aquastock.io"
+                href="mailto:admin@ddpay.io"
                 className="rounded-full border border-neutral-300 px-5 py-2 text-sm hover:bg-neutral-100"
               >
                 Talk to us

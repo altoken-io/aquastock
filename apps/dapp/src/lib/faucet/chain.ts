@@ -18,8 +18,11 @@ import {
 import { fetchIssuerPowers } from '../pools/chain';
 import type { FaucetChain } from './service';
 
-/** Under the route's `maxDuration`, so a slow network fails cleanly instead of being killed. */
-const CONFIRM_TIMEOUT_MS = 25_000;
+/**
+ * Well under the route's 30 s `maxDuration`, leaving room for the balance reads and limiter
+ * calls before it, so a slow network fails cleanly with JSON instead of being killed mid-reply.
+ */
+const CONFIRM_TIMEOUT_MS = 18_000;
 const POLL_MS = 700;
 
 const sleep = (ms: number) =>

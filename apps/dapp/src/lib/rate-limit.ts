@@ -73,8 +73,22 @@ export type RateLimiterOptions = {
 };
 
 /**
- * A limiter with its own budget: Upstash when configured, in memory in development, and
- * closed in production without Upstash.
+ * Upstash answers `success: true` with `reason: 'timeout'` when Redis is slower than its
+ * timeout (5 s by default). For a budget that guards something spent, such as the faucet,
+ * a slow Redis must close the gate, not open it.
+ */
+export const refuseOnTimeout = (
+  limiter: Pick<Ratelimit, 'limit'>,
+): RateLimiter => ({
+  limit: async (identifier) => {
+    const { success, reason } = await limiter.limit(identifier);
+    return { success: success && reason !== 'timeout' };
+  },
+});
+
+/**
+ * A limiter with its own budget for something that is spent: Upstash when configured (closed
+ * when it times out), in memory in development, and closed in production without Upstash.
  */
 export const createRateLimiter = ({
   prefix,
@@ -82,12 +96,14 @@ export const createRateLimiter = ({
   windowSeconds,
 }: RateLimiterOptions): RateLimiter => {
   if (redis) {
-    return new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(requests, `${windowSeconds} s`),
-      prefix: `@altoken/ratelimit/${prefix}`,
-      analytics: true,
-    });
+    return refuseOnTimeout(
+      new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(requests, `${windowSeconds} s`),
+        prefix: `@altoken/ratelimit/${prefix}`,
+        analytics: true,
+      }),
+    );
   }
   return process.env.NODE_ENV === 'production'
     ? unavailableProductionRateLimit
