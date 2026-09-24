@@ -1,0 +1,5 @@
+node_modules
+out
+# Throwaway devnet keypairs and run state written by `pnpm capture` (worthless demo
+# wallets, but keys never belong in git).
+capture/.state

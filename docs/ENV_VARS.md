@@ -21,7 +21,7 @@ Index-only — points to `apps/web/.env.example` and `apps/dapp/.env.example`, a
 - `NEXT_PUBLIC_BASE_URL`, `NEXT_PUBLIC_WEB_URL`: the two public URLs.
 - On mainnet also `NEXT_PUBLIC_MAINNET_DEMO_CAP`, or pool creation stays closed.
 - On devnet, `FAUCET_SECRET_KEY` so visitors and judges can get demo tokens themselves. Without it the app still works, but a new wallet has no way to get dSPYx.
-- Optionally `PYTH_API_KEY`, so "≈ $" values next to token amounts come from Pyth. Without it they come from Jupiter's keyless price API.
+- Optionally `PYTH_API_KEY`, so "≈ $" values next to token amounts come from Pyth. Without it (or when Pyth refuses the key) they come from Jupiter's keyless price API, and from CoinGecko's keyless API if Jupiter is down.
 
 **A deployed `apps/web`** needs `NEXT_PUBLIC_BASE_URL` and `NEXT_PUBLIC_DAPP_URL`. Nothing on the marketing site touches a database, so its other variables are optional.
 

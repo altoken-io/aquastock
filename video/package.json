@@ -1,0 +1,38 @@
+{
+  "name": "@aquastock/video",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The Stocklana demo video for AquaStock Match Pools, made with Remotion. Kept out of the pnpm workspace (like programs/), so its dependencies never reach the apps' Vercel installs.",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio --no-open",
+    "capture": "node capture/capture.ts",
+    "render": "remotion render AquaStockDemo out/aquastock-match-pools-demo.mp4 --gl=angle",
+    "still": "remotion still",
+    "lint": "eslint src capture",
+    "check-types": "tsc --noEmit && tsc --noEmit -p capture",
+    "test": "node --test \"capture/**/*.test.ts\" \"src/lib/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.528",
+    "@remotion/google-fonts": "4.0.528",
+    "@remotion/transitions": "4.0.528",
+    "@turf/turf": "7.4.0",
+    "maplibre-gl": "6.11.2",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "remotion": "4.0.528"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.528",
+    "@types/node": "24.13.6",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "9.19.0",
+    "playwright": "1.63.0",
+    "typescript": "5.9.3"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}

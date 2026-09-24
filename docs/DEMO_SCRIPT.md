@@ -25,6 +25,8 @@ Rules for the live run:
 
 ## 2. The 2–3 minute video
 
+**Built (2026-09-24):** `video/` renders this section as a Remotion video (about 2:20) from a recorded run of the live devnet app: a sponsor creates a pool, two savers deposit, one leaves early and one claims, each a real devnet transaction shown with its signature. It says "devnet" and "scripted test wallet" on screen. How to re-record and render: `video/README.md`. The table below is the outline it follows.
+
 Record on mainnet with the hard caps if the mainnet run works. Otherwise record on the devnet replica and say so on screen.
 
 | Time      | Content                                                                                                               |

@@ -14,3 +14,7 @@ next-env.d.ts
 # Anchor/Cargo build output and the generated IDL + TS types under it (nested
 # .gitignore isn't read by the Prettier CLI).
 programs/target/
+
+# Rendered video output and the capture's run state (throwaway keys; gitignored in video/).
+video/out/
+video/capture/.state/

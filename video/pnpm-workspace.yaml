@@ -1,0 +1,8 @@
+# This folder is its own pnpm root, deliberately outside the repo's workspace (like
+# `programs/`): Remotion, MapLibre and Playwright stay out of the lockfile that Vercel
+# installs for apps/web and apps/dapp.
+packages:
+  - '.'
+
+onlyBuiltDependencies:
+  - esbuild

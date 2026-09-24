@@ -1,0 +1,441 @@
+{
+  "capturedAt": "2026-09-24T19:11:22.871Z",
+  "app": "https://aquastock-dapp.vercel.app",
+  "network": "devnet",
+  "viewport": {
+    "width": 1280,
+    "height": 800,
+    "deviceScaleFactor": 2
+  },
+  "pool": {
+    "address": "BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+    "name": "Video demo: 1:1 match, 3-minute vesting",
+    "vestingSeconds": 180
+  },
+  "wallets": {
+    "sponsor": "59kL9keiXf4Xq7EPDoDCExUSy6HBtQZUQtshm4SKoKDU",
+    "saverA": "8XSJhTqMZRrJit3s1rfaikpzhvxkwQRvp5jkKpTuUMxD",
+    "saverB": "8B53js2PvUCzBU3iZyC2aj5Kdhnw1viKNGnmmmq65cPv"
+  },
+  "transactions": {
+    "faucetSponsor": "5obTcF6JG6LCYM4BxWaMKchsRb7JJeidxyrZtzC1rLBUC8LsHFtgMHaNmNUWVNy4dfMieMqEGc1cjaqdJZeDVhxp",
+    "createPool": "2pRP2rfJCbHYUzoE3oUVziwbc7nq6SjZLVM2kgAjtQkarUQjJuUyykQynN7aBT2Hoctqwogzf3gRGo2gjCnEtbex",
+    "faucetSaverA": "5CZXP5zwEBnCx98obsdsqeC8ot9jMAsm3ApistyTgjUoJn1EFWXhSvgRJ6bsS2yAcAZjPk4uVb9M7ruc2WCvReKL",
+    "depositA": "4n8c25SehWazhK3AkzuBrx5GDQMaWNVJwJCWhmTARgsJvkeRd2DMyphi5VjMWhTUWGyok4zB8Xa5CAfjzVFzWSUE",
+    "faucetSaverB": "4VVHXF74XVzuAqVbDbnVQfpjRUGWkojF21divUZPv8hipvm45Y3Bq99a4LSAK6vkcg7zDVmVU8FwWUZTcxCEyQYH",
+    "depositB": "5F46HRNCC2WGG98sXhv8ZoYZemahpp4RwE2cHwDNr8G6vE7oKWzcqW3nFv1vzHEA8kYHVu9hikwz1SWzX8ca5esr",
+    "withdrawB": "5QQQYCvPF4XMgF6AfaDBWtsSuCgYogfDTxHKohREYrRKba3pa8coHGZrhW8xjfixEpr5thYXPyr3L3hjQmv5Hqbq",
+    "claimA": "4UoLoqpw7fcX2jSW5nCFcVFB1ZmnnyXYWN81eWFA5bu2yHDoBvndvCx76xp7L87mK91EKv8daKDLhyPbecLKexB8"
+  },
+  "shots": [
+    {
+      "id": "wizard-fund-empty",
+      "file": "capture/wizard-fund-empty.jpg",
+      "path": "/en/pools/new",
+      "takenAt": "2026-09-24T18:59:29.399Z",
+      "boxes": {
+        "faucet": {
+          "x": 79,
+          "y": 436.375,
+          "width": 124,
+          "height": 36
+        }
+      }
+    },
+    {
+      "id": "pool-new",
+      "file": "capture/pool-new.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:04:18.631Z",
+      "boxes": {
+        "title": {
+          "x": 40,
+          "y": 233.375,
+          "width": 1200,
+          "height": 40
+        },
+        "budget": {
+          "x": 321,
+          "y": 456.375,
+          "width": 375.328125,
+          "height": 24
+        }
+      }
+    },
+    {
+      "id": "deposit-empty",
+      "file": "capture/deposit-empty.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:05:18.329Z",
+      "boxes": {
+        "faucet": {
+          "x": 817.328125,
+          "y": 635.375,
+          "width": 124,
+          "height": 36
+        },
+        "panel": {
+          "x": 753.328125,
+          "y": 417.375,
+          "width": 486.671875,
+          "height": 340
+        }
+      }
+    },
+    {
+      "id": "deposit-preview",
+      "file": "capture/deposit-preview.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:05:48.083Z",
+      "boxes": {
+        "panel": {
+          "x": 753.328125,
+          "y": 417.375,
+          "width": 486.671875,
+          "height": 577
+        },
+        "preview": {
+          "x": 795.328125,
+          "y": 687.375,
+          "width": 402.671875,
+          "height": 20
+        },
+        "cta": {
+          "x": 778.328125,
+          "y": 877.375,
+          "width": 436.671875,
+          "height": 44
+        }
+      }
+    },
+    {
+      "id": "deposit-done",
+      "file": "capture/deposit-done.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:05:50.624Z",
+      "boxes": {
+        "panel": {
+          "x": 753.328125,
+          "y": -120.625,
+          "width": 486.671875,
+          "height": 786
+        }
+      }
+    },
+    {
+      "id": "deposit-b-done",
+      "file": "capture/deposit-b-done.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:05:58.606Z",
+      "boxes": {
+        "panel": {
+          "x": 753.328125,
+          "y": -120.625,
+          "width": 486.671875,
+          "height": 786
+        }
+      }
+    },
+    {
+      "id": "vest-1",
+      "file": "capture/vest-1.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:07:26.306Z",
+      "boxes": {
+        "panel": {
+          "x": 753.328125,
+          "y": 417.375,
+          "width": 486.671875,
+          "height": 700
+        }
+      }
+    },
+    {
+      "id": "mymatch-early",
+      "file": "capture/mymatch-early.jpg",
+      "path": "/en/my-match",
+      "takenAt": "2026-09-24T19:07:30.823Z",
+      "boxes": {
+        "claim": {
+          "x": 61,
+          "y": 777,
+          "width": 176,
+          "height": 40
+        }
+      }
+    },
+    {
+      "id": "vest-2",
+      "file": "capture/vest-2.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:07:32.571Z",
+      "boxes": {
+        "panel": {
+          "x": 753.328125,
+          "y": 417.375,
+          "width": 486.671875,
+          "height": 700
+        }
+      }
+    },
+    {
+      "id": "withdraw-preview",
+      "file": "capture/withdraw-preview.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:07:35.905Z",
+      "boxes": {
+        "dialog": {
+          "x": 430,
+          "y": 240,
+          "width": 420,
+          "height": 320
+        },
+        "cta": {
+          "x": 658,
+          "y": 495,
+          "width": 167,
+          "height": 40
+        }
+      }
+    },
+    {
+      "id": "withdraw-done",
+      "file": "capture/withdraw-done.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:07:40.440Z",
+      "boxes": {
+        "panel": {
+          "x": 753.328125,
+          "y": -262.625,
+          "width": 486.671875,
+          "height": 740
+        }
+      }
+    },
+    {
+      "id": "vest-3",
+      "file": "capture/vest-3.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:07:41.887Z",
+      "boxes": {
+        "panel": {
+          "x": 753.328125,
+          "y": 417.375,
+          "width": 486.671875,
+          "height": 700
+        }
+      }
+    },
+    {
+      "id": "mymatch-claim",
+      "file": "capture/mymatch-claim.jpg",
+      "path": "/en/my-match",
+      "takenAt": "2026-09-24T19:07:58.913Z",
+      "boxes": {
+        "claim": {
+          "x": 61,
+          "y": 777,
+          "width": 160,
+          "height": 40
+        }
+      }
+    },
+    {
+      "id": "claim-done",
+      "file": "capture/claim-done.jpg",
+      "path": "/en/my-match",
+      "takenAt": "2026-09-24T19:08:05.932Z",
+      "boxes": {}
+    },
+    {
+      "id": "vest-4",
+      "file": "capture/vest-4.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:08:59.613Z",
+      "boxes": {
+        "panel": {
+          "x": 753.328125,
+          "y": 417.375,
+          "width": 486.671875,
+          "height": 700
+        }
+      }
+    },
+    {
+      "id": "pool-after",
+      "file": "capture/pool-after.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:09:01.398Z",
+      "boxes": {
+        "budget": {
+          "x": 321,
+          "y": 456.375,
+          "width": 375.328125,
+          "height": 24
+        }
+      }
+    },
+    {
+      "id": "pool-issuer",
+      "file": "capture/pool-issuer.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:09:02.232Z",
+      "boxes": {
+        "heading": {
+          "x": 61,
+          "y": 412.375,
+          "width": 206,
+          "height": 24
+        }
+      }
+    },
+    {
+      "id": "pool-activity",
+      "file": "capture/pool-activity.jpg",
+      "path": "/en/pools/BkvtfcMJGVvCXbjVPbKMLM1e6FAXGQNqHmP1PmbziqNZ",
+      "takenAt": "2026-09-24T19:09:03.062Z",
+      "boxes": {
+        "heading": {
+          "x": 61,
+          "y": 412.375,
+          "width": 639.328125,
+          "height": 24
+        }
+      }
+    },
+    {
+      "id": "pools-after",
+      "file": "capture/pools-after.jpg",
+      "path": "/en/pools",
+      "takenAt": "2026-09-24T19:09:04.145Z",
+      "boxes": {
+        "card": {
+          "x": 61,
+          "y": 487,
+          "width": 347.328125,
+          "height": 28
+        }
+      }
+    },
+    {
+      "id": "explorer-deposit",
+      "file": "capture/explorer-deposit.jpg",
+      "path": "/tx/4n8c25SehWazhK3AkzuBrx5GDQMaWNVJwJCWhmTARgsJvkeRd2DMyphi5VjMWhTUWGyok4zB8Xa5CAfjzVFzWSUE",
+      "takenAt": "2026-09-24T19:09:08.021Z",
+      "boxes": {
+        "result": {
+          "x": 379,
+          "y": 269,
+          "width": 52.625,
+          "height": 17.640625
+        }
+      }
+    },
+    {
+      "id": "pools-before",
+      "file": "capture/pools-before.jpg",
+      "path": "/en/pools",
+      "takenAt": "2026-09-24T19:11:18.250Z",
+      "boxes": {
+        "create": {
+          "x": 1117,
+          "y": 286,
+          "width": 123,
+          "height": 40
+        }
+      }
+    },
+    {
+      "id": "wizard-details",
+      "file": "capture/wizard-details.jpg",
+      "path": "/en/pools/new",
+      "takenAt": "2026-09-24T19:11:19.528Z",
+      "boxes": {
+        "name": {
+          "x": 40,
+          "y": 410.375,
+          "width": 676.65625,
+          "height": 46
+        },
+        "cta": {
+          "x": 623.65625,
+          "y": 703.75,
+          "width": 93,
+          "height": 40
+        }
+      }
+    },
+    {
+      "id": "wizard-rules",
+      "file": "capture/wizard-rules.jpg",
+      "path": "/en/pools/new",
+      "takenAt": "2026-09-24T19:11:20.925Z",
+      "boxes": {
+        "match": {
+          "x": 53,
+          "y": 76.375,
+          "width": 630.65625,
+          "height": 44
+        },
+        "vesting": {
+          "x": 40,
+          "y": 399.375,
+          "width": 126,
+          "height": 26
+        },
+        "cta": {
+          "x": 623.65625,
+          "y": 631.375,
+          "width": 93,
+          "height": 40
+        }
+      }
+    },
+    {
+      "id": "wizard-fund",
+      "file": "capture/wizard-fund.jpg",
+      "path": "/en/pools/new",
+      "takenAt": "2026-09-24T19:11:21.844Z",
+      "boxes": {
+        "budget": {
+          "x": 53,
+          "y": 481.375,
+          "width": 547.65625,
+          "height": 44
+        },
+        "reach": {
+          "x": 57,
+          "y": 585.375,
+          "width": 642.65625,
+          "height": 16
+        },
+        "cta": {
+          "x": 623.65625,
+          "y": 704.375,
+          "width": 93,
+          "height": 40
+        }
+      }
+    },
+    {
+      "id": "wizard-review",
+      "file": "capture/wizard-review.jpg",
+      "path": "/en/pools/new",
+      "takenAt": "2026-09-24T19:11:22.871Z",
+      "boxes": {
+        "cta": {
+          "x": 40,
+          "y": 690.375,
+          "width": 676.65625,
+          "height": 48
+        },
+        "disclosure": {
+          "x": 40,
+          "y": 466.375,
+          "width": 676.65625,
+          "height": 20
+        }
+      }
+    }
+  ]
+}
