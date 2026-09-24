@@ -112,7 +112,7 @@
     "price": {
       "title": "SPYx market price",
       "perToken": "per SPYx",
-      "source": "Pyth SPYx/USD, updated {age}",
+      "source": "{source, select, jupiter {Jupiter} other {Pyth}} SPYx/USD, updated {age}",
       "demo": "Every ≈ $ figure in this app uses this price: what the same amount of real SPYx is worth. Demo {symbol} has no value.",
       "live": "Every ≈ $ figure in this app uses this price. It moves with the market."
     }

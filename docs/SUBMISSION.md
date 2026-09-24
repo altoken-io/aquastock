@@ -9,7 +9,7 @@ Run `pnpm demo:preflight` (read-only) and then `pnpm demo:preflight --live` (a r
 - [ ] **Faucet on in production.** `FAUCET_SECRET_KEY` set in Vercel (Production scope) for the dApp, then redeploy. Without it a judge's new wallet has no tokens and the demo stops at the deposit.
 - [ ] **Repository public**, or leave the GitHub field empty and rely on the demo and video links. A private repo answers 404 to judges.
 - [ ] **Latest `main` deployed** on both Vercel projects (the preflight's "App build" line compares the live build with your checkout).
-- [ ] **Pyth key working**, or accept that "≈ $" values stay hidden. The preflight says which.
+- [ ] **Prices showing.** The preflight's "Market price" line says whether they come from Pyth or the Jupiter fallback.
 - [ ] **Video recorded** (2–3 minutes, script in `DEMO_SCRIPT.md` section 2) and uploaded as unlisted.
 - [ ] **Teammates invited** from the submit form.
 
@@ -25,7 +25,7 @@ The employer match, for people without an employer: a sponsor's match on your to
 
 **Track**
 
-Main track (Investing). Bounties: none recommended. Pyth is used for display-only "≈ $" values, which is not central enough for the Pyth bounty's judging; opt in only if you want the exposure.
+Main track (Investing). Bounties: none recommended. Prices are display-only "≈ $" values (Pyth when the key has the SPYx grant, Jupiter otherwise), which is not central enough for the Pyth bounty's judging.
 
 **Links**
 
@@ -58,7 +58,7 @@ Main track (Investing). Bounties: none recommended. Pyth is used for display-onl
 
 **Tech**
 
-> Anchor 1.2 (Rust, Token-2022), Next.js, `@solana/web3.js` with Wallet Standard, Prisma + Postgres, Pyth Hermes, Vercel. Open-source components and prior work are listed in the README.
+> Anchor 1.2 (Rust, Token-2022), Next.js, `@solana/web3.js` with Wallet Standard, Prisma + Postgres, Pyth Hermes with a Jupiter Price API fallback, Vercel. Open-source components and prior work are listed in the README.
 
 ## Open-source and prior-work disclosure
 

@@ -112,7 +112,7 @@
     "price": {
       "title": "Precio de mercado de SPYx",
       "perToken": "por SPYx",
-      "source": "Pyth SPYx/USD, actualizado {age}",
+      "source": "{source, select, jupiter {Jupiter} other {Pyth}} SPYx/USD, actualizado {age}",
       "demo": "Cada cifra ≈ $ de esta app usa este precio: lo que vale la misma cantidad de SPYx real. El {symbol} de prueba no tiene valor.",
       "live": "Cada cifra ≈ $ de esta app usa este precio. Se mueve con el mercado."
     }

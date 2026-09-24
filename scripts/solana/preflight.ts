@@ -81,6 +81,7 @@ const positionSchema = z.object({
 });
 const poolDetailSchema = z.object({ position: positionSchema.nullable() });
 const priceSchema = z.object({
+  source: z.string(),
   pair: z.string(),
   price: z.string(),
   publishTime: z.number().int(),
@@ -369,22 +370,17 @@ async function checkPrice(ctx: Context): Promise<void> {
   const parsed = priceSchema.safeParse(response?.body);
   if (parsed.success) {
     const age = Math.round(Date.now() / 1_000 - parsed.data.publishTime);
+    // Jupiter is the fallback: a working price, but a sign Pyth has no key or no grant.
     report(
-      'pass',
-      'Pyth price',
-      `${parsed.data.pair} $${Number(parsed.data.price).toFixed(2)}, ${age}s old`,
-    );
-  } else if (response?.status === 404) {
-    report(
-      'warn',
-      'Pyth price',
-      'no PYTH_API_KEY on this deployment: "≈ $" values are hidden',
+      parsed.data.source === 'pyth' ? 'pass' : 'warn',
+      'Market price',
+      `${parsed.data.pair} $${Number(parsed.data.price).toFixed(2)} from ${parsed.data.source}, ${age}s old${parsed.data.source === 'pyth' ? '' : ': Pyth is not answering (Vercel logs say why: "pyth hermes answered …")'}`,
     );
   } else {
     report(
       'warn',
-      'Pyth price',
-      `unavailable (${response?.status ?? 'no answer'}): the key is set but Hermes refused it or the price was stale. Vercel logs say which ("pyth hermes answered" or "pyth price refused")`,
+      'Market price',
+      `unavailable (${response?.status ?? 'no answer'}): neither Pyth nor Jupiter answered, so "≈ $" values are hidden`,
     );
   }
 }

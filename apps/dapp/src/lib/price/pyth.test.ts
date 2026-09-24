@@ -78,6 +78,7 @@ describe('fetchSpyxPrice', () => {
     const fetchImpl = fakeFetch(hermes());
     const price = await fetchSpyxPrice('KEY123', NOW, fetchImpl);
     expect(price).toEqual({
+      source: 'pyth',
       pair: 'SPYx/USD',
       feedId: SPYX_USD_FEED_ID,
       price: '612.3456',

@@ -141,6 +141,7 @@ export async function fetchSpyxPrice(
   }
 
   return {
+    source: 'pyth',
     pair: 'SPYx/USD',
     feedId: SPYX_USD_FEED_ID,
     price: toDecimal(mantissa, feed.price.expo),

@@ -166,6 +166,7 @@ export function IssuerCard() {
           </p>
           <p className="mt-0.5 text-xs text-muted-foreground">
             {t('price.source', {
+              source: price.source,
               age: formatRelativeTime(
                 new Date(price.publishTime * 1_000),
                 new Date(),

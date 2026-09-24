@@ -75,7 +75,7 @@ The pool page shows, read live from the mint: the issuer can pause transfers, fr
 | `apps/web`   | The marketing site (Next.js, en/es).                                                                                                                                                                                           |
 | `packages/*` | Shared UI primitives, locales, config, animation, API types and the program's typed IDL, and the Prisma schema.                                                                                                                |
 
-The chain is the source of truth for every number. Postgres (Prisma) holds only pool names, signed by the sponsor's wallet, and an activity feed the server re-reads from the chain before recording. Prices come from Pyth (Hermes, `Crypto.SPYX/USD`) and are shown only as "≈ $" next to token amounts.
+The chain is the source of truth for every number. Postgres (Prisma) holds only pool names, signed by the sponsor's wallet, and an activity feed the server re-reads from the chain before recording. Prices are shown only as "≈ $" next to token amounts: from Pyth (Hermes, `Crypto.SPYX/USD`) when the deployment's key is entitled to that feed, otherwise from Jupiter's public Price API for the real SPYx mint. The price card names the source.
 
 ## Run it locally
 
@@ -97,5 +97,5 @@ Open <http://localhost:3003/en/pools> and choose "E2E Test Wallet". No keys of y
 ## Prior work and open-source components
 
 - AquaStock is built by the team behind DDPay (contact: admin@ddpay.io). The monorepo scaffold (build tooling, shared config and generic UI primitives) was adapted on 2026-09-13 from our earlier DDPay codebase. Commits from 2026-09-13 to 2026-09-18 belong to an earlier AquaStock concept (water-project co-funding) that this build replaced. The Match Pools program, API, product UI, marketing site and docs were written from 2026-09-19 for Stocklana.
-- Built on open-source software: Anchor, `@solana/web3.js`, `@solana/spl-token`, Solana wallet-adapter (Wallet Standard), Next.js, React, next-intl, Tailwind CSS, Base UI, Prisma, Better Auth, zod, `@upstash/ratelimit`, Motion, GSAP, OGL, cobe, Vitest, Playwright and LiteSVM. Market data from Pyth Network. The marketing site's photographs are AI-generated illustrations.
+- Built on open-source software: Anchor, `@solana/web3.js`, `@solana/spl-token`, Solana wallet-adapter (Wallet Standard), Next.js, React, next-intl, Tailwind CSS, Base UI, Prisma, Better Auth, zod, `@upstash/ratelimit`, Motion, GSAP, OGL, cobe, Vitest, Playwright and LiteSVM. Market data from Pyth Network and Jupiter. The marketing site's photographs are AI-generated illustrations.
 - The team's decisions and open risks are in [docs/PIVOT_PLAN.md](docs/PIVOT_PLAN.md); the demo script and judge Q&A are in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md).
