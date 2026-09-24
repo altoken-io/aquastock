@@ -20,6 +20,7 @@ import {
   shortAddress,
   toIntlLocale,
 } from '../lib/format';
+import { trackingGap } from '../lib/tracking';
 import { useFormatters, useToken } from '../token-context';
 
 /**
@@ -33,6 +34,9 @@ export function IssuerCard() {
   const issuer = token.issuer;
   const locale = toIntlLocale(useLocale());
   const { data: price } = usePrice();
+  const gap = price?.reference
+    ? trackingGap(price.price, price.reference.price)
+    : null;
 
   const holder = (address: string | null) =>
     address ? (
@@ -174,6 +178,36 @@ export function IssuerCard() {
               ),
             })}
           </p>
+          {price.reference && gap ? (
+            // Does the token still follow its fund? The gap in words, with the fund's price.
+            <div className="mt-3">
+              <p className="text-sm text-foreground tabular-nums">
+                {t('price.tracking.gap', {
+                  direction: gap.direction,
+                  percent: new Intl.NumberFormat(locale, {
+                    style: 'percent',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(gap.share),
+                  fund: price.reference.symbol,
+                  reference: new Intl.NumberFormat(locale, {
+                    style: 'currency',
+                    currency: 'USD',
+                  }).format(Number(price.reference.price)),
+                })}
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                {t('price.tracking.note', {
+                  fund: price.reference.symbol,
+                  age: formatRelativeTime(
+                    new Date(price.reference.updatedAt * 1_000),
+                    new Date(),
+                    locale,
+                  ),
+                })}
+              </p>
+            </div>
+          ) : null}
           <p className="mt-2 text-xs text-muted-foreground">
             {isMainnet(token.network)
               ? t('price.live')

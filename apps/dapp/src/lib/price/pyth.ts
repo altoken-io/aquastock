@@ -83,6 +83,22 @@ const unavailable = () =>
   );
 
 /**
+ * Pyth turned the key away: a 401 (missing or unknown key) or a 403 (its plan has no grant for
+ * the feed). Unlike an outage or a stale price, asking again in a minute gets the same answer,
+ * so the caller may stop asking for a while. Callers still see a plain `price_unavailable`.
+ */
+export class PythRefusedError extends ApiError {
+  constructor(readonly hermesStatus: number) {
+    super(
+      503,
+      'price_unavailable',
+      'the market price is not available right now',
+    );
+    this.name = 'PythRefusedError';
+  }
+}
+
+/**
  * The latest SPYx/USD price. Throws `price_unavailable` for anything a person should not see
  * as a price: Hermes down or refusing the key, a malformed answer, a non-positive or stale price.
  */
@@ -111,6 +127,9 @@ export async function fetchSpyxPrice(
         .trim()
         .slice(0, MAX_LOGGED_ERROR_CHARS);
       console.error('pyth hermes answered', response.status, reason);
+      if (response.status === 401 || response.status === 403) {
+        throw new PythRefusedError(response.status);
+      }
       throw unavailable();
     }
     body = await response.json();
@@ -154,5 +173,6 @@ export async function fetchSpyxPrice(
     price: toDecimal(mantissa, feed.price.expo),
     confidence: toDecimal(BigInt(feed.price.conf), feed.price.expo),
     publishTime: feed.price.publish_time,
+    reference: null,
   };
 }

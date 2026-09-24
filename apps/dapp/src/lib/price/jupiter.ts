@@ -1,9 +1,13 @@
-// Live SPYx/USD from Jupiter's public Price API: the fallback when Pyth has no key or refuses
+// Live SPYx/USD from Jupiter's public Price API: the source while Pyth has no key or refuses
 // one (a key without the tokenized-stock grant gets 403). Keyless, 30 requests a minute; the
 // data cache below keeps this app far under that. Server-only, like the Pyth source.
+//
+// Jupiter prices the token as a wallet shows it: it reads SPYx's scaled-UI multiplier (its answer
+// carries `scaledUiConfig`), and its price sits next to SPY's while a trading pool's raw-token
+// price runs above SPY by that multiplier. That is the unit every "≈ $" in this app uses.
 import { z } from 'zod';
 
-import type { PriceDto } from '@aquastock/types';
+import type { PriceDto, PriceReferenceDto } from '@aquastock/types';
 
 import { ApiError } from '../api/errors';
 
@@ -19,14 +23,54 @@ const JUPITER_PRICE_URL = 'https://api.jup.ag/price/v3';
 const REVALIDATE_SECONDS = 10;
 
 /** A per-token price outside this range is a broken answer, not a market. */
-const MIN_SANE_PRICE = 0.000001;
-const MAX_SANE_PRICE = 1_000_000;
+export const MIN_SANE_PRICE = 0.000001;
+export const MAX_SANE_PRICE = 1_000_000;
 
-// Only the field this app reads. Jupiter leaves out, or nulls, a mint it cannot price.
+/**
+ * SPY's price can be days old over a weekend or a holiday; older than this it is no longer a
+ * fair thing to compare the token with.
+ */
+export const MAX_REFERENCE_AGE_SECONDS = 4 * 24 * 3_600;
+
+/** Clock skew allowed between us and Jupiter before a reference counts as future-dated. */
+const MAX_FUTURE_SECONDS = 60;
+
+// Only the fields this app reads. Jupiter leaves out, or nulls, a mint it cannot price.
+// `stockData` is xStocks' own figure for the stock the token tracks (SPY for SPYx); it is
+// optional because nothing else depends on it.
 const jupiterSchema = z.record(
   z.string(),
-  z.object({ usdPrice: z.number() }).nullable(),
+  z
+    .object({
+      usdPrice: z.number(),
+      stockData: z
+        .object({ price: z.number(), updatedAt: z.string() })
+        .nullish()
+        .catch(null),
+    })
+    .nullable(),
 );
+
+export const isSanePrice = (value: number): boolean =>
+  Number.isFinite(value) && value >= MIN_SANE_PRICE && value <= MAX_SANE_PRICE;
+
+/** SPY's price as Jupiter relays it from xStocks, or null when absent, broken or stale. */
+export function parseReference(
+  stockData: { price: number; updatedAt: string } | null | undefined,
+  now: number,
+): PriceReferenceDto | null {
+  if (!stockData || !isSanePrice(stockData.price)) return null;
+  const updatedAt = Math.floor(Date.parse(stockData.updatedAt) / 1000);
+  if (!Number.isFinite(updatedAt)) return null;
+  const age = now - updatedAt;
+  if (age > MAX_REFERENCE_AGE_SECONDS || age < -MAX_FUTURE_SECONDS) return null;
+  return {
+    symbol: 'SPY',
+    price: numberToDecimal(stockData.price),
+    source: 'xstocks',
+    updatedAt,
+  };
+}
 
 const unavailable = () =>
   new ApiError(
@@ -70,15 +114,9 @@ export async function fetchJupiterSpyxPrice(
   }
 
   const parsed = jupiterSchema.safeParse(body);
-  const usdPrice = parsed.success
-    ? parsed.data[SPYX_MAINNET_MINT]?.usdPrice
-    : undefined;
-  if (
-    usdPrice === undefined ||
-    !Number.isFinite(usdPrice) ||
-    usdPrice < MIN_SANE_PRICE ||
-    usdPrice > MAX_SANE_PRICE
-  ) {
+  const entry = parsed.success ? parsed.data[SPYX_MAINNET_MINT] : undefined;
+  const usdPrice = entry?.usdPrice;
+  if (usdPrice === undefined || !isSanePrice(usdPrice)) {
     console.error('jupiter price refused', { usdPrice });
     throw unavailable();
   }
@@ -90,5 +128,6 @@ export async function fetchJupiterSpyxPrice(
     price: numberToDecimal(usdPrice),
     confidence: null,
     publishTime: now,
+    reference: parseReference(entry?.stockData, now),
   };
 }

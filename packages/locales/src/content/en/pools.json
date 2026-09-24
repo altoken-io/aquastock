@@ -112,7 +112,11 @@
     "price": {
       "title": "SPYx market price",
       "perToken": "per SPYx",
-      "source": "{source, select, jupiter {Jupiter} other {Pyth}} SPYx/USD, updated {age}",
+      "source": "{source, select, jupiter {Jupiter} coingecko {CoinGecko} other {Pyth}} SPYx/USD, updated {age}",
+      "tracking": {
+        "gap": "{direction, select, above {{percent} above} below {{percent} below} other {Level with}} {fund} ({reference}), the fund it follows",
+        "note": "{fund}'s price from xStocks, updated {age}. A wide gap would mean the token no longer follows the fund."
+      },
       "demo": "Every ≈ $ figure in this app uses this price: what the same amount of real SPYx is worth. Demo {symbol} has no value.",
       "live": "Every ≈ $ figure in this app uses this price. It moves with the market."
     }

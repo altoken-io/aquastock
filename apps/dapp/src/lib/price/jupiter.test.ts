@@ -3,9 +3,11 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { ApiError } from '../api/errors';
 import {
+  MAX_REFERENCE_AGE_SECONDS,
   SPYX_MAINNET_MINT,
   fetchJupiterSpyxPrice,
   numberToDecimal,
+  parseReference,
 } from './jupiter';
 
 const NOW = 1_790_200_000;
@@ -22,9 +24,16 @@ function fakeFetch(body: unknown, status = 200) {
 }
 
 // The shape api.jup.ag/price/v3 answers, trimmed to what matters.
-const jupiter = (usdPrice: unknown) => ({
-  [SPYX_MAINNET_MINT]: { usdPrice, decimals: 8, blockId: 449943909 },
+const jupiter = (usdPrice: unknown, stockData?: unknown) => ({
+  [SPYX_MAINNET_MINT]: {
+    usdPrice,
+    decimals: 8,
+    blockId: 449943909,
+    ...(stockData === undefined ? {} : { stockData }),
+  },
 });
+
+const iso = (seconds: number) => new Date(seconds * 1000).toISOString();
 
 async function rejection(promise: Promise<unknown>): Promise<ApiError> {
   const error = await promise.then(
@@ -56,6 +65,7 @@ describe('fetchJupiterSpyxPrice', () => {
       price: '765.780248',
       confidence: null,
       publishTime: NOW,
+      reference: null,
     });
     const [url, init] = fetchImpl.mock.calls[0]!;
     expect(String(url)).toBe(
@@ -96,5 +106,48 @@ describe('fetchJupiterSpyxPrice', () => {
     expect((await rejection(fetchJupiterSpyxPrice(NOW, down))).code).toBe(
       'price_unavailable',
     );
+  });
+});
+
+describe('the SPY reference', () => {
+  it("carries xStocks' SPY price when Jupiter sends it", async () => {
+    const body = jupiter(765.629824630423, {
+      id: 'xstocks',
+      price: 766.19,
+      mcap: 692457351851,
+      updatedAt: iso(NOW - 90),
+    });
+    const price = await fetchJupiterSpyxPrice(NOW, fakeFetch(body));
+    expect(price.price).toBe('765.629825');
+    expect(price.reference).toEqual({
+      symbol: 'SPY',
+      price: '766.19',
+      source: 'xstocks',
+      updatedAt: NOW - 90,
+    });
+  });
+
+  it('still prices the token when the reference is missing or malformed', async () => {
+    for (const stockData of [null, { price: 'n/a' }, 'xstocks', {}]) {
+      const price = await fetchJupiterSpyxPrice(
+        NOW,
+        fakeFetch(jupiter(765.5, stockData)),
+      );
+      expect(price.price).toBe('765.5');
+      expect(price.reference).toBeNull();
+    }
+  });
+
+  it('drops a reference too old to compare with, or dated in the future', () => {
+    const at = (age: number) =>
+      parseReference({ price: 766.19, updatedAt: iso(NOW - age) }, NOW);
+    // A long weekend is fine.
+    expect(at(3 * 24 * 3_600)?.price).toBe('766.19');
+    expect(at(MAX_REFERENCE_AGE_SECONDS + 1)).toBeNull();
+    expect(at(-120)).toBeNull();
+    expect(
+      parseReference({ price: 766.19, updatedAt: 'soon' }, NOW),
+    ).toBeNull();
+    expect(parseReference({ price: 0, updatedAt: iso(NOW) }, NOW)).toBeNull();
   });
 });

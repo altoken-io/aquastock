@@ -85,6 +85,11 @@ const priceSchema = z.object({
   pair: z.string(),
   price: z.string(),
   publishTime: z.number().int(),
+  // Older deployments send no reference; it is information, not a requirement.
+  reference: z
+    .object({ symbol: z.string(), price: z.string() })
+    .nullish()
+    .catch(null),
 });
 const errorSchema = z.object({
   error: z.object({ code: z.string(), message: z.string() }),
@@ -369,18 +374,29 @@ async function checkPrice(ctx: Context): Promise<void> {
   const response = await http(`${ctx.app}/api/price`);
   const parsed = priceSchema.safeParse(response?.body);
   if (parsed.success) {
-    const age = Math.round(Date.now() / 1_000 - parsed.data.publishTime);
-    // Jupiter is the fallback: a working price, but a sign Pyth has no key or no grant.
+    const { source, pair, price, publishTime, reference } = parsed.data;
+    const age = Math.round(Date.now() / 1_000 - publishTime);
+    // Pyth and Jupiter are both normal (Jupiter serves until the Pyth key may read SPYx);
+    // CoinGecko means Jupiter is down, which is worth a look before judging.
+    const note =
+      source === 'pyth'
+        ? ''
+        : source === 'jupiter'
+          ? ' (Pyth has no key or no SPYx grant; Vercel logs: "pyth refused the key")'
+          : ': Jupiter is not answering, so the CoinGecko fallback serves';
+    const gap = reference
+      ? `; ${((Number(price) / Number(reference.price) - 1) * 100).toFixed(2)}% against ${reference.symbol} $${Number(reference.price).toFixed(2)}`
+      : '';
     report(
-      parsed.data.source === 'pyth' ? 'pass' : 'warn',
+      source === 'coingecko' ? 'warn' : 'pass',
       'Market price',
-      `${parsed.data.pair} $${Number(parsed.data.price).toFixed(2)} from ${parsed.data.source}, ${age}s old${parsed.data.source === 'pyth' ? '' : ': Pyth is not answering (Vercel logs say why: "pyth hermes answered …")'}`,
+      `${pair} $${Number(price).toFixed(2)} from ${source}, ${age}s old${gap}${note}`,
     );
   } else {
     report(
       'warn',
       'Market price',
-      `unavailable (${response?.status ?? 'no answer'}): neither Pyth nor Jupiter answered, so "≈ $" values are hidden`,
+      `unavailable (${response?.status ?? 'no answer'}): no price source answered, so "≈ $" values are hidden`,
     );
   }
 }

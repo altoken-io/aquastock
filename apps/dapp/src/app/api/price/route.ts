@@ -1,37 +1,32 @@
-import { ApiError } from '@/lib/api/errors';
 import { apiHandler } from '@/lib/api/handler';
 import { optionalServerEnv } from '@/lib/env/server';
-import { fetchJupiterSpyxPrice } from '@/lib/price/jupiter';
-import { fetchSpyxPrice, hermesBaseUrl } from '@/lib/price/pyth';
+import { getPoolServices } from '@/lib/pools/server';
+import { getDeployment } from '@/lib/pools/service';
+import { hermesBaseUrl } from '@/lib/price/pyth';
+import { createMarketPrice } from '@/lib/price/source';
 
 export const dynamic = 'force-dynamic';
 
+// One per server instance, so a Pyth refusal is remembered between requests.
+const marketPrice = createMarketPrice({
+  pythKey: () => optionalServerEnv('PYTH_API_KEY'),
+  hermesUrl: () => hermesBaseUrl(optionalServerEnv('PYTH_HERMES_URL')),
+  // Read only when CoinGecko is needed: the live mint's multiplier (the devnet replica mirrors
+  // the real SPYx's).
+  multiplier: async () =>
+    (await getDeployment(getPoolServices())).issuer?.multiplier ?? null,
+});
+
 /**
- * Live SPYx/USD for "≈ $" next to token amounts. Pyth when the deployment has a key it
- * accepts; otherwise Jupiter's keyless price, so a missing Pyth grant hides nothing. The answer
- * names its `source`. 503 only when both are unavailable.
+ * Live SPYx/USD for "≈ $" next to token amounts: Pyth when the deployment's key may read it,
+ * otherwise Jupiter's keyless price, and CoinGecko's when Jupiter is down. The answer names its
+ * `source`, and carries SPY's own price as `reference` when the source reports it. 503 only when
+ * no source answers.
  */
 export function GET(request: Request) {
   return apiHandler(
     request,
     { rateLimitKey: 'price', cache: 'publicRead' },
-    async () => {
-      const now = Math.floor(Date.now() / 1000);
-      const apiKey = optionalServerEnv('PYTH_API_KEY');
-      if (apiKey) {
-        try {
-          return await fetchSpyxPrice(
-            apiKey,
-            now,
-            fetch,
-            hermesBaseUrl(optionalServerEnv('PYTH_HERMES_URL')),
-          );
-        } catch (error) {
-          // Pyth already logged why; anything but "unavailable" is a bug and stays loud.
-          if (!(error instanceof ApiError)) throw error;
-        }
-      }
-      return fetchJupiterSpyxPrice(now);
-    },
+    () => marketPrice(Math.floor(Date.now() / 1000)),
   );
 }

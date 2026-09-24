@@ -115,8 +115,23 @@ export interface FaucetInfoDto {
   sol: string;
 }
 
-/** Where a market price came from: Pyth first, Jupiter's public price when Pyth refuses. */
-export type PriceSource = 'pyth' | 'jupiter';
+/**
+ * Where a market price came from: Pyth when the deployment's key may read SPYx, otherwise
+ * Jupiter's public price, and CoinGecko's only when Jupiter is down too.
+ */
+export type PriceSource = 'pyth' | 'jupiter' | 'coingecko';
+
+/** The price of what a tokenized stock tracks, so the token can be compared against it. */
+export interface PriceReferenceDto {
+  /** What the token follows, e.g. "SPY" for SPYx. */
+  symbol: string;
+  /** US dollars per share, as a decimal string. */
+  price: string;
+  /** Who publishes it, e.g. "xstocks". */
+  source: string;
+  /** Unix seconds of its last update. */
+  updatedAt: number;
+}
 
 /** A live market price, for showing what token amounts are worth. */
 export interface PriceDto {
@@ -127,10 +142,12 @@ export interface PriceDto {
   feedId: string;
   /** US dollars per token as a wallet shows it, as a decimal string. */
   price: string;
-  /** Pyth's confidence interval, same units as `price`; null from Jupiter, which gives none. */
+  /** Pyth's confidence interval, same units as `price`; null from Jupiter and CoinGecko. */
   confidence: string | null;
   /** Unix seconds when Pyth published this price, or when Jupiter's was read (it gives no time). */
   publishTime: number;
+  /** SPY's own price, when the source reports it (Jupiter does, from xStocks); null otherwise. */
+  reference: PriceReferenceDto | null;
 }
 
 /** What a faucet request actually sent. Amounts are decimal strings of raw units. */

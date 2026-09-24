@@ -6,6 +6,7 @@ import {
   DEFAULT_HERMES_URL,
   MAX_FUTURE_PRICE_SECONDS,
   MAX_PRICE_AGE_SECONDS,
+  PythRefusedError,
   SPYX_USD_FEED_ID,
   fetchSpyxPrice,
   hermesBaseUrl,
@@ -85,6 +86,7 @@ describe('fetchSpyxPrice', () => {
       price: '612.3456',
       confidence: '0.045',
       publishTime: NOW - 5,
+      reference: null,
     });
     const [url, init] = fetchImpl.mock.calls[0]!;
     expect(String(url)).toContain(SPYX_USD_FEED_ID);
@@ -131,6 +133,32 @@ describe('fetchSpyxPrice', () => {
       'Not entitled: feed Crypto.SPYX/USD (no grant accepted) for key [redacted]',
     );
     expect(JSON.stringify(log.mock.calls)).not.toContain(key);
+  });
+
+  it.each([401, 403])(
+    'marks a %i as Pyth refusing the key, which the caller may stop retrying',
+    async (status) => {
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      const error = await rejection(
+        fetchSpyxPrice('k', NOW, fakeFetch('refused', status)),
+      );
+      expect(error).toBeInstanceOf(PythRefusedError);
+      expect(error instanceof PythRefusedError && error.hermesStatus).toBe(
+        status,
+      );
+      // Callers still only ever see a plain "unavailable".
+      expect(error.code).toBe('price_unavailable');
+      expect(error.status).toBe(503);
+    },
+  );
+
+  it('does not mark an outage as a refusal', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const error = await rejection(
+      fetchSpyxPrice('k', NOW, fakeFetch('bad gateway', 502)),
+    );
+    expect(error).not.toBeInstanceOf(PythRefusedError);
+    expect(error.code).toBe('price_unavailable');
   });
 
   it('asks the configured Hermes host, defaulting to the recommended one', async () => {
