@@ -33,6 +33,9 @@ const MAX_LOGGED_ERROR_CHARS = 300;
 /** Older than this, a price says more about a stalled feed than about the market. */
 export const MAX_PRICE_AGE_SECONDS = 6 * 3_600;
 
+/** Allow modest clock skew between our server and Pyth, but no future-dated quote. */
+export const MAX_FUTURE_PRICE_SECONDS = 60;
+
 /** Hermes answers are shared by every visitor for this long (Next's data cache). */
 const REVALIDATE_SECONDS = 10;
 
@@ -130,7 +133,11 @@ export async function fetchSpyxPrice(
 
   const mantissa = BigInt(feed.price.price);
   const age = now - feed.price.publish_time;
-  if (mantissa <= 0n || age > MAX_PRICE_AGE_SECONDS) {
+  if (
+    mantissa <= 0n ||
+    age > MAX_PRICE_AGE_SECONDS ||
+    age < -MAX_FUTURE_PRICE_SECONDS
+  ) {
     // Every refusal leaves a reason in the server log, so an operator can tell a stalled feed
     // from a rejected key without guessing.
     console.error('pyth price refused', {

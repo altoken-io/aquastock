@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ApiError } from '../api/errors';
 import {
   DEFAULT_HERMES_URL,
+  MAX_FUTURE_PRICE_SECONDS,
   MAX_PRICE_AGE_SECONDS,
   SPYX_USD_FEED_ID,
   fetchSpyxPrice,
@@ -194,6 +195,22 @@ describe('fetchSpyxPrice', () => {
       ageSeconds: MAX_PRICE_AGE_SECONDS + 1,
     });
     const edge = hermes({ publish_time: NOW - MAX_PRICE_AGE_SECONDS });
+    await expect(
+      fetchSpyxPrice('k', NOW, fakeFetch(edge)),
+    ).resolves.toBeTruthy();
+  });
+
+  it('refuses a price too far in the future while allowing clock skew', async () => {
+    const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const future = hermes({ publish_time: NOW + MAX_FUTURE_PRICE_SECONDS + 1 });
+    expect(
+      (await rejection(fetchSpyxPrice('k', NOW, fakeFetch(future)))).code,
+    ).toBe('price_unavailable');
+    expect(log).toHaveBeenCalledWith('pyth price refused', {
+      positive: true,
+      ageSeconds: -MAX_FUTURE_PRICE_SECONDS - 1,
+    });
+    const edge = hermes({ publish_time: NOW + MAX_FUTURE_PRICE_SECONDS });
     await expect(
       fetchSpyxPrice('k', NOW, fakeFetch(edge)),
     ).resolves.toBeTruthy();
