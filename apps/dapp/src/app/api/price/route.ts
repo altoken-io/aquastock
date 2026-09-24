@@ -1,7 +1,7 @@
 import { ApiError } from '@/lib/api/errors';
 import { apiHandler } from '@/lib/api/handler';
 import { optionalServerEnv } from '@/lib/env/server';
-import { fetchSpyxPrice } from '@/lib/price/pyth';
+import { fetchSpyxPrice, hermesBaseUrl } from '@/lib/price/pyth';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,7 +19,12 @@ export function GET(request: Request) {
           'this deployment shows no market prices',
         );
       }
-      return fetchSpyxPrice(apiKey, Math.floor(Date.now() / 1000));
+      return fetchSpyxPrice(
+        apiKey,
+        Math.floor(Date.now() / 1000),
+        fetch,
+        hermesBaseUrl(optionalServerEnv('PYTH_HERMES_URL')),
+      );
     },
   );
 }

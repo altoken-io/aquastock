@@ -9,7 +9,26 @@ import { ApiError } from '../api/errors';
 export const SPYX_USD_FEED_ID =
   '2817b78438c769357182c04346fddaad1178c82f4048828fe0997c3c64624e14';
 
-const HERMES_URL = 'https://hermes.pyth.network';
+/**
+ * Pyth's upgraded Hermes, which its migration guide recommends over the legacy
+ * `https://hermes.pyth.network` (same routes and answers; both need a key since 2026-08-26).
+ */
+export const DEFAULT_HERMES_URL = 'https://pyth.dourolabs.app/hermes';
+
+/** The Hermes base URL from `PYTH_HERMES_URL`: any https URL, else the default. */
+export function hermesBaseUrl(value: string | undefined): string {
+  if (!value) return DEFAULT_HERMES_URL;
+  try {
+    const url = new URL(value.trim());
+    if (url.protocol !== 'https:') return DEFAULT_HERMES_URL;
+    return url.toString().replace(/\/+$/, '');
+  } catch {
+    return DEFAULT_HERMES_URL;
+  }
+}
+
+/** How much of a Hermes error body reaches the log: enough for its reason, never a page. */
+const MAX_LOGGED_ERROR_CHARS = 300;
 
 /** Older than this, a price says more about a stalled feed than about the market. */
 export const MAX_PRICE_AGE_SECONDS = 6 * 3_600;
@@ -68,19 +87,27 @@ export async function fetchSpyxPrice(
   apiKey: string,
   now: number,
   fetchImpl: typeof fetch = fetch,
+  baseUrl: string = DEFAULT_HERMES_URL,
 ): Promise<PriceDto> {
   let body: unknown;
   try {
     const response = await fetchImpl(
-      `${HERMES_URL}/v2/updates/price/latest?ids%5B%5D=${SPYX_USD_FEED_ID}&parsed=true&encoding=hex`,
+      `${baseUrl}/v2/updates/price/latest?ids%5B%5D=${SPYX_USD_FEED_ID}&parsed=true&encoding=hex`,
       {
         headers: { Authorization: `Bearer ${apiKey}` },
         next: { revalidate: REVALIDATE_SECONDS },
       },
     );
     if (!response.ok) {
-      // The status is enough to tell a rejected key (401/403) from an outage; never the key.
-      console.error('pyth hermes answered', response.status);
+      // Hermes says why in the body: a 401 is a missing or unknown key, a 403 names a feed the
+      // key's account is not entitled to ("Not entitled: feed ... (no grant accepted)"). Logged
+      // with the key blanked out, in case an answer ever echoes it.
+      const text = await response.text().catch(() => '');
+      const reason = (apiKey ? text.split(apiKey).join('[redacted]') : text)
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, MAX_LOGGED_ERROR_CHARS);
+      console.error('pyth hermes answered', response.status, reason);
       throw unavailable();
     }
     body = await response.json();

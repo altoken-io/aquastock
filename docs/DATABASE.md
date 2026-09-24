@@ -44,7 +44,7 @@ pnpm --filter @aquastock/db-prisma exec prisma migrate deploy
 
 ## Neon
 
-`DATABASE_URL` is the **pooled** URL (host contains `-pooler`, with `?sslmode=require`) and is what the app uses. `DIRECT_URL` is the **direct** URL and is what `prisma migrate` uses. The free tier suspends after about five minutes idle, so ping the database before a demo. The production role should hold only `SELECT`, `INSERT` and `UPDATE` on these tables; migrations run under a separate owner role.
+`DATABASE_URL` is the **pooled** URL (host contains `-pooler`) and is what the app uses, through the `pg` driver. Give it `?sslmode=verify-full`: `pg` already treats `require` as `verify-full` and warns on every cold start that the meaning will change in its next major version, and Neon's certificate is publicly trusted, so `verify-full` keeps today's behaviour and silences the warning. `DIRECT_URL` is the **direct** URL and is what `prisma migrate` uses; keep `?sslmode=require` there, since Prisma's migration engine reads the connection string itself. The free tier suspends after about five minutes idle, so ping the database before a demo. The production role should hold only `SELECT`, `INSERT` and `UPDATE` on these tables; migrations run under a separate owner role.
 
 ## Tests
 

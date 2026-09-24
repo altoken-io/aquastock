@@ -3,9 +3,11 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { ApiError } from '../api/errors';
 import {
+  DEFAULT_HERMES_URL,
   MAX_PRICE_AGE_SECONDS,
   SPYX_USD_FEED_ID,
   fetchSpyxPrice,
+  hermesBaseUrl,
   toDecimal,
 } from './pyth';
 
@@ -108,6 +110,45 @@ describe('fetchSpyxPrice', () => {
     expect(JSON.stringify(log.mock.calls)).not.toContain('SECRET-KEY');
   });
 
+  it('logs why Hermes refused, with the key blanked out', async () => {
+    const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const key = 'pk_live_SECRET123';
+    const fetchImpl = vi.fn<typeof fetch>(() =>
+      Promise.resolve(
+        new Response(
+          `Not entitled: feed Crypto.SPYX/USD (no grant accepted) for key ${key}`,
+          { status: 403 },
+        ),
+      ),
+    );
+    const error = await rejection(fetchSpyxPrice(key, NOW, fetchImpl));
+    expect(error.code).toBe('price_unavailable');
+    expect(log).toHaveBeenCalledWith(
+      'pyth hermes answered',
+      403,
+      'Not entitled: feed Crypto.SPYX/USD (no grant accepted) for key [redacted]',
+    );
+    expect(JSON.stringify(log.mock.calls)).not.toContain(key);
+  });
+
+  it('asks the configured Hermes host, defaulting to the recommended one', async () => {
+    const fetchImpl = fakeFetch(hermes());
+    await fetchSpyxPrice('k', NOW, fetchImpl);
+    await fetchSpyxPrice(
+      'k',
+      NOW,
+      fetchImpl,
+      hermesBaseUrl('https://hermes.pyth.network/'),
+    );
+    const urls = fetchImpl.mock.calls.map(([url]) => String(url));
+    expect(urls[0]).toMatch(
+      /^https:\/\/pyth\.dourolabs\.app\/hermes\/v2\/updates\/price\/latest\?/,
+    );
+    expect(urls[1]).toMatch(
+      /^https:\/\/hermes\.pyth\.network\/v2\/updates\/price\/latest\?/,
+    );
+  });
+
   it('treats a network failure as unavailable', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
     const fetchImpl = vi.fn<typeof fetch>(() =>
@@ -156,4 +197,22 @@ describe('fetchSpyxPrice', () => {
       fetchSpyxPrice('k', NOW, fakeFetch(edge)),
     ).resolves.toBeTruthy();
   });
+});
+
+describe('hermesBaseUrl', () => {
+  it('keeps an https URL without its trailing slash', () => {
+    expect(hermesBaseUrl(' https://hermes.pyth.network/ ')).toBe(
+      'https://hermes.pyth.network',
+    );
+    expect(hermesBaseUrl('https://pyth.dourolabs.app/hermes')).toBe(
+      'https://pyth.dourolabs.app/hermes',
+    );
+  });
+
+  it.each([undefined, '', 'http://hermes.pyth.network', 'not a url'])(
+    'falls back to the recommended host for %j',
+    (value) => {
+      expect(hermesBaseUrl(value)).toBe(DEFAULT_HERMES_URL);
+    },
+  );
 });

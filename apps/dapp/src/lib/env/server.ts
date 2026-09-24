@@ -18,6 +18,8 @@ const serverEnv = {
   FAUCET_SECRET_KEY: process.env.FAUCET_SECRET_KEY,
   // Pyth Hermes API key (server-only; sent as a Bearer token). Unset hides USD values.
   PYTH_API_KEY: process.env.PYTH_API_KEY,
+  // Optional Hermes base URL override (https only); defaults to Pyth's recommended host.
+  PYTH_HERMES_URL: process.env.PYTH_HERMES_URL,
 };
 
 // Optional environment variables in development
