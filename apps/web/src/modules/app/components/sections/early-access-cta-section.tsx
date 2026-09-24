@@ -1,13 +1,11 @@
+import Image from 'next/image';
 import { getLocale, getTranslations } from 'next-intl/server';
-
-import {
-  MotionDiv,
-  MotionText,
-} from '@/components/helpers/motion/blur-lazy-motion';
-import ButtonLink from '@/components/ui/button-link';
-import { TextReveal } from '@/components/helpers/motion/text-reveal';
-import { dappPoolsUrl } from '@/lib/dapp-url';
 import { ArrowRight } from 'lucide-react';
+
+import ButtonLink from '@/components/ui/button-link';
+import { dappPoolsUrl, dappUrl } from '@/lib/dapp-url';
+import blend from '@/modules/app/assets/confluence-blend.webp';
+import { PAGE_CONTAINER } from '@/modules/app/utils/layout';
 
 export async function EarlyAccessCtaSection() {
   const [t, locale] = await Promise.all([
@@ -16,45 +14,57 @@ export async function EarlyAccessCtaSection() {
   ]);
 
   return (
-    <section
-      id="early-access"
-      className="relative flex w-full flex-col items-center justify-center px-6 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32 xl:pl-32"
-    >
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center overflow-hidden rounded-md border border-border bg-primary px-6 py-16 text-center sm:px-12 sm:py-20 lg:py-24">
-        <span
-          aria-hidden="true"
-          className="font-mono-ui absolute top-6 left-6 rounded-sm border border-primary-foreground/25 px-2 py-1 text-[10px] tracking-[0.18em] text-primary-foreground/70 uppercase"
-        >
-          {t('notice.tag')}
-        </span>
+    <section id="get-started" className="w-full pt-4 pb-20 sm:pb-28">
+      <div className={PAGE_CONTAINER}>
+        {/* Downstream of the hero: the two waters, now one. */}
+        <div className="reveal relative isolate overflow-hidden rounded-plate bg-abyss text-abyss-foreground">
+          <Image
+            src={blend}
+            alt=""
+            placeholder="blur"
+            sizes="(min-width: 80rem) 76rem, calc(100vw - 2rem)"
+            className="absolute inset-0 -z-10 size-full object-cover object-right"
+          />
+          {/* Keeps the copy on the dark water, whatever the crop. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 bg-linear-to-r from-abyss via-abyss/75 to-transparent sm:via-abyss/55"
+          />
 
-        <TextReveal
-          as="h2"
-          text={t('title')}
-          trigger="view"
-          start="top"
-          className="relative max-w-4xl text-4xl leading-[0.98] tracking-tight text-balance text-primary-foreground sm:text-5xl lg:text-6xl"
-        />
-
-        <MotionText
-          className="relative mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground sm:text-lg"
-          delay={0.2}
-        >
-          {t('subtitle')}
-        </MotionText>
-
-        <MotionDiv delay={0.3} className="relative mt-9">
-          <ButtonLink
-            href={dappPoolsUrl(locale)}
-            variant="none"
-            rounded="md"
-            animation="grow"
-            className="h-13 bg-background px-6 font-semibold text-foreground shadow-lg shadow-black/10 hover:bg-background/90 sm:min-w-xs"
-          >
-            <span>{t('cta.primary.label')}</span>
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </ButtonLink>
-        </MotionDiv>
+          <div className="flex min-h-104 flex-col justify-center px-6 py-14 sm:px-12 sm:py-20 lg:px-16">
+            <h2 className="max-w-xl text-4xl text-balance sm:text-6xl">
+              {t('title')}
+            </h2>
+            <p className="mt-5 max-w-md text-lg text-pretty text-abyss-muted">
+              {t('subtitle')}
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <ButtonLink
+                href={dappPoolsUrl(locale)}
+                variant="none"
+                rounded="full"
+                padding="none"
+                className="group h-12 bg-abyss-foreground pr-5 pl-6 font-semibold text-abyss transition duration-150 ease-out-strong hover:bg-white active:scale-97"
+              >
+                {t('cta')}
+                <ArrowRight
+                  aria-hidden
+                  className="size-4 transition-transform duration-200 ease-out-strong group-hover:translate-x-0.5 motion-reduce:transition-none"
+                />
+              </ButtonLink>
+              <ButtonLink
+                href={dappUrl(locale, '/my-match')}
+                variant="none"
+                rounded="full"
+                padding="none"
+                className="h-12 border border-abyss-foreground/25 px-6 font-medium text-abyss-foreground transition duration-150 ease-out-strong hover:bg-abyss-foreground/10 active:scale-97"
+              >
+                {t('secondary')}
+              </ButtonLink>
+            </div>
+            <p className="mt-10 text-sm text-abyss-muted">{t('note')}</p>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -43,7 +43,7 @@ Do not make AquaStock feel like a speculative crypto/DeFi project. Avoid token-p
 3. Never imply more certainty, scale or adoption than a hackathon build has. Label illustrative numbers.
 4. Keep the legal reality visible: this is a demo and does not constitute an offer of securities.
 5. State the risks as facts next to the claim they qualify: the issuer's powers, the unaudited program, the upgrade authority.
-6. Draw the mechanism in code (HTML/SVG) rather than stock photography, so it follows the theme and cannot overclaim.
+6. Draw the mechanism in code (HTML/SVG) rather than stock photography, so it follows the theme and cannot overclaim. Photography is allowed only as metaphor (the hero's two rivers meeting), never as a depiction of the product, a pool, or people using it.
 
 ## Accessibility & Inclusion
 

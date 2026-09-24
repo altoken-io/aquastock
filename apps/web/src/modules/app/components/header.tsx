@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import * as motion from 'motion/react-m';
 import { useReducedMotion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
+import { ArrowRight } from 'lucide-react';
 
 import { Link } from '@/lib/i18n/navigation';
 import BrandLogo from '@/components/helpers/brand-logo';
@@ -14,13 +15,19 @@ import ThemeSwitcher from '@/components/helpers/theme-switcher';
 import { useIsScrolled } from '@/hooks/use-scroll-position';
 import { cn } from '@/utils/classNames';
 import { dappPoolsUrl, dappUrl } from '@/lib/dapp-url';
+import { navLinks } from '@/modules/app/utils/guards';
 
 type IndicatorRect = { left: number; width: number };
 
+/**
+ * A floating pill rather than a full-width bar: it sits over the hero like a buoy and firms up
+ * (more opaque, a shadow) once the page scrolls under it. The hover highlight glides between
+ * links on a spring, so moving along the nav feels like one control rather than four.
+ */
 const Header = () => {
   const t = useTranslations('navbar');
   const locale = useLocale();
-  const navLinks = t.raw('navigation') as NavLink[];
+  const sections = navLinks(t.raw('sections'));
   const isScrolled = useIsScrolled();
   const prefersReducedMotion = useReducedMotion();
 
@@ -39,26 +46,26 @@ const Header = () => {
     <>
       <a
         href="#main-content"
-        className="fixed top-4 left-4 z-10000 -translate-y-24 rounded-sm bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform focus-visible:translate-y-0 focus-visible:outline-none"
+        className="fixed top-4 left-4 z-10000 -translate-y-24 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform focus-visible:translate-y-0 focus-visible:outline-none"
       >
         {t('skipToContent')}
       </a>
-      <header
-        className={cn(
-          'fixed inset-x-0 top-0 z-9999 border-b bg-background/85 backdrop-blur-md transition-colors duration-300',
-          isScrolled ? 'border-border' : 'border-transparent',
-        )}
-      >
+      <header className="pointer-events-none fixed inset-x-0 top-3 z-9999 px-3 sm:top-4 sm:px-6">
         <nav
           aria-label={t('logo.label')}
-          className="mx-auto flex h-16 w-full max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 xl:pl-28 xl:pr-10"
+          className={cn(
+            'pointer-events-auto mx-auto flex h-14 max-w-5xl items-center justify-between gap-3 rounded-full border py-2 pr-2 pl-4 backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-300 ease-out-strong',
+            isScrolled
+              ? 'border-border bg-card/85 shadow-lg shadow-foreground/5'
+              : 'border-border/60 bg-card/60',
+          )}
         >
           <Link
             href="/#home"
-            className="flex shrink-0 items-center gap-2.5 rounded-sm py-1 focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="flex shrink-0 items-center gap-2 rounded-full py-1 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
           >
             <BrandLogo alt={t('logo.alt')} size={40} className="size-7" />
-            <span className="font-mono-ui text-sm font-medium tracking-[0.14em] text-foreground uppercase">
+            <span className="font-headline text-lg font-medium tracking-tight text-foreground">
               {t('logo.label')}
             </span>
           </Link>
@@ -70,7 +77,7 @@ const Header = () => {
           >
             <motion.span
               aria-hidden
-              className="bg-primary pointer-events-none absolute bottom-0 left-0 h-0.5"
+              className="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-muted"
               animate={{
                 left: indicator?.left ?? 0,
                 width: indicator?.width ?? 0,
@@ -79,52 +86,48 @@ const Header = () => {
               transition={
                 prefersReducedMotion
                   ? { duration: 0 }
-                  : { type: 'spring', stiffness: 420, damping: 34 }
+                  : { type: 'spring', duration: 0.35, bounce: 0.15 }
               }
             />
-            <ul className="relative flex items-center gap-1">
-              {navLinks.map((link) => (
+            <ul className="relative flex items-center">
+              {sections.map((link) => (
                 <li key={link.href}>
-                  {/* Product pages live in the dApp, not on this site. */}
-                  <a
-                    href={dappUrl(locale, link.href)}
+                  <Link
+                    href={link.href}
                     onMouseEnter={(event) =>
                       trackIndicator(event.currentTarget)
                     }
                     onFocus={(event) => trackIndicator(event.currentTarget)}
-                    aria-label={
-                      link.description
-                        ? `${link.title} — ${link.description}`
-                        : undefined
-                    }
-                    className="font-mono-ui focus-visible:ring-ring relative z-10 block px-3 py-2 text-xs tracking-[0.1em] text-foreground/70 uppercase transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none"
+                    className="relative z-10 block rounded-full px-4 py-2 text-sm text-foreground/70 transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                   >
                     {link.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="hidden items-center gap-2 lg:flex">
-            <div className="mr-1 flex items-center gap-1 border-r border-border pr-3">
-              <ThemeSwitcher wrapperClassName="size-8" />
-              <LanguageSwitcher />
-            </div>
+          <div className="hidden items-center gap-1.5 lg:flex">
+            <ThemeSwitcher wrapperClassName="size-9" />
+            <LanguageSwitcher />
             <a
-              href={dappPoolsUrl(locale)}
-              className="focus-visible:ring-ring rounded-sm px-2 py-1 text-sm font-medium text-foreground/75 transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:outline-none"
+              href={dappUrl(locale, '/my-match')}
+              className="rounded-full px-3 py-2 text-sm font-medium text-foreground/75 transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
             >
-              {t('cta.signIn')}
+              {t('cta.myMatch')}
             </a>
             <ButtonLink
-              href={t('cta.earlyAccess.href')}
+              href={dappPoolsUrl(locale)}
               variant="primary"
-              padding="sm"
-              rounded="md"
-              className="h-9 px-4 text-sm font-semibold"
+              rounded="full"
+              padding="none"
+              className="group h-10 pr-4 pl-5 text-sm font-semibold transition-transform duration-150 ease-out-strong active:scale-97"
             >
-              {t('cta.earlyAccess.label')}
+              {t('cta.openApp')}
+              <ArrowRight
+                aria-hidden
+                className="size-3.5 transition-transform duration-200 ease-out-strong group-hover:translate-x-0.5 motion-reduce:transition-none"
+              />
             </ButtonLink>
           </div>
 

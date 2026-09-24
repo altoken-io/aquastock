@@ -1,33 +1,23 @@
 {
-  "title": "El aporte del empleador, para quienes no tienen empleador.",
-  "subtitle": "Un patrocinador financia un aporte. Tú depositas SPYx tokenizado. El aporte queda reservado para ti en Solana y se libera mientras más te quedas.",
-  "description": "Si te retiras antes, conservas tu depósito y lo que ya se liberó. El resto vuelve al patrocinador. Cada cifra está en la cadena.",
-  "cta": {
-    "primary": {
-      "href": "/#how-it-works",
-      "label": "Ver cómo funciona"
-    },
-    "secondary": {
-      "href": "/#faq",
-      "label": "Leer las preguntas frecuentes"
-    }
+  "badge": "En vivo en Solana devnet",
+  "badgeNote": "Versión de hackathon",
+  "title": {
+    "line1": "El aporte del empleador,",
+    "line2": "para todos los demás."
   },
-  "usersCount": "Demo de hackathon — devnet",
-  "legend": {
+  "subtitle": "Un patrocinador iguala lo que ahorras. El aporte se libera mientras te quedas, y tu depósito siempre vuelve.",
+  "cta": {
+    "primary": "Abrir la app",
+    "secondary": "Cómo funciona"
+  },
+  "plate": {
+    "alt": "Vista aérea de un río oscuro y un río arenoso que se encuentran y siguen como uno solo.",
     "sponsor": "Aporte del patrocinador",
     "saver": "Tus ahorros",
-    "sameTable": "Una posición, dos fuentes."
+    "merge": "Igualado al depositar",
+    "vest": "Tuyo a medida que se libera"
   },
-  "gaugeLabel": "Aporte",
-  "panel": {
-    "ariaLabel": "Una posición de ejemplo: lo que depositas, el aporte del patrocinador y cuánto se ha liberado",
-    "recordLabel": "Posición — ilustrativa",
-    "projectName": "Aporte al ahorro de docentes",
-    "status": "Liberándose",
-    "deposit": "Tu depósito",
-    "match": "Aporte del patrocinador",
-    "vested": "Liberado hasta ahora",
-    "claimable": "Listo para reclamar",
-    "caption": "Cifras ilustrativas, no un fondo real."
+  "intro": {
+    "label": "AquaStock"
   }
 }

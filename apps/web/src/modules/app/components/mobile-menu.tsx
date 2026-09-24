@@ -7,8 +7,8 @@ import { AnimatePresence, useReducedMotion } from 'motion/react';
 import * as motion from 'motion/react-m';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { DotBackground } from '@/modules/app/components/dot-background';
 import { dappPoolsUrl, dappUrl } from '@/lib/dapp-url';
+import { navLinks } from '@/modules/app/utils/guards';
 
 import BrandLogo from '@/components/helpers/brand-logo';
 import ButtonLink from '@/components/ui/button-link';
@@ -26,7 +26,8 @@ const PANEL_ID = 'mobile-menu-panel';
 const MobileMenu = ({ className }: { className?: string }) => {
   const t = useTranslations('navbar');
   const locale = useLocale();
-  const navLinks = t.raw('navigation') as NavLink[];
+  const sections = navLinks(t.raw('sections'));
+  const appLinks = navLinks(t.raw('navigation'));
   const prefersReducedMotion = useReducedMotion();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -86,7 +87,7 @@ const MobileMenu = ({ className }: { className?: string }) => {
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-controls={PANEL_ID}
-        className="flex size-10 items-center justify-center rounded-sm bg-foreground text-background transition-transform active:scale-95"
+        className="flex size-10 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-150 ease-out-strong active:scale-95"
       >
         <Menu className="size-4.5" />
       </button>
@@ -112,21 +113,14 @@ const MobileMenu = ({ className }: { className?: string }) => {
               }}
               className="fixed inset-0 z-99999 flex flex-col overflow-hidden bg-background lg:hidden"
             >
-              <DotBackground
-                glow={false}
-                width={22}
-                height={22}
-                className="-z-10 text-primary/[0.08]"
-              />
-
-              <div className="flex items-center justify-between border-b border-border/70 px-4 py-3 sm:px-6">
+              <div className="flex items-center justify-between px-4 py-3 sm:px-6">
                 <Link
                   href="/#home"
                   onClick={handleClose}
                   className="flex items-center gap-2.5 rounded-sm py-1"
                 >
                   <BrandLogo alt={t('logo.alt')} size={40} className="size-7" />
-                  <span className="font-mono-ui text-sm font-medium tracking-[0.14em] text-foreground uppercase">
+                  <span className="font-headline text-lg font-medium tracking-tight text-foreground">
                     {t('logo.label')}
                   </span>
                 </Link>
@@ -135,7 +129,7 @@ const MobileMenu = ({ className }: { className?: string }) => {
                   type="button"
                   onClick={handleClose}
                   aria-label={t('mobileMenu.ariaClose')}
-                  className="flex size-10 items-center justify-center rounded-sm bg-foreground text-background transition-transform active:scale-95"
+                  className="flex size-10 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-150 ease-out-strong active:scale-95"
                 >
                   <X className="size-4.5" />
                 </button>
@@ -145,8 +139,20 @@ const MobileMenu = ({ className }: { className?: string }) => {
                 aria-label={t('logo.label')}
                 className="flex-1 overflow-y-auto px-4 sm:px-6"
               >
-                <ol>
-                  {navLinks.map((link, idx) => (
+                <ul>
+                  {sections.map((link) => (
+                    <li key={link.href} className="border-b border-border/70">
+                      <Link
+                        href={link.href}
+                        onClick={handleClose}
+                        className="block py-5 font-headline text-3xl leading-none font-medium tracking-tight text-foreground transition-colors hover:text-primary"
+                      >
+                        {link.title}
+                      </Link>
+                    </li>
+                  ))}
+                  {/* Product pages live in the dApp, not on this site. */}
+                  {appLinks.map((link) => (
                     <li
                       key={link.href}
                       className="border-b border-border/70 last:border-b-0"
@@ -154,49 +160,39 @@ const MobileMenu = ({ className }: { className?: string }) => {
                       <a
                         href={dappUrl(locale, link.href)}
                         onClick={handleClose}
-                        className="group flex items-baseline justify-between gap-4 py-5 sm:py-6"
+                        className="group flex items-baseline justify-between gap-4 py-5"
                       >
-                        <span className="flex items-baseline gap-4 sm:gap-6">
-                          <span className="font-body text-xs text-muted-foreground/70 tabular-nums">
-                            {String(idx + 1).padStart(2, '0')}
+                        <span className="flex flex-col gap-1">
+                          <span className="font-headline text-3xl leading-none font-medium tracking-tight text-foreground transition-colors group-hover:text-primary">
+                            {link.title}
                           </span>
-                          <span className="flex flex-col gap-1">
-                            <span className="font-headline text-2xl leading-none tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-3xl">
-                              {link.title}
+                          {link.description && (
+                            <span className="font-body text-sm text-muted-foreground">
+                              {link.description}
                             </span>
-                            {link.description && (
-                              <span className="font-body text-sm text-muted-foreground">
-                                {link.description}
-                              </span>
-                            )}
-                          </span>
+                          )}
                         </span>
-                        <ArrowUpRight className="size-5 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                        <ArrowUpRight className="size-5 shrink-0 text-muted-foreground/50 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
                       </a>
                     </li>
                   ))}
-                </ol>
+                </ul>
               </nav>
 
               <div className="flex items-center justify-between gap-3 border-t border-border/70 bg-background px-4 py-4 sm:px-6">
                 <ThemeSwitcher wrapperClassName="size-10" />
                 <LanguageSwitcher />
               </div>
-              <div className="flex items-center gap-3 border-t border-border/70 bg-background px-4 py-4 sm:px-6">
-                <a
+              <div className="border-t border-border/70 bg-background px-4 py-4 sm:px-6">
+                <ButtonLink
                   href={dappPoolsUrl(locale)}
                   onClick={handleClose}
-                  className="flex h-12 flex-1 items-center justify-center rounded-md border border-border text-sm font-semibold text-foreground/80 transition-colors hover:border-foreground/30 hover:text-foreground"
-                >
-                  {t('cta.signIn')}
-                </a>
-                <ButtonLink
-                  href={t('cta.earlyAccess.href')}
-                  onClick={handleClose}
                   variant="primary"
-                  className="h-12 flex-1 rounded-md text-sm font-semibold"
+                  width="full"
+                  rounded="full"
+                  className="h-12 text-sm font-semibold transition-transform duration-150 ease-out-strong active:scale-97"
                 >
-                  {t('cta.earlyAccess.label')}
+                  {t('cta.openApp')}
                 </ButtonLink>
               </div>
             </motion.div>

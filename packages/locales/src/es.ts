@@ -1,6 +1,5 @@
 import admin from './content/es/admin.json';
 import common from './content/es/common.json';
-import confluence from './content/es/confluence.json';
 import create from './content/es/create.json';
 import cookies from './content/es/cookies.json';
 import earlyAccessCta from './content/es/earlyAccessCta.json';
@@ -30,7 +29,6 @@ import wallet from './content/es/wallet.json';
 export const es = {
   admin,
   common,
-  confluence,
   cookies,
   create,
   deposit,

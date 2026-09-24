@@ -1,14 +1,15 @@
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 
+import { IntroCurtain } from '@/modules/app/components/intro-curtain';
 import { HeroSection } from '@/modules/app/components/sections/hero-section';
-import { ConfluenceSection } from '@/modules/app/components/sections/confluence-section';
+import { SidesMarqueeSection } from '@/modules/app/components/sections/sides-marquee-section';
 import { HowItWorksSection } from '@/modules/app/components/sections/how-it-works-section';
-import { UseCasesSection } from '@/modules/app/components/sections/use-cases-section';
+import { LeavingEarlySection } from '@/modules/app/components/sections/leaving-early-section';
+import { WorldSection } from '@/modules/app/components/sections/world-section';
 import { FaqSection } from '@/modules/app/components/sections/faq-section';
 import { EarlyAccessCtaSection } from '@/modules/app/components/sections/early-access-cta-section';
-import { GaugeRail } from '@/modules/app/components/gauge-rail';
 import { routing } from '@/lib/i18n/routing';
 
 type HomePageProps = Readonly<{
@@ -26,33 +27,19 @@ export default async function HomePage({ params }: HomePageProps) {
 
   // Enable static rendering for Server Components rendered by this page.
   setRequestLocale(locale);
+  const t = await getTranslations('hero');
 
-  const [tHero, tConfluence, tHowItWorks, tUseCases, tFaq, tEarlyAccess] =
-    await Promise.all([
-      getTranslations('hero'),
-      getTranslations('confluence'),
-      getTranslations('howItWorks'),
-      getTranslations('useCases'),
-      getTranslations('faq'),
-      getTranslations('earlyAccessCta'),
-    ]);
-
-  const gaugeData = [
-    { id: 'home', label: tHero('gaugeLabel') },
-    { id: 'confluence', label: tConfluence('gaugeLabel') },
-    { id: 'how-it-works', label: tHowItWorks('gaugeLabel') },
-    { id: 'use-cases', label: tUseCases('gaugeLabel') },
-    { id: 'faq', label: tFaq('gaugeLabel') },
-    { id: 'early-access', label: tEarlyAccess('gaugeLabel') },
-  ];
-
+  // The page reads downstream: the two rivers meet (hero), who they are (marquee), how they
+  // join (steps), what leaving early costs (outcomes), how far they reach (globe), the hard
+  // questions, then the way in.
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center">
-      <GaugeRail data={gaugeData} />
+    <div className="flex w-full flex-col">
+      <IntroCurtain label={t('intro.label')} />
       <HeroSection />
-      <ConfluenceSection />
+      <SidesMarqueeSection />
       <HowItWorksSection />
-      <UseCasesSection />
+      <LeavingEarlySection />
+      <WorldSection />
       <FaqSection />
       <EarlyAccessCtaSection />
     </div>

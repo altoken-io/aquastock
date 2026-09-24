@@ -2,7 +2,7 @@
   "logo": {
     "alt": "AquaStock logo",
     "label": "AquaStock",
-    "tagline": "The employer match, on Solana"
+    "tagline": "The employer match, for everyone else."
   },
   "navigation": [
     {
@@ -16,14 +16,25 @@
       "description": "Track your deposits and vesting"
     }
   ],
+  "sections": [
+    {
+      "href": "/#how-it-works",
+      "title": "How it works"
+    },
+    {
+      "href": "/#leaving-early",
+      "title": "Leaving early"
+    },
+    {
+      "href": "/#faq",
+      "title": "FAQ"
+    }
+  ],
   "skipToContent": "Skip to content",
   "cta": {
-    "signIn": "Connect wallet",
     "admin": "Staff sign in",
-    "earlyAccess": {
-      "href": "/#faq",
-      "label": "Learn more"
-    }
+    "openApp": "Open the app",
+    "myMatch": "My match"
   },
   "mobileMenu": {
     "title": "Menu",

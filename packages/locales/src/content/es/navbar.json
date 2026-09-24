@@ -2,7 +2,7 @@
   "logo": {
     "alt": "Logo de AquaStock",
     "label": "AquaStock",
-    "tagline": "El aporte del empleador, en Solana"
+    "tagline": "El aporte del empleador, para todos los demás."
   },
   "navigation": [
     {
@@ -16,14 +16,25 @@
       "description": "Sigue tus depósitos y su liberación"
     }
   ],
+  "sections": [
+    {
+      "href": "/#how-it-works",
+      "title": "Cómo funciona"
+    },
+    {
+      "href": "/#leaving-early",
+      "title": "Retirarte antes"
+    },
+    {
+      "href": "/#faq",
+      "title": "Preguntas"
+    }
+  ],
   "skipToContent": "Saltar al contenido",
   "cta": {
-    "signIn": "Conectar billetera",
     "admin": "Acceso del equipo",
-    "earlyAccess": {
-      "href": "/#faq",
-      "label": "Saber más"
-    }
+    "openApp": "Abrir la app",
+    "myMatch": "Mi aporte"
   },
   "mobileMenu": {
     "title": "Menú",

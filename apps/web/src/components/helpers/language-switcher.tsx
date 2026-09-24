@@ -17,9 +17,9 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       <Select>
         <SelectTrigger
           aria-label="Language"
-          className="group flex cursor-pointer items-center justify-center rounded-full bg-primary p-2 transition-colors ease-in-out hover:bg-primary/80"
+          className="group flex size-9 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground/70 transition-colors duration-200 ease-out hover:bg-accent hover:text-foreground"
         >
-          <Globe className="size-4 text-primary-foreground" />
+          <Globe className="size-4" />
         </SelectTrigger>
         <SelectContent>
           <SelectOption value="es">

@@ -1,7 +1,10 @@
 {
-  "tagline": "The employer match, on Solana",
+  "tagline": "The employer match, for everyone else.",
   "quickLinks": {
     "title": "Links",
+    "howItWorks": "How it works",
+    "faq": "FAQ",
+    "openApp": "Open the app",
     "privacy": "Privacy",
     "terms": "Terms"
   },

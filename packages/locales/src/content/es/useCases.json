@@ -1,24 +1,54 @@
 {
-  "badge": "Para quién es",
-  "gaugeLabel": "Alcance",
-  "title": "Para quién es un fondo",
-  "subtitle": "Cuatro formas en que se podría usar un fondo. Es una demo, y ninguna es un programa real.",
-  "cases": {
-    "employers": {
-      "title": "Empleadores y DAOs",
-      "description": "Iguala los ahorros de tu equipo sin administrar una pensión."
+  "marquee": {
+    "title": "Hecho para los dos lados de un aporte",
+    "sponsor": {
+      "label": "Patrocinadores",
+      "items": [
+        "Empleadores",
+        "DAOs",
+        "Cooperativas",
+        "Comunidades de creadores",
+        "Protocolos",
+        "Sindicatos",
+        "Equipos remotos",
+        "Redes de exalumnos",
+        "Negocios locales",
+        "ONG"
+      ]
     },
-    "communities": {
-      "title": "Comunidades y diáspora",
-      "description": "Financia un aporte sobre los ahorros de quienes quieres que sigan ahorrando."
+    "saver": {
+      "label": "Ahorradores",
+      "items": [
+        "Freelancers",
+        "Trabajadores de apps",
+        "Creadores",
+        "Contratistas",
+        "Trabajo remoto",
+        "Estudiantes",
+        "Comerciantes",
+        "Conductores",
+        "Diseñadores",
+        "Músicos"
+      ]
+    }
+  },
+  "world": {
+    "eyebrow": "Donde haya una billetera",
+    "title": {
+      "lead": "2.000 millones de trabajadores.",
+      "rest": "Sin aporte del empleador."
     },
-    "protocols": {
-      "title": "Protocolos y marcas",
-      "description": "Premia a quienes se quedan, con un aporte que se libera en lugar de un regalo."
+    "body": "Es la fuerza laboral informal del mundo. Un patrocinador en un país puede igualar el ahorro de alguien en otro. Solo hace falta una billetera.",
+    "source": "Estimación de empleo informal: OIT, 2023.",
+    "chips": {
+      "wallet": "Cualquier billetera de Solana",
+      "signup": "Sin registro",
+      "languages": "Español e inglés"
     },
-    "savers": {
-      "title": "Cualquiera con SPYx",
-      "description": "Deposita y mira exactamente cuánto vale el aporte si te quedas, y si no."
+    "legend": {
+      "sponsor": "Patrocinador",
+      "saver": "Ahorrador",
+      "note": "Rutas ilustrativas, no fondos reales."
     }
   }
 }

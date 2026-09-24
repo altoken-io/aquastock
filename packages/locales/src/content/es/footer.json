@@ -1,7 +1,10 @@
 {
-  "tagline": "El aporte del empleador, en Solana",
+  "tagline": "El aporte del empleador, para todos los demás.",
   "quickLinks": {
     "title": "Enlaces",
+    "howItWorks": "Cómo funciona",
+    "faq": "Preguntas",
+    "openApp": "Abrir la app",
     "privacy": "Privacidad",
     "terms": "Términos"
   },

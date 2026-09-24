@@ -7,6 +7,7 @@ Mostly generic, brand-agnostic component libraries, plus AquaStock-specific prod
 - `src/default/{button,card,code}.tsx` — minimal unstyled defaults.
 - `src/tw/{avatar,badge,button,button-link,combobox,date-range-picker,dialog,dropdown-menu,input,menu,select,sheet,tabs,textarea,tooltip}.tsx` — a Tailwind/Base-UI-style primitive kit consumed by both apps (e.g. `@aquastock/ui/tw/tooltip`).
 - `src/brand/mark.ts` (`@aquastock/ui/brand/mark`) — the AquaStock brand mark as plain SVG path data (not JSX), promoted here because both apps' logo, favicon, apple-icon, and OG image render the identical geometry. See `docs/ASSETS.md`.
+- `src/tw/globe.tsx` (`@aquastock/ui/tw/globe`) — a generic WebGL dotted globe (cobe, already this package's dependency): markers, arcs, slow rotation, drag to turn. cobe is imported only when the globe nears the viewport, the loop pauses off screen, and reduced motion holds it still. Used by `apps/web`'s globe band.
 - `src/utils/classNames.ts` — `cn()` class-merging helper.
 
 ## `apps/web/src/components`
@@ -17,11 +18,18 @@ Mostly generic, brand-agnostic component libraries, plus AquaStock-specific prod
 
 ## `apps/web/src/modules/app/components` (AquaStock-specific, home page)
 
-- `confluence-visual.tsx`: the brand's signature visual (two currents converging into one), a thin client wrapper around `@aquastock/animation`'s OGL `Strands` component, dynamically imported and with a static gradient fallback for `prefers-reduced-motion`.
-- `hero-ledger-panel.tsx`: the hero's visual anchor, an instrument-panel reading of one illustrative position (deposit, sponsor match, how much has vested). Labelled illustrative.
-- `leaving-early-preview.tsx`: a receipt-style ledger of what leaving early at month 3 of 12 means (deposit returned, vested match kept, unvested match returned to the sponsor). Labelled illustrative.
-- `vesting-line.tsx`: the vesting rule drawn as an SVG line (no image), with HTML labels so it stays legible when scaled to a narrow column.
-- `sections/*`: `hero`, `confluence` (pairs the visual with the leaving-early receipt), `how-it-works`, `use-cases`, `faq` (nine questions, including who controls the token and the program), `early-access-cta`. Copy comes from the `hero`, `confluence`, `howItWorks`, `useCases`, `faq` and `earlyAccessCta` namespaces.
+The "Meeting of Waters" home page (see `docs/VISUAL.md`). Sections read downstream: hero, marquee, how it works, leaving early, globe, FAQ, closing card.
+
+- `intro-curtain.tsx`: the first-visit loading screen (the drop fills with water, then the curtain lifts, about 1.5 s). An inline script decides before first paint (once per tab session, never under reduced motion) and the rest is CSS (`.intro-curtain` in `globals.css`), so it never waits on hydration or blocks input. On the visits that play it, `--intro-offset` pushes the hero's `rise-N` entrances back behind it.
+- `confluence-plate.tsx`: the hero's signature: the aerial photograph plus pins (sponsor's match, your savings, matched on deposit, yours as it vests) and the vesting seam, placed in the photo's own coordinates and mapped through `object-cover` (`.plate-pin`, `--plate-k`), so they stay on the water at 16:9 and on the phone's 4:3 crop, where the pins turn into numbers with a key below.
+- `step-visuals.tsx`: the three how-it-works pictures (the pool's locked rules, the two deposits flowing into one position, the straight vesting line).
+- `world-globe.tsx`: the globe's AquaStock data (illustrative routes from `lib/globe.ts`, stream colours) over the generic `@aquastock/ui/tw/globe`.
+- `lib/leave-early.ts`: vesting arithmetic (deposit always back whole, linear vesting rounded down, the rest to the sponsor) and `leaveEarlyShares` for drawing a position as one bar; `lib/globe.ts`: routes and the focus-angle maths. Both tested with `node --test`.
+- `utils/layout.ts`: `PAGE_CONTAINER`, the one content width shared by the header, footer and every home section. `utils/guards.ts`: type guards for `t.raw()` lists (`stringList`, `navLinks`).
+- `sections/*`: `hero`, `sides-marquee` (sponsors and savers flowing in opposite directions; the list is also given once to screen readers), `how-it-works`, `leaving-early` (outcomes at months 3/6/12 plus three fact cards and the risk link), `world` (the abyss band with the globe), `faq`, `early-access-cta`. Copy comes from the `hero`, `useCases` (marquee + world), `howItWorks` (steps, outcomes, facts), `faq` and `earlyAccessCta` namespaces.
+- `header.tsx` (a floating pill; the hover highlight glides between links on a spring), `mobile-menu.tsx`, `footer.tsx` (a large wordmark sinking below the edge).
+
+Motion utilities live in `apps/web/src/app/globals.css`: `animate-rise`/`animate-pop` + `rise-N` (CSS entrances that run before hydration), `.reveal`, `.fill-in`, `.wipe-in` (scroll-driven, `@supports`-gated), `.flow-dash`, `.edge-fade`.
 
 ## `apps/dapp/src/components`
 
@@ -75,7 +83,7 @@ Staff email-password login, separate from wallet-connect, no public sign-up. See
 
 ## `packages/animation` (shared, `@aquastock/animation`)
 
-Generic motion/effect components under `src/motion/components` (marquee, blur variants, count-up, curved-loop, dot-pattern background, text-reveal, and others), plus `src/gsap` and `src/ogl` wrappers. No AquaStock-specific compositions.
+Generic motion/effect components under `src/motion/components` (marquee (pauses under reduced motion; `apps/web` defines its `animate-marquee` keyframes in its own theme), blur variants, count-up, curved-loop, dot-pattern background, text-reveal, and others), plus `src/gsap` and `src/ogl` wrappers. No AquaStock-specific compositions.
 
 ## Convention
 

@@ -24,9 +24,14 @@ file at all.
 - **Manifest icon** — each app's `app/manifest.ts` points at its own `/icon.svg`
   directly; no separate `android-chrome-*.png` set.
 
-## `apps/web/public/assets`
+## `apps/web` imagery
 
-Empty of imagery. The marketing site uses no photography: the hero, "leaving early" and vesting visuals are drawn in code (`modules/app/components/{hero-ledger-panel,leaving-early-preview,vesting-line}.tsx`, an SVG and HTML, so they follow the theme and need no file). The two water-infrastructure photographs it shipped before the Match Pools pivot (`brand/process-site-verification.webp`, `brand/site-notice.webp`) were removed with that model.
+`public/assets` is empty. The home page's two photographs are statically imported from `apps/web/src/modules/app/assets/` (so `next/image` gets their size and a blur placeholder at build time, and serves them content-hashed):
+
+- `confluence.webp`: the hero plate, two rivers meeting (the sponsor's match and your savings). Pins are placed in its own coordinates; see `apps/web/PLACEHOLDER_ASSETS.md` before replacing it.
+- `confluence-blend.webp`: the closing card's background, the two waters mixing.
+
+Both are generated (GPT Image via the codex-image MCP), compressed to WebP with `sharp`. They are atmosphere and metaphor only; the mechanism itself (pins, seam, steps, bars, globe) is drawn in code. The two water-infrastructure photographs the site shipped before the Match Pools pivot were removed with that model.
 
 ## `apps/dapp/public/assets`
 

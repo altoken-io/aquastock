@@ -18,9 +18,9 @@ const RIPPLE_TRANSITION = {
 /**
  * Next.js's file-based loading UI for this route segment — shown
  * automatically (via the Suspense boundary Next wraps around `page.tsx`)
- * while the async section components below it (getTranslations calls in
- * hero-section, confluence-section, etc.) resolve. A water ripple expanding
- * from the brand mark, since this app is otherwise sparing with motion.
+ * while the async section components below it resolve. A water ripple
+ * expanding from the brand mark. Not the home page's intro curtain, which is
+ * a first-visit moment (see modules/app/components/intro-curtain.tsx).
  */
 export default function Loading() {
   const prefersReducedMotion = useReducedMotion();

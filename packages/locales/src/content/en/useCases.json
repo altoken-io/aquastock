@@ -1,24 +1,54 @@
 {
-  "badge": "Who it's for",
-  "gaugeLabel": "Scope",
-  "title": "Who a pool is for",
-  "subtitle": "Four ways a pool could be used. This is a demo, and none of them is a live program.",
-  "cases": {
-    "employers": {
-      "title": "Employers and DAOs",
-      "description": "Match your team's savings without running a pension."
+  "marquee": {
+    "title": "Made for both sides of a match",
+    "sponsor": {
+      "label": "Sponsors",
+      "items": [
+        "Employers",
+        "DAOs",
+        "Co-ops",
+        "Creator communities",
+        "Protocols",
+        "Unions",
+        "Remote teams",
+        "Alumni networks",
+        "Local businesses",
+        "Nonprofits"
+      ]
     },
-    "communities": {
-      "title": "Communities and diaspora",
-      "description": "Fund a match on the savings of people you want to keep saving."
+    "saver": {
+      "label": "Savers",
+      "items": [
+        "Freelancers",
+        "Gig workers",
+        "Creators",
+        "Contractors",
+        "Remote workers",
+        "Students",
+        "Shop owners",
+        "Drivers",
+        "Designers",
+        "Musicians"
+      ]
+    }
+  },
+  "world": {
+    "eyebrow": "Anywhere with a wallet",
+    "title": {
+      "lead": "2 billion workers.",
+      "rest": "No employer match."
     },
-    "protocols": {
-      "title": "Protocols and brands",
-      "description": "Reward holders who stay, with a match that vests instead of a giveaway."
+    "body": "That's the world's informal workforce. A sponsor in one country can match a saver in another. All it takes is a wallet.",
+    "source": "Informal employment estimate: ILO, 2023.",
+    "chips": {
+      "wallet": "Any Solana wallet",
+      "signup": "No sign-up",
+      "languages": "English & Español"
     },
-    "savers": {
-      "title": "Anyone with SPYx",
-      "description": "Deposit and see exactly what the match is worth if you stay, and if you don't."
+    "legend": {
+      "sponsor": "Sponsor",
+      "saver": "Saver",
+      "note": "Illustrative routes, not live pools."
     }
   }
 }

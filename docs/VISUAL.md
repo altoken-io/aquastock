@@ -43,8 +43,12 @@ Don't scatter arbitrary values like `bg-[#0c7489]`. Define semantic variables in
 
 ## Resolved
 
-- **The dApp draws its own Confluence**, distinct from the marketing site's: the match ring is a plain SVG (so it renders on the server, closes into one shape at hero scale and shrinks to a card thumbnail), while `apps/web` uses an OGL canvas (`ConfluenceVisual`) for the same idea.
-- **`apps/web` states the mechanism in its own visuals** instead of using stock photography: a vesting ledger panel in the hero (`hero-ledger-panel.tsx`), a "leaving early" receipt (`leaving-early-preview.tsx`) and a code-drawn vesting line (`vesting-line.tsx`). All are labelled illustrative. The web site keeps `public`/`private` as a deliberate hero-scoped use of the two tokens.
+- **The dApp draws its own Confluence**, distinct from the marketing site's: the match ring is a plain SVG (so it renders on the server, closes into one shape at hero scale and shrinks to a card thumbnail), while `apps/web` shows the same two streams as a real-looking confluence: the "Meeting of Waters" hero.
+- **`apps/web` ("Meeting of Waters")**: the hero is an aerial photograph of a dark river and a sandy river meeting (`confluence-plate.tsx`), annotated like a map: sponsor's match (the dark water, Anchor), your savings (the sandy water, Terra), matched on deposit (where they meet), yours as it vests (the seam, with month ticks, drawn downstream once on load). The photo is metaphor only; everything that states the mechanism is code: the how-it-works pictures (`step-visuals.tsx`), the leave-early bars (real vesting arithmetic from `lib/leave-early.ts`, labelled illustrative) and the globe of illustrative routes (`world-globe.tsx` over `@aquastock/ui/tw/globe`).
+  - **Palette.** The web keeps the shared semantic tokens but tints its neutrals cool: a "mist" page (`--background`), white cards, and "abyss" bands (`--abyss*` in `apps/web/src/app/globals.css`: the globe band and the closing card, dark in both themes with their own AA-checked text, rule and stream colours).
+  - **Type.** Funnel Display (headlines, used large and tight), Funnel Sans (body), Geist Mono (figures and short labels; the dApp's mono, so the handoff reads as one product).
+  - **Motion.** One orchestrated moment: a first-visit intro curtain (the drop fills, then lifts), the headline rising, the pins popping in order, the seam drawing itself downstream. Everything else is quiet: scroll-driven reveals (CSS `animation-timeline: view()`, no JS, content simply visible where unsupported), the two-way marquee, the globe turning once every 80 s and pausing off screen. Reduced motion skips the curtain, the travel and the drifting drop, holds the marquee and the globe still, and keeps fades.
+  - Streams keep the rule: `public`/`private` (and `--abyss-sponsor`/`--abyss-saver` on the dark bands) always sit next to a label or icon.
 
 ## What still needs a real design pass
 

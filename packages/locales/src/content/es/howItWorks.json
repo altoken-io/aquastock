@@ -1,34 +1,59 @@
 {
-  "badge": "Cómo funciona",
-  "title": "Ahorra. Quédate. El aporte es tuyo.",
-  "subtitle": "El aporte de un patrocinador, reservado en la cadena en cuanto depositas y ganado de forma lineal.",
+  "title": "Tres pasos. Todo on-chain.",
   "steps": {
-    "firstStep": {
-      "title": "Un patrocinador financia un aporte",
-      "description": "Bloquea tokens en un fondo y define las reglas: la tasa de aporte, lo máximo que puede depositar un ahorrador, cuánto tarda en liberarse el aporte y cuándo cierran los depósitos."
+    "fund": {
+      "title": "Un patrocinador financia un fondo",
+      "description": "La tasa, el tope y la liberación quedan fijos al lanzarlo."
     },
-    "secondStep": {
+    "deposit": {
       "title": "Depositas SPYx",
-      "description": "El monto del aporte queda reservado para ti en la cadena, en la misma transacción. Si el fondo no puede igualar por completo, lo ves antes de firmar."
+      "description": "Tu parte del aporte se reserva en la misma transacción."
     },
-    "thirdStep": {
+    "vest": {
       "title": "El aporte se libera",
-      "description": "De forma lineal, desde el momento en que depositas. Puedes reclamar lo que ya se liberó cuando quieras."
-    },
-    "fourthStep": {
-      "title": "Retírate cuando quieras",
-      "description": "Siempre recuperas todo tu depósito. El aporte que aún no se liberó vuelve al patrocinador; lo que ya se liberó sigue siendo tuyo."
+      "description": "En línea recta. Reclama o retírate cuando quieras."
     }
   },
-  "summary": "Reglas que no cambian una vez creado el fondo, y cifras que cualquiera puede comprobar.",
-  "illustration": {
-    "label": "Una línea de liberación: el aporte sube en línea recta desde el día del depósito. Si te retiras antes, la parte que aún no se liberó vuelve al patrocinador.",
-    "start": "Depósito",
-    "end": "Todo liberado",
-    "vested": "Liberado: es tuyo",
-    "unvested": "Aún sin liberar: vuelve al patrocinador si te retiras",
-    "here": "Estás aquí"
+  "visual": {
+    "example": "Ejemplo",
+    "rate": "Tasa de aporte",
+    "cap": "Tope",
+    "vesting": "Liberación",
+    "months": "{count} meses",
+    "locked": "Fijo",
+    "you": "Tú",
+    "match": "Aporte",
+    "reserved": "Reservados juntos",
+    "vested": "Liberado",
+    "month": "Mes {month}"
   },
-  "gaugeLabel": "Proceso",
-  "benchmarkLabel": "PASO"
+  "outcomes": {
+    "title": "Retírate cuando quieras. Conserva lo liberado.",
+    "leaveAt": "Retírate en el mes {month}",
+    "total": "Te llevas {total} SPYx",
+    "legend": {
+      "deposit": "Tu depósito",
+      "kept": "Aporte que conservas",
+      "returned": "Vuelve al patrocinador"
+    },
+    "caption": "Ilustrativo: depósito de 100 SPYx, aporte 1:1, liberación en 12 meses.",
+    "ariaRow": "Mes {month}: recuperas tu depósito de {deposit} SPYx, conservas {kept} SPYx del aporte y {returned} SPYx vuelven al patrocinador.",
+    "riskNote": "Versión de hackathon sin auditar.",
+    "riskLink": "Lee los riesgos"
+  },
+  "facts": {
+    "deposit": {
+      "title": "Tu depósito vuelve completo.",
+      "body": "Retirarte antes solo te cuesta el aporte que aún no se ha liberado."
+    },
+    "rules": {
+      "title": "Las reglas se fijan al lanzar.",
+      "body": "El patrocinador no puede cambiar la tasa, el tope ni el calendario. El equipo aún puede actualizar el programa."
+    },
+    "chain": {
+      "title": "Cada cifra está on-chain.",
+      "body": "La liberación es aritmética simple que cualquiera puede verificar.",
+      "formula": "liberado = aporte × transcurrido ÷ periodo"
+    }
+  }
 }

@@ -16,18 +16,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* AquaStock palette (docs/VISUAL.md). Neutral scale is true gray (zero
-   chroma) so backgrounds read as plain white/black, not a warm or cool
-   tint. --primary ("Reservoir") is the one brand/CTA color; --public
-   ("Anchor") and --private ("Terra") are reserved specifically for
-   tagging a position's investor_type in the dApp — never used as a
-   general accent on the marketing site, but kept here so both apps share
-   one token vocabulary. */
+/* AquaStock palette for the marketing site (docs/VISUAL.md). The neutrals carry a faint cool
+   tint, water rather than paper: "mist" pages and "abyss" bands (the deep navy of the globe
+   section and the footer's wordmark). --primary ("Reservoir") is still the one brand/CTA colour,
+   shared with apps/dapp. --public ("Anchor", the sponsor's match) and --private ("Terra", the
+   saver's own savings) are reserved for telling those two streams apart, never a general accent;
+   they are also the two rivers in the hero photograph. */
 :root {
   /* Base */
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.975 0.005 215);
+  --foreground: oklch(0.2 0.03 245);
 
   /* Surface */
 
@@ -43,7 +42,7 @@
   --primary-foreground: oklch(1 0 0);
   --primary-pressed: oklch(0.44 0.1 200);
 
-  /* Public (government-anchor) vs. private (community) position tags */
+  /* The two streams: the sponsor's match and the saver's own savings */
   --public: oklch(0.34 0.07 260);
   --public-foreground: oklch(1 0 0);
   --private: oklch(0.55 0.13 45);
@@ -51,13 +50,13 @@
 
   /* Soft surface */
 
-  --secondary: oklch(0.96 0 0);
+  --secondary: oklch(0.945 0.008 215);
   --secondary-foreground: var(--foreground);
 
   /* Neutral */
 
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.46 0 0);
+  --muted: oklch(0.945 0.008 215);
+  --muted-foreground: oklch(0.47 0.02 235);
 
   /* Accent */
 
@@ -75,10 +74,22 @@
 
   /* Inputs */
 
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.9 0 0);
+  --border: oklch(0.9 0.008 220);
+  --input: oklch(0.9 0.008 220);
 
   --ring: var(--primary);
+
+  /* Abyss: the deep-water bands. Dark in both themes, with its own text and rule colours so
+     anything placed on it stays AA without per-theme overrides. */
+  --abyss: oklch(0.19 0.035 245);
+  --abyss-foreground: oklch(0.97 0.006 215);
+  --abyss-muted: oklch(0.74 0.02 230);
+  --abyss-border: oklch(0.3 0.035 245);
+  --abyss-primary: oklch(0.72 0.12 196);
+  /* The two streams, lifted for the abyss (the light theme's navy would vanish on it). The globe's
+     markers use the same values (world-globe.tsx). */
+  --abyss-sponsor: oklch(0.7 0.09 258);
+  --abyss-saver: oklch(0.74 0.14 48);
 
   /* Charts */
 
@@ -90,7 +101,7 @@
 
   /* Sidebar */
 
-  --sidebar: oklch(0.98 0 0);
+  --sidebar: oklch(0.98 0.004 215);
   --sidebar-foreground: var(--foreground);
 
   --sidebar-primary: var(--primary);
@@ -102,21 +113,20 @@
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
 
-  /* Radius — tighter than apps/dapp's on purpose: the marketing site's
-     instrument-panel/ledger direction wants drawn rectangles and hairline
-     rules, not soft pill shapes. Each app keeps its own copy of this token
-     set (see docs/VISUAL.md), so this doesn't affect apps/dapp. */
-  --radius: 0.625rem;
+  /* Radius: soft, like worn stone in a riverbed. Cards and plates step up from here
+     (rounded-2xl / rounded-3xl / rounded-plate); pills are rounded-full. Each app keeps its own
+     copy of this token set (see docs/VISUAL.md), so this doesn't affect apps/dapp. */
+  --radius: 0.875rem;
 }
 
 .dark {
-  --background: oklch(0.13 0 0);
-  --foreground: oklch(0.98 0 0);
+  --background: oklch(0.17 0.02 245);
+  --foreground: oklch(0.97 0.006 215);
 
-  --card: oklch(0.19 0 0);
+  --card: oklch(0.215 0.025 245);
   --card-foreground: var(--foreground);
 
-  --popover: oklch(0.19 0 0);
+  --popover: oklch(0.215 0.025 245);
   --popover-foreground: var(--foreground);
 
   --primary: oklch(0.72 0.12 196);
@@ -128,11 +138,11 @@
   --private: oklch(0.68 0.14 48);
   --private-foreground: oklch(0.16 0.02 45);
 
-  --secondary: oklch(0.23 0 0);
+  --secondary: oklch(0.25 0.025 245);
   --secondary-foreground: var(--foreground);
 
-  --muted: oklch(0.23 0 0);
-  --muted-foreground: oklch(0.65 0 0);
+  --muted: oklch(0.25 0.025 245);
+  --muted-foreground: oklch(0.72 0.02 230);
 
   --accent: oklch(0.28 0.045 196);
   --accent-foreground: oklch(0.94 0.02 196);
@@ -143,10 +153,13 @@
   --ok-text: oklch(0.78 0.15 150);
   --warning: oklch(0.72 0.15 65);
 
-  --border: oklch(0.28 0 0);
-  --input: oklch(0.28 0 0);
+  --border: oklch(0.31 0.025 245);
+  --input: oklch(0.31 0.025 245);
 
   --ring: var(--primary);
+
+  --abyss: oklch(0.12 0.025 245);
+  --abyss-border: oklch(0.27 0.03 245);
 
   --chart-1: var(--primary);
   --chart-2: var(--ok);
@@ -154,7 +167,7 @@
   --chart-4: var(--private);
   --chart-5: var(--public);
 
-  --sidebar: oklch(0.16 0 0);
+  --sidebar: oklch(0.19 0.022 245);
   --sidebar-foreground: var(--foreground);
 
   --sidebar-primary: var(--primary);
@@ -207,6 +220,13 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-abyss: var(--abyss);
+  --color-abyss-foreground: var(--abyss-foreground);
+  --color-abyss-muted: var(--abyss-muted);
+  --color-abyss-border: var(--abyss-border);
+  --color-abyss-primary: var(--abyss-primary);
+  --color-abyss-sponsor: var(--abyss-sponsor);
+  --color-abyss-saver: var(--abyss-saver);
 
   --font-headline: var(--font-headline);
   --font-body: var(--font-body);
@@ -216,6 +236,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* The hero photograph, the globe band and the closing card: the page's three big "plates". */
+  --radius-plate: calc(var(--radius) * 2.5);
 
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
@@ -225,6 +247,242 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+}
+
+/* Home page motion. One strong ease-out for everything that enters, one ease-in-out for things
+   already on screen moving from A to B, and the iOS sheet curve for the intro curtain lifting away.
+   Every entrance is CSS, so the page paints and animates before hydration and never sits invisible
+   while the bundle loads. */
+@theme {
+  --ease-out-strong: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-strong: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-rise: rise 700ms var(--ease-out-strong) both;
+  --animate-pop: pop 420ms var(--ease-out-strong) both;
+  /* For @aquastock/animation's Marquee: constant motion, so linear. */
+  --animate-marquee: marquee var(--duration) infinite linear;
+
+  /* The footer's wordmark: as wide as the page allows, capped so it stays a word, not a banner. */
+  --text-wordmark: clamp(4.5rem, 19vw, 17rem);
+  --text-wordmark--line-height: 1;
+  --text-wordmark--letter-spacing: -0.06em;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+}
+
+/* Stagger for `animate-rise` / `animate-pop`: `rise-1` .. `rise-12`, 80ms apart, pushed back by
+   the intro curtain's length on the visits that play it. */
+@utility rise-* {
+  animation-delay: calc(--value(integer) * 80ms + var(--intro-offset, 0ms));
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Intro curtain (home page, first visit per tab session; see intro-curtain.tsx). An inline script
+   sets html[data-intro="play"] before first paint and "done" once it has run; without the script
+   the curtain never shows. Water fills the mark, then the curtain lifts off the page. It never
+   takes pointer events, so it can't block a click even while it is on screen.
+   --------------------------------------------------------------------------------------------- */
+.intro-curtain {
+  display: none;
+}
+
+html[data-intro='play'] {
+  --intro-offset: 950ms;
+}
+
+html[data-intro='play'] .intro-curtain {
+  display: grid;
+  animation: intro-lift 650ms var(--ease-drawer) 900ms both;
+}
+
+.intro-curtain .intro-water {
+  transform-box: fill-box;
+  animation: intro-fill 800ms var(--ease-in-out-strong) 60ms both;
+}
+
+.intro-curtain .intro-word {
+  animation: reveal-up 600ms var(--ease-out-strong) 180ms both;
+}
+
+@keyframes intro-lift {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes intro-fill {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-intro='play'] {
+    --intro-offset: 0ms;
+  }
+  html[data-intro='play'] .intro-curtain {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Hero plate (confluence-plate.tsx). Pins are placed in the photograph's own coordinates
+   (--u/--v, 0..1) and mapped through object-fit: cover. --plate-k is how much wider the photo is
+   than its frame (1 at 16:9, 4/3 on phones, where the frame is 4:3 and the sides are cropped).
+   --------------------------------------------------------------------------------------------- */
+.confluence-plate {
+  --plate-k: 1.3333;
+}
+
+@media (width >= 40rem) {
+  .confluence-plate {
+    --plate-k: 1;
+  }
+}
+
+.plate-pin {
+  left: calc(50% + (var(--u) - 0.5) * var(--plate-k) * 100%);
+  top: calc(var(--v) * 100%);
+}
+
+/* The seam between the two rivers draws itself downstream once, like the match vesting. */
+.plate-seam {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: seam-draw 1600ms var(--ease-in-out-strong)
+    calc(900ms + var(--intro-offset, 0ms)) forwards;
+}
+
+@keyframes seam-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate-seam {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  /* The drifting drop along the seam is SMIL (<animateMotion>), which media queries can't stop. */
+  .plate-drift {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Scroll reveals, driven by the scroll position itself (no JS, off the main thread). Browsers
+   without scroll-driven animations, and anyone with reduced motion, simply see the content.
+   --------------------------------------------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-up var(--ease-out-strong) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    /* Bars that fill left to right as they come into view (the leave-early outcomes). */
+    /* Complete by the time the bar is fully on screen: a half-filled bar at rest would read as
+       data. */
+    .fill-in {
+      transform-origin: left center;
+      animation: fill-in var(--ease-out-strong) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+
+    /* A chart that wipes in left to right, like time passing, as it comes into view. */
+    .wipe-in {
+      animation: wipe-in var(--ease-out-strong) both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 45%;
+    }
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@keyframes fill-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes wipe-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+/* Water moving along a line: the two deposits flowing into one position (how-it-works). */
+.flow-dash {
+  stroke-dasharray: 3 7;
+  animation: flow-dash 1.4s linear infinite;
+}
+
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-dash {
+    animation: none;
+  }
+}
+
+/* Soft fade at a marquee's two ends, so items slide in and out of the page instead of being cut. */
+.edge-fade {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the fade, drop the movement. */
+  .animate-rise,
+  .animate-pop {
+    animation-name: fade-only;
+  }
+}
+
+@keyframes fade-only {
+  from {
+    opacity: 0;
+  }
 }
 
 @layer base {
@@ -242,9 +500,9 @@
   h5,
   h6 {
     font-family: var(--font-headline), sans-serif;
-    letter-spacing: -0.02em;
-    line-height: 0.96;
-    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    font-weight: 500;
   }
   p,
   button,
@@ -253,9 +511,8 @@
   }
 }
 
-/* Datum labels, tick numerals, ledger figures, timestamps — the "read off
-   an instrument" register. Reserved for short UI metadata, never body
-   copy. */
+/* Figures, units and short labels (Geist Mono, shared with apps/dapp): the "read it off the
+   chain" register. Reserved for numbers and short UI metadata, never body copy. */
 .font-mono-ui {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-feature-settings: 'tnum' 1;

@@ -13,7 +13,7 @@ import {
   getTranslations,
   setRequestLocale,
 } from 'next-intl/server';
-import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
+import { Funnel_Display, Funnel_Sans, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { hasLocale } from 'next-intl';
@@ -59,28 +59,25 @@ function getBrowserPreferredLocale(
   return availableLocales[0]; // fallback al locale por defecto
 }
 
-// Type system for the marketing site's "civic instrument" direction (see
-// docs/VISUAL.md for the shared color tokens this pairs with): Space Grotesk
-// carries headline personality with technical, well-drawn numerals; IBM Plex
-// Sans is the quieter civic/engineering-register body face; IBM Plex Mono
-// renders the gauge rail's datum labels, ledger numerals, and benchmark
-// stamps. apps/dapp keeps its own separate Geist-based system — these are
-// deliberately not shared, see docs/COMPONENTS.md.
-const space_grotesk = Space_Grotesk({
+// Type system for the marketing site: Funnel Display carries headlines and big figures, used
+// with restraint; Funnel Sans is its quieter sibling for body copy; Geist Mono sets numbers,
+// units and short labels (`.font-mono-ui`), the same mono the dApp uses, so the handoff to
+// apps/dapp reads as one product. apps/dapp keeps its own Geist-based system; see docs/VISUAL.md.
+const funnel_display = Funnel_Display({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
+  weight: ['500', '600'],
   variable: '--font-headline',
   display: 'swap',
 });
 
-const ibm_plex_sans = IBM_Plex_Sans({
+const funnel_sans = Funnel_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-body',
   display: 'swap',
 });
 
-const ibm_plex_mono = IBM_Plex_Mono({
+const geist_mono = Geist_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-mono',
@@ -215,7 +212,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${space_grotesk.variable} ${ibm_plex_sans.variable} ${ibm_plex_mono.variable} light`}
+      className={`${funnel_display.variable} ${funnel_sans.variable} ${geist_mono.variable} light`}
       suppressHydrationWarning
     >
       <body>
@@ -279,7 +276,8 @@ export const viewport: Viewport = {
   userScalable: true,
   viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#1c1c1c' },
+    // --background in each theme (globals.css), as hex.
+    { media: '(prefers-color-scheme: light)', color: '#f3f8f9' },
+    { media: '(prefers-color-scheme: dark)', color: '#081018' },
   ],
 };

@@ -1,124 +1,83 @@
 import { getTranslations } from 'next-intl/server';
-import { MotionDiv } from '@/components/helpers/motion/blur-lazy-motion';
-import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
-import { cn } from '@/utils/classNames';
-import { VestingLine } from '@/modules/app/components/vesting-line';
 
-const STEP_TONE = {
-  first: 'border-primary text-primary',
-  second: 'border-public text-public',
-  third: 'border-private text-private',
-  fourth: 'border-primary text-primary',
-} as const;
+import {
+  MergeVisual,
+  RulesVisual,
+  VestVisual,
+} from '@/modules/app/components/step-visuals';
+import { PAGE_CONTAINER } from '@/modules/app/utils/layout';
+
+const STEP_IDS = ['fund', 'deposit', 'vest'] as const;
 
 export async function HowItWorksSection() {
   const t = await getTranslations('howItWorks');
 
-  const steps = [
-    {
-      id: 'first',
-      order: 1,
-      title: t('steps.firstStep.title'),
-      description: t('steps.firstStep.description'),
-    },
-    {
-      id: 'second',
-      order: 2,
-      title: t('steps.secondStep.title'),
-      description: t('steps.secondStep.description'),
-    },
-    {
-      id: 'third',
-      order: 3,
-      title: t('steps.thirdStep.title'),
-      description: t('steps.thirdStep.description'),
-    },
-    {
-      id: 'fourth',
-      order: 4,
-      title: t('steps.fourthStep.title'),
-      description: t('steps.fourthStep.description'),
-    },
-  ] as const;
+  // A real sequence (fund, then deposit, then vest), so the cards are numbered.
+  const visuals = {
+    fund: (
+      <RulesVisual
+        labels={{
+          example: t('visual.example'),
+          locked: t('visual.locked'),
+          rate: t('visual.rate'),
+          cap: t('visual.cap'),
+          vesting: t('visual.vesting'),
+          months: t('visual.months', { count: 12 }),
+        }}
+      />
+    ),
+    deposit: (
+      <MergeVisual
+        labels={{
+          you: t('visual.you'),
+          match: t('visual.match'),
+          reserved: t('visual.reserved'),
+        }}
+      />
+    ),
+    vest: (
+      <VestVisual
+        labels={{
+          vested: t('visual.vested'),
+          month: t('visual.month', { month: 12 }),
+        }}
+      />
+    ),
+  };
 
   return (
-    <section
-      id="how-it-works"
-      className="relative flex w-full flex-col items-center justify-center overflow-hidden py-20 lg:py-40"
-    >
-      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-12 lg:px-24 xl:pl-32">
-        <div className="mb-24 flex flex-col border-b border-border pb-10">
-          <p className="font-mono-ui mb-4 text-[11px] tracking-[0.2em] text-primary uppercase">
-            {t('badge')}
-          </p>
-          <RichTextReveal
-            as="h2"
-            trigger="view"
-            start="top"
-            className="mb-6 max-w-3xl text-5xl tracking-tight md:text-6xl lg:text-7xl"
-          >
-            {t('title')}
-          </RichTextReveal>
-          <MotionDiv
-            delay={0.2}
-            className="max-w-2xl text-lg text-muted-foreground"
-          >
-            {t('subtitle')}
-          </MotionDiv>
-        </div>
+    <section id="how-it-works" className="w-full py-20 sm:py-28">
+      <div className={PAGE_CONTAINER}>
+        <h2 className="reveal max-w-xl text-4xl text-balance sm:text-6xl">
+          {t('title')}
+        </h2>
 
-        <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
-          <MotionDiv delay={0.2} className="lg:col-span-1">
-            <div className="w-full rounded-md border border-border bg-card p-5 lg:sticky lg:top-28">
-              <VestingLine />
-            </div>
-          </MotionDiv>
-
-          <div className="relative flex flex-col gap-10 lg:col-span-2">
-            <div
-              aria-hidden="true"
-              className="absolute top-8 bottom-8 left-7 hidden w-px bg-border sm:block"
-            />
-
-            {steps.map((step, index) => (
-              <MotionDiv
-                key={step.id}
-                delay={0.3 + index * 0.1}
-                className="relative flex gap-6"
+        <ol className="mt-12 grid gap-4 sm:mt-16 lg:grid-cols-3">
+          {STEP_IDS.map((id, index) => (
+            <li
+              key={id}
+              className="reveal flex flex-col rounded-3xl border border-border bg-card p-2 shadow-xs"
+            >
+              <div
+                aria-hidden
+                className="flex h-56 items-center justify-center overflow-hidden rounded-2xl bg-muted/70 px-6"
               >
-                <div
-                  className={cn(
-                    'font-mono-ui relative z-10 flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-md border-2 bg-background text-[10px] tracking-[0.05em] uppercase',
-                    STEP_TONE[step.id],
-                  )}
-                >
-                  <span className="opacity-70">{t('benchmarkLabel')}</span>
-                  <span className="text-base font-medium">
-                    {String(step.order).padStart(2, '0')}
-                  </span>
-                </div>
-
-                <div className="pt-2">
-                  <h3 className="mb-2 text-2xl text-foreground">
-                    {step.title}
-                  </h3>
-                  <p className="max-w-lg text-lg font-light text-muted-foreground">
-                    {step.description}
-                  </p>
-                </div>
-              </MotionDiv>
-            ))}
-          </div>
-        </div>
-
-        <MotionDiv
-          delay={0.9}
-          className="mt-20 border-t border-dashed border-border pt-10 text-center"
-        >
-          <p className="text-xl text-foreground/80 sm:text-2xl">
-            {t('summary')}
-          </p>
-        </MotionDiv>
+                {visuals[id]}
+              </div>
+              <div className="flex flex-1 flex-col px-5 pt-6 pb-5">
+                <span className="font-mono-ui text-xs text-muted-foreground">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-3 text-2xl text-balance">
+                  {t(`steps.${id}.title`)}
+                </h3>
+                <p className="mt-2 text-pretty text-muted-foreground">
+                  {t(`steps.${id}.description`)}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

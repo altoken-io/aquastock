@@ -1,45 +1,31 @@
 {
-  "badge": "On record",
-  "gaugeLabel": "FAQ",
-  "title": "Frequently asked questions",
-  "subtitle": "Straight answers for the hackathon demo.",
-  "trustNote": "On-chain, not self-reported.",
+  "title": "Straight answers.",
+  "subtitle": "Including the risks.",
+  "cta": "Try it on devnet",
   "questions": {
     "faq1": {
       "question": "Is this an offer of securities?",
-      "answer": "No. This is a hackathon demo and does not constitute an offer of securities. The program is unaudited. Only use amounts you can afford to lose."
+      "answer": "No. It's a hackathon demo, and the program is unaudited. Only use amounts you can afford to lose."
     },
     "faq2": {
-      "question": "What do I actually own when I hold SPYx?",
-      "answer": "SPYx is a tokenized stock, and its issuer keeps real control over the token: it can pause transfers, freeze accounts, move tokens out of any account, and change the display multiplier. A pool can't change that. Every pool page lists these powers, read live from the chain."
+      "question": "Who controls SPYx?",
+      "answer": "Its issuer. It can pause transfers, freeze accounts, move tokens and change the display multiplier. A pool can't change that, and every pool page lists these powers, read live from the chain."
     },
     "faq3": {
-      "question": "What happens if I leave early?",
-      "answer": "You always get your whole deposit back. The part of the match that hasn't vested returns to the sponsor; what has vested stays yours to claim."
+      "question": "Can the sponsor take the match back?",
+      "answer": "Not while it's reserved for you. After a pool closes, the sponsor can reclaim only the match nobody reserved and what early leavers gave up."
     },
     "faq4": {
-      "question": "Can the sponsor take the match back?",
-      "answer": "Not while it is reserved for you. After a pool closes, the sponsor can reclaim only the match nobody reserved, plus what savers gave up by leaving early. The rules can't change once the pool exists."
+      "question": "Who controls the program?",
+      "answer": "The team's deploy wallet holds the upgrade authority, so the team could change how pools behave. The app discloses it."
     },
     "faq5": {
-      "question": "Who controls the program?",
-      "answer": "The program's upgrade authority is the team's deploy wallet, so the team could change how pools behave. The app discloses it, and it is one more reason to treat this as a demo."
+      "question": "How do I get tokens?",
+      "answer": "Connect a wallet in the app and use \"Get demo tokens\": 100 dSPYx and a little SOL for fees. Demo tokens have no value."
     },
     "faq6": {
-      "question": "Do I need an account?",
-      "answer": "No. Connect a Solana wallet. There is no sign-up and no KYC, and every action is a transaction your wallet signs. Only the team's operator console has a login."
-    },
-    "faq7": {
-      "question": "Which network does the demo use?",
-      "answer": "Solana devnet, with a replica of the SPYx token that has the same extensions. Where mainnet is enabled, the app caps how large a pool can be."
-    },
-    "faq8": {
-      "question": "Where do I get SPYx?",
-      "answer": "On the devnet demo, connect a wallet and use the \"Get demo tokens\" button: it sends 100 demo dSPYx, which have no value, and a little SOL for fees. Real SPYx trades on Jupiter; the app would link out to it on mainnet and never sells tokens itself."
-    },
-    "faq9": {
       "question": "Why does the demo vest in minutes?",
-      "answer": "So you can watch it happen. Pools that vest in under a week are labelled \"Demo timescale\". A real pool would vest over months."
+      "answer": "So you can watch it happen. A real pool would vest over months."
     }
   }
 }

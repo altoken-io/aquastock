@@ -1,34 +1,59 @@
 {
-  "badge": "How it works",
-  "title": "Save. Stay. The match is yours.",
-  "subtitle": "A sponsor's match, reserved on-chain the moment you deposit and earned in a straight line.",
+  "title": "Three moves. All on-chain.",
   "steps": {
-    "firstStep": {
-      "title": "A sponsor funds a match",
-      "description": "They lock tokens in a pool and set the rules: the match rate, the most one saver can deposit, how long the match takes to vest, and when deposits close."
+    "fund": {
+      "title": "A sponsor funds a pool",
+      "description": "Match rate, cap and vesting lock at launch."
     },
-    "secondStep": {
+    "deposit": {
       "title": "You deposit SPYx",
-      "description": "The matching amount is reserved for you on-chain in the same transaction. If the pool can't match in full, you see that before you sign."
+      "description": "Your share of the match is reserved in the same transaction."
     },
-    "thirdStep": {
+    "vest": {
       "title": "The match vests",
-      "description": "In a straight line, starting the moment you deposit. You can claim what has vested at any time."
-    },
-    "fourthStep": {
-      "title": "Leave whenever you like",
-      "description": "You always get your whole deposit back. Match that hasn't vested returns to the sponsor; what has vested stays yours."
+      "description": "In a straight line. Claim or leave anytime."
     }
   },
-  "summary": "Rules that can't change once a pool exists, and numbers anyone can check.",
-  "illustration": {
-    "label": "A vesting line: the match rises in a straight line from the day of the deposit. Leaving early returns the part that has not vested yet to the sponsor.",
-    "start": "Deposit",
-    "end": "Fully vested",
-    "vested": "Vested: yours",
-    "unvested": "Not vested yet: returns to the sponsor if you leave",
-    "here": "You are here"
+  "visual": {
+    "example": "Example",
+    "rate": "Match rate",
+    "cap": "Cap",
+    "vesting": "Vesting",
+    "months": "{count} months",
+    "locked": "Locked",
+    "you": "You",
+    "match": "Match",
+    "reserved": "Reserved together",
+    "vested": "Vested",
+    "month": "Month {month}"
   },
-  "gaugeLabel": "Process",
-  "benchmarkLabel": "STEP"
+  "outcomes": {
+    "title": "Leave anytime. Keep what's vested.",
+    "leaveAt": "Leave at month {month}",
+    "total": "You leave with {total} SPYx",
+    "legend": {
+      "deposit": "Your deposit",
+      "kept": "Match you keep",
+      "returned": "Back to the sponsor"
+    },
+    "caption": "Illustrative: 100 SPYx deposit, 1:1 match, 12-month vesting.",
+    "ariaRow": "Month {month}: your {deposit} SPYx deposit comes back, you keep {kept} SPYx of the match, and {returned} SPYx goes back to the sponsor.",
+    "riskNote": "Unaudited hackathon build.",
+    "riskLink": "Read the risks"
+  },
+  "facts": {
+    "deposit": {
+      "title": "Your deposit comes back whole.",
+      "body": "Leaving early only costs the match that hasn't vested."
+    },
+    "rules": {
+      "title": "Rules lock at launch.",
+      "body": "The sponsor can't change the rate, cap or schedule. The team can still upgrade the program."
+    },
+    "chain": {
+      "title": "Every number is on-chain.",
+      "body": "Vesting is plain arithmetic anyone can check.",
+      "formula": "vested = match × elapsed ÷ period"
+    }
+  }
 }

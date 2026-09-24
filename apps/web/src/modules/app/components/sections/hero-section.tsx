@@ -1,100 +1,75 @@
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { ArrowRight } from 'lucide-react';
 
-import { MotionDiv } from '@/components/helpers/motion/blur-lazy-motion';
-import { RichTextReveal } from '@/components/helpers/motion/rich-text-reveal';
 import ButtonLink from '@/components/ui/button-link';
-import { HeroLedgerPanel } from '@/modules/app/components/hero-ledger-panel';
+import { dappPoolsUrl } from '@/lib/dapp-url';
+import { ConfluencePlate } from '@/modules/app/components/confluence-plate';
+import { PAGE_CONTAINER } from '@/modules/app/utils/layout';
 
 export async function HeroSection() {
-  const t = await getTranslations('hero');
+  const [t, locale] = await Promise.all([getTranslations('hero'), getLocale()]);
 
   return (
-    <section
-      id="home"
-      className="relative flex w-full items-center overflow-hidden pt-32 pb-16 sm:pt-40 lg:pt-44"
-    >
-      <div className="mx-auto grid w-full max-w-7xl items-start gap-16 px-6 sm:px-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-24 xl:pl-32">
-        <div>
-          <MotionDiv className="font-mono-ui mb-6 inline-flex items-center gap-2 rounded-sm border border-border/70 bg-muted/60 px-3 py-1 text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
-            <span className="size-1.5 rounded-full bg-primary" />
-            {t('usersCount')}
-          </MotionDiv>
+    <section id="home" className="w-full pt-32 pb-10 sm:pt-36">
+      <div className={PAGE_CONTAINER}>
+        <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
+          <p className="animate-rise rise-1 inline-flex items-center gap-2.5 rounded-full border border-border bg-card py-1 pr-3.5 pl-2 text-sm text-muted-foreground shadow-xs">
+            <span className="flex items-center gap-1.5 rounded-full bg-ok/12 px-2 py-0.5 font-medium text-ok-text">
+              <span className="relative flex size-1.5" aria-hidden>
+                <span className="absolute inset-0 animate-ping rounded-full bg-ok opacity-60 motion-reduce:animate-none" />
+                <span className="relative size-1.5 rounded-full bg-ok" />
+              </span>
+              {t('badge')}
+            </span>
+            {t('badgeNote')}
+          </p>
 
-          <RichTextReveal
-            as="h1"
-            trigger="load"
-            stagger={0.03}
-            className="mb-6 max-w-2xl text-4xl sm:text-5xl md:text-6xl xl:text-[4.5rem] xl:leading-[0.98]"
-          >
-            {t('title')}
-          </RichTextReveal>
+          {/* Two lines on purpose: the claim, then who it's for, in a quieter tone. */}
+          <h1 className="animate-rise rise-2 mt-7 text-5xl text-balance sm:text-7xl lg:text-8xl">
+            <span className="block">{t('title.line1')}</span>
+            <span className="block text-foreground/45">{t('title.line2')}</span>
+          </h1>
 
-          <MotionDiv
-            delay={0.3}
-            className="mb-4 max-w-prose text-lg text-foreground/90 xl:text-xl"
-          >
+          <p className="animate-rise rise-3 mt-6 max-w-xl text-lg text-pretty text-muted-foreground sm:text-xl">
             {t('subtitle')}
-          </MotionDiv>
-          <MotionDiv
-            delay={0.4}
-            className="mb-8 max-w-prose text-base text-foreground/60 xl:text-lg"
-          >
-            {t('description')}
-          </MotionDiv>
+          </p>
 
-          <MotionDiv delay={0.5} className="flex flex-wrap items-center gap-3">
+          <div className="animate-rise rise-4 mt-9 flex flex-wrap items-center justify-center gap-3">
             <ButtonLink
+              href={dappPoolsUrl(locale)}
               variant="primary"
-              rounded="md"
-              padding="lg"
-              href={t('cta.primary.href')}
-              className="h-12 font-medium"
+              rounded="full"
+              padding="none"
+              className="group h-12 pr-5 pl-6 font-semibold transition-transform duration-150 ease-out-strong active:scale-97"
             >
-              {t('cta.primary.label')}
+              {t('cta.primary')}
+              <ArrowRight
+                aria-hidden
+                className="size-4 transition-transform duration-200 ease-out-strong group-hover:translate-x-0.5 motion-reduce:transition-none"
+              />
             </ButtonLink>
             <ButtonLink
-              variant="outline"
-              rounded="md"
-              padding="lg"
-              href={t('cta.secondary.href')}
-              className="h-12 font-medium"
+              href="/#how-it-works"
+              variant="none"
+              rounded="full"
+              padding="none"
+              className="h-12 border border-border bg-card px-6 font-medium transition duration-150 ease-out-strong hover:bg-muted active:scale-97"
             >
-              {t('cta.secondary.label')}
+              {t('cta.secondary')}
             </ButtonLink>
-          </MotionDiv>
-
-          <MotionDiv
-            delay={0.6}
-            className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/70 pt-6 text-sm"
-          >
-            <span className="flex items-center gap-2 text-foreground/80">
-              <span
-                className="size-2 rounded-full bg-public"
-                aria-hidden="true"
-              />
-              {t('legend.sponsor')}
-            </span>
-            <span className="flex items-center gap-2 text-foreground/80">
-              <span
-                className="size-2 rounded-full bg-private"
-                aria-hidden="true"
-              />
-              {t('legend.saver')}
-            </span>
-            <span className="font-mono-ui text-[11px] tracking-[0.08em] text-muted-foreground uppercase">
-              {t('legend.sameTable')}
-            </span>
-          </MotionDiv>
+          </div>
         </div>
 
-        <MotionDiv
-          delay={0.35}
-          direction="horizontal"
-          x={24}
-          className="lg:pt-2"
-        >
-          <HeroLedgerPanel />
-        </MotionDiv>
+        <ConfluencePlate
+          className="mt-14 sm:mt-20"
+          alt={t('plate.alt')}
+          labels={{
+            sponsor: t('plate.sponsor'),
+            saver: t('plate.saver'),
+            merge: t('plate.merge'),
+            vest: t('plate.vest'),
+          }}
+        />
       </div>
     </section>
   );
