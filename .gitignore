@@ -66,3 +66,7 @@ playwright-report/
 
 # Solana keypairs (programs/keys holds program and test-wallet secrets)
 programs/keys/
+
+# AI agent skills & local agent config (skills live in ~/.agents/skills)
+.codex/skills/
+skills-lock.json
